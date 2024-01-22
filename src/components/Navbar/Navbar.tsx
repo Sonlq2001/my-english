@@ -1,13 +1,15 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 
-const AppHeader: FC = () => {
+import { NavbarWrap } from "./Navbar.styles";
+
+const Navbar: FC = () => {
   return (
-    <div>
+    <NavbarWrap>
       <Link to="/">Home</Link>
       <Link to="/listening">Listening</Link>
-    </div>
+    </NavbarWrap>
   );
 };
 
-export default AppHeader;
+export default Navbar;
