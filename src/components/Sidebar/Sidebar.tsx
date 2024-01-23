@@ -11,7 +11,9 @@ const Sidebar: FC = () => {
       <TitleSidebar>MyEnglish</TitleSidebar>
 
       <ListMenu>
-        <AppButton leftIcon={<IconSpeaking />}>Speaking</AppButton>
+        <AppButton leftIcon={<IconSpeaking />} variant="text">
+          Speaking
+        </AppButton>
       </ListMenu>
     </SidebarWrap>
   );
