@@ -1,14 +1,13 @@
-import { styled } from "styled-components";
+import { styled, css } from "styled-components";
 
-export const Button = styled.button`
+import { Attributes, ObjectRulesCss } from "@app/types/them.types";
+
+const BaseButton = styled.button`
   display: flex;
   align-items: center;
-  padding: 0.8rem 1.6rem;
-  width: 100%;
-  justify-content: flex-end;
-  background-color: transparent;
-  border-radius: 2rem 0 0 2rem;
+  justify-content: center;
   transition: 0.3s ease;
+  background-color: transparent;
   .icon {
     line-height: 0;
   }
@@ -19,10 +18,66 @@ export const Button = styled.button`
     margin-left: 1rem;
   }
   .text {
-    font-size: 1.7rem;
     font-weight: 600;
   }
-  &:hover {
-    background-color: var(--info-bg-light);
-  }
 `;
+
+export const Button = styled(BaseButton)<Attributes>`
+  ${({ theme, size, variant }) => {
+    if (!size || !variant) return;
+
+    const variantBtn: ObjectRulesCss = {
+      text: css`
+        color: ${theme.palette.primary.main};
+        .icon path {
+          fill: ${theme.palette.primary.main};
+        }
+      `,
+      contained: css`
+        background-color: ${theme.palette.primary.main};
+        color: ${theme.palette.white};
+        .icon path {
+          fill: ${theme.palette.white};
+        }
+      `,
+      outlined: css`
+        border: 1px solid ${theme.palette.primary.main};
+        color: ${theme.palette.primary.main};
+        .icon path {
+          fill: ${theme.palette.primary.main};
+        }
+      `,
+    };
+
+    const sizeBtn: ObjectRulesCss = {
+      small: css`
+        padding: 0.4rem 1rem;
+        .text {
+          font-size: 1.5rem;
+        }
+      `,
+      medium: css`
+        padding: 0.6rem 1.6rem;
+        .text {
+          font-size: 1.6rem;
+        }
+      `,
+      large: css`
+        padding: 0.8rem 2.2rem;
+        .text {
+          font-size: 1.7rem;
+        }
+      `,
+    };
+
+    return css`
+      ${variantBtn[variant]}
+      ${sizeBtn[size]}
+    `;
+  }}
+`;
+
+Button.defaultProps = {
+  size: "medium",
+  variant: "contained",
+};
