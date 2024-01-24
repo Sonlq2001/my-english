@@ -1,6 +1,7 @@
 import { FC, ButtonHTMLAttributes, ReactNode, memo } from "react";
 import { StyleSheetManager } from "styled-components";
 import isPropValid from "@emotion/is-prop-valid";
+import clsx from "clsx";
 
 import { Button } from "./AppButton.styles";
 import { Attributes } from "@app/types/them.types";
@@ -15,6 +16,10 @@ const AppButton: FC<AppButtonProps> = ({
   children,
   leftIcon,
   rightIcon,
+  variant,
+  size,
+  disabled,
+  className,
   ...rest
 }) => {
   return (
@@ -27,9 +32,14 @@ const AppButton: FC<AppButtonProps> = ({
       }}
       {...rest}
     >
-      <Button>
+      <Button
+        className={clsx(className, disabled && "disabled")}
+        variant={variant}
+        size={size}
+        disabled={disabled}
+      >
         {leftIcon && <span className="icon left-icon">{leftIcon}</span>}
-        <span className="text">{children}</span>
+        {children}
         {rightIcon && <span className="icon right-icon">{rightIcon}</span>}
       </Button>
     </StyleSheetManager>

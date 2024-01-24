@@ -10,20 +10,34 @@ export type ThemeColors = {
       lightBg?: string;
     };
     white?: string;
+    button: {
+      lightBg?: string;
+    };
+    disabled: {
+      disabledColor?: string;
+      disabledBg?: string;
+    };
   };
 };
 
 export const Theme: ThemeColors = {
   palette: {
     primary: {
-      main: "#0B60B0",
-      light: "#40A2D8",
-      dark: "#365486",
+      main: "#1976d2",
+      light: "#42a5f5",
+      dark: "#1565c0",
       contrastText: "#fff",
     },
     background: {
       lightBg: "rgba(110, 164, 255, 0.2)",
     },
     white: "#fff",
+    button: {
+      lightBg: "rgba(25, 118, 210, 0.04)",
+    },
+    disabled: {
+      disabledColor: "rgba(0, 0, 0, 0.26)",
+      disabledBg: "rgba(0, 0, 0, 0.12)",
+    },
   },
 };
