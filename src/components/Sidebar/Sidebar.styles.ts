@@ -16,4 +16,12 @@ export const TitleSidebar = styled.h1`
 
 export const ListMenu = styled.div`
   margin-top: 3rem;
+
+  .btn-sidebar {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 2rem;
+    border-radius: 2rem 0 0 2rem;
+  }
 `;
