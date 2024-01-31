@@ -1,13 +1,13 @@
 import { FC } from "react";
-import { Link } from "react-router-dom";
+
+import IconWeather from "@app/assets/images/icon-svg/icon-weather.svg?react";
 
 import { NavbarWrap } from "./Navbar.styles";
 
 const Navbar: FC = () => {
   return (
     <NavbarWrap>
-      <Link to="/">Home</Link>
-      <Link to="/listening">Listening</Link>
+      <IconWeather />
     </NavbarWrap>
   );
 };

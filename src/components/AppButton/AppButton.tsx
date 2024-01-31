@@ -2,6 +2,7 @@ import { FC, ButtonHTMLAttributes, ReactNode, memo } from "react";
 import { StyleSheetManager } from "styled-components";
 import isPropValid from "@emotion/is-prop-valid";
 import clsx from "clsx";
+import { Link } from "react-router-dom";
 
 import { Button } from "./AppButton.styles";
 import { Attributes } from "@app/types/them.types";
@@ -10,6 +11,7 @@ type AppButtonProps = Attributes &
   ButtonHTMLAttributes<HTMLButtonElement> & {
     leftIcon?: ReactNode;
     rightIcon?: ReactNode;
+    to?: string;
   };
 
 const AppButton: FC<AppButtonProps> = ({
@@ -20,9 +22,10 @@ const AppButton: FC<AppButtonProps> = ({
   size,
   disabled,
   className,
+  to,
   ...rest
 }) => {
-  return (
+  const WrapButton = (
     <StyleSheetManager
       enableVendorPrefixes
       shouldForwardProp={(propName, elementToBeRendered) => {
@@ -44,6 +47,12 @@ const AppButton: FC<AppButtonProps> = ({
       </Button>
     </StyleSheetManager>
   );
+
+  if (to) {
+    return <Link to={to}>{WrapButton}</Link>;
+  }
+
+  return WrapButton;
 };
 
 export default memo(AppButton);
