@@ -2,7 +2,7 @@ import { FC, ButtonHTMLAttributes, ReactNode, memo } from "react";
 import { StyleSheetManager } from "styled-components";
 import isPropValid from "@emotion/is-prop-valid";
 import clsx from "clsx";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { Button } from "./AppButton.styles";
 import { Attributes } from "@app/types/them.types";
@@ -49,7 +49,7 @@ const AppButton: FC<AppButtonProps> = ({
   );
 
   if (to) {
-    return <Link to={to}>{WrapButton}</Link>;
+    return <NavLink to={to}>{WrapButton}</NavLink>;
   }
 
   return WrapButton;

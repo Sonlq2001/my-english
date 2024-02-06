@@ -3,25 +3,25 @@ import { FC, ReactNode } from "react";
 import Navbar from "@app/components/Navbar/Navbar";
 import Sidebar from "@app/components/Sidebar/Sidebar";
 
-import { LayoutDefault, Content, InnerContent } from "../Layout.styles";
+import { LayoutDefault, Content } from "../Layout.styles";
 
-interface DefaultLayoutProps {
+interface DashboardLayoutProps {
   children?: ReactNode;
 }
 
-const DefaultLayout: FC<DefaultLayoutProps> = ({ children }) => {
+const DashboardLayout: FC<DashboardLayoutProps> = ({ children }) => {
   return (
-    <div id="default-layout">
+    <div id="dashboard-layout">
       <LayoutDefault>
         <Sidebar />
 
         <Content>
           <Navbar />
-          <InnerContent>{children}</InnerContent>
+          {children}
         </Content>
       </LayoutDefault>
     </div>
   );
 };
 
-export default DefaultLayout;
+export default DashboardLayout;
