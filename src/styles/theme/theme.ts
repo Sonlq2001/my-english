@@ -1,22 +1,36 @@
+type ColorHue = {
+  thin?: number | string;
+  extraLight?: number | string;
+  light?: number | string;
+  normal?: number | string;
+  medium?: number | string;
+  semibold?: number | string;
+  bold?: number | string;
+  extrabold?: number | string;
+  black?: number | string;
+};
+
 export type ThemeColors = {
   palette: {
     primary: {
-      main?: string;
-      light?: string;
-      dark?: string;
-      contrastText?: string;
+      main: string;
+      light: string;
+      dark: string;
+      contrastText: string;
     };
     background: {
-      lightBg?: string;
+      lightBg: string;
     };
-    white?: string;
+    white: string;
     button: {
-      lightBg?: string;
+      lightBg: string;
     };
     disabled: {
-      disabledColor?: string;
-      disabledBg?: string;
+      disabledColor: string;
+      disabledBg: string;
     };
+    weight: ColorHue;
+    gray: ColorHue;
   };
 };
 
@@ -38,6 +52,24 @@ export const Theme: ThemeColors = {
     disabled: {
       disabledColor: "rgba(0, 0, 0, 0.26)",
       disabledBg: "rgba(0, 0, 0, 0.12)",
+    },
+    weight: {
+      thin: 100,
+      extraLight: 200,
+      light: 300,
+      normal: 400,
+      medium: 500,
+      semibold: 600,
+      bold: 700,
+      extrabold: 800,
+      black: 900,
+    },
+    gray: {
+      medium: "#999999",
+      semibold: "#777777",
+      bold: "#555555",
+      extrabold: "#333333",
+      black: "#111111",
     },
   },
 };

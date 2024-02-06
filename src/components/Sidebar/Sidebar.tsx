@@ -1,12 +1,7 @@
-import { FC } from "react";
+import { FC, ElementType } from "react";
 
-import IconSpeaking from "@app/assets/images/icon-svg/icon-speaking.svg?react";
-import IconListening from "@app/assets/images/icon-svg/icon-listening.svg?react";
-import IconReading from "@app/assets/images/icon-svg/icon-reading.svg?react";
-import IconWriting from "@app/assets/images/icon-svg/icon-writing.svg?react";
-import IconNotepad from "@app/assets/images/icon-svg/icon-notepad.svg?react";
-import IconSetting from "@app/assets/images/icon-svg/icon-setting.svg?react";
 import AppButton from "@app/components/AppButton/AppButton";
+import { NAVBAR_MENUS } from "@app/constants/navbar.constants";
 
 import { SidebarWrap, TitleSidebar, ListMenu } from "./Sidebar.styles";
 
@@ -16,56 +11,21 @@ const Sidebar: FC = () => {
       <TitleSidebar>MyEnglish</TitleSidebar>
 
       <ListMenu>
-        <AppButton
-          leftIcon={<IconListening />}
-          variant="text"
-          className="btn-sidebar"
-          size="large"
-          to="/"
-        >
-          Listening
-        </AppButton>
-        <AppButton
-          leftIcon={<IconSpeaking />}
-          variant="text"
-          className="btn-sidebar"
-          size="large"
-          to="/listening"
-        >
-          Speaking
-        </AppButton>
-        <AppButton
-          leftIcon={<IconReading />}
-          variant="text"
-          className="btn-sidebar"
-          size="large"
-        >
-          Reading
-        </AppButton>
-        <AppButton
-          leftIcon={<IconWriting />}
-          variant="text"
-          className="btn-sidebar"
-          size="large"
-        >
-          Writing
-        </AppButton>
-        <AppButton
-          leftIcon={<IconNotepad />}
-          variant="text"
-          className="btn-sidebar"
-          size="large"
-        >
-          Notepad
-        </AppButton>
-        <AppButton
-          leftIcon={<IconSetting />}
-          variant="text"
-          className="btn-sidebar"
-          size="large"
-        >
-          Settings
-        </AppButton>
+        {NAVBAR_MENUS.map((menu) => {
+          const IconMenu = menu.icon as ElementType;
+          return (
+            <AppButton
+              key={menu.id}
+              leftIcon={<IconMenu />}
+              variant="text"
+              className="btn-sidebar"
+              size="large"
+              to={menu.path}
+            >
+              {menu.label}
+            </AppButton>
+          );
+        })}
       </ListMenu>
     </SidebarWrap>
   );
