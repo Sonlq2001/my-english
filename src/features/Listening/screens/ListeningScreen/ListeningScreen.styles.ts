@@ -11,8 +11,11 @@ export const ListTopic = styled.div`
   display: flex;
   align-items: center;
   .btn-topic {
-    border-bottom: 2px solid ${(props) => props.theme.palette.primary.main};
     border-radius: 0;
+    transition: none;
+  }
+  .btn-topic.active {
+    border-bottom: 2px solid ${(props) => props.theme.palette.primary.main};
   }
 `;
 
