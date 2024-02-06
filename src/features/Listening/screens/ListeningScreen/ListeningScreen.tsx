@@ -1,4 +1,5 @@
-import { FC } from "react";
+import { FC, useState } from "react";
+import clsx from "clsx";
 
 import AppButton from "@app/components/AppButton/AppButton";
 
@@ -7,6 +8,12 @@ import { LIST_TOPIC } from "../../constants/listening.constants";
 import ItemPodcast from "../../components/ItemPodcast/ItemPodcast";
 
 const ListeningScreen: FC = () => {
+  const [tabTopic, setTabTopic] = useState<string>("Popular"); // TODO: default topic
+
+  const handleTabTopic = (nameTopic: string) => {
+    setTabTopic(nameTopic);
+  };
+
   return (
     <WrapContent>
       <h2>Discover</h2>
@@ -16,8 +23,9 @@ const ListeningScreen: FC = () => {
           <AppButton
             key={index}
             variant="text"
-            className="btn-topic"
+            className={clsx("btn-topic", tabTopic === topic.name && "active")}
             size="medium"
+            onClick={() => handleTabTopic(topic.name)}
           >
             {topic.name}
           </AppButton>

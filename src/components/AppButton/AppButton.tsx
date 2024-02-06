@@ -33,13 +33,13 @@ const AppButton: FC<AppButtonProps> = ({
           ? isPropValid(propName)
           : true;
       }}
-      {...rest}
     >
       <Button
         className={clsx(className, disabled && "disabled")}
         variant={variant}
         size={size}
         disabled={disabled}
+        {...rest}
       >
         {leftIcon && <span className="icon left-icon">{leftIcon}</span>}
         {children}
