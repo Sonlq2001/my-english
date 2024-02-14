@@ -6,10 +6,20 @@ const ReadingScreen = lazy(
   () => import("../screens/ReadingScreen/ReadingScreen")
 );
 
+const ArticleDetail = lazy(
+  () => import("../screens/ArticleDetail/ArticleDetail")
+);
+
 const READING_SCREEN: RouteItemDef = {
   id: "reading-screen",
   path: "/reading",
   component: ReadingScreen,
 };
 
-export const READING_ROUTES = [READING_SCREEN];
+const ARTICLE_DETAIL: RouteItemDef = {
+  id: "article-detail-screen",
+  path: "/article/:slug",
+  component: ArticleDetail,
+};
+
+export const READING_ROUTES = [READING_SCREEN, ARTICLE_DETAIL];
