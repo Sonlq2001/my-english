@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { ThemeProvider } from "styled-components";
 
+import "suneditor/dist/css/suneditor.min.css";
+
 import ErrorBoundary from "@app/components/ErrorBoundary/ErrorBoundary.tsx";
 import App from "./App.tsx";
 import "./styles/index.css";

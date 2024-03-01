@@ -65,6 +65,8 @@ export const Theme: ThemeColors = {
       black: 900,
     },
     gray: {
+      thin: "#f3f3f3",
+      extraLight: "#eee",
       medium: "#999999",
       semibold: "#777777",
       bold: "#555555",

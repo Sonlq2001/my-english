@@ -17,9 +17,6 @@ const BaseButton = styled.button`
     .icon {
       line-height: 0;
     }
-    .icon path {
-      fill: currentColor;
-    }
     .left-icon {
       margin-right: 1rem;
     }
@@ -35,7 +32,7 @@ const BaseButton = styled.button`
 `;
 
 export const Button = styled(BaseButton)<Attributes>`
-  ${({ theme, size, variant, disabled }) => {
+  ${({ theme, size, variant, disabled, fullWidth }) => {
     if (!size || !variant) return;
 
     const variantBtn: ObjectRulesCss = {
@@ -106,6 +103,7 @@ export const Button = styled(BaseButton)<Attributes>`
       ${variantBtn[variant]}
       ${sizeBtn[size]}
       ${disabled ? disabledBtn[variant] : ""}
+      width: ${fullWidth ? "100%" : "fit-content"};
     `;
   }}
 `;

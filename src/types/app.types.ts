@@ -6,3 +6,8 @@ export type NavbarMenus = {
   path: string;
   label: string;
 };
+
+export type OptionsType = {
+  label: string;
+  value: string;
+}[];

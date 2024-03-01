@@ -1,13 +1,15 @@
 import { lazy } from "react";
 
 import { RouteItemDef } from "@app/types/routes.types";
+import DashboardLayout from "@app/layouts/DashboardLayout/DashboardLayout";
+
+import { DashboardPathsEnum } from "../constants/dashboard.paths";
 
 const DashboardScreen = lazy(() => import("../screens/DashboardScreen"));
-import DashboardLayout from "@app/layouts/DashboardLayout/DashboardLayout";
 
 const DASHBOARD_SCREEN: RouteItemDef = {
   id: "dashboard-screen",
-  path: "/",
+  path: DashboardPathsEnum.DASHBOARD,
   component: DashboardScreen,
   layout: DashboardLayout,
 };

@@ -2,6 +2,8 @@ import { lazy } from "react";
 
 import { RouteItemDef } from "@app/types/routes.types";
 
+import { ReadingPathsEnum } from "../constants/reading.paths";
+
 const ReadingScreen = lazy(
   () => import("../screens/ReadingScreen/ReadingScreen")
 );
@@ -12,13 +14,13 @@ const ArticleDetail = lazy(
 
 const READING_SCREEN: RouteItemDef = {
   id: "reading-screen",
-  path: "/reading",
+  path: ReadingPathsEnum.READING,
   component: ReadingScreen,
 };
 
 const ARTICLE_DETAIL: RouteItemDef = {
   id: "article-detail-screen",
-  path: "/article/:slug",
+  path: ReadingPathsEnum.ARTICLE_DETAIL,
   component: ArticleDetail,
 };
 
