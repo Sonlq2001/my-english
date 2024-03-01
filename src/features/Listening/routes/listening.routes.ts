@@ -2,6 +2,8 @@ import { lazy } from "react";
 
 import { RouteItemDef } from "@app/types/routes.types";
 
+import { ListeningPathsEnum } from "../constants/listening.paths";
+
 const ListeningScreen = lazy(
   () => import("../screens/ListeningScreen/ListeningScreen")
 );
@@ -11,7 +13,7 @@ const PodcastDetail = lazy(
 
 const LISTENING_SCREEN: RouteItemDef = {
   id: "listening-screen",
-  path: "/listening",
+  path: ListeningPathsEnum.LISTENING,
   component: ListeningScreen,
 };
 

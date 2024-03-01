@@ -16,6 +16,8 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.3",
     "styled-components": "^6.1.8",
+    "suneditor": "^2.45.1",
+    "suneditor-react": "^3.6.1",
     "vite-plugin-svgr": "^4.2.0"
   },
   "devDependencies": {

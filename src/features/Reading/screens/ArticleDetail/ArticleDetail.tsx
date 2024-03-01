@@ -1,16 +1,20 @@
 import { FC } from "react";
 
 import IconBookmark from "@app/assets/images/icon-svg/icon-bookmark.svg?react";
+import ReturnButton from "@app/components/ReturnButton/ReturnButton";
 
 import {
   WrapArticleDetail,
   HeaderArticleDetail,
   InfoArticle,
 } from "./ArticleDetail.styles";
+import { ReadingPathsEnum } from "../../constants/reading.paths";
 
 const ArticleDetail: FC = () => {
   return (
     <WrapArticleDetail>
+      <ReturnButton to={ReadingPathsEnum.READING} />
+
       <HeaderArticleDetail>
         <IconBookmark />
       </HeaderArticleDetail>

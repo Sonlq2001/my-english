@@ -12,6 +12,7 @@ type AppButtonProps = Attributes &
     leftIcon?: ReactNode;
     rightIcon?: ReactNode;
     to?: string;
+    fullWidth?: boolean;
   };
 
 const AppButton: FC<AppButtonProps> = ({
@@ -23,6 +24,7 @@ const AppButton: FC<AppButtonProps> = ({
   disabled,
   className,
   to,
+  fullWidth,
   ...rest
 }) => {
   const WrapButton = (
@@ -39,9 +41,14 @@ const AppButton: FC<AppButtonProps> = ({
         variant={variant}
         size={size}
         disabled={disabled}
+        fullWidth={fullWidth}
         {...rest}
       >
-        {leftIcon && <span className="icon left-icon">{leftIcon}</span>}
+        {leftIcon && (
+          <span className={`icon ${children ? "left-icon" : ""}`}>
+            {leftIcon}
+          </span>
+        )}
         {children}
         {rightIcon && <span className="icon right-icon">{rightIcon}</span>}
       </Button>
