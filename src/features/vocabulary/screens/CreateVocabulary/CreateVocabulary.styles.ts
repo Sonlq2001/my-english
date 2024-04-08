@@ -1,11 +1,12 @@
 import { styled } from "styled-components";
+import { Form } from "formik";
 
 export const WrapPage = styled.div`
   max-width: 76.8rem;
   margin: 0 auto;
 `;
 
-export const WrapForm = styled.div`
+export const WrapForm = styled(Form)`
   margin-top: 3rem;
   display: flex;
   flex-direction: column;

@@ -2,6 +2,7 @@ import { FC } from "react";
 
 import IconSpeaking2 from "@app/assets/images/icon-svg/icon-speaking-2.svg?react";
 import ReturnButton from "@app/components/ReturnButton/ReturnButton";
+import { convertTextToSpeech } from "@app/helpers/text-to-speech";
 
 import {
   WrapVocabularyDetail,
@@ -11,6 +12,9 @@ import {
 import { VocabularyPathsEnum } from "../../vocabulary";
 
 const VocabularyDetail: FC = () => {
+  const handleVoiceText = () => {
+    convertTextToSpeech("This word has been used prior to the 1980s "); // TODO: text
+  };
   return (
     <WrapVocabularyDetail>
       <ReturnButton
@@ -19,7 +23,7 @@ const VocabularyDetail: FC = () => {
 
       <div className="name-vocabulary">
         <span className="vocabulary">Hello</span>
-        <IconSpeaking2 />
+        <IconSpeaking2 onClick={handleVoiceText} />
       </div>
       <div className="type-vocabulary">( Verb )</div>
 
