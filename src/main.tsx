@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ThemeProvider } from "styled-components";
-
+import "regenerator-runtime/runtime";
 import "suneditor/dist/css/suneditor.min.css";
 
 import ErrorBoundary from "@app/components/ErrorBoundary/ErrorBoundary.tsx";

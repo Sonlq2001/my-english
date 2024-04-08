@@ -4,6 +4,7 @@ import { READING_ROUTES } from "@app/features/reading/reading";
 import { SPEAKING_ROUTES } from "@app/features/speaking/speaking";
 import { VOCABULARY_ROUTES } from "@app/features/vocabulary/vocabulary";
 import { NOTEPAD_ROUTES } from "@app/features/notepad/notepad";
+import { WRITING_ROUTES } from "@app/features/writing/writing";
 
 export const LIST_ROUTES = [
   ...DASHBOARD_ROUTES,
@@ -12,4 +13,5 @@ export const LIST_ROUTES = [
   ...SPEAKING_ROUTES,
   ...VOCABULARY_ROUTES,
   ...NOTEPAD_ROUTES,
+  ...WRITING_ROUTES,
 ];

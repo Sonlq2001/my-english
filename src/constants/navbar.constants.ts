@@ -4,6 +4,7 @@ import { ReadingPathsEnum } from "@app/features/reading/reading";
 import { SpeakingPathsEnum } from "@app/features/speaking/speaking";
 import { VocabularyPathsEnum } from "@app/features/vocabulary/vocabulary";
 import { NotepadPathsEnum } from "@app/features/notepad/notepad";
+import { WritingPathsEnum } from "@app/features/writing/writing";
 
 import IconDashboard from "@app/assets/images/icon-svg/icon-dashboard.svg?react";
 import IconListening from "@app/assets/images/icon-svg/icon-listening.svg?react";
@@ -42,7 +43,7 @@ export const NAVBAR_MENUS: NavbarMenus[] = [
   },
   {
     id: "Writing",
-    path: "/writing",
+    path: WritingPathsEnum.WRITING,
     icon: IconWriting,
     label: "Writing",
   },

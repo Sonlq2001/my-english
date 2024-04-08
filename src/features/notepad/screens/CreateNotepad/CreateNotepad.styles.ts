@@ -1,11 +1,13 @@
 import { styled } from "styled-components";
 
+import { Form } from "formik";
+
 export const WrapCreateNotepad = styled.div`
   max-width: 76.8rem;
   margin: 0 auto;
 `;
 
-export const WrapForm = styled.div`
+export const WrapFormik = styled(Form)`
   margin-top: 3rem;
   display: flex;
   flex-direction: column;
