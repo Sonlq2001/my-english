@@ -1,18 +1,13 @@
 import { FC } from "react";
-
 import AppButton from "@app/components/AppButton/AppButton";
 import IconWriting from "@app/assets/images/icon-svg/icon-writing.svg?react";
-
 import { useGetVocabularyQuery } from "../../redux/notepad.api";
-
 import { WrapNotepad, ListNotepad } from "./NotepadScreen.styles";
 import NotepadSection from "../../components/NotepadSection/NotepadSection";
 
-const NotepadScreen: FC = () => {
-  const { data } = useGetVocabularyQuery();
-  // TODO: RTK query
-  console.log(data);
-
+export const NotepadScreen: FC = () => {
+  useGetVocabularyQuery();
+  // console.log(data);
   return (
     <WrapNotepad>
       <div className="row-header">
@@ -32,5 +27,3 @@ const NotepadScreen: FC = () => {
     </WrapNotepad>
   );
 };
-
-export default NotepadScreen;
