@@ -6,12 +6,22 @@ import BlankLayout from "@app/layouts/BlankLayout/BlankLayout";
 import { AuthPathsEnum } from "../constants/auth.paths";
 
 const LoginScreen = lazy(() => import("../screens/LoginScreen/LoginScreen"));
+const LoginSuccessScreen = lazy(
+  () => import("../screens/LoginSuccessScreen/LoginSuccessScreen")
+);
 
-const SIGN_IN_SCREEN: RouteItemDef = {
+const LOGIN_SCREEN: RouteItemDef = {
   id: "login-screen",
   path: AuthPathsEnum.LOGIN,
   component: LoginScreen,
   layout: BlankLayout,
 };
 
-export const AUTH_ROUTES = [SIGN_IN_SCREEN];
+const LOGIN_SUCCESS_SCREEN: RouteItemDef = {
+  id: "login-success-screen",
+  path: AuthPathsEnum.LOGIN_SUCCESS,
+  component: LoginSuccessScreen,
+  layout: BlankLayout,
+};
+
+export const AUTH_ROUTES = [LOGIN_SCREEN, LOGIN_SUCCESS_SCREEN];
