@@ -11,3 +11,9 @@ export type OptionsType = {
   label: string;
   value: string;
 }[];
+
+export type BaseResponse<T> = {
+  message: string;
+  status: number;
+  metadata: T;
+};
