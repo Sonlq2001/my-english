@@ -1,12 +1,31 @@
 import { FC, useEffect } from "react";
 
+import { usePostLoginSuccessMutation } from "../../redux/auth.api";
+import { DashboardPathsEnum } from "@app/features/dashboard/dashboard";
+
 const LoginSuccessScreen: FC = () => {
-  // TODO: handle success
-  console.log("omg");
+  const code = new URLSearchParams(window.location.search).get("code");
+
+  const [postLoginSuccess, result] = usePostLoginSuccessMutation();
+
   useEffect(() => {
-    fetch("http://localhost:5000/v1/api/auth/login-success");
-  }, []);
-  return <div>LoginSuccessScreen</div>;
+    if (code) {
+      postLoginSuccess(code);
+    }
+  }, [code, postLoginSuccess]);
+
+  useEffect(() => {
+    if (result.data) {
+      window.location.href = DashboardPathsEnum.DASHBOARD;
+    }
+  }, [result.data]);
+
+  if (result.isLoading) {
+    // TODO: Loading
+    return <div>Loading...</div>;
+  }
+
+  return null;
 };
 
 export default LoginSuccessScreen;

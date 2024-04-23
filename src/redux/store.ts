@@ -2,13 +2,16 @@ import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 import { notepadApi } from "@app/features/notepad/notepad";
+import { authApi } from "@app/features/auth/auth";
 
 import rootReducer from "./rootReducer";
 
 export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(notepadApi.middleware),
+    getDefaultMiddleware()
+      .concat(notepadApi.middleware)
+      .concat(authApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
