@@ -24,6 +24,7 @@ const CREATE_NOTEPAD: RouteItemDef = {
   id: "create-screen",
   path: NotepadPathsEnum.CREATE_NOTEPAD,
   component: CreateNotepad,
+  isPrivateRoute: true,
 };
 
 const NOTEPAD_DETAIL: RouteItemDef = {
