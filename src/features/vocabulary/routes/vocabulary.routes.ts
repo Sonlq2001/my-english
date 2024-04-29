@@ -43,6 +43,7 @@ const CREATE_VOCABULARY: RouteItemDef = {
   id: "create-vocabulary-screen",
   path: VocabularyPathsEnum.CREATE_VOCABULARY,
   component: CreateVocabulary,
+  isPrivateRoute: true,
 };
 
 export const VOCABULARY_ROUTES = [

@@ -1,26 +1,31 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
+import { unwrapResult } from "@reduxjs/toolkit";
 
-import { usePostLoginSuccessMutation } from "../../redux/auth.api";
+import { loginSuccess } from "@app/features/auth/auth";
 import { DashboardPathsEnum } from "@app/features/dashboard/dashboard";
+import { useAppDispatch } from "@app/redux/store";
 
 const LoginSuccessScreen: FC = () => {
-  const code = new URLSearchParams(window.location.search).get("code");
-
-  const [postLoginSuccess, result] = usePostLoginSuccessMutation();
+  const dispatch = useAppDispatch();
+  const [isLoadingLogin, setIsLoadingLogin] = useState<boolean>(true);
 
   useEffect(() => {
+    const code = new URLSearchParams(window.location.search).get("code");
     if (code) {
-      postLoginSuccess(code);
+      dispatch(loginSuccess({ code }))
+        .then(unwrapResult)
+        .then((res) => {
+          if (res.user.googleId !== code) {
+            // todo return login fail
+            return;
+          }
+          window.location.href = DashboardPathsEnum.DASHBOARD;
+        })
+        .finally(() => setIsLoadingLogin(false));
     }
-  }, [code, postLoginSuccess]);
+  }, [dispatch]);
 
-  useEffect(() => {
-    if (result.data) {
-      window.location.href = DashboardPathsEnum.DASHBOARD;
-    }
-  }, [result.data]);
-
-  if (result.isLoading) {
+  if (isLoadingLogin) {
     // TODO: Loading
     return <div>Loading...</div>;
   }

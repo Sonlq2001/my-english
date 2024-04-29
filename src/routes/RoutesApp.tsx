@@ -4,12 +4,27 @@ import { Routes, Route } from "react-router-dom";
 import DefaultLayout from "../layouts/DefaultLayout/DefaultLayout";
 import { LIST_ROUTES } from "./routes.config";
 import { RouteItemDef } from "../types/routes.types";
+import { store } from "@app/redux/store";
+import { AuthPathsEnum } from "@app/features/auth/auth";
 
-const wrapRoute: FC<RouteItemDef> = ({ id, path, component, layout }) => {
+const wrapRoute: FC<RouteItemDef> = ({
+  id,
+  path,
+  component,
+  layout,
+  isPrivateRoute,
+}) => {
+  const isLogged = Boolean(store.getState().auth.accessToken);
+
   const ComponentScreen = component;
   const ContentLayout = layout ?? DefaultLayout;
 
   const Content: FC = () => {
+    if (!isLogged && isPrivateRoute) {
+      window.location.href = AuthPathsEnum.LOGIN;
+      return null;
+    }
+
     return (
       <ContentLayout>
         <Suspense fallback={null}>

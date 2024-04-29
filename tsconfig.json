@@ -24,6 +24,9 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": [
+    "src",
+    "./node_modules/redux-persist/types/integration/react.d.ts"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
