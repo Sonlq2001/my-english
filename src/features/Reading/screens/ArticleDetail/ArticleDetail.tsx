@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, useCallback } from "react";
 
 import IconBookmark from "@app/assets/images/icon-svg/icon-bookmark.svg?react";
 import ReturnButton from "@app/components/ReturnButton/ReturnButton";
@@ -59,10 +59,10 @@ const ArticleDetail: FC = () => {
     }
   };
 
-  const handleCloseModal = () => {
+  const handleCloseModal = useCallback(() => {
     setPositionModal({ x: 0, y: 0 });
     setIsOpenModal(false);
-  };
+  }, []);
 
   useEffect(() => {
     if (!isOpenModal) {
