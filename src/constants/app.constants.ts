@@ -5,3 +5,8 @@ export enum KEYS_BUTTONS {
 }
 
 export const ID_IGNORE = "ignore-user-avatar";
+
+export enum KEYS_HEADERS {
+  CLIENT_ID = "client-id",
+  AUTHORIZATION = "Authorization",
+}

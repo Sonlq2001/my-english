@@ -1,15 +1,18 @@
 import { FC } from "react";
+import debounce from "lodash.debounce";
 
 import Portal from "@app/components/Portal/Portal";
 import ClickOutside from "@app/components/ClickOutside/ClickOutside";
 import { useGetUserInfo } from "@app/hooks/use-get-use-info";
+import { ID_IGNORE } from "@app/constants/app.constants";
+import { useAppDispatch } from "@app/redux/store";
+import { AuthPathsEnum, logout } from "@app/features/auth/auth";
 
 import {
   WrapNavbarList,
   NavbarListAvatar,
   WrapList,
 } from "./NavbarList.styles";
-import { ID_IGNORE } from "@app/constants/app.constants";
 
 interface NavbarListProps {
   open: true;
@@ -17,7 +20,14 @@ interface NavbarListProps {
 }
 
 const NavbarList: FC<NavbarListProps> = ({ open, setOpenNavbarList }) => {
+  const dispatch = useAppDispatch();
   const { fullName, photo } = useGetUserInfo();
+
+  const handleLogout = debounce(() => {
+    dispatch(logout()).finally(() => {
+      window.location.href = AuthPathsEnum.LOGIN;
+    });
+  }, 300);
 
   return (
     <Portal open={open}>
@@ -44,7 +54,9 @@ const NavbarList: FC<NavbarListProps> = ({ open, setOpenNavbarList }) => {
             </a>
           </WrapList>
 
-          <button className="btn-logout">Logout</button>
+          <button className="btn-logout" onClick={handleLogout}>
+            Logout
+          </button>
         </WrapNavbarList>
       </ClickOutside>
     </Portal>

@@ -7,4 +7,8 @@ const loginSuccessApi = (payload: PayloadLoginSuccess) => {
   return api.post(AuthEndpointsEnum.LOGIN_SUCCESS, payload);
 };
 
-export const authApi = { loginSuccessApi };
+const logoutApi = () => {
+  return api.post(AuthEndpointsEnum.LOGOUT);
+};
+
+export const authApi = { loginSuccessApi, logoutApi };
