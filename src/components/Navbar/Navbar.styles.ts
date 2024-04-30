@@ -4,8 +4,16 @@ export const NavbarWrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 4.5rem;
+  height: 5.4rem;
   padding: 0 2rem;
+
+  .btn-login {
+    font-weight: ${(props) => props.theme.palette.weight.medium};
+    &:hover {
+      text-decoration: underline;
+      color: ${(props) => props.theme.palette.primary.main};
+    }
+  }
 `;
 
 export const BoxWeather = styled.div`

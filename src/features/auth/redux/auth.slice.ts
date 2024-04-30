@@ -20,6 +20,7 @@ export const loginSuccess = createAsyncThunk<
 
 const initialState: InitialStateAuth = {
   accessToken: "",
+  user: null,
 };
 
 const authSlice = createSlice({
@@ -29,9 +30,11 @@ const authSlice = createSlice({
   extraReducers: (build) => {
     build.addCase(loginSuccess.fulfilled, (state, action) => {
       state.accessToken = action.payload.accessToken;
+      state.user = action.payload.user;
     });
     build.addCase(loginSuccess.rejected, (state) => {
       state.accessToken = "";
+      state.user = null;
     });
   },
 });
@@ -39,7 +42,7 @@ const authSlice = createSlice({
 const authConfig = {
   key: "auth",
   storage,
-  whitelist: ["accessToken"],
+  whitelist: ["accessToken", "user"],
 };
 
 export const authReducer = persistReducer(authConfig, authSlice.reducer);
