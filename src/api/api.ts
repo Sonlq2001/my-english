@@ -6,6 +6,7 @@ import axios, {
 } from "axios";
 
 import { toSnakeCase, toCamel } from "@app/helpers/convert-object";
+import { KEYS_HEADERS } from "@app/constants/app.constants";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_BASE_API,
@@ -17,11 +18,14 @@ const api = axios.create({
 
 const requestInterceptor = (req: InternalAxiosRequestConfig) => {
   const accessToken = store.getState().auth.accessToken;
+  const userId = store.getState().auth.user?.id;
+
   req.params = toSnakeCase(req.params, true);
   req.data = toSnakeCase(req.data, true);
 
-  if (accessToken) {
-    req.headers.Authorization = `Bearer ${accessToken}`;
+  if (accessToken && userId) {
+    req.headers[KEYS_HEADERS.AUTHORIZATION] = `Bearer ${accessToken}`;
+    req.headers[KEYS_HEADERS.CLIENT_ID] = userId;
   }
 
   return req;

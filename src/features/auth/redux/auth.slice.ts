@@ -18,6 +18,17 @@ export const loginSuccess = createAsyncThunk<
   }
 });
 
+export const logout = createAsyncThunk<unknown, void>(
+  "auth/logout",
+  async (_, { rejectWithValue }) => {
+    try {
+      await authApi.logoutApi();
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const initialState: InitialStateAuth = {
   accessToken: "",
   user: null,
@@ -33,6 +44,15 @@ const authSlice = createSlice({
       state.user = action.payload.user;
     });
     build.addCase(loginSuccess.rejected, (state) => {
+      state.accessToken = "";
+      state.user = null;
+    });
+
+    build.addCase(logout.fulfilled, (state) => {
+      state.accessToken = "";
+      state.user = null;
+    });
+    build.addCase(logout.rejected, (state) => {
       state.accessToken = "";
       state.user = null;
     });
