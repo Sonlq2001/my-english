@@ -26,3 +26,7 @@ export type DefUser = {
   photo: string;
   typeLogin: string;
 };
+
+export type ResRefreshToken = {
+  accessToken: string;
+};

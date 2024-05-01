@@ -11,4 +11,8 @@ const logoutApi = () => {
   return api.post(AuthEndpointsEnum.LOGOUT);
 };
 
-export const authApi = { loginSuccessApi, logoutApi };
+const refreshTokenApi = () => {
+  return api.post(AuthEndpointsEnum.REFRESH_TOKEN);
+};
+
+export const authApi = { loginSuccessApi, logoutApi, refreshTokenApi };
