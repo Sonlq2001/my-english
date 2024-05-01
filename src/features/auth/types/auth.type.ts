@@ -10,6 +10,7 @@ export type InitialStateAuth = {
 
 export type PayloadLoginSuccess = {
   code: string;
+  otp: string;
 };
 
 export type ResLoginSuccess = {
