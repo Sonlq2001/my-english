@@ -15,6 +15,7 @@ const LOGIN_SCREEN: RouteItemDef = {
   path: AuthPathsEnum.LOGIN,
   component: LoginScreen,
   layout: BlankLayout,
+  isAuthRoute: true,
 };
 
 const LOGIN_SUCCESS_SCREEN: RouteItemDef = {
@@ -22,6 +23,7 @@ const LOGIN_SUCCESS_SCREEN: RouteItemDef = {
   path: AuthPathsEnum.LOGIN_SUCCESS,
   component: LoginSuccessScreen,
   layout: BlankLayout,
+  isAuthRoute: true,
 };
 
 export const AUTH_ROUTES = [LOGIN_SCREEN, LOGIN_SUCCESS_SCREEN];

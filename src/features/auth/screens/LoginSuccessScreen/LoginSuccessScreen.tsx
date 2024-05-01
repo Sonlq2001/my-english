@@ -9,19 +9,26 @@ const LoginSuccessScreen: FC = () => {
   const dispatch = useAppDispatch();
   const [isLoadingLogin, setIsLoadingLogin] = useState<boolean>(true);
 
+  const redirectTo = (url: string) => (window.location.href = url);
+
   useEffect(() => {
-    const code = new URLSearchParams(window.location.search).get("code");
-    if (code) {
-      dispatch(loginSuccess({ code }))
+    const queryUrl = new URLSearchParams(window.location.search);
+    const code = queryUrl.get("code");
+    const otp = queryUrl.get("otp");
+    if (code && otp) {
+      dispatch(loginSuccess({ code, otp }))
         .then(unwrapResult)
-        .then((res) => {
-          if (res.user.googleId !== code) {
-            // todo return login fail
-            return;
-          }
-          window.location.href = DashboardPathsEnum.DASHBOARD;
+        .then(() => {
+          redirectTo(DashboardPathsEnum.DASHBOARD);
+        })
+        .catch(() => {
+          // TODO: redirect
+          redirectTo("/error");
         })
         .finally(() => setIsLoadingLogin(false));
+    } else {
+      // TODO: redirect
+      redirectTo("/error");
     }
   }, [dispatch]);
 
