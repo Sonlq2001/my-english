@@ -7,8 +7,13 @@ import createAuthRefreshInterceptor from "axios-auth-refresh";
 
 import { store } from "@app/redux/store";
 import { toSnakeCase, toCamel } from "@app/helpers/convert-object";
-import { KEYS_HEADERS } from "@app/constants/app.constants";
-import { refreshToken } from "@app/features/auth/auth";
+import {
+  KEYS_HEADERS,
+  LOGOUT_RULE_MESSAGE,
+  STATUS_CODE,
+} from "@app/constants/app.constants";
+import { refreshToken, logoutAction } from "@app/features/auth/auth";
+import { AuthPathsEnum } from "@app/features/auth/auth";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_BASE_API,
@@ -39,11 +44,28 @@ const responseInterceptor = (res: AxiosResponse) => {
 };
 
 const errorInterceptor = (error: AxiosError) => {
+  if (error && error.response) {
+    const status = error.response.status;
+    const message = error.response.data?.message;
+
+    if (
+      status === STATUS_CODE.UNAUTHORIZED &&
+      message === LOGOUT_RULE_MESSAGE
+    ) {
+      store.dispatch(logoutAction());
+      window.location.href = AuthPathsEnum.LOGIN;
+    }
+    return Promise.reject(error.response);
+  }
   return Promise.reject(error);
 };
 
 const refreshAuthLogic = async () => {
-  await store.dispatch(refreshToken());
+  const accessToken = store.getState().auth.accessToken;
+  const user = store.getState().auth.user;
+  if (accessToken && user) {
+    await store.dispatch(refreshToken());
+  }
   return Promise.resolve();
 };
 
