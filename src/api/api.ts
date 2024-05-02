@@ -1,12 +1,14 @@
-import { store } from "@app/redux/store";
 import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
   AxiosError,
 } from "axios";
+import createAuthRefreshInterceptor from "axios-auth-refresh";
 
+import { store } from "@app/redux/store";
 import { toSnakeCase, toCamel } from "@app/helpers/convert-object";
 import { KEYS_HEADERS } from "@app/constants/app.constants";
+import { refreshToken } from "@app/features/auth/auth";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_BASE_API,
@@ -37,9 +39,15 @@ const responseInterceptor = (res: AxiosResponse) => {
 };
 
 const errorInterceptor = (error: AxiosError) => {
-  console.log(error);
   return Promise.reject(error);
 };
+
+const refreshAuthLogic = async () => {
+  await store.dispatch(refreshToken());
+  return Promise.resolve();
+};
+
+createAuthRefreshInterceptor(api, refreshAuthLogic, { statusCodes: [408] });
 
 api.interceptors.request.use(requestInterceptor);
 api.interceptors.response.use(responseInterceptor, errorInterceptor);

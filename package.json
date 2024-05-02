@@ -13,6 +13,7 @@
     "@emotion/is-prop-valid": "^1.2.1",
     "@reduxjs/toolkit": "^2.2.3",
     "axios": "^1.6.8",
+    "axios-auth-refresh": "^3.3.6",
     "clsx": "^2.1.0",
     "formik": "^2.4.5",
     "lodash.camelcase": "^4.3.0",

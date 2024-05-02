@@ -2,9 +2,13 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import { InitialStateAuth } from "../types/auth.type";
 import { authApi } from "../api/auth.api";
-import { PayloadLoginSuccess, ResLoginSuccess } from "../types/auth.type";
+import {
+  InitialStateAuth,
+  PayloadLoginSuccess,
+  ResLoginSuccess,
+  ResRefreshToken,
+} from "../types/auth.type";
 
 export const loginSuccess = createAsyncThunk<
   ResLoginSuccess,
@@ -23,6 +27,18 @@ export const logout = createAsyncThunk<unknown, void>(
   async (_, { rejectWithValue }) => {
     try {
       await authApi.logoutApi();
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const refreshToken = createAsyncThunk<ResRefreshToken>(
+  "auth/refreshToken",
+  async (_, { rejectWithValue }) => {
+    try {
+      const res = await authApi.refreshTokenApi();
+      return res.data.metadata;
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -53,6 +69,14 @@ const authSlice = createSlice({
       state.user = null;
     });
     build.addCase(logout.rejected, (state) => {
+      state.accessToken = "";
+      state.user = null;
+    });
+
+    build.addCase(refreshToken.fulfilled, (state, action) => {
+      state.accessToken = action.payload.accessToken;
+    });
+    build.addCase(refreshToken.rejected, (state) => {
       state.accessToken = "";
       state.user = null;
     });
