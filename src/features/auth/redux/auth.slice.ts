@@ -53,32 +53,33 @@ const initialState: InitialStateAuth = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    logoutAction: (state) => {
+      state.accessToken = "";
+      state.user = null;
+    },
+  },
   extraReducers: (build) => {
     build.addCase(loginSuccess.fulfilled, (state, action) => {
       state.accessToken = action.payload.accessToken;
       state.user = action.payload.user;
     });
     build.addCase(loginSuccess.rejected, (state) => {
-      state.accessToken = "";
-      state.user = null;
+      authSlice.caseReducers.logoutAction(state);
     });
 
     build.addCase(logout.fulfilled, (state) => {
-      state.accessToken = "";
-      state.user = null;
+      authSlice.caseReducers.logoutAction(state);
     });
     build.addCase(logout.rejected, (state) => {
-      state.accessToken = "";
-      state.user = null;
+      authSlice.caseReducers.logoutAction(state);
     });
 
     build.addCase(refreshToken.fulfilled, (state, action) => {
       state.accessToken = action.payload.accessToken;
     });
     build.addCase(refreshToken.rejected, (state) => {
-      state.accessToken = "";
-      state.user = null;
+      authSlice.caseReducers.logoutAction(state);
     });
   },
 });
@@ -90,3 +91,5 @@ const authConfig = {
 };
 
 export const authReducer = persistReducer(authConfig, authSlice.reducer);
+
+export const { logoutAction } = authSlice.actions;

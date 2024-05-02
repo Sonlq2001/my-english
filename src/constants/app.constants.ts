@@ -12,3 +12,9 @@ export enum KEYS_HEADERS {
 }
 
 export const ROOT_PATH = "/";
+
+export const LOGOUT_RULE_MESSAGE = "yes";
+
+export enum STATUS_CODE {
+  UNAUTHORIZED = 401,
+}
