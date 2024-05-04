@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ReactNode, FC } from "react";
 
 export type NavbarMenus = {
@@ -16,4 +17,11 @@ export type BaseResponse<T> = {
   message: string;
   status: number;
   metadata: T;
+};
+
+export type MenuEditors<T> = {
+  icon: FC;
+  key: T;
+  custom?: any;
+  title?: string;
 };
