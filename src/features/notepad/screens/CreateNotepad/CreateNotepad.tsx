@@ -37,7 +37,7 @@ const CreateNotepad: FC = () => {
               isRequire
             />
 
-            <TextEditor2 />
+            <TextEditor2 label="Notepad" isRequire />
             <div className="row-btn">
               <AppButton type="submit" rightIcon={<IconPlusInCircle />}>
                 Add

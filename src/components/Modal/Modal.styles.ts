@@ -54,5 +54,6 @@ export const WrapModal = styled.div`
     display: flex;
     justify-content: flex-end;
     padding: 2.5rem;
+    gap: 2rem;
   }
 `;

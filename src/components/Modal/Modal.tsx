@@ -13,6 +13,11 @@ interface ModalProps {
   onSubmit: () => void;
   onClosed: () => void;
   title: string;
+  isSubButton?: boolean;
+  textSub?: string;
+  onCancel?: () => void;
+  disabled?: boolean;
+  disabledSub?: boolean;
 }
 
 const Modal: FC<ModalProps> = ({
@@ -21,6 +26,11 @@ const Modal: FC<ModalProps> = ({
   onSubmit,
   onClosed,
   title,
+  isSubButton,
+  textSub = "Cancel",
+  onCancel,
+  disabled = false,
+  disabledSub = false,
 }) => {
   return (
     <Portal open>
@@ -37,7 +47,18 @@ const Modal: FC<ModalProps> = ({
           <main className="body-modal">{children}</main>
 
           <footer className="footer-modal">
-            <AppButton size="large" onClick={onSubmit}>
+            {isSubButton && (
+              <AppButton
+                variant="text"
+                size="large"
+                onClick={onCancel}
+                disabled={disabledSub}
+              >
+                {textSub}
+              </AppButton>
+            )}
+
+            <AppButton size="large" onClick={onSubmit} disabled={disabled}>
               {textOK}
             </AppButton>
           </footer>

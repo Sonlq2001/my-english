@@ -1,12 +1,13 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import TextAlign from "@tiptap/extension-text-align";
 import Highlight from "@tiptap/extension-highlight";
 import Underline from "@tiptap/extension-underline";
+import Link from "@tiptap/extension-link";
 
 import MenuEditor from "./MenuEditor/MenuEditor";
-import { WrapContentEditor, WrapTextEditor } from "./TextEditor2.styles";
+import { Wrap, WrapContentEditor, WrapTextEditor } from "./TextEditor.styles";
 
 const extensions = [
   StarterKit,
@@ -15,9 +16,18 @@ const extensions = [
   }),
   Highlight.configure({ multicolor: true }),
   Underline,
+  Link.configure({
+    protocols: ["ftp", "mailto"],
+    openOnClick: "whenNotEditable",
+  }),
 ];
 
-const TextEditor2: FC = () => {
+interface TextEditorProps {
+  label?: string;
+  isRequire?: boolean;
+}
+
+const TextEditor: FC<TextEditorProps> = ({ label, isRequire = false }) => {
   const editor = useEditor({
     extensions,
   });
@@ -27,19 +37,27 @@ const TextEditor2: FC = () => {
   }
 
   return (
-    <WrapTextEditor>
-      <MenuEditor editor={editor} />
+    <Wrap>
+      {label && (
+        <label htmlFor={label}>
+          {label}
+          {isRequire && <span className="label-require">*</span>}
+        </label>
+      )}
+      <WrapTextEditor>
+        <MenuEditor editor={editor} />
 
-      <WrapContentEditor>
-        <EditorContent
-          editor={editor}
-          placeholder="Enter your notes"
-          content=""
-          className="editor-tip-tab"
-        />
-      </WrapContentEditor>
-    </WrapTextEditor>
+        <WrapContentEditor>
+          <EditorContent
+            editor={editor}
+            placeholder="Enter your notes"
+            content=""
+            className="editor-tip-tab"
+          />
+        </WrapContentEditor>
+      </WrapTextEditor>
+    </Wrap>
   );
 };
 
-export default TextEditor2;
+export default memo(TextEditor);
