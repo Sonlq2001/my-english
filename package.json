@@ -12,6 +12,12 @@
   "dependencies": {
     "@emotion/is-prop-valid": "^1.2.1",
     "@reduxjs/toolkit": "^2.2.3",
+    "@tiptap/extension-highlight": "^2.3.1",
+    "@tiptap/extension-text-align": "^2.3.1",
+    "@tiptap/extension-underline": "^2.3.1",
+    "@tiptap/pm": "^2.3.1",
+    "@tiptap/react": "^2.3.1",
+    "@tiptap/starter-kit": "^2.3.1",
     "axios": "^1.6.8",
     "axios-auth-refresh": "^3.3.6",
     "clsx": "^2.1.0",

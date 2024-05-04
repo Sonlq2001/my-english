@@ -2,7 +2,6 @@ import { FC } from "react";
 
 import { Formik } from "formik";
 
-import TextEditor from "@app/components/TextEditor/TextEditor";
 import AppButton from "@app/components/AppButton/AppButton";
 import TextField from "@app/components/TextField/TextField";
 import ReturnButton from "@app/components/ReturnButton/ReturnButton";
@@ -11,6 +10,7 @@ import IconPlusInCircle from "@app/assets/images/icon-svg/icon-plus-in-circle.sv
 import { NotepadPathsEnum } from "../../constants/notepad.paths";
 import { WrapCreateNotepad, WrapFormik } from "./CreateNotepad.styles";
 import { notepadSchema } from "../../helpers/notepad.helpers";
+import TextEditor2 from "@app/components/TextEditor2/TextEditor2";
 
 const CreateNotepad: FC = () => {
   return (
@@ -37,7 +37,7 @@ const CreateNotepad: FC = () => {
               isRequire
             />
 
-            <TextEditor label="Description" name="description" isRequire />
+            <TextEditor2 />
             <div className="row-btn">
               <AppButton type="submit" rightIcon={<IconPlusInCircle />}>
                 Add
