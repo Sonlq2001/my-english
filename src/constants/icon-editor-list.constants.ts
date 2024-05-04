@@ -25,6 +25,7 @@ import IconHeading4 from "@app/assets/images/icon-svg/editor/icon-heading-4.svg?
 import IconHeading5 from "@app/assets/images/icon-svg/editor/icon-heading-5.svg?react";
 import IconHeading6 from "@app/assets/images/icon-svg/editor/icon-heading-6.svg?react";
 import IconImage from "@app/assets/images/icon-svg/editor/icon-image.svg?react";
+import IconLink from "@app/assets/images/icon-svg/editor/icon-link.svg?react";
 
 import { MenuEditors } from "@app/types/app.types";
 
@@ -48,6 +49,7 @@ export enum KeysEditor {
   HightLight = "highlight",
   UnderLine = "underline",
   Image = "image",
+  Link = "link",
 }
 
 export const IconEditorList: MenuEditors<KeysEditor>[] = [
@@ -55,6 +57,7 @@ export const IconEditorList: MenuEditors<KeysEditor>[] = [
   { icon: IconItalic, key: KeysEditor.Italic, title: "Italic" },
   { icon: IconHeading, key: KeysEditor.Heading, title: "Heading" },
   { icon: IconBlockquote, key: KeysEditor.Blockquote, title: "Blockquote" },
+  { icon: IconLink, key: KeysEditor.Link, title: "Link" },
   { icon: IconBulletList, key: KeysEditor.BulletList, title: "BulletList" },
   { icon: IconOrderList, key: KeysEditor.OrderList, title: "OrderList" },
   { icon: IconStrike, key: KeysEditor.Strike, title: "Strike" },
