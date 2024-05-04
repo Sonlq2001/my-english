@@ -10,13 +10,15 @@ import {
 
 import { WrapMenuEditor } from "./MenuEditor.styles";
 import MenuHeading from "../MenuHeading/MenuHeading";
+import MenuImage from "../MenuImage/MenuImage";
 
 interface MenuEditorProps {
   editor: CoreEditor;
 }
 
 const MenuEditor: FC<MenuEditorProps> = ({ editor }) => {
-  const [isOpenHeading, setIsOpenHeading] = useState(false);
+  const [isOpenHeading, setIsOpenHeading] = useState<boolean>(false);
+  const [isOpenImage, setIsOpenImage] = useState<boolean>(false);
 
   const handleMenuItem = (key: KeysEditor) => {
     switch (key) {
@@ -74,6 +76,9 @@ const MenuEditor: FC<MenuEditorProps> = ({ editor }) => {
       case KeysEditor.Undo:
         editor.chain().focus().undo().run();
         break;
+      case KeysEditor.Image:
+        setIsOpenImage(!isOpenImage);
+        break;
       default:
         break;
     }
@@ -124,6 +129,8 @@ const MenuEditor: FC<MenuEditorProps> = ({ editor }) => {
       {isOpenHeading && (
         <MenuHeading setIsOpenHeading={setIsOpenHeading} editor={editor} />
       )}
+
+      {isOpenImage && <MenuImage setIsOpenImage={setIsOpenImage} />}
     </WrapMenuEditor>
   );
 };

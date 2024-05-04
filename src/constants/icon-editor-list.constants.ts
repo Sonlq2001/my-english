@@ -24,6 +24,7 @@ import IconHeading3 from "@app/assets/images/icon-svg/editor/icon-heading-3.svg?
 import IconHeading4 from "@app/assets/images/icon-svg/editor/icon-heading-4.svg?react";
 import IconHeading5 from "@app/assets/images/icon-svg/editor/icon-heading-5.svg?react";
 import IconHeading6 from "@app/assets/images/icon-svg/editor/icon-heading-6.svg?react";
+import IconImage from "@app/assets/images/icon-svg/editor/icon-image.svg?react";
 
 import { MenuEditors } from "@app/types/app.types";
 
@@ -46,6 +47,7 @@ export enum KeysEditor {
   Redo = "redo",
   HightLight = "highlight",
   UnderLine = "underline",
+  Image = "image",
 }
 
 export const IconEditorList: MenuEditors<KeysEditor>[] = [
@@ -55,8 +57,6 @@ export const IconEditorList: MenuEditors<KeysEditor>[] = [
   { icon: IconBlockquote, key: KeysEditor.Blockquote, title: "Blockquote" },
   { icon: IconBulletList, key: KeysEditor.BulletList, title: "BulletList" },
   { icon: IconOrderList, key: KeysEditor.OrderList, title: "OrderList" },
-  { icon: IconCode, key: KeysEditor.Code, title: "Code" },
-  { icon: IconCodeBlock, key: KeysEditor.CodeBlock, title: "CodeBlock" },
   { icon: IconStrike, key: KeysEditor.Strike, title: "Strike" },
   {
     icon: IconAlignLeft,
@@ -94,14 +94,17 @@ export const IconEditorList: MenuEditors<KeysEditor>[] = [
     title: "HorizontalRule",
   },
   { icon: IconHardBreak, key: KeysEditor.HardBreak, title: "HardBreak" },
-  { icon: IconUndo, key: KeysEditor.Undo, title: "Undo" },
-  { icon: IconRedo, key: KeysEditor.Redo, title: "Redo" },
   {
     icon: IconHightLight,
     key: KeysEditor.HightLight,
     title: "HightLight",
   },
   { icon: IconUnderLine, key: KeysEditor.UnderLine, title: "UnderLine" },
+  { icon: IconCode, key: KeysEditor.Code, title: "Code" },
+  { icon: IconCodeBlock, key: KeysEditor.CodeBlock, title: "CodeBlock" },
+  { icon: IconImage, key: KeysEditor.Image, title: "Image" },
+  { icon: IconUndo, key: KeysEditor.Undo, title: "Undo" },
+  { icon: IconRedo, key: KeysEditor.Redo, title: "Redo" },
 ];
 
 export enum KeysHeadings {
@@ -153,3 +156,19 @@ export const ListHeading: (MenuEditors<KeysHeadings> & { level: Level })[] = [
 ];
 
 export const ID_IGNORE_HEADING = "id-ignore-heading";
+
+export enum TABS_UPLOAD {
+  INSERT_LINK = 1,
+  UPLOAD = 2,
+}
+
+export const TABS_UPLOAD_IMAGES = [
+  {
+    title: "Insert from URL",
+    value: TABS_UPLOAD.INSERT_LINK,
+  },
+  {
+    title: "Upload",
+    value: TABS_UPLOAD.UPLOAD,
+  },
+];
