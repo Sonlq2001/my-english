@@ -1,6 +1,5 @@
-import { FC } from "react";
+import { Level } from "@tiptap/extension-heading";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import IconBold from "@app/assets/images/icon-svg/editor/icon-bold.svg?react";
 import IconItalic from "@app/assets/images/icon-svg/editor/icon-italic.svg?react";
 import IconBlockquote from "@app/assets/images/icon-svg/editor/icon-blockquote.svg?react";
@@ -18,10 +17,20 @@ import IconUndo from "@app/assets/images/icon-svg/editor/icon-undo.svg?react";
 import IconRedo from "@app/assets/images/icon-svg/editor/icon-redo.svg?react";
 import IconHightLight from "@app/assets/images/icon-svg/editor/icon-hight-light.svg?react";
 import IconUnderLine from "@app/assets/images/icon-svg/editor/icon-underline.svg?react";
+import IconHeading from "@app/assets/images/icon-svg/editor/icon-heading.svg?react";
+import IconHeading1 from "@app/assets/images/icon-svg/editor/icon-heading-1.svg?react";
+import IconHeading2 from "@app/assets/images/icon-svg/editor/icon-heading-2.svg?react";
+import IconHeading3 from "@app/assets/images/icon-svg/editor/icon-heading-3.svg?react";
+import IconHeading4 from "@app/assets/images/icon-svg/editor/icon-heading-4.svg?react";
+import IconHeading5 from "@app/assets/images/icon-svg/editor/icon-heading-5.svg?react";
+import IconHeading6 from "@app/assets/images/icon-svg/editor/icon-heading-6.svg?react";
+
+import { MenuEditors } from "@app/types/app.types";
 
 export enum KeysEditor {
   Bold = "bold",
   Italic = "italic",
+  Heading = "heading",
   Blockquote = "blockquote",
   BulletList = "bulletList",
   OrderList = "orderedList",
@@ -39,20 +48,16 @@ export enum KeysEditor {
   UnderLine = "underline",
 }
 
-export const IconEditorList: {
-  icon: FC;
-  key: KeysEditor;
-  custom?: any;
-  title?: string;
-}[] = [
+export const IconEditorList: MenuEditors<KeysEditor>[] = [
   { icon: IconBold, key: KeysEditor.Bold, title: "Bold" },
   { icon: IconItalic, key: KeysEditor.Italic, title: "Italic" },
-  { icon: IconBlockquote, key: KeysEditor.Blockquote },
-  { icon: IconBulletList, key: KeysEditor.BulletList },
-  { icon: IconOrderList, key: KeysEditor.OrderList },
-  { icon: IconCode, key: KeysEditor.Code },
-  { icon: IconCodeBlock, key: KeysEditor.CodeBlock },
-  { icon: IconStrike, key: KeysEditor.Strike },
+  { icon: IconHeading, key: KeysEditor.Heading, title: "Heading" },
+  { icon: IconBlockquote, key: KeysEditor.Blockquote, title: "Blockquote" },
+  { icon: IconBulletList, key: KeysEditor.BulletList, title: "BulletList" },
+  { icon: IconOrderList, key: KeysEditor.OrderList, title: "OrderList" },
+  { icon: IconCode, key: KeysEditor.Code, title: "Code" },
+  { icon: IconCodeBlock, key: KeysEditor.CodeBlock, title: "CodeBlock" },
+  { icon: IconStrike, key: KeysEditor.Strike, title: "Strike" },
   {
     icon: IconAlignLeft,
     key: KeysEditor.AlignLeft,
@@ -61,6 +66,7 @@ export const IconEditorList: {
         textAlign: "left",
       },
     },
+    title: "AlignLeft",
   },
   {
     icon: IconAlignCenter,
@@ -70,6 +76,7 @@ export const IconEditorList: {
         textAlign: "center",
       },
     },
+    title: "AlignCenter",
   },
   {
     icon: IconAlignRight,
@@ -79,14 +86,70 @@ export const IconEditorList: {
         textAlign: "right",
       },
     },
+    title: "AlignRight",
   },
-  { icon: IconHorizontalRule, key: KeysEditor.HorizontalRule },
-  { icon: IconHardBreak, key: KeysEditor.HardBreak },
-  { icon: IconUndo, key: KeysEditor.Undo },
-  { icon: IconRedo, key: KeysEditor.Redo },
+  {
+    icon: IconHorizontalRule,
+    key: KeysEditor.HorizontalRule,
+    title: "HorizontalRule",
+  },
+  { icon: IconHardBreak, key: KeysEditor.HardBreak, title: "HardBreak" },
+  { icon: IconUndo, key: KeysEditor.Undo, title: "Undo" },
+  { icon: IconRedo, key: KeysEditor.Redo, title: "Redo" },
   {
     icon: IconHightLight,
     key: KeysEditor.HightLight,
+    title: "HightLight",
   },
-  { icon: IconUnderLine, key: KeysEditor.UnderLine },
+  { icon: IconUnderLine, key: KeysEditor.UnderLine, title: "UnderLine" },
 ];
+
+export enum KeysHeadings {
+  Heading1 = "Heading1",
+  Heading2 = "Heading2",
+  Heading3 = "Heading3",
+  Heading4 = "Heading4",
+  Heading5 = "Heading5",
+  Heading6 = "Heading6",
+}
+
+export const ListHeading: (MenuEditors<KeysHeadings> & { level: Level })[] = [
+  {
+    icon: IconHeading1,
+    key: KeysHeadings.Heading1,
+    title: "Heading 1",
+    level: 1,
+  },
+  {
+    icon: IconHeading2,
+    key: KeysHeadings.Heading1,
+    title: "Heading 2",
+    level: 2,
+  },
+  {
+    icon: IconHeading3,
+    key: KeysHeadings.Heading3,
+    title: "Heading 3",
+    level: 3,
+  },
+  {
+    icon: IconHeading4,
+    key: KeysHeadings.Heading4,
+    title: "Heading 4",
+    level: 4,
+  },
+  {
+    icon: IconHeading5,
+    key: KeysHeadings.Heading5,
+    title: "Heading 5",
+    level: 5,
+  },
+  {
+    icon: IconHeading6,
+    key: KeysHeadings.Heading6,
+    title: "Heading 6",
+    level: 6,
+  },
+];
+
+export const ID_IGNORE_HEADING = "id-ignore-heading";

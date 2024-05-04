@@ -1,19 +1,23 @@
-import { FC, ElementType } from "react";
+import { FC, ElementType, useState } from "react";
 import { Editor as CoreEditor } from "@tiptap/core";
 import clsx from "clsx";
 
 import {
+  ID_IGNORE_HEADING,
   IconEditorList,
   KeysEditor,
 } from "@app/constants/icon-editor-list.constants";
 
 import { WrapMenuEditor } from "./MenuEditor.styles";
+import MenuHeading from "../MenuHeading/MenuHeading";
 
 interface MenuEditorProps {
   editor: CoreEditor;
 }
 
 const MenuEditor: FC<MenuEditorProps> = ({ editor }) => {
+  const [isOpenHeading, setIsOpenHeading] = useState(false);
+
   const handleMenuItem = (key: KeysEditor) => {
     switch (key) {
       case KeysEditor.Bold:
@@ -21,6 +25,9 @@ const MenuEditor: FC<MenuEditorProps> = ({ editor }) => {
         break;
       case KeysEditor.Italic:
         editor.chain().focus().toggleItalic().run();
+        break;
+      case KeysEditor.Heading:
+        setIsOpenHeading(!isOpenHeading);
         break;
       case KeysEditor.Strike:
         editor.chain().focus().toggleStrike().run();
@@ -72,27 +79,51 @@ const MenuEditor: FC<MenuEditorProps> = ({ editor }) => {
     }
   };
 
+  const isCheckDisabled = (key: KeysEditor) => {
+    switch (key) {
+      case KeysEditor.Bold:
+        return !editor.can().chain().focus().toggleBold().run();
+      case KeysEditor.Italic:
+        return !editor.can().chain().focus().toggleItalic().run();
+      case KeysEditor.Code:
+        return !editor.can().chain().focus().toggleCode().run();
+      case KeysEditor.Strike:
+        return !editor.can().chain().focus().toggleStrike().run();
+      case KeysEditor.Undo:
+        return !editor.can().chain().focus().undo().run();
+      case KeysEditor.Redo:
+        return !editor.can().chain().focus().redo().run();
+      default:
+        return false;
+    }
+  };
+
   return (
     <WrapMenuEditor>
       {IconEditorList.map((menu, index) => {
         const IconMenu = menu.icon as ElementType;
+        const isHeading = menu.key === KeysEditor.Heading;
+        const isActiveMenu =
+          editor.isActive(menu?.custom ? menu.custom[menu.key] : menu.key) ||
+          (isOpenHeading && isHeading);
+
         return (
           <button
             title={menu.title}
-            className={clsx(
-              "btn-menu",
-              editor.isActive(menu?.custom ? menu.custom[menu.key] : menu.key)
-                ? "is-active"
-                : ""
-            )}
+            className={clsx("btn-menu", isActiveMenu ? "is-active" : "")}
             type="button"
             key={index}
             onClick={() => handleMenuItem(menu.key)}
+            disabled={isCheckDisabled(menu.key)}
           >
-            <IconMenu />
+            <IconMenu id={isHeading ? ID_IGNORE_HEADING : ""} />
           </button>
         );
       })}
+
+      {isOpenHeading && (
+        <MenuHeading setIsOpenHeading={setIsOpenHeading} editor={editor} />
+      )}
     </WrapMenuEditor>
   );
 };

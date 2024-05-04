@@ -4,12 +4,14 @@ interface ClickOutsideProps {
   children: ReactNode;
   onOutsideClick: () => void;
   idElementIgnore?: string;
+  className?: string;
 }
 
 const ClickOutside: FC<ClickOutsideProps> = ({
   children,
   onOutsideClick,
   idElementIgnore,
+  className,
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
@@ -31,7 +33,11 @@ const ClickOutside: FC<ClickOutsideProps> = ({
     };
   }, [idElementIgnore, onOutsideClick]);
 
-  return <div ref={containerRef}>{children}</div>;
+  return (
+    <div className={className} ref={containerRef}>
+      {children}
+    </div>
+  );
 };
 
 export default memo(ClickOutside);
