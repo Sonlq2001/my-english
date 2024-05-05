@@ -97,3 +97,17 @@ img {
   color: #1976d2;
   font-weight: 500;
 }
+
+/* set max with default image */
+.ProseMirror img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  display: flex;
+  margin: auto;
+}
+/* highlight outline when selected image */
+.ProseMirror img.ProseMirror-selectednode {
+  outline: 3px solid rgba(12, 118, 167, 0.678);
+  border-radius: 5px;
+}

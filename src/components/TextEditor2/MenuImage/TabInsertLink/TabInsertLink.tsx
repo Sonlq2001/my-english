@@ -8,11 +8,10 @@ const TabInsertLink: FC = () => {
   return (
     <WrapTabInsertLink>
       <TextField
-        name="image"
+        name="link"
         label="Image URL"
         fullWidth
         placeholder="Paste or type URL"
-        isRequire
       />
 
       <TextField name="alt" label="Alt text (alternative text)" fullWidth />

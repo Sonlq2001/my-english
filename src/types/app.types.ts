@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ReactNode, FC } from "react";
+import { TABS_UPLOAD } from "@app/constants/icon-editor-list.constants";
 
 export type NavbarMenus = {
   id: string;
@@ -24,4 +25,10 @@ export type MenuEditors<T> = {
   key: T;
   custom?: any;
   title?: string;
+};
+
+export type TypeMenuImage = {
+  link: File | string;
+  alt: string;
+  tab: TABS_UPLOAD;
 };

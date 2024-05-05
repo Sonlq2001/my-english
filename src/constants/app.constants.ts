@@ -18,3 +18,7 @@ export const LOGOUT_RULE_MESSAGE = "yes";
 export enum STATUS_CODE {
   UNAUTHORIZED = 401,
 }
+
+export const SIZE_UPLOAD_IMAGE = 3000000; // 3mb
+
+export const RULES_ACCEPT_IMAGE = ["image/jpeg", "image/jpg", "image/png"];
