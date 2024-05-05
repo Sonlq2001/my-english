@@ -135,7 +135,9 @@ const MenuEditor: FC<MenuEditorProps> = ({ editor }) => {
         <MenuHeading setIsOpenHeading={setIsOpenHeading} editor={editor} />
       )}
 
-      {isOpenImage && <MenuImage setIsOpenImage={setIsOpenImage} />}
+      {isOpenImage && (
+        <MenuImage setIsOpenImage={setIsOpenImage} editor={editor} />
+      )}
 
       {isOpenLink && <MenuLink setIsOpenLink={setIsOpenLink} editor={editor} />}
     </WrapMenuEditor>

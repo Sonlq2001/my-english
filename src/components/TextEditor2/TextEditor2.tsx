@@ -5,6 +5,7 @@ import TextAlign from "@tiptap/extension-text-align";
 import Highlight from "@tiptap/extension-highlight";
 import Underline from "@tiptap/extension-underline";
 import Link from "@tiptap/extension-link";
+import Image from "@tiptap/extension-image";
 
 import MenuEditor from "./MenuEditor/MenuEditor";
 import { Wrap, WrapContentEditor, WrapTextEditor } from "./TextEditor.styles";
@@ -20,6 +21,7 @@ const extensions = [
     protocols: ["ftp", "mailto"],
     openOnClick: "whenNotEditable",
   }),
+  Image,
 ];
 
 interface TextEditorProps {

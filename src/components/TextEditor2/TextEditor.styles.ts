@@ -30,5 +30,6 @@ export const WrapContentEditor = styled.div`
     height: 100%;
     outline: none;
     padding: 1.5rem;
+    overflow: auto;
   }
 `;
