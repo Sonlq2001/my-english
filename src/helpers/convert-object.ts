@@ -34,6 +34,10 @@ export function toSnakeCase<T = unknown>(
   d: T,
   filter = false
 ): T | Record<string, unknown> | undefined {
+  if (d instanceof FormData) {
+    return d;
+  }
+
   if (isObject(d)) {
     const o: Record<string, unknown> = {};
     Object.keys(d as Record<string, unknown>).forEach((k) => {
