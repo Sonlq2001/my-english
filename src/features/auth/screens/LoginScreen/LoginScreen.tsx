@@ -11,7 +11,7 @@ import {
 
 const LoginScreen: FC = () => {
   const handleLoginGoogle = () => {
-    window.open("http://localhost:5000/v1/api/auth/google", "_self");
+    window.open(`${import.meta.env.VITE_BASE_API}/auth/google`, "_self");
   };
 
   return (

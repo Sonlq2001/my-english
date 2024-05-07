@@ -1,6 +1,6 @@
 import { FC } from "react";
-
 import { Formik } from "formik";
+import debounce from "lodash.debounce";
 
 import AppButton from "@app/components/AppButton/AppButton";
 import TextField from "@app/components/TextField/TextField";
@@ -27,7 +27,7 @@ const CreateNotepad: FC = () => {
         }}
         validationSchema={notepadSchema}
       >
-        {() => (
+        {({ setFieldValue, errors }) => (
           <WrapFormik>
             <TextField
               label="Title notepad"
@@ -37,7 +37,17 @@ const CreateNotepad: FC = () => {
               isRequire
             />
 
-            <TextEditor2 label="Notepad" isRequire />
+            <div>
+              <TextEditor2
+                label="Notepad"
+                isRequire
+                getValue={debounce((value) => {
+                  setFieldValue("description", value);
+                }, 300)}
+              />
+              <div>{errors.description}</div>
+            </div>
+
             <div className="row-btn">
               <AppButton type="submit" rightIcon={<IconPlusInCircle />}>
                 Add

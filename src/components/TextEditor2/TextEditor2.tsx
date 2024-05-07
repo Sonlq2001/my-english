@@ -27,11 +27,20 @@ const extensions = [
 interface TextEditorProps {
   label?: string;
   isRequire?: boolean;
+  getValue: (value: string) => void;
 }
 
-const TextEditor: FC<TextEditorProps> = ({ label, isRequire = false }) => {
+const TextEditor: FC<TextEditorProps> = ({
+  label,
+  isRequire = false,
+  getValue,
+}) => {
   const editor = useEditor({
     extensions,
+    onUpdate: ({ editor }) => {
+      const result = editor.getHTML();
+      getValue(result);
+    },
   });
 
   if (!editor) {

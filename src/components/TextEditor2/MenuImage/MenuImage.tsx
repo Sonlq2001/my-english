@@ -2,6 +2,7 @@ import { FC, useState, memo } from "react";
 import clsx from "clsx";
 import { Formik, Form } from "formik";
 import { Editor as CoreEditor } from "@tiptap/core";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 import Modal from "@app/components/Modal/Modal";
 import {
@@ -10,10 +11,12 @@ import {
 } from "@app/constants/icon-editor-list.constants";
 import { schemaInsertLinkImage } from "@app/helpers/text-editor.helper";
 import { TypeMenuImage } from "@app/types/app.types";
+import { useAppDispatch } from "@app/redux/store";
 
 import { ContentTabs, TabHeader } from "./MenuImage.styles";
 import TabInsertLink from "./TabInsertLink/TabInsertLink";
 import TabUpload from "./TabUpload/TabUpload";
+import { uploadFile } from "@app/features/app/app";
 
 interface MenuImageProps {
   setIsOpenImage: (open: false) => void;
@@ -27,19 +30,31 @@ export const initMenuImage = {
 };
 
 const MenuImage: FC<MenuImageProps> = ({ setIsOpenImage, editor }) => {
+  const dispatch = useAppDispatch();
   const [tabUpload, setTabUpload] = useState<TABS_UPLOAD>(
     TABS_UPLOAD.INSERT_LINK
   );
 
-  const handleSubmitImage = ({ link, alt }: TypeMenuImage) => {
+  const handleSubmitImage = async ({ link, alt }: TypeMenuImage) => {
     if (link instanceof File) {
-      // TODO: upload file cloudinary
-      console.log(link, "file");
+      const formData = new FormData();
+      formData.append("file", link);
+
+      await dispatch(uploadFile(formData))
+        .then(unwrapResult)
+        .then((res) => {
+          editor
+            .chain()
+            .focus()
+            .setImage({ src: res.imageUrl, alt: res.publicId })
+            .run();
+        });
     }
 
     if (link && typeof link === "string") {
       editor.chain().focus().setImage({ src: link, alt }).run();
     }
+
     setIsOpenImage(false);
   };
 
@@ -55,13 +70,14 @@ const MenuImage: FC<MenuImageProps> = ({ setIsOpenImage, editor }) => {
       onSubmit={handleSubmitImage}
       validationSchema={schemaInsertLinkImage}
     >
-      {({ submitForm, setValues }) => (
+      {({ submitForm, setValues, isSubmitting }) => (
         <Modal
           open
           textOK="Apply"
           title="Upload Image"
           onClosed={() => setIsOpenImage(false)}
           onSubmit={submitForm}
+          disabled={isSubmitting}
         >
           <Form>
             <TabHeader>

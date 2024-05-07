@@ -93,6 +93,7 @@ const ImageUpload: FC<ImageUploadProps> = ({
             const file = e.target.files ? e.target.files[0] : null;
             handlePreviewImage(file);
           }}
+          accept="image/png, image/jpeg"
         />
       </WrapImageUpload>
     </StyleSheetManager>

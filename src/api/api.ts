@@ -8,6 +8,7 @@ import createAuthRefreshInterceptor from "axios-auth-refresh";
 import { store } from "@app/redux/store";
 import { toSnakeCase, toCamel } from "@app/helpers/convert-object";
 import {
+  CONTENT_TYPES_HEADER,
   KEYS_HEADERS,
   LOGOUT_RULE_MESSAGE,
   STATUS_CODE,
@@ -33,6 +34,9 @@ const requestInterceptor = (req: InternalAxiosRequestConfig) => {
   if (accessToken && userId) {
     req.headers[KEYS_HEADERS.AUTHORIZATION] = `Bearer ${accessToken}`;
     req.headers[KEYS_HEADERS.CLIENT_ID] = userId;
+    req.headers[KEYS_HEADERS.CONTENT_TYPE] = req.headers?.useFormData
+      ? CONTENT_TYPES_HEADER.FORM_DATA
+      : CONTENT_TYPES_HEADER.JSON;
   }
 
   return req;
