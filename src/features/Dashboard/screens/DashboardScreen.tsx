@@ -7,7 +7,7 @@ import { DashboardWrap } from "./Dashboard.styles";
 const DashboardScreen: FC = () => {
   // TODO:
   useEffect(() => {
-    api.get("/vocabulary/list");
+    api.get("/vocabulary/list-vocabulary");
   }, []);
 
   return (

@@ -6,11 +6,12 @@ import AppButton from "@app/components/AppButton/AppButton";
 import TextField from "@app/components/TextField/TextField";
 import ReturnButton from "@app/components/ReturnButton/ReturnButton";
 import IconPlusInCircle from "@app/assets/images/icon-svg/icon-plus-in-circle.svg?react";
+import TextEditor2 from "@app/components/TextEditor2/TextEditor2";
+import HelperText from "@app/components/HelperText/HelperText";
 
 import { NotepadPathsEnum } from "../../constants/notepad.paths";
 import { WrapCreateNotepad, WrapFormik } from "./CreateNotepad.styles";
 import { notepadSchema } from "../../helpers/notepad.helpers";
-import TextEditor2 from "@app/components/TextEditor2/TextEditor2";
 
 const CreateNotepad: FC = () => {
   return (
@@ -45,7 +46,7 @@ const CreateNotepad: FC = () => {
                   setFieldValue("description", value);
                 }, 300)}
               />
-              <div>{errors.description}</div>
+              {errors.description && <HelperText text={errors.description} />}
             </div>
 
             <div className="row-btn">
