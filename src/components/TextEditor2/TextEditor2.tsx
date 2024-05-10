@@ -38,8 +38,9 @@ const TextEditor: FC<TextEditorProps> = ({
   const editor = useEditor({
     extensions,
     onUpdate: ({ editor }) => {
-      const result = editor.getHTML();
-      getValue(result);
+      const contentTextEditor = editor.getHTML();
+      const isEmptyText = !editor.state.doc.textContent.trim().length;
+      getValue(isEmptyText ? "" : contentTextEditor);
     },
   });
 

@@ -6,6 +6,7 @@ import { VOCABULARY_ROUTES } from "@app/features/vocabulary/vocabulary";
 import { NOTEPAD_ROUTES } from "@app/features/notepad/notepad";
 import { WRITING_ROUTES } from "@app/features/writing/writing";
 import { AUTH_ROUTES } from "@app/features/auth/auth";
+import { SETTING_ROUTES } from "@app/features/setting/setting";
 
 export const LIST_ROUTES = [
   ...DASHBOARD_ROUTES,
@@ -16,4 +17,5 @@ export const LIST_ROUTES = [
   ...NOTEPAD_ROUTES,
   ...WRITING_ROUTES,
   ...AUTH_ROUTES,
+  ...SETTING_ROUTES,
 ];
