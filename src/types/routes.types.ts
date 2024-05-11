@@ -5,11 +5,15 @@ export type RouteItemDef = {
 
   path: string;
 
-  component: FC;
+  component?: FC;
 
   layout?: FC;
 
   isPrivateRoute?: boolean;
 
   isAuthRoute?: boolean;
+
+  subMenu?: RouteItemDef[];
+
+  index?: boolean;
 };
