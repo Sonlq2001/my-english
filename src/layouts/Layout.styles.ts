@@ -16,10 +16,11 @@ export const LayoutDefault = styled.div`
 
 export const Content = styled.div`
   flex: 1;
-  margin-bottom: 11rem;
+  /* margin-bottom: 11rem; */
 `;
 
 export const InnerContent = styled.div`
-  padding: 0 3rem;
-  height: calc(100% - 4.5rem);
+  padding: 0 4rem;
+  min-height: calc(100vh - 5.4rem);
+  background-color: #f9fafb;
 `;

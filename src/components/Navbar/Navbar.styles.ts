@@ -6,6 +6,7 @@ export const NavbarWrap = styled.div`
   justify-content: space-between;
   height: 5.4rem;
   padding: 0 2rem;
+  border-bottom: 1px solid #d9e3e7;
 
   .btn-login {
     font-weight: ${(props) => props.theme.palette.weight.medium};

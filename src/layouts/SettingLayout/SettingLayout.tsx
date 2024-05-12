@@ -1,17 +1,19 @@
-import { FC, ReactNode } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { ElementType, FC } from "react";
+import { Outlet } from "react-router-dom";
 
 import Navbar from "@app/components/Navbar/Navbar";
 import Sidebar from "@app/components/Sidebar/Sidebar";
-import AudioPlay from "@app/components/AudioPlay/AudioPlay";
+import AppButton from "@app/components/AppButton/AppButton";
+import { NAVBAR_SETTINGS_MENUS } from "@app/constants/navbar-setting.constants";
 
 import { LayoutDefault, Content, InnerContent } from "../Layout.styles";
+import {
+  SidebarMenu,
+  TitleSetting,
+  WrapSettingLayout,
+} from "./SettingLayout.styles";
 
-interface SettingLayoutProps {
-  children?: ReactNode;
-}
-
-const SettingLayout: FC<SettingLayoutProps> = () => {
+const SettingLayout: FC = () => {
   return (
     <div id="setting-layout">
       <LayoutDefault>
@@ -20,18 +22,37 @@ const SettingLayout: FC<SettingLayoutProps> = () => {
         <Content>
           <Navbar />
           <InnerContent>
-            <div>
-              <nav>
-                <NavLink to="podcast">Podcast</NavLink>
-                <NavLink to="general">general</NavLink>
-              </nav>
-            </div>
-            <Outlet />
+            <TitleSetting>
+              <h2>Settings</h2>
+              <p>Customize util match to your work</p>
+            </TitleSetting>
+            <WrapSettingLayout>
+              <SidebarMenu>
+                {NAVBAR_SETTINGS_MENUS.map((nav) => {
+                  const IconMenu = nav.icon as ElementType;
+                  return (
+                    <AppButton
+                      key={nav.id}
+                      variant="text"
+                      size="large"
+                      leftIcon={<IconMenu />}
+                      className={"nav-link"}
+                      to={nav.path}
+                    >
+                      {nav.label}
+                    </AppButton>
+                  );
+                })}
+              </SidebarMenu>
+
+              {/* Outlet: render content submenu  */}
+              <div className="content-setting">
+                <Outlet />
+              </div>
+            </WrapSettingLayout>
           </InnerContent>
         </Content>
       </LayoutDefault>
-
-      <AudioPlay />
     </div>
   );
 };
