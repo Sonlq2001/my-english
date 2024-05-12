@@ -5,7 +5,10 @@ import { SpeakingPathsEnum } from "@app/features/speaking/speaking";
 import { VocabularyPathsEnum } from "@app/features/vocabulary/vocabulary";
 import { NotepadPathsEnum } from "@app/features/notepad/notepad";
 import { WritingPathsEnum } from "@app/features/writing/writing";
-import { SettingPathsEnum } from "@app/features/setting/setting";
+import {
+  SettingPathsEnum,
+  SettingSubPathsEnum,
+} from "@app/features/setting/setting";
 
 import IconDashboard from "@app/assets/images/icon-svg/icon-dashboard.svg?react";
 import IconListening from "@app/assets/images/icon-svg/icon-listening.svg?react";
@@ -62,8 +65,9 @@ export const NAVBAR_MENUS: NavbarMenus[] = [
   },
   {
     id: "Settings",
-    path: SettingPathsEnum.SETTINGS,
+    path: `${SettingPathsEnum.SETTINGS}/${SettingSubPathsEnum.GENERAL}`,
     icon: IconSetting,
     label: "Settings",
+    customActive: true,
   },
 ];

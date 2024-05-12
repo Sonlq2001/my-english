@@ -11,7 +11,7 @@ interface SettingLayoutProps {
   children?: ReactNode;
 }
 
-const SettingLayout: FC<SettingLayoutProps> = ({ children }) => {
+const SettingLayout: FC<SettingLayoutProps> = () => {
   return (
     <div id="setting-layout">
       <LayoutDefault>
@@ -26,14 +26,12 @@ const SettingLayout: FC<SettingLayoutProps> = ({ children }) => {
                 <NavLink to="general">general</NavLink>
               </nav>
             </div>
-            {children}
+            <Outlet />
           </InnerContent>
         </Content>
       </LayoutDefault>
 
       <AudioPlay />
-
-      <Outlet />
     </div>
   );
 };

@@ -25,7 +25,8 @@ export const ListMenu = styled.div`
     border-radius: 2rem 0 0 2rem;
   }
 
-  a.active {
+  a.active,
+  a button.active {
     background-color: ${(props) => props.theme.palette.primary.main};
     display: block;
     border-radius: 2rem 0 0 2rem;
