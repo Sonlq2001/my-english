@@ -1,13 +1,12 @@
 import { FC } from "react";
-import { WrapGeneral, WrapTitleSetting } from "./SettingGeneral.styles";
+
+import { WrapGeneral } from "./SettingGeneral.styles";
+import TitleSetting from "../../components/TitleSetting/TitleSetting";
 
 const SettingGeneral: FC = () => {
   return (
     <WrapGeneral>
-      <WrapTitleSetting>
-        <h2>General</h2>
-        <p>Cập nhật thông tin của bạn</p>
-      </WrapTitleSetting>
+      <TitleSetting title="General" subtitle="Update your information" />
     </WrapGeneral>
   );
 };

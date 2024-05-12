@@ -33,6 +33,7 @@ export const ListMenu = styled.div`
     width: 100%;
     padding-top: 1.2rem;
     padding-bottom: 1.2rem;
+    justify-content: flex-start;
   }
 
   a button.btn-active {

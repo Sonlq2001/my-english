@@ -1,5 +1,6 @@
 import { ElementType, FC } from "react";
 import { Outlet } from "react-router-dom";
+import clsx from "clsx";
 
 import Navbar from "@app/components/Navbar/Navbar";
 import Sidebar from "@app/components/Sidebar/Sidebar";
@@ -30,13 +31,14 @@ const SettingLayout: FC = () => {
               <SidebarMenu>
                 {NAVBAR_SETTINGS_MENUS.map((nav) => {
                   const IconMenu = nav.icon as ElementType;
+
                   return (
                     <AppButton
                       key={nav.id}
                       variant="text"
                       size="large"
                       leftIcon={<IconMenu />}
-                      className={"nav-link"}
+                      className={clsx("nav-link")}
                       to={nav.path}
                     >
                       {nav.label}
