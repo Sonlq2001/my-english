@@ -6,7 +6,6 @@ const BaseButton = styled.button`
   ${({ theme }) => css`
     display: flex;
     align-items: center;
-    justify-content: center;
     transition: 0.3s ease;
     background-color: transparent;
     border-radius: 0.4rem;

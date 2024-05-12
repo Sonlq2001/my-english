@@ -15,19 +15,16 @@ const Sidebar: FC = () => {
       <ListMenu>
         {NAVBAR_MENUS.map((menu) => {
           const IconMenu = menu.icon as ElementType;
+          const isActiveMenu =
+            (menu?.customActive &&
+              window.location.pathname.includes(SettingPathsEnum.SETTINGS)) ||
+            menu.path === window.location.pathname;
           return (
             <AppButton
               key={menu.id}
               leftIcon={<IconMenu />}
               variant="text"
-              className={clsx(
-                "btn-sidebar",
-                menu?.customActive &&
-                  window.location.pathname.includes(
-                    SettingPathsEnum.SETTINGS
-                  ) &&
-                  "active"
-              )}
+              className={clsx("btn-sidebar", isActiveMenu && "btn-active")}
               size="large"
               to={menu.path}
             >
