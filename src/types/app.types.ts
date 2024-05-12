@@ -7,6 +7,7 @@ export type NavbarMenus = {
   icon: ReactNode | FC;
   path: string;
   label: string;
+  customActive?: boolean;
 };
 
 export type OptionsType = {

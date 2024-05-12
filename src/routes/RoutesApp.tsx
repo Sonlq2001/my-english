@@ -1,4 +1,4 @@
-import { FC, Suspense } from "react";
+import React, { FC, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import { store } from "@app/redux/store";
@@ -18,7 +18,6 @@ const wrapRoute: FC<RouteItemDef> = ({
   isPrivateRoute,
   isAuthRoute,
   subMenu,
-  // index = false,
 }) => {
   const isLogged = Boolean(store.getState().auth.accessToken);
 
@@ -51,12 +50,10 @@ const wrapRoute: FC<RouteItemDef> = ({
         subMenu.map((item) => {
           const ComponentSub = item.component ?? AppNotFound;
           return (
-            <Route
-              index
-              key={item.id}
-              path={item.path}
-              element={<ComponentSub />}
-            />
+            <React.Fragment key={item.id}>
+              {item.index && <Route index element={<ComponentSub />} />}
+              <Route path={item.path} element={<ComponentSub />} />
+            </React.Fragment>
           );
         })}
     </Route>
