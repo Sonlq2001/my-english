@@ -7,6 +7,7 @@ import {
 } from "../constants/setting.path";
 import SettingPodcast from "../screens/SettingPodcast/SettingPodcast";
 import SettingGeneral from "../screens/SettingGeneral/SettingGeneral";
+import CreatePodcast from "../screens/CreatePodcast/CreatePodcast";
 
 const SETTING_SCREEN: RouteItemDef = {
   id: "setting-screen",
@@ -18,6 +19,11 @@ const SETTING_SCREEN: RouteItemDef = {
       path: SettingSubPathsEnum.PODCAST,
       component: SettingPodcast,
       index: true,
+    },
+    {
+      id: "create-podcast-setting",
+      path: SettingSubPathsEnum.CREATE_PODCAST,
+      component: CreatePodcast,
     },
     {
       id: "general-setting",

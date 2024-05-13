@@ -8,6 +8,7 @@ const BaseButton = styled.button`
     align-items: center;
     transition: 0.3s ease;
     background-color: transparent;
+    justify-content: center;
     border-radius: 0.4rem;
     overflow: hidden;
     user-select: none;

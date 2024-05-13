@@ -34,5 +34,6 @@ export const SidebarMenu = styled.nav`
     padding-top: 1.2rem;
     padding-bottom: 1.2rem;
     font-weight: 500;
+    justify-content: flex-start;
   }
 `;
