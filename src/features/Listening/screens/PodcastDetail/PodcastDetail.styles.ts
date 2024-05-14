@@ -2,10 +2,13 @@ import { styled } from "styled-components";
 
 export const WrapPodcast = styled.div`
   display: flex;
+  background-color: ${(props) => props.theme.palette.white};
+  padding: 2rem;
 `;
 
 export const ContentVideo = styled.div`
   margin-right: 4rem;
+  width: 65%;
 `;
 
 export const VideoPlay = styled.div`
@@ -37,22 +40,10 @@ export const DescriptionVideo = styled.div`
 `;
 
 export const WrapTranscript = styled.div`
+  width: 35%;
   h4 {
-    margin-bottom: 2rem;
-  }
-`;
-
-export const SectionTranscript = styled.div`
-  .time-part {
-    padding: 0.5rem 1rem;
-    border-radius: 2rem;
-    background-color: #eee;
-    display: inline-block;
-    margin-bottom: 1.5rem;
-  }
-  .content-section {
-    display: flex;
-    flex-wrap: wrap;
-    line-height: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid ${(props) => props.theme.palette.gray.extraLight};
   }
 `;

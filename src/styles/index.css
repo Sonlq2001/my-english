@@ -112,3 +112,26 @@ img {
   outline: 3px solid rgba(12, 118, 167, 0.678);
   border-radius: 5px;
 }
+
+/* reset / style scrollbar */
+/* width */
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #d4d4d4;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #bdbdbd;
+}

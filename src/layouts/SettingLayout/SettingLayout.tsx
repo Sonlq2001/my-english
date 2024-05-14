@@ -6,13 +6,10 @@ import Navbar from "@app/components/Navbar/Navbar";
 import Sidebar from "@app/components/Sidebar/Sidebar";
 import AppButton from "@app/components/AppButton/AppButton";
 import { NAVBAR_SETTINGS_MENUS } from "@app/constants/navbar-setting.constants";
+import TitlePage from "@app/components/TitlePage/TitlePage";
 
 import { LayoutDefault, Content, InnerContent } from "../Layout.styles";
-import {
-  SidebarMenu,
-  TitleSetting,
-  WrapSettingLayout,
-} from "./SettingLayout.styles";
+import { SidebarMenu, WrapSettingLayout } from "./SettingLayout.styles";
 
 const SettingLayout: FC = () => {
   return (
@@ -23,10 +20,10 @@ const SettingLayout: FC = () => {
         <Content>
           <Navbar />
           <InnerContent>
-            <TitleSetting>
-              <h2>Settings</h2>
-              <p>Customize util match to your work</p>
-            </TitleSetting>
+            <TitlePage
+              title="Settings"
+              subtitle="Customize util match to your work."
+            />
             <WrapSettingLayout>
               <SidebarMenu>
                 {NAVBAR_SETTINGS_MENUS.map((nav) => {
