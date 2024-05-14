@@ -5,3 +5,49 @@ export const HeaderSetting = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
+
+export const WrapTable = styled.div`
+  overflow-x: auto;
+  margin-top: 2rem;
+  max-width: 100%;
+`;
+
+export const Table = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+    white-space: nowrap;
+    background-color: #f3f3f3;
+    font-weight: 500;
+    padding: 1.2rem;
+    text-align: left;
+  }
+  td {
+    text-align: left;
+    padding: 1.5rem 1.2rem;
+  }
+  tr:not(:first-child) {
+    border-top: 1px solid #f3f3f3;
+  }
+`;
+
+export const WrapTile = styled.div`
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  max-width: 60rem;
+  width: 100%;
+  img {
+    width: 5.5rem;
+    height: 5.5rem;
+    border-radius: 100%;
+    border: 1px solid #ccc;
+  }
+`;
+
+export const WrapAction = styled.div`
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+`;
