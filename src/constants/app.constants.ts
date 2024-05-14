@@ -27,3 +27,6 @@ export enum CONTENT_TYPES_HEADER {
   JSON = "application/json",
   FORM_DATA = "multipart/form-data",
 }
+
+export const YOUTUBE_EMBEDDED_LINK =
+  "https://www.youtube.com/embed/:youtube_id";

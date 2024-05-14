@@ -1,5 +1,8 @@
 import { FC } from "react";
 
+import TitlePage from "@app/components/TitlePage/TitlePage";
+import { YOUTUBE_EMBEDDED_LINK } from "@app/constants/app.constants";
+
 import {
   WrapPodcast,
   ContentVideo,
@@ -7,48 +10,52 @@ import {
   InfoVideo,
   DescriptionVideo,
   WrapTranscript,
-  SectionTranscript,
 } from "./PodcastDetail.styles";
+import { useGetPodcastDetailQuery } from "../../redux/auth.query";
+import TranscriptPodcast from "../../components/TranscriptPodcast/TranscriptPodcast";
 
 const PodcastDetail: FC = () => {
+  // TODO: id
+  const { data, isLoading, error } = useGetPodcastDetailQuery(
+    "66430d16974ee9a3e501dc57"
+  );
+
+  if (isLoading) {
+    return <div>Loading....</div>;
+  }
+
+  if (!data || error) {
+    return <div>Error</div>;
+  }
+
   return (
-    <WrapPodcast>
-      <ContentVideo>
-        <VideoPlay>
-          <iframe
-            src="https://www.youtube.com/embed/5ylTfytfkh4"
-            frameBorder="0"
-          />
-        </VideoPlay>
+    <>
+      <TitlePage
+        title="Discovery podcasts"
+        subtitle="Listening practice is easier with podcast transcripts."
+      />
 
-        <InfoVideo>
-          <h2>A reframing of masculinity, rooted in empathy</h2>
-          <p>14/02/2024</p>
-        </InfoVideo>
-        <DescriptionVideo>
-          Urging us to turn away from voices perpetuating harmful stereotypes,
-          gender equality advocate Gary Barker shares three insights on
-          fostering a culture of care, compassion and connection among men. "We
-          are the most wired-to-care species on the planet," he says. "But if
-          you don't use it ... you don't get good at it."
-        </DescriptionVideo>
-      </ContentVideo>
-      <WrapTranscript>
-        <h4>Transcript</h4>
+      <WrapPodcast>
+        <ContentVideo>
+          <VideoPlay>
+            <iframe
+              src={YOUTUBE_EMBEDDED_LINK.replace(":youtube_id", data.videoId)}
+              frameBorder="0"
+            />
+          </VideoPlay>
 
-        <SectionTranscript>
-          <div className="time-part">00:00</div>
-          <div className="content-section">
-            <p>This is a hard conversation. </p>
-            <p>I want to start with that. Well, let's step into it.</p>
-            <p>It was 1977. Jimmy Carter was president.</p>
-            <p>
-              I was having lunch in my high school cafeteria in Houston, Texas,
-            </p>
-          </div>
-        </SectionTranscript>
-      </WrapTranscript>
-    </WrapPodcast>
+          <InfoVideo>
+            <h2>{data.title}</h2>
+            <p>14/02/2024</p>
+          </InfoVideo>
+          <DescriptionVideo>{data?.description}</DescriptionVideo>
+        </ContentVideo>
+        <WrapTranscript>
+          <h4>Transcript</h4>
+          <TranscriptPodcast transcripts={data.transcripts || []} />
+        </WrapTranscript>
+      </WrapPodcast>
+    </>
   );
 };
 

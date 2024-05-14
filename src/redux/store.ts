@@ -12,6 +12,7 @@ import {
 
 import { notepadApi } from "@app/features/notepad/notepad";
 import { authApi } from "@app/features/auth/auth";
+import { podcastQuery } from "@app/features/listening/listening";
 
 import rootReducer from "./rootReducer";
 
@@ -24,7 +25,8 @@ export const store = configureStore({
       },
     })
       .concat(notepadApi.middleware)
-      .concat(authApi.middleware),
+      .concat(authApi.middleware)
+      .concat(podcastQuery.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

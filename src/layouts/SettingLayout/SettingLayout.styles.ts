@@ -10,14 +10,6 @@ export const WrapSettingLayout = styled.div`
   }
 `;
 
-export const TitleSetting = styled.div`
-  padding: 3rem 0;
-  p {
-    margin-top: 1rem;
-    font-size: 1.5rem;
-  }
-`;
-
 export const SidebarMenu = styled.nav`
   display: flex;
   flex-direction: column;
