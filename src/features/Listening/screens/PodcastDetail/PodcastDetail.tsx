@@ -52,7 +52,7 @@ const PodcastDetail: FC = () => {
         </ContentVideo>
         <WrapTranscript>
           <h4>Transcript</h4>
-          <TranscriptPodcast transcripts={data.transcripts || []} />
+          <TranscriptPodcast transcripts={data.transcripts} />
         </WrapTranscript>
       </WrapPodcast>
     </>
