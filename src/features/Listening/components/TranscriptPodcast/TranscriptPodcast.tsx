@@ -1,9 +1,11 @@
 import { FC } from "react";
 
+import { convertSeconds } from "@app/helpers/time";
+
 import { WrapTranscript, SectionTranscript } from "./TranscriptPodcast.styles";
 
 interface TranscriptPodcastProps {
-  transcripts: { text: string }[];
+  transcripts: { text: string; duration: number; offset: number }[];
 }
 
 const TranscriptPodcast: FC<TranscriptPodcastProps> = ({
@@ -15,7 +17,9 @@ const TranscriptPodcast: FC<TranscriptPodcastProps> = ({
         {transcripts.map((transcript, index) => {
           return (
             <SectionTranscript key={index}>
-              <div className="time-part">00:00</div>
+              <div className="time-part">
+                {convertSeconds(transcript.offset)}
+              </div>
               <div className="content-section">
                 <p>{transcript.text}</p>
               </div>
