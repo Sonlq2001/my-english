@@ -11,21 +11,6 @@ export const ContentVideo = styled.div`
   width: 65%;
 `;
 
-export const VideoPlay = styled.div`
-  position: relative;
-  padding-top: 56.25%;
-
-  iframe {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-`;
-
 export const InfoVideo = styled.div`
   border-bottom: 1px solid ${(props) => props.theme.palette.gray.medium};
   padding: 2rem 0;

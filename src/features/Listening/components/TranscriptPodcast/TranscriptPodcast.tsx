@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 
 import { convertSeconds } from "@app/helpers/time";
 
@@ -6,11 +6,17 @@ import { WrapTranscript, SectionTranscript } from "./TranscriptPodcast.styles";
 
 interface TranscriptPodcastProps {
   transcripts: { text: string; duration: number; offset: number }[];
+  handleSeekTo: (seekTo: number) => void;
 }
 
 const TranscriptPodcast: FC<TranscriptPodcastProps> = ({
   transcripts = [],
+  handleSeekTo,
 }) => {
+  const handleSpecifyVideoTime = (seconds: number) => {
+    handleSeekTo(seconds);
+  };
+
   return (
     <WrapTranscript>
       <div className="list-transcript">
@@ -20,7 +26,10 @@ const TranscriptPodcast: FC<TranscriptPodcastProps> = ({
               <div className="time-part">
                 {convertSeconds(transcript.offset)}
               </div>
-              <div className="content-section">
+              <div
+                className="content-section"
+                onClick={() => handleSpecifyVideoTime(transcript.offset)}
+              >
                 <p>{transcript.text}</p>
               </div>
             </SectionTranscript>
@@ -31,4 +40,4 @@ const TranscriptPodcast: FC<TranscriptPodcastProps> = ({
   );
 };
 
-export default TranscriptPodcast;
+export default memo(TranscriptPodcast);

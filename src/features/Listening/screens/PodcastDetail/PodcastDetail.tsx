@@ -1,24 +1,30 @@
-import { FC } from "react";
+import { FC, useRef } from "react";
 
 import TitlePage from "@app/components/TitlePage/TitlePage";
-import { YOUTUBE_EMBEDDED_LINK } from "@app/constants/app.constants";
 
 import {
   WrapPodcast,
   ContentVideo,
-  VideoPlay,
   InfoVideo,
   DescriptionVideo,
   WrapTranscript,
 } from "./PodcastDetail.styles";
 import { useGetPodcastDetailQuery } from "../../redux/auth.query";
 import TranscriptPodcast from "../../components/TranscriptPodcast/TranscriptPodcast";
+import VideoPlay from "../../components/VideoPlay/VideoPlay";
 
 const PodcastDetail: FC = () => {
+  const videoPlayRef = useRef<{ setSeekTo: (seekTo: number) => void }>(null);
   // TODO: id
   const { data, isLoading, error } = useGetPodcastDetailQuery(
     "66430d16974ee9a3e501dc57"
   );
+
+  const handleSeekTo = (seekTo: number) => {
+    if (videoPlayRef.current?.setSeekTo) {
+      videoPlayRef.current.setSeekTo(seekTo);
+    }
+  };
 
   if (isLoading) {
     return <div>Loading....</div>;
@@ -37,12 +43,7 @@ const PodcastDetail: FC = () => {
 
       <WrapPodcast>
         <ContentVideo>
-          <VideoPlay>
-            <iframe
-              src={YOUTUBE_EMBEDDED_LINK.replace(":youtube_id", data.videoId)}
-              frameBorder="0"
-            />
-          </VideoPlay>
+          <VideoPlay ref={videoPlayRef} videoId={data.videoId} />
 
           <InfoVideo>
             <h2>{data.title}</h2>
@@ -52,7 +53,10 @@ const PodcastDetail: FC = () => {
         </ContentVideo>
         <WrapTranscript>
           <h4>Transcript</h4>
-          <TranscriptPodcast transcripts={data.transcripts} />
+          <TranscriptPodcast
+            handleSeekTo={handleSeekTo}
+            transcripts={data.transcripts}
+          />
         </WrapTranscript>
       </WrapPodcast>
     </>
