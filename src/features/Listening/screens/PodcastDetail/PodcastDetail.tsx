@@ -1,4 +1,4 @@
-import { FC, useRef } from "react";
+import { FC, useRef, useState } from "react";
 
 import TitlePage from "@app/components/TitlePage/TitlePage";
 
@@ -14,7 +14,11 @@ import TranscriptPodcast from "../../components/TranscriptPodcast/TranscriptPodc
 import VideoPlay from "../../components/VideoPlay/VideoPlay";
 
 const PodcastDetail: FC = () => {
-  const videoPlayRef = useRef<{ setSeekTo: (seekTo: number) => void }>(null);
+  const videoPlayRef = useRef<{
+    setSeekTo: (seekTo: number) => void;
+  }>(null);
+  const [duration, setDuration] = useState(0);
+
   // TODO: id
   const { data, isLoading, error } = useGetPodcastDetailQuery(
     "66430d16974ee9a3e501dc57"
@@ -43,7 +47,11 @@ const PodcastDetail: FC = () => {
 
       <WrapPodcast>
         <ContentVideo>
-          <VideoPlay ref={videoPlayRef} videoId={data.videoId} />
+          <VideoPlay
+            ref={videoPlayRef}
+            videoId={data.videoId}
+            setDuration={setDuration}
+          />
 
           <InfoVideo>
             <h2>{data.title}</h2>
@@ -56,6 +64,7 @@ const PodcastDetail: FC = () => {
           <TranscriptPodcast
             handleSeekTo={handleSeekTo}
             transcripts={data.transcripts}
+            duration={duration}
           />
         </WrapTranscript>
       </WrapPodcast>

@@ -23,3 +23,19 @@ export const WrapVideoPlay = styled.div`
     bottom: 0;
   }
 `;
+
+export const WrapControlVideo = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background-color: ${(props) => props.theme.palette.gray.extraLight};
+  padding: 0.8rem;
+`;
+
+export const ButtonPlay = styled.button`
+  background-color: transparent;
+  svg {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+`;
