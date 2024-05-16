@@ -17,3 +17,17 @@ export type ResPodcast = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type ProgressVideo = {
+  loaded: number;
+  loadedSeconds: number;
+  played: number;
+  playedSeconds: number;
+};
+
+export type ControlVideo = {
+  playing: boolean;
+  duration: number;
+  loadedSeconds: number;
+  volume: number;
+};

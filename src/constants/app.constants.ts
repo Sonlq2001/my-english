@@ -29,4 +29,4 @@ export enum CONTENT_TYPES_HEADER {
 }
 
 export const YOUTUBE_EMBEDDED_LINK =
-  "https://www.youtube.com/embed/:youtube_id";
+  "https://www.youtube.com/watch?v=:youtube_id";

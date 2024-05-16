@@ -26,5 +26,9 @@ export const SectionTranscript = styled.div`
     display: flex;
     flex-wrap: wrap;
     line-height: 2rem;
+    p {
+      cursor: pointer;
+      word-break: break-word;
+    }
   }
 `;
