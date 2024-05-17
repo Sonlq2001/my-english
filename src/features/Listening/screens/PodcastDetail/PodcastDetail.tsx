@@ -12,12 +12,19 @@ import {
 import { useGetPodcastDetailQuery } from "../../redux/auth.query";
 import TranscriptPodcast from "../../components/TranscriptPodcast/TranscriptPodcast";
 import VideoPlay from "../../components/VideoPlay/VideoPlay";
+import { ControlVideo } from "../../types/listening.type";
 
 const PodcastDetail: FC = () => {
+  const [controlVideo, setControlVideo] = useState<ControlVideo>({
+    playing: false,
+    duration: 0,
+    loadedSeconds: 0,
+    volume: 100,
+  });
+
   const videoPlayRef = useRef<{
     setSeekTo: (seekTo: number) => void;
   }>(null);
-  const [duration, setDuration] = useState(0);
 
   // TODO: id
   const { data, isLoading, error } = useGetPodcastDetailQuery(
@@ -50,7 +57,8 @@ const PodcastDetail: FC = () => {
           <VideoPlay
             ref={videoPlayRef}
             videoId={data.videoId}
-            setDuration={setDuration}
+            controlVideo={controlVideo}
+            setControlVideo={setControlVideo}
           />
 
           <InfoVideo>
@@ -64,7 +72,9 @@ const PodcastDetail: FC = () => {
           <TranscriptPodcast
             handleSeekTo={handleSeekTo}
             transcripts={data.transcripts}
-            duration={duration}
+            duration={controlVideo.loadedSeconds}
+            isPlay={controlVideo.playing}
+            setControlVideo={setControlVideo}
           />
         </WrapTranscript>
       </WrapPodcast>

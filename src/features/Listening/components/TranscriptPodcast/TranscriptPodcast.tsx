@@ -1,51 +1,68 @@
-import { FC, memo, useEffect } from "react";
+import { FC, memo, useEffect, Dispatch, SetStateAction, useRef } from "react";
 
 import { convertSeconds } from "@app/helpers/time";
 
 import { WrapTranscript, SectionTranscript } from "./TranscriptPodcast.styles";
+import { ControlVideo } from "../../types/listening.type";
 
 interface TranscriptPodcastProps {
   transcripts: { text: string; duration: number; offset: number }[];
   handleSeekTo: (seekTo: number) => void;
   duration: number;
+  isPlay: boolean;
+  setControlVideo: Dispatch<SetStateAction<ControlVideo>>;
 }
 
 const TranscriptPodcast: FC<TranscriptPodcastProps> = ({
   transcripts = [],
   handleSeekTo,
   duration,
+  isPlay,
+  setControlVideo,
 }) => {
-  const handleSpecifyVideoTime = (seconds: number) => {
+  const isSCroll = useRef<boolean>(false);
+  const elementListTranscript = useRef<HTMLDivElement>(null);
+  const handleSpecifyVideoTime = (seconds: number): void => {
     handleSeekTo(seconds);
+    setControlVideo((prev) => ({ ...prev, playing: true }));
+    isSCroll.current = true;
   };
 
   useEffect(() => {
-    const currentTranscript = document.querySelector(
-      ".list-transcript .active"
-    );
+    if (!isPlay || isSCroll.current || !elementListTranscript.current) return;
+    const currentTranscript =
+      elementListTranscript.current.querySelector(".active");
 
     if (currentTranscript) {
       currentTranscript.scrollIntoView({
-        block: "center",
         behavior: "smooth",
       });
     }
-  }, [duration]);
+  }, [isPlay, duration]);
+
+  const handleMouseOver = () => {
+    isSCroll.current = true;
+  };
+
+  const handleMouseLeave = () => {
+    isSCroll.current = false;
+  };
 
   return (
-    <WrapTranscript>
-      <div className="list-transcript">
+    <WrapTranscript
+      onMouseOver={handleMouseOver}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div className="list-transcript" ref={elementListTranscript}>
         {transcripts.map((transcript, index) => {
+          const isActive =
+            duration > transcript.offset &&
+            duration < transcripts[index + 1]?.offset;
+
           return (
             <SectionTranscript
               key={`transcript-${index}`}
-              className={
-                duration < transcripts[index + 1]?.offset &&
-                Math.floor(duration) === Math.floor(transcript.offset)
-                  ? "active"
-                  : ""
-              }
-              id=""
+              className={isActive ? "active" : ""}
             >
               <div className="time-part">
                 {convertSeconds(transcript.offset)}

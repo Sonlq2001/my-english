@@ -1,11 +1,4 @@
-import {
-  FC,
-  useRef,
-  useState,
-  forwardRef,
-  useImperativeHandle,
-  useMemo,
-} from "react";
+import { FC, useRef, forwardRef, useImperativeHandle, useMemo } from "react";
 import ReactPlayer from "react-player";
 
 import { YOUTUBE_EMBEDDED_LINK } from "@app/constants/app.constants";
@@ -23,19 +16,13 @@ import { ProgressVideo, ControlVideo } from "../../types/listening.type";
 interface VideoPlayProps {
   videoId: string;
   ref: React.Ref<unknown>;
-  setDuration: (duration: number) => void;
+  controlVideo: ControlVideo;
+  setControlVideo: (control: ControlVideo) => void;
 }
 
 const VideoPlay: FC<VideoPlayProps> = forwardRef(
-  ({ videoId, setDuration }, ref) => {
+  ({ videoId, controlVideo, setControlVideo }, ref) => {
     const videoRef = useRef<ReactPlayer>(null);
-
-    const [controlVideo, setControlVideo] = useState<ControlVideo>({
-      playing: false,
-      duration: 0,
-      loadedSeconds: 0,
-      volume: 100,
-    });
 
     useImperativeHandle(ref, () => ({
       setSeekTo: (value: number) => {
@@ -49,9 +36,7 @@ const VideoPlay: FC<VideoPlayProps> = forwardRef(
     };
 
     const handleProgressVideo = (e: ProgressVideo) => {
-      console.log(e);
       setControlVideo({ ...controlVideo, loadedSeconds: e.playedSeconds });
-      setDuration(e.playedSeconds);
     };
 
     const handleEndVideo = () => {
