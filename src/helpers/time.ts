@@ -1,4 +1,4 @@
-export const convertSeconds = (seconds: number) => {
+export const convertSeconds = (seconds: number, skipHours = false) => {
   // convert seconds to milliseconds
   const milliseconds = seconds * 1000;
 
@@ -8,7 +8,7 @@ export const convertSeconds = (seconds: number) => {
 
   // Format the result string hh:mm:ss
   const formattedTime = `
-  ${hours.toString().padStart(2, "0")}:
+  ${skipHours ? "" : `${hours.toString().padStart(2, "0")}:`}
   ${minutes.toString().padStart(2, "0")}:
   ${secondsRounded.toString().padStart(2, "0")}`;
 
