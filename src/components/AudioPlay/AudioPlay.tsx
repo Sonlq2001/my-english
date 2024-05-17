@@ -5,6 +5,7 @@ import IconPlayBack from "@app/assets/images/icon-svg/icon-play-back.svg?react";
 import IconPlayTrackPrev from "@app/assets/images/icon-svg/icon-play-track-prev.svg?react";
 import IconPlayTrackNext from "@app/assets/images/icon-svg/icon-play-track-next.svg?react";
 import IconVolume from "@app/assets/images/icon-svg/icon-volume.svg?react";
+import InputRange from "@app/components/InputRange/InputRange";
 
 import {
   AudioPlayWrap,
@@ -39,13 +40,7 @@ const AudioPlay: FC = () => {
 
         <AudioTimeLine>
           <span>04:50</span>
-          <input
-            type="range"
-            className="input-track"
-            min={0}
-            max={100}
-            defaultValue={0}
-          />
+          <InputRange type="range" min={0} max={100} defaultValue={0} />
           <span>06:54</span>
 
           <IconVolume className="icon-volume" />
