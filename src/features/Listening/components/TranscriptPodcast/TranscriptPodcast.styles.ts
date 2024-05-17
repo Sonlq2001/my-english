@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 export const WrapTranscript = styled.div`
   overflow-y: auto;
   position: relative;
-  padding-top: calc(100% - 3.8rem + 1.5rem);
+  padding-top: calc(100% - 3.8rem + 5.5rem);
   .list-transcript {
     display: flex;
     flex-direction: column;
@@ -11,13 +11,11 @@ export const WrapTranscript = styled.div`
     position: absolute;
     top: 0;
     bottom: 0;
+    padding: 0 0.5rem;
   }
 `;
 
 export const SectionTranscript = styled.div`
-  &.active {
-    color: red;
-  }
   .time-part {
     padding: 0.5rem 1rem;
     border-radius: 2rem;
@@ -29,9 +27,24 @@ export const SectionTranscript = styled.div`
     display: flex;
     flex-wrap: wrap;
     line-height: 2rem;
+    padding: 0 0.3rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    &:hover {
+      background-color: #febf0040;
+    }
     p {
-      cursor: pointer;
       word-break: break-word;
+      line-height: 2.5rem;
+    }
+  }
+  &.active {
+    .time-part,
+    .content-section {
+      background-color: #fcdbdc;
+    }
+    .content-section:hover {
+      background-color: #fcdbdc;
     }
   }
 `;
