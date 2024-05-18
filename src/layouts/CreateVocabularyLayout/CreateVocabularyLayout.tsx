@@ -6,7 +6,7 @@ import AppButton from "@app/components/AppButton/AppButton";
 import { VocabularyPathsEnum } from "@app/features/vocabulary/vocabulary";
 import IconPlus from "@app/assets/images/icon-svg/icon-plus.svg?react";
 
-import { LayoutDefault, Content } from "../Layout.styles";
+import { LayoutDefault, Content, InnerContent } from "../Layout.styles";
 
 interface CreateVocabularyLayoutProps {
   children?: ReactNode;
@@ -21,7 +21,7 @@ const CreateVocabularyLayout: FC<CreateVocabularyLayoutProps> = ({
         <Sidebar />
         <Content>
           <Navbar />
-          {children}
+          <InnerContent>{children}</InnerContent>
         </Content>
 
         <AppButton
