@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BaseResponse } from "@app/types/app.types";
 
 import { ListeningEndpointsEnum } from "../constants/listening.endpoints";
-import { ResPodcast } from "../types/listening.type";
+import { ResPodcast, ResListPodcast } from "../types/listening.type";
 import { toCamel } from "@app/helpers/convert-object";
 
 export const podcastQuery = createApi({
@@ -25,7 +25,15 @@ export const podcastQuery = createApi({
         return toCamel(rawResult.metadata) as ResPodcast;
       },
     }),
+
+    getListPodcast: build.query<ResListPodcast, void>({
+      query: () => ListeningEndpointsEnum.GET_LIST_PODCAST,
+      transformResponse: (rawResult: BaseResponse<ResListPodcast>) => {
+        return toCamel(rawResult.metadata) as ResListPodcast;
+      },
+    }),
   }),
 });
 
-export const { useGetPodcastDetailQuery } = podcastQuery;
+export const { useGetPodcastDetailQuery, useGetListPodcastQuery } =
+  podcastQuery;

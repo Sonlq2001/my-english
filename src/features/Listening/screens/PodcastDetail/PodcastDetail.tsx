@@ -1,6 +1,8 @@
 import { FC, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
 
 import TitlePage from "@app/components/TitlePage/TitlePage";
+import { formatDate } from "@app/helpers/time";
 
 import {
   WrapPodcast,
@@ -15,6 +17,7 @@ import VideoPlay from "../../components/VideoPlay/VideoPlay";
 import { ControlVideo } from "../../types/listening.type";
 
 const PodcastDetail: FC = () => {
+  const { podcast_id } = useParams<{ podcast_id: string }>();
   const [controlVideo, setControlVideo] = useState<ControlVideo>({
     playing: false,
     duration: 0,
@@ -26,10 +29,7 @@ const PodcastDetail: FC = () => {
     setSeekTo: (seekTo: number) => void;
   }>(null);
 
-  // TODO: id
-  const { data, isLoading, error } = useGetPodcastDetailQuery(
-    "66430d16974ee9a3e501dc57"
-  );
+  const { data, isLoading, error } = useGetPodcastDetailQuery(podcast_id || "");
 
   const handleSeekTo = (seekTo: number) => {
     if (videoPlayRef.current?.setSeekTo) {
@@ -63,7 +63,7 @@ const PodcastDetail: FC = () => {
 
           <InfoVideo>
             <h2>{data.title}</h2>
-            <p>14/02/2024</p>
+            <p>{formatDate(data.updatedAt)}</p>
           </InfoVideo>
           <DescriptionVideo>{data?.description}</DescriptionVideo>
         </ContentVideo>

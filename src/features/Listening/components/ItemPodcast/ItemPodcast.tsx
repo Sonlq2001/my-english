@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import ImagePodcast from "@app/assets/images/image-podcast.png";
 import IconPlayAudio from "@app/assets/images/icon-svg/icon-play-audio.svg?react";
+import { ListeningPathsEnum } from "@app/features/listening/listening";
 
 import {
   WrapContentPodcast,
@@ -10,19 +11,28 @@ import {
   ContentThumbnail,
 } from "./ItemPodcast.styles";
 
-const ItemPodcast: FC = () => {
+interface ItemPodcastProps {
+  title: string;
+  topic: string;
+  thumbnail?: string;
+  id: string;
+}
+
+const ItemPodcast: FC<ItemPodcastProps> = ({ title, topic, id, thumbnail }) => {
   return (
-    // TODO: link video
-    <Link to="/podcast/123">
+    <Link to={ListeningPathsEnum.PODCAST_DETAIL.replace(":podcast_id", id)}>
       <WrapContentPodcast>
         <ContentPodcast>
-          <h3>Lorem ipsum dolor sit amet consectetur adipisicin</h3>
-          <p>Video</p>
+          <h3>{title}</h3>
+          <p>{topic}</p>
           <ContentThumbnail>
             <IconPlayAudio />
             <img
-              src="https://cdn.pixabay.com/photo/2023/08/18/16/19/bridge-8198882_640.jpg"
-              alt=""
+              src={
+                thumbnail ||
+                "https://cdn.pixabay.com/photo/2021/09/22/11/34/horse-6646593_640.jpg"
+              }
+              alt="img-thumbnail"
               className="image-thumbnail"
             />
           </ContentThumbnail>

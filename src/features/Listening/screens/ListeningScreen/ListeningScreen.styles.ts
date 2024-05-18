@@ -1,9 +1,12 @@
 import { styled } from "styled-components";
 
 export const WrapContent = styled.div`
-  margin-top: 2rem;
-  h2 {
-    margin-bottom: 2rem;
+  background-color: ${(props) => props.theme.palette.white};
+  padding: 2rem;
+  > h3 {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #dfe7e9;
   }
 `;
 

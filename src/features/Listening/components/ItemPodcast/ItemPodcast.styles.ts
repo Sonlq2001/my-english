@@ -40,6 +40,11 @@ export const ContentPodcast = styled.div`
   h3 {
     font-size: 2.2rem;
     margin-bottom: 1.5rem;
+    line-height: 3rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 `;
 

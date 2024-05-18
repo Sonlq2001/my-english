@@ -56,7 +56,7 @@ const TranscriptPodcast: FC<TranscriptPodcastProps> = ({
       <div className="list-transcript" ref={elementListTranscript}>
         {transcripts.map((transcript, index) => {
           const isActive =
-            duration > transcript.offset &&
+            duration >= transcript.offset &&
             duration < transcripts[index + 1]?.offset;
 
           return (

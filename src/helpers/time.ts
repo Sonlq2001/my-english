@@ -14,3 +14,13 @@ export const convertSeconds = (seconds: number, skipHours = false) => {
 
   return formattedTime;
 };
+
+export const formatDate = (date: Date | string) => {
+  const newDate = new Date(date);
+  return newDate.toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+};
