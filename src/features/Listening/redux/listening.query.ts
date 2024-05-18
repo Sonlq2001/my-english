@@ -1,13 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { BaseResponse } from "@app/types/app.types";
+import { toCamel } from "@app/helpers/convert-object";
 
 import { ListeningEndpointsEnum } from "../constants/listening.endpoints";
 import { ResPodcast, ResListPodcast } from "../types/listening.type";
-import { toCamel } from "@app/helpers/convert-object";
 
-export const podcastQuery = createApi({
-  reducerPath: "podcastQuery",
+export const listeningQuery = createApi({
+  reducerPath: "listeningQuery",
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_BASE_API,
   }),
@@ -36,4 +36,4 @@ export const podcastQuery = createApi({
 });
 
 export const { useGetPodcastDetailQuery, useGetListPodcastQuery } =
-  podcastQuery;
+  listeningQuery;

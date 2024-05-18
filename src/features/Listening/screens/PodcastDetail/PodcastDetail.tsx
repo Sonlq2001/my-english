@@ -11,7 +11,7 @@ import {
   DescriptionVideo,
   WrapTranscript,
 } from "./PodcastDetail.styles";
-import { useGetPodcastDetailQuery } from "../../redux/auth.query";
+import { useGetPodcastDetailQuery } from "../../redux/listening.query";
 import TranscriptPodcast from "../../components/TranscriptPodcast/TranscriptPodcast";
 import VideoPlay from "../../components/VideoPlay/VideoPlay";
 import { ControlVideo } from "../../types/listening.type";

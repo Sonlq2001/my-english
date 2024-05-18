@@ -2,7 +2,7 @@ import { DashboardPathsEnum } from "@app/features/dashboard/dashboard";
 import { ListeningPathsEnum } from "@app/features/listening/listening";
 import { ReadingPathsEnum } from "@app/features/reading/reading";
 import { SpeakingPathsEnum } from "@app/features/speaking/speaking";
-import { VocabularyPathsEnum } from "@app/features/vocabulary/vocabulary";
+import { VocabularyPathsEnum } from "@app/features/vocabulary/constants/vocabulary.paths";
 import { NotepadPathsEnum } from "@app/features/notepad/notepad";
 import { WritingPathsEnum } from "@app/features/writing/writing";
 import {

@@ -2,7 +2,9 @@ import { styled } from "styled-components";
 import { Link } from "react-router-dom";
 
 export const WrapContent = styled.div`
-  h3 {
+  background-color: ${(props) => props.theme.palette.white};
+  padding: 2rem;
+  > h3 {
     font-size: 2rem;
   }
 `;

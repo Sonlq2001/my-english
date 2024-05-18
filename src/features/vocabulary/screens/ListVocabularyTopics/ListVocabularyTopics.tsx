@@ -1,6 +1,11 @@
 import { FC } from "react";
 
 import IconTopic from "@app/assets/images/icon-svg/icon-topic.svg?react";
+import TitlePage from "@app/components/TitlePage/TitlePage";
+import {
+  VocabularyPathsEnum,
+  useGetListTopicsQuery,
+} from "@app/features/vocabulary/vocabulary";
 
 import {
   WrapContent,
@@ -9,16 +14,39 @@ import {
 } from "./ListVocabularyTopics.styles";
 
 const ListVocabularyTopics: FC = () => {
+  const { data, isLoading, error } = useGetListTopicsQuery();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error || !data) {
+    return <div>Error</div>;
+  }
+
   return (
-    <WrapContent>
-      <h3>Topics</h3>
-      <ListData>
-        <ItemTopic to="/list-vocabulary/school">
-          <IconTopic />
-          School
-        </ItemTopic>
-      </ListData>
-    </WrapContent>
+    <>
+      <TitlePage title="List topics" subtitle="List of vocabulary topics" />
+
+      <WrapContent>
+        <h3>Topics</h3>
+        <ListData>
+          {data.length &&
+            data.map((topic) => (
+              <ItemTopic
+                to={VocabularyPathsEnum.LIST_VOCABULARY.replace(
+                  ":topic",
+                  topic.name
+                )}
+                key={topic.id}
+              >
+                <IconTopic />
+                {topic.name}
+              </ItemTopic>
+            ))}
+        </ListData>
+      </WrapContent>
+    </>
   );
 };
 
