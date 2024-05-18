@@ -132,7 +132,7 @@ const VideoPlay: FC<VideoPlayProps> = forwardRef(
           </WrapProgressVideo>
 
           <WrapVolume>
-            <div onClick={handleMuteVideo}>
+            <div className="btn-volume" onClick={handleMuteVideo}>
               {controlVideo.volume === MIN_VOLUME ? (
                 <IconMute />
               ) : (

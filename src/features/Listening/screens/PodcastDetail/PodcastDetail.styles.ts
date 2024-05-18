@@ -14,9 +14,12 @@ export const ContentVideo = styled.div`
 export const InfoVideo = styled.div`
   border-bottom: 1px solid ${(props) => props.theme.palette.gray.medium};
   padding: 2rem 0;
+  h2 {
+    line-height: 3rem;
+  }
   p {
     font-size: 1.4rem;
-    margin-top: 0.8rem;
+    margin-top: 1.5rem;
   }
 `;
 

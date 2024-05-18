@@ -31,3 +31,5 @@ export type ControlVideo = {
   loadedSeconds: number;
   volume: number;
 };
+
+export type ResListPodcast = Omit<ResPodcast, "transcripts" | "description">[];

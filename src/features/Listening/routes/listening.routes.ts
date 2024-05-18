@@ -19,7 +19,7 @@ const LISTENING_SCREEN: RouteItemDef = {
 
 const PODCAST_DETAIL_SCREEN: RouteItemDef = {
   id: "podcast-detail-screen",
-  path: "/podcast/:slug",
+  path: ListeningPathsEnum.PODCAST_DETAIL,
   component: PodcastDetail,
 };
 

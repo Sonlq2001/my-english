@@ -74,4 +74,7 @@ export const WrapVolume = styled.div`
       width: 1rem;
     }
   }
+  .btn-volume {
+    line-height: 0;
+  }
 `;
