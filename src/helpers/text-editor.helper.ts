@@ -11,7 +11,7 @@ export const schemaInsertLink = object({
   link: string().matches(urlRegex, "Invalid URL format").nonNullable(),
 });
 
-const ruleFile = (name: string) => {
+export const ruleFile = (name: string) => {
   return mixed()
     .test(name, "File format not supported.", (file) => {
       if (file instanceof File) {
