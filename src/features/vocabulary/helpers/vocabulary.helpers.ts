@@ -1,20 +1,30 @@
 import { object, string, array } from "yup";
 
+import { TypeInitVocabulary } from "@app/features/vocabulary/types/vocabulary.type";
+
+import { ruleFile } from "@app/helpers/text-editor.helper";
+
 export const vocabularySchema = object({
-  vocabulary: string().required("You have not entered a value"),
+  name: string().required("You have not entered a value"),
   meanings: array(
     object({
       meaning: string().required("You have not entered a value"),
     })
-  )
-    .min(1, "it qua")
-    .max(5, "nhieu qua"),
-
+  ),
   examples: array(
     object({
       example: string().required("You have not entered a value"),
     })
-  )
-    .min(1, "it qua")
-    .max(5, "nhieu qua"),
+  ),
+
+  reminiscentPhoto: ruleFile("reminiscentPhoto").nullable(),
 });
+
+export const initVocabulary: TypeInitVocabulary = {
+  name: "",
+  meanings: [{ meaning: "" }],
+  examples: [{ example: "" }],
+  topic: ["663c42bbbaf18dd34a6c9cb0"],
+  reminiscentPhoto: null,
+  partOfSpeech: "663c37539ce13917b2e93813",
+};

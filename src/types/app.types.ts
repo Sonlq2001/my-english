@@ -12,7 +12,7 @@ export type NavbarMenus = {
 
 export type OptionsType = {
   label: string;
-  value: string;
+  value: string | number;
 }[];
 
 export type BaseResponse<T> = {

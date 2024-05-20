@@ -2,16 +2,19 @@ import { FC, InputHTMLAttributes, memo } from "react";
 import { Field, FieldProps } from "formik";
 
 import { OptionsType } from "@app/types/app.types";
+import {
+  ListCheckbox,
+  WrapCheckbox,
+  WrapCheckboxGroup,
+} from "@app/components/CheckboxGroup/CheckBoxGroup.styles";
 
-import { WrapRadioGroup, ListRadio, WrapRadio } from "./RadioGroup.styles";
-
-interface RadioGroupProps extends InputHTMLAttributes<HTMLInputElement> {
+interface CheckboxGroupProps extends InputHTMLAttributes<HTMLInputElement> {
   options: OptionsType;
   name: string;
   label?: string;
 }
 
-const RadioGroup: FC<RadioGroupProps> = ({
+const CheckboxGroup: FC<CheckboxGroupProps> = ({
   options,
   name,
   label,
@@ -21,40 +24,40 @@ const RadioGroup: FC<RadioGroupProps> = ({
     <Field name={name}>
       {({ field }: FieldProps) => {
         return (
-          <WrapRadioGroup>
+          <WrapCheckboxGroup>
             {label && (
-              <label htmlFor="" className="title-radio">
+              <label htmlFor="" className="title-checkbox">
                 {label}
               </label>
             )}
 
-            <ListRadio>
+            <ListCheckbox>
               {options.map((option, index) => (
-                <WrapRadio key={`key-${option.value}`}>
+                <WrapCheckbox key={`key-${option.value}`}>
                   <input
-                    type="radio"
+                    type="checkbox"
                     id={`${option.value}-${index}`}
                     hidden
-                    className="input-radio"
+                    className="input-checkbox"
                     {...props}
                     {...field}
                     value={option.value}
-                    checked={option.value === field.value}
+                    checked={[...field.value].includes(option.value)}
                   />
                   <label
                     htmlFor={`${option.value}-${index}`}
-                    className="label-radio"
+                    className="label-checkbox"
                   >
                     {option.label}
                   </label>
-                </WrapRadio>
+                </WrapCheckbox>
               ))}
-            </ListRadio>
-          </WrapRadioGroup>
+            </ListCheckbox>
+          </WrapCheckboxGroup>
         );
       }}
     </Field>
   );
 };
 
-export default memo(RadioGroup);
+export default memo(CheckboxGroup);

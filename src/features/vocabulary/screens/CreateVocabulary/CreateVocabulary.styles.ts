@@ -2,7 +2,12 @@ import { styled } from "styled-components";
 import { Form } from "formik";
 
 export const WrapPage = styled.div`
-  max-width: 76.8rem;
+  background-color: ${(props) => props.theme.palette.white};
+  padding: 2rem;
+`;
+
+export const WrapContent = styled.div`
+  max-width: 102.4rem;
   margin: 0 auto;
 `;
 
