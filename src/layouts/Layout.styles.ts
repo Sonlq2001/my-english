@@ -20,7 +20,7 @@ export const Content = styled.div`
 `;
 
 export const InnerContent = styled.div`
-  padding: 0 4rem;
+  padding: 0 4rem 4rem;
   min-height: calc(100vh - 5.4rem);
   background-color: #f9fafb;
 `;

@@ -17,7 +17,7 @@ export const vocabularySchema = object({
     })
   ),
 
-  reminiscentPhoto: ruleFile("reminiscentPhoto").nullable(),
+  file: ruleFile("file").nullable(),
 });
 
 export const initVocabulary: TypeInitVocabulary = {
@@ -25,6 +25,6 @@ export const initVocabulary: TypeInitVocabulary = {
   meanings: [{ meaning: "" }],
   examples: [{ example: "" }],
   topic: ["663c42bbbaf18dd34a6c9cb0"],
-  reminiscentPhoto: null,
+  file: null,
   partOfSpeech: "663c37539ce13917b2e93813",
 };

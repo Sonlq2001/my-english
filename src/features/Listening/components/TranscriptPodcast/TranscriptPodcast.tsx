@@ -34,8 +34,10 @@ const TranscriptPodcast: FC<TranscriptPodcastProps> = ({
       elementListTranscript.current.querySelector(".active");
 
     if (currentTranscript) {
-      currentTranscript.scrollIntoView({
+      // TODO: not working
+      currentTranscript.scrollTo({
         behavior: "smooth",
+        top: currentTranscript.clientHeight + 100,
       });
     }
   }, [isPlay, duration]);
