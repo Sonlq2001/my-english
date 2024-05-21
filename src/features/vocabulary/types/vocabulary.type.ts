@@ -8,8 +8,12 @@ export type TypeInitVocabulary = {
   meanings: { meaning: string }[];
   examples: { example: string }[];
   topic: string[];
-  reminiscentPhoto: File | null;
+  file: File | null;
   partOfSpeech: string;
+};
+
+export type ReqVocabulary = Omit<TypeInitVocabulary, "file"> & {
+  reminiscentPhoto: { publicId: string; imageUrl: string } | null;
 };
 
 export type ResListPartsOfSpeech = {

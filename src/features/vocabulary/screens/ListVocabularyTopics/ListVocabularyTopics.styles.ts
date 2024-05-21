@@ -13,6 +13,7 @@ export const ListData = styled.div`
   display: flex;
   margin-top: 2rem;
   gap: 2.4rem;
+  flex-wrap: wrap;
 `;
 
 export const ItemTopic = styled(Link)`

@@ -1,5 +1,6 @@
 import { FC, useMemo } from "react";
 import { Formik } from "formik";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 import ReturnButton from "@app/components/ReturnButton/ReturnButton";
 import TextField from "@app/components/TextField/TextField";
@@ -14,13 +15,17 @@ import {
   useGetPartsOfSpeechQuery,
   useGetListTopicsQuery,
 } from "@app/features/vocabulary/vocabulary";
+import { useAppDispatch } from "@app/redux/store";
+import TitlePage from "@app/components/TitlePage/TitlePage";
+import { uploadFile } from "@app/features/app/app";
 
 import { WrapPage, WrapForm, WrapContent } from "./CreateVocabulary.styles";
 import {
   initVocabulary,
   vocabularySchema,
 } from "../../helpers/vocabulary.helpers";
-import TitlePage from "@app/components/TitlePage/TitlePage";
+import { postCreateVocabulary } from "../../redux/vocabulary.slice";
+import { TypeInitVocabulary } from "../../types/vocabulary.type";
 
 const CreateVocabulary: FC = () => {
   const { data, isLoading, error } = useGetPartsOfSpeechQuery();
@@ -29,6 +34,7 @@ const CreateVocabulary: FC = () => {
     isLoading: isLoadingTopic,
     error: errorTopic,
   } = useGetListTopicsQuery();
+  const dispatch = useAppDispatch();
 
   const partsOfSpeech = useMemo(() => {
     return (data ?? [])?.map((item) => ({
@@ -43,6 +49,22 @@ const CreateVocabulary: FC = () => {
       value: item.id,
     }));
   }, [dataTopic]);
+
+  const handleSubmit = async ({ file, ...reset }: TypeInitVocabulary) => {
+    try {
+      let dataImage = null;
+      if (file) {
+        const formData = new FormData();
+        formData.append("file", file);
+        dataImage = unwrapResult(await dispatch(uploadFile(formData)));
+      }
+      await dispatch(
+        postCreateVocabulary({ ...reset, reminiscentPhoto: dataImage })
+      );
+    } catch (error) {
+      // TODO: Error
+    }
+  };
 
   if (isLoading || isLoadingTopic) {
     return <div>Loading...</div>;
@@ -61,9 +83,7 @@ const CreateVocabulary: FC = () => {
 
           <Formik
             initialValues={initVocabulary}
-            onSubmit={(values) => {
-              console.log(values);
-            }}
+            onSubmit={handleSubmit}
             validationSchema={vocabularySchema}
           >
             {({ setFieldValue, resetForm, values, errors }) => (
@@ -109,22 +129,20 @@ const CreateVocabulary: FC = () => {
 
                 <div>
                   <ImageUpload
-                    imageUrl={values.reminiscentPhoto ?? ""}
+                    imageUrl={values.file ?? ""}
                     label="Upload photos"
-                    name="reminiscentPhoto"
+                    name="file"
                     getFile={(file) => {
-                      setFieldValue("reminiscentPhoto", file);
+                      setFieldValue("file", file);
                     }}
                     handleResetFile={() => {
                       resetForm({
-                        values: { ...initVocabulary, reminiscentPhoto: null },
+                        values: { ...initVocabulary, file: null },
                       });
                     }}
                     fullWidth
                   />
-                  {errors?.reminiscentPhoto && (
-                    <HelperText text={errors.reminiscentPhoto} />
-                  )}
+                  {errors?.file && <HelperText text={errors.file} />}
                 </div>
 
                 <div className="row-btn">
