@@ -1,8 +1,10 @@
 import { styled } from "styled-components";
 
 export const WrapVocabularyDetail = styled.div`
-  max-width: 76.8rem;
+  max-width: 102.4rem;
   margin: 0 auto;
+  background-color: ${(props) => props.theme.palette.white};
+  padding: 2rem;
 
   .name-vocabulary {
     display: flex;
@@ -20,7 +22,7 @@ export const WrapVocabularyDetail = styled.div`
   }
 
   .type-vocabulary {
-    margin-top: 0.5rem;
+    margin-top: 1rem;
     font-size: 1.5rem;
     font-style: italic;
   }

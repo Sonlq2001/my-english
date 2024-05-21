@@ -6,6 +6,7 @@ import {
   VocabularyPathsEnum,
   useGetListTopicsQuery,
 } from "@app/features/vocabulary/vocabulary";
+import { encodeKeyword } from "@app/helpers/encode-decode-word";
 
 import {
   WrapContent,
@@ -31,12 +32,12 @@ const ListVocabularyTopics: FC = () => {
       <WrapContent>
         <h3>Topics</h3>
         <ListData>
-          {data.length &&
+          {data.length > 0 &&
             data.map((topic) => (
               <ItemTopic
                 to={VocabularyPathsEnum.LIST_VOCABULARY.replace(
                   ":topic",
-                  topic.name
+                  encodeKeyword(topic.name)
                 )}
                 key={topic.id}
               >
