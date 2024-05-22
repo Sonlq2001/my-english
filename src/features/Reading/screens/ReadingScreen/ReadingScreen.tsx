@@ -8,27 +8,42 @@ import {
   ColumnRight,
   ListArticle,
 } from "./ReadingScreen.styles";
+import TitlePage from "@app/components/TitlePage/TitlePage";
+import { useGetListDocumentsQuery } from "../../redux/reading.query";
 
 const ReadingScreen: FC = () => {
+  const { data, error, isLoading } = useGetListDocumentsQuery();
+
+  if (isLoading) {
+    return <div>Loading....</div>;
+  }
+
+  if (!data || error) {
+    return <div>Error</div>;
+  }
+
   return (
-    <WrapContentReading>
-      <h2>Reading</h2>
+    <>
+      <TitlePage
+        title="Read the document"
+        subtitle="Repository for all your documents."
+      />
 
-      <LayoutReading>
-        <ColumnLeft>
-          <h3>Read the document</h3>
+      <WrapContentReading>
+        <LayoutReading>
+          <ColumnLeft>
+            <h3>All documents</h3>
 
-          <ListArticle>
-            <Article />
-            <Article />
-            <Article />
-            <Article />
-          </ListArticle>
-        </ColumnLeft>
+            <ListArticle>
+              {data.length > 0 &&
+                data.map((doc) => <Article article={doc} key={doc.id} />)}
+            </ListArticle>
+          </ColumnLeft>
 
-        <ColumnRight>column 2</ColumnRight>
-      </LayoutReading>
-    </WrapContentReading>
+          <ColumnRight>column 2</ColumnRight>
+        </LayoutReading>
+      </WrapContentReading>
+    </>
   );
 };
 

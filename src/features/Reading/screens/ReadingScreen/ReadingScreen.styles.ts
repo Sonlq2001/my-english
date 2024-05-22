@@ -1,10 +1,8 @@
 import { styled } from "styled-components";
 
 export const WrapContentReading = styled.div`
-  margin-top: 2rem;
-  h2 {
-    margin-bottom: 2rem;
-  }
+  background-color: ${(props) => props.theme.palette.white};
+  padding: 2rem;
 `;
 
 export const LayoutReading = styled.div`

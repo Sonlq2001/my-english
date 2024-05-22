@@ -14,6 +14,7 @@ import { notepadApi } from "@app/features/notepad/notepad";
 import { authApi } from "@app/features/auth/auth";
 import { listeningQuery } from "@app/features/listening/listening";
 import { vocabularyQuery } from "@app/features/vocabulary/vocabulary";
+import { readingQuery } from "@app/features/reading/reading";
 
 import rootReducer from "./rootReducer";
 
@@ -28,7 +29,8 @@ export const store = configureStore({
       .concat(notepadApi.middleware)
       .concat(authApi.middleware)
       .concat(listeningQuery.middleware)
-      .concat(vocabularyQuery.middleware),
+      .concat(vocabularyQuery.middleware)
+      .concat(readingQuery.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
