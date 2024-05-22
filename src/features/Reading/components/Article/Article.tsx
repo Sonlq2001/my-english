@@ -1,21 +1,30 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 
-import { WrapArticle } from "./Article.styles";
+import { formatDate } from "@app/helpers/time";
 
-const Article: FC = () => {
+import { WrapArticle } from "./Article.styles";
+import { ResListDocuments } from "../../types/reading.type";
+import { ReadingPathsEnum } from "../../constants/reading.paths";
+
+interface ArticleProps {
+  article: ResListDocuments;
+}
+
+const Article: FC<ArticleProps> = ({ article }) => {
   return (
     <WrapArticle>
-      <span className="topic-article">Design</span>
-      <Link to="/article/123" className="title-article">
-        House GOP fails to impeach Homeland Security Secretary Mayorkas
+      <span className="topic-article">{article.topic}</span>
+      <Link
+        to={ReadingPathsEnum.ARTICLE_DETAIL.replace(":article_id", article.id)}
+        className="title-article"
+      >
+        {article.title}
       </Link>
-      <p className="des-article">
-        House Republicans were exasperated after the stunning defeat of their
-        resolution to impeach Homeland Security Secretary Alejandro Mayorkas
-      </p>
-
-      <span className="time-article">07/02/2024</span>
+      {article.shortDescription && (
+        <p className="des-article">{article.shortDescription}</p>
+      )}
+      <span className="time-article">{formatDate(article.createdAt)}</span>
     </WrapArticle>
   );
 };
