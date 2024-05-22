@@ -48,7 +48,7 @@ const ListeningScreen: FC = () => {
           ))}
         </ListTopic>
 
-        {data.length && (
+        {data.length > 0 && (
           <ListPodcast>
             {data.map((podcast) => (
               <ItemPodcast

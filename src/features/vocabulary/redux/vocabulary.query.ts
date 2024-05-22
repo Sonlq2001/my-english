@@ -4,7 +4,11 @@ import { BaseResponse } from "@app/types/app.types";
 import { toCamel } from "@app/helpers/convert-object";
 
 import { VocabularyEndpointsEnum } from "../constants/vocabulary.endpoints";
-import { ResListPartsOfSpeech, ResListTopics } from "../types/vocabulary.type";
+import {
+  ResListPartsOfSpeech,
+  ResListTopics,
+  ResVocabulary,
+} from "../types/vocabulary.type";
 
 export const vocabularyQuery = createApi({
   reducerPath: "vocabularyQuery",
@@ -25,8 +29,26 @@ export const vocabularyQuery = createApi({
         return toCamel(rawResult.metadata) as ResListPartsOfSpeech;
       },
     }),
+    getVocabularyDetail: build.query<ResVocabulary, string>({
+      query: (word) =>
+        VocabularyEndpointsEnum.GET_VOCABULARY.replace(":word", word),
+      transformResponse: (rawResult: BaseResponse<ResVocabulary>) => {
+        return toCamel(rawResult.metadata) as ResVocabulary;
+      },
+    }),
+    getListVocabularyByTopic: build.query<ResVocabulary[], string>({
+      query: (topic) =>
+        VocabularyEndpointsEnum.GET_LIST_VOCABULARY.replace(":topic", topic),
+      transformResponse: (rawResult: BaseResponse<ResVocabulary[]>) => {
+        return toCamel(rawResult.metadata) as ResVocabulary[];
+      },
+    }),
   }),
 });
 
-export const { useGetListTopicsQuery, useGetPartsOfSpeechQuery } =
-  vocabularyQuery;
+export const {
+  useGetListTopicsQuery,
+  useGetPartsOfSpeechQuery,
+  useGetVocabularyDetailQuery,
+  useGetListVocabularyByTopicQuery,
+} = vocabularyQuery;
