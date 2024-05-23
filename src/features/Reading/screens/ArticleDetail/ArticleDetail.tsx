@@ -1,8 +1,13 @@
 import { FC, useState, useEffect, useCallback } from "react";
+import { useParams } from "react-router-dom";
 
 import IconBookmark from "@app/assets/images/icon-svg/icon-bookmark.svg?react";
 import ReturnButton from "@app/components/ReturnButton/ReturnButton";
 import ModalTranslate from "@app/components/ModalTranslate/ModalTranslate";
+import TitlePage from "@app/components/TitlePage/TitlePage";
+import ClickOutside from "@app/components/ClickOutside/ClickOutside";
+import { useGetDocumentQuery } from "@app/features/reading/reading";
+import { formatDate } from "@app/helpers/time";
 
 import {
   WrapArticleDetail,
@@ -10,15 +15,16 @@ import {
   InfoArticle,
 } from "./ArticleDetail.styles";
 import { ReadingPathsEnum } from "../../constants/reading.paths";
-import ClickOutside from "@app/components/ClickOutside/ClickOutside";
 
 const ArticleDetail: FC = () => {
+  const { article_id } = useParams<{ article_id: string }>();
   const [positionModal, setPositionModal] = useState<{ x: number; y: number }>({
     x: 0,
     y: 0,
   });
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-  const [previousSelection, setPreviousSelection] = useState("");
+  const [currentValue, setCurrentValue] = useState<string>("");
+  const { data, error, isLoading } = useGetDocumentQuery(article_id || "");
 
   const handleShowModalTranslate = (e: React.MouseEvent<HTMLElement>) => {
     const instanceSelect = document.all
@@ -29,7 +35,7 @@ const ArticleDetail: FC = () => {
       const selection = window.getSelection();
       const valueSelected = String(selection).trim();
 
-      if (!selection || !valueSelected || valueSelected === previousSelection) {
+      if (!selection || !valueSelected) {
         return;
       }
       const viewportWidth =
@@ -55,7 +61,7 @@ const ArticleDetail: FC = () => {
             : e.clientX,
         y: e.clientY + scrollTop + 15,
       });
-      setPreviousSelection(valueSelected);
+      setCurrentValue(valueSelected);
     }
   };
 
@@ -66,53 +72,59 @@ const ArticleDetail: FC = () => {
 
   useEffect(() => {
     if (!isOpenModal) {
-      setPreviousSelection("");
+      setCurrentValue("");
     }
   }, [isOpenModal]);
 
-  useEffect(() => {}, []);
+  if (isLoading) {
+    return <div>Loading....</div>;
+  }
+
+  if (!data || error) {
+    return <div>Error</div>;
+  }
 
   return (
-    <WrapArticleDetail>
-      <ReturnButton to={ReadingPathsEnum.READING} />
+    <>
+      <TitlePage title="Reading document" subtitle="" />
 
-      <HeaderArticleDetail>
-        <IconBookmark />
-      </HeaderArticleDetail>
+      <WrapArticleDetail>
+        <ReturnButton to={ReadingPathsEnum.READING} />
 
-      <h2>Learn Data Structures and Algorithms | DSA Tutorial</h2>
+        <HeaderArticleDetail>
+          <IconBookmark />
+        </HeaderArticleDetail>
 
-      <InfoArticle>
-        <span>By: Sown</span>
-        <span className="dot"></span>
-        <span>18 Oct 2024</span>
-      </InfoArticle>
+        <h2>{data.title}</h2>
 
-      <div
-        className="content"
-        onDoubleClick={handleShowModalTranslate}
-        onMouseUp={handleShowModalTranslate}
-      >
-        <h4>abc lasjj</h4>
-        <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptate
-          maiores recusandae suscipit totam facere unde eum nesciunt molestiae,
-          quod corrupti quos officiis dolore sunt ea dignissimos adipisci enim,
-          maxime perferendis!
-        </p>
-        <span>f ajg23 pasdfi </span>
-      </div>
+        <InfoArticle>
+          {data.author && <span>By: {data.author}</span>}
+          <span className="dot"></span>
+          <span>{formatDate(data.createdAt)}</span>
+        </InfoArticle>
 
-      {isOpenModal && (
-        <ClickOutside onOutsideClick={handleCloseModal}>
-          <ModalTranslate
-            x={positionModal.x}
-            y={positionModal.y}
-            onCloseModal={handleCloseModal}
-          />
-        </ClickOutside>
-      )}
-    </WrapArticleDetail>
+        <div
+          className="content"
+          onDoubleClick={handleShowModalTranslate}
+          onMouseUp={handleShowModalTranslate}
+          onClick={() => setIsOpenModal(false)}
+        >
+          {data.shortDescription && <h4>{data.shortDescription}</h4>}
+          <div dangerouslySetInnerHTML={{ __html: data.description }} />
+        </div>
+
+        {isOpenModal && (
+          <ClickOutside onOutsideClick={handleCloseModal}>
+            <ModalTranslate
+              x={positionModal.x}
+              y={positionModal.y}
+              onCloseModal={handleCloseModal}
+              currentValue={currentValue}
+            />
+          </ClickOutside>
+        )}
+      </WrapArticleDetail>
+    </>
   );
 };
 

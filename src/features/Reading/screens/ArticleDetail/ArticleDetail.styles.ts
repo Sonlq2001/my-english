@@ -1,7 +1,9 @@
 import { styled } from "styled-components";
 
 export const WrapArticleDetail = styled.div`
-  h2 {
+  padding: 2rem;
+  background-color: ${(props) => props.theme.palette.white};
+  > h2 {
     font-size: 2rem;
     margin-bottom: 2rem;
   }

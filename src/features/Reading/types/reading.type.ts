@@ -1,4 +1,4 @@
-export type ResListDocuments = {
+export type ResDocument = {
   id: string;
   title: string;
   author?: string;
