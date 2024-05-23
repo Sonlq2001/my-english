@@ -2,6 +2,7 @@ import { FC } from "react";
 
 import IconSpeaking2 from "@app/assets/images/icon-svg/icon-speaking-2.svg?react";
 import IconClose from "@app/assets/images/icon-svg/icon-close.svg?react";
+import { convertTextToSpeech } from "@app/helpers/text-to-speech";
 
 import { WrapModalTranslate, BodyModal } from "./ModalTranslate.styles";
 import AppButton from "../AppButton/AppButton";
@@ -10,9 +11,21 @@ interface ModalTranslateProps {
   x: number;
   y: number;
   onCloseModal: () => void;
+  currentValue: string;
 }
 
-const ModalTranslate: FC<ModalTranslateProps> = ({ x, y, onCloseModal }) => {
+const ModalTranslate: FC<ModalTranslateProps> = ({
+  x,
+  y,
+  onCloseModal,
+  currentValue,
+}) => {
+  const handleVoice = () => {
+    if (!currentValue) return;
+    convertTextToSpeech(currentValue);
+    // TODO: call api
+  };
+
   return (
     <WrapModalTranslate
       style={{
@@ -33,8 +46,8 @@ const ModalTranslate: FC<ModalTranslateProps> = ({ x, y, onCloseModal }) => {
       <BodyModal>
         <div className="vocabulary">
           <div className="key-vocabulary">
-            Information
-            <IconSpeaking2 />
+            {currentValue}
+            <IconSpeaking2 onClick={handleVoice} />
           </div>
           <div className="type-vocabulary">( Verb )</div>
         </div>

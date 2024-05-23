@@ -32,6 +32,9 @@ export const BodyModal = styled.div`
     gap: 2rem;
     font-weight: ${(props) => props.theme.palette.weight.semibold};
     font-size: 1.8rem;
+    svg {
+      cursor: pointer;
+    }
   }
 
   .type-vocabulary {

@@ -1,4 +1,6 @@
-export const convertTextToSpeech = (text: string) => {
+import debounce from "lodash.debounce";
+
+export const convertTextToSpeech = debounce((text: string) => {
   if (!("speechSynthesis" in window)) {
     alert("Browser not support");
     return;
@@ -9,4 +11,4 @@ export const convertTextToSpeech = (text: string) => {
   const voices = window.speechSynthesis.getVoices();
   utterance.voice = voices[0];
   window.speechSynthesis.speak(utterance);
-};
+}, 200);
