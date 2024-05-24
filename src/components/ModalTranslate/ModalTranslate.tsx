@@ -3,10 +3,11 @@ import { FC } from "react";
 import IconSpeaking2 from "@app/assets/images/icon-svg/icon-speaking-2.svg?react";
 import IconClose from "@app/assets/images/icon-svg/icon-close.svg?react";
 import { convertTextToSpeech } from "@app/helpers/text-to-speech";
+import { useGetVocabularyDetailQuery } from "@app/features/vocabulary/vocabulary";
+import ImageNotfound from "@app/assets/images/not-found.png";
 
 import { WrapModalTranslate, BodyModal } from "./ModalTranslate.styles";
 import AppButton from "../AppButton/AppButton";
-
 interface ModalTranslateProps {
   x: number;
   y: number;
@@ -20,11 +21,16 @@ const ModalTranslate: FC<ModalTranslateProps> = ({
   onCloseModal,
   currentValue,
 }) => {
+  const { data, isLoading, error } = useGetVocabularyDetailQuery(currentValue);
+
   const handleVoice = () => {
     if (!currentValue) return;
     convertTextToSpeech(currentValue);
-    // TODO: call api
   };
+
+  if (isLoading || error) {
+    return null;
+  }
 
   return (
     <WrapModalTranslate
@@ -41,21 +47,31 @@ const ModalTranslate: FC<ModalTranslateProps> = ({
           leftIcon={<IconClose />}
           onClick={onCloseModal}
         />
-        <AppButton size="small">Save</AppButton>
+        {!data && <AppButton size="small">Save</AppButton>}
       </div>
       <BodyModal>
-        <div className="vocabulary">
-          <div className="key-vocabulary">
-            {currentValue}
-            <IconSpeaking2 onClick={handleVoice} />
-          </div>
-          <div className="type-vocabulary">( Verb )</div>
-        </div>
+        {data ? (
+          <>
+            <div className="vocabulary">
+              <div className="key-vocabulary">
+                {currentValue}
+                <IconSpeaking2 onClick={handleVoice} />
+              </div>
+              <div className="type-vocabulary">( {data.partOfSpeech.en} )</div>
+            </div>
 
-        <ol className="meanings">
-          <li>sự thông tin</li>
-          <li>thông tin</li>
-        </ol>
+            <ol className="meanings">
+              {data.meanings.map((mean) => (
+                <li key={mean.id}>{mean.meaning}</li>
+              ))}
+            </ol>
+          </>
+        ) : (
+          <p className="box-notfound">
+            <img src={ImageNotfound} alt="img-notfound" />
+            This word is not in your dictionary yet
+          </p>
+        )}
       </BodyModal>
     </WrapModalTranslate>
   );
