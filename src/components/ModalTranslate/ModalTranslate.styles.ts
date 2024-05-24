@@ -52,4 +52,17 @@ export const BodyModal = styled.div`
       font-size: 1.5rem;
     }
   }
+
+  .box-notfound {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+    color: ${(props) => props.theme.palette.gray.medium};
+    font-size: 1.5rem;
+    img {
+      width: 6rem;
+    }
+  }
 `;
