@@ -1,10 +1,13 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 
 import IconMicrophone from "@app/assets/images/icon-svg/icon-microphone.svg?react";
 import AppButton from "@app/components/AppButton/AppButton";
+import TitlePage from "@app/components/TitlePage/TitlePage";
+import ReturnButton from "@app/components/ReturnButton/ReturnButton";
+import { SpeakingPathsEnum } from "@app/features/speaking/speaking";
 
 import { LIST_ACTIONS_READING } from "../../constants/speaking.constants";
 import {
@@ -24,7 +27,7 @@ const VoiceToTextScreen: FC = () => {
   const [tab, currentTab] = useState<TABS_ACTIONS_READING>(
     TABS_ACTIONS_READING.RANDOM
   );
-  const { transcript, listening } = useSpeechRecognition();
+  const { transcript, listening, resetTranscript } = useSpeechRecognition();
 
   const handleStartListening = () => {
     SpeechRecognition.startListening({ continuous: true });
@@ -34,52 +37,71 @@ const VoiceToTextScreen: FC = () => {
     SpeechRecognition.stopListening();
   };
 
+  useEffect(() => {
+    (async () => {
+      await SpeechRecognition.stopListening();
+      resetTranscript();
+    })();
+  }, [resetTranscript, tab]);
+
   return (
-    <WrapContent>
-      <InnerContent>
-        <h3 className="title-screen">Speech to text</h3>
+    <>
+      <TitlePage
+        title="Speech to text"
+        subtitle="Practice pronunciation and speaking in short paragraphs."
+      />
 
-        <ListActionReading>
-          {LIST_ACTIONS_READING.map((item, index) => (
-            <AppButton
-              size="small"
-              variant={item.tab === tab ? "contained" : "outlined"}
-              key={`btn-action-${index}`}
-              onClick={() => currentTab(item.tab)}
-              className="btn-action"
+      <WrapContent>
+        <ReturnButton to={SpeakingPathsEnum.SPEAKING} />
+        <InnerContent>
+          <ListActionReading>
+            {LIST_ACTIONS_READING.map((item, index) => (
+              <AppButton
+                size="small"
+                variant={item.tab === tab ? "contained" : "outlined"}
+                key={`btn-action-${index}`}
+                onClick={() => currentTab(item.tab)}
+                className="btn-action"
+              >
+                {item.label}
+              </AppButton>
+            ))}
+          </ListActionReading>
+
+          <div className="content-tab">
+            {tab === TABS_ACTIONS_READING.RANDOM && <RandomText />}
+            {tab === TABS_ACTIONS_READING.CUSTOMIZE && <CustomizeText />}
+            {tab === TABS_ACTIONS_READING.FREESTYLE && <FreestyleText />}
+          </div>
+
+          <div className="content-render">
+            <button className="btn-reset" onClick={resetTranscript}>
+              Reset
+            </button>
+
+            <div>
+              {transcript}
+              {listening && <LoadingTyping />}
+            </div>
+          </div>
+        </InnerContent>
+        <FooterContent>
+          {listening ? (
+            <BoxIconVoice onClick={handleStopListening}>
+              <div className="pulsate" />
+              <IconMicrophone />
+            </BoxIconVoice>
+          ) : (
+            <BoxIconVoice
+              onClick={handleStartListening}
+              onTouchStart={handleStartListening}
             >
-              {item.label}
-            </AppButton>
-          ))}
-        </ListActionReading>
-
-        <div className="content-tab">
-          {tab === TABS_ACTIONS_READING.RANDOM && <RandomText />}
-          {tab === TABS_ACTIONS_READING.CUSTOMIZE && <CustomizeText />}
-          {tab === TABS_ACTIONS_READING.FREESTYLE && <FreestyleText />}
-        </div>
-
-        <div className="content-render">
-          {transcript}
-          {listening && <LoadingTyping />}
-        </div>
-      </InnerContent>
-      <FooterContent>
-        {listening ? (
-          <BoxIconVoice onClick={handleStopListening}>
-            <div className="pulsate" />
-            <IconMicrophone />
-          </BoxIconVoice>
-        ) : (
-          <BoxIconVoice
-            onClick={handleStartListening}
-            onTouchStart={handleStartListening}
-          >
-            <IconMicrophone />
-          </BoxIconVoice>
-        )}
-      </FooterContent>
-    </WrapContent>
+              <IconMicrophone />
+            </BoxIconVoice>
+          )}
+        </FooterContent>
+      </WrapContent>
+    </>
   );
 };
 

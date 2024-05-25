@@ -4,6 +4,8 @@ export const WrapContent = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  padding: 2rem;
+  background-color: ${(props) => props.theme.palette.white};
 `;
 
 export const InnerContent = styled.div`
@@ -12,6 +14,16 @@ export const InnerContent = styled.div`
     margin-top: 2rem;
     line-height: 2.5rem;
     border-top: 1px solid ${(props) => props.theme.palette.gray.extraLight};
+  }
+  .btn-reset {
+    margin-top: 1rem;
+    background-color: transparent;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: ${(props) => props.theme.palette.gray.thin};
+    &:hover {
+      background-color: ${(props) => props.theme.palette.gray.extraLight};
+    }
   }
   .content-tab {
     margin-top: 3rem;

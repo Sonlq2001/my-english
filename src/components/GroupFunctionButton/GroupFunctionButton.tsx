@@ -1,5 +1,6 @@
 import { ElementType, FC, useState } from "react";
 import debounce from "lodash.debounce";
+import clsx from "clsx";
 
 import IconGoogleTranslate from "@app/assets/images/icon-svg/icon-google-translate.svg?react";
 import IconSpeaking2 from "@app/assets/images/icon-svg/icon-speaking-2.svg?react";
@@ -30,11 +31,13 @@ const DELAY_CLICK = 300; // 300 milliseconds = 0.3s
 interface GroupFunctionButtonProps {
   textSpeak: string;
   onClickTranscript?: () => void;
+  disabled?: { [key in KEYS_BUTTONS]?: boolean };
 }
 
 const GroupFunctionButton: FC<GroupFunctionButtonProps> = ({
   textSpeak,
   onClickTranscript,
+  disabled,
 }) => {
   const [activeButtons, setActiveButtons] = useState<KEYS_BUTTONS[]>([]);
 
@@ -84,9 +87,10 @@ const GroupFunctionButton: FC<GroupFunctionButtonProps> = ({
           ((btnAction?.event && onClickTranscript) || !btnAction?.event) && (
             <IconMenu
               key={`btn-action-${index}`}
-              className={
-                activeButtons.includes(btnAction.key) ? "active-btn" : ""
-              }
+              className={clsx(
+                activeButtons.includes(btnAction.key) && "active-btn",
+                disabled && disabled[btnAction.key] && "disabled"
+              )}
               onClick={() => {
                 handleActionButton(btnAction.key);
                 setActiveButtons((dataPrev) => {

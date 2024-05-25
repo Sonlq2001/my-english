@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 const FreestyleText: FC = () => {
-  return <div>FreestyleText</div>;
+  return <div>Speak freely</div>;
 };
 
 export default FreestyleText;
