@@ -40,9 +40,7 @@ const VocabularyDetail: FC = () => {
       <TitlePage title="Vocabulary" subtitle="Every day a new word." />
 
       <WrapVocabularyDetail>
-        <ReturnButton
-          to={VocabularyPathsEnum.LIST_VOCABULARY.replace(":topic", "school")}
-        />
+        <ReturnButton to={VocabularyPathsEnum.LIST_VOCABULARY_TOPICS} />
 
         <div className="name-vocabulary">
           <span className="vocabulary">{data.name}</span>
