@@ -13,4 +13,9 @@ export const WrapGroupButton = styled.div`
   svg.active-btn {
     color: ${(props) => props.theme.palette.primary.main};
   }
+  svg.disabled {
+    cursor: default;
+    pointer-events: none;
+    color: ${(props) => props.theme.palette.gray.medium};
+  }
 `;

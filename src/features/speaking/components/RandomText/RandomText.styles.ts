@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 
 export const GroupContent = styled.div`
   display: flex;
+  gap: 3rem;
   .text-random {
     line-height: 2.5rem;
     text-align: justify;
@@ -9,7 +10,6 @@ export const GroupContent = styled.div`
   .text-content {
     max-width: 60%;
     width: 100%;
-    margin-right: 3rem;
   }
   .transcript-text {
     max-width: 40%;
