@@ -1,7 +1,9 @@
 import { styled } from "styled-components";
 
 export const WrapWritingModel = styled.div`
-  h3 {
+  padding: 2rem;
+  background-color: ${(props) => props.theme.palette.white};
+  > h3 {
     margin: 2rem 0 3rem 0;
   }
 `;

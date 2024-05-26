@@ -1,4 +1,5 @@
 import { FC } from "react";
+import TitlePage from "@app/components/TitlePage/TitlePage";
 
 import WritingStyle from "../../components/WritingStyle/WritingStyle";
 import { ListWritingStyle } from "./WritingScreen.styles";
@@ -6,7 +7,9 @@ import { LIST_WRITING_STYLE } from "../../constants/writing.constants";
 
 const WritingScreen: FC = () => {
   return (
-    <div>
+    <>
+      <TitlePage title="Practice writing in different forms" subtitle="" />
+
       <ListWritingStyle>
         {LIST_WRITING_STYLE.map((item, index) => (
           <WritingStyle
@@ -17,7 +20,7 @@ const WritingScreen: FC = () => {
           />
         ))}
       </ListWritingStyle>
-    </div>
+    </>
   );
 };
 
