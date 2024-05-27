@@ -2,7 +2,6 @@ import { FC } from "react";
 
 import AppButton from "@app/components/AppButton/AppButton";
 import IconWriting from "@app/assets/images/icon-svg/icon-writing.svg?react";
-import ReturnButton from "@app/components/ReturnButton/ReturnButton";
 
 import { useGetVocabularyQuery } from "../../redux/notepad.api";
 
@@ -23,7 +22,6 @@ const NotepadScreen: FC = () => {
       />
       <WrapNotepad>
         <div className="row-header">
-          <ReturnButton to="/" />
           <AppButton
             className="btn-add"
             to="/create-notepad"

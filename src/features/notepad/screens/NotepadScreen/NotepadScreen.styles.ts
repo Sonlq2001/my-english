@@ -6,8 +6,7 @@ export const WrapNotepad = styled.div`
   .row-header {
     margin-bottom: 3rem;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     .btn-add {
       padding: 0.8rem 1.6rem;
     }
