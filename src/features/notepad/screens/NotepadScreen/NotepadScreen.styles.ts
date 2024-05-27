@@ -1,6 +1,8 @@
 import { styled } from "styled-components";
 
 export const WrapNotepad = styled.div`
+  padding: 2rem;
+  background-color: ${(props) => props.theme.palette.white};
   .row-header {
     margin-bottom: 3rem;
     display: flex;
@@ -11,7 +13,4 @@ export const WrapNotepad = styled.div`
   }
 `;
 
-export const ListNotepad = styled.div`
-  max-width: 76.8rem;
-  margin: 0 auto;
-`;
+export const ListNotepad = styled.div``;

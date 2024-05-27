@@ -3,8 +3,8 @@ import { styled } from "styled-components";
 import { Form } from "formik";
 
 export const WrapCreateNotepad = styled.div`
-  max-width: 76.8rem;
-  margin: 0 auto;
+  padding: 2rem;
+  background-color: ${(props) => props.theme.palette.white};
 `;
 
 export const WrapFormik = styled(Form)`

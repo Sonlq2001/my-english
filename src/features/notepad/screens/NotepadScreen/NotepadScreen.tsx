@@ -7,6 +7,7 @@ import { useGetVocabularyQuery } from "../../redux/notepad.api";
 
 import { WrapNotepad, ListNotepad } from "./NotepadScreen.styles";
 import NotepadSection from "../../components/NotepadSection/NotepadSection";
+import TitlePage from "@app/components/TitlePage/TitlePage";
 
 const NotepadScreen: FC = () => {
   const { data } = useGetVocabularyQuery();
@@ -14,22 +15,28 @@ const NotepadScreen: FC = () => {
   console.log(data);
 
   return (
-    <WrapNotepad>
-      <div className="row-header">
-        <AppButton
-          className="btn-add"
-          to="/create-notepad"
-          leftIcon={<IconWriting />}
-        />
-      </div>
+    <>
+      <TitlePage
+        title="Personal notebook"
+        subtitle="Record useful information."
+      />
+      <WrapNotepad>
+        <div className="row-header">
+          <AppButton
+            className="btn-add"
+            to="/create-notepad"
+            leftIcon={<IconWriting />}
+          />
+        </div>
 
-      <ListNotepad>
-        <NotepadSection />
-        <NotepadSection />
-        <NotepadSection />
-        <NotepadSection />
-      </ListNotepad>
-    </WrapNotepad>
+        <ListNotepad>
+          <NotepadSection />
+          <NotepadSection />
+          <NotepadSection />
+          <NotepadSection />
+        </ListNotepad>
+      </WrapNotepad>
+    </>
   );
 };
 

@@ -12,52 +12,60 @@ import HelperText from "@app/components/HelperText/HelperText";
 import { NotepadPathsEnum } from "../../constants/notepad.paths";
 import { WrapCreateNotepad, WrapFormik } from "./CreateNotepad.styles";
 import { notepadSchema } from "../../helpers/notepad.helpers";
+import TitlePage from "@app/components/TitlePage/TitlePage";
 
 const CreateNotepad: FC = () => {
   return (
-    <WrapCreateNotepad>
-      <ReturnButton to={NotepadPathsEnum.NOTEPAD} />
+    <>
+      <TitlePage
+        title="Create a new notebook"
+        subtitle="Create a new notebook so you can easily refer back to it when necessary."
+      />
 
-      <Formik
-        initialValues={{
-          notepad: "",
-          description: "",
-        }}
-        onSubmit={(values) => {
-          console.log(values);
-        }}
-        validationSchema={notepadSchema}
-      >
-        {({ setFieldValue, errors }) => (
-          <WrapFormik>
-            <TextField
-              label="Title notepad"
-              fullWidth
-              name="notepad"
-              placeholder="ex: better version"
-              isRequire
-            />
+      <WrapCreateNotepad>
+        <ReturnButton to={NotepadPathsEnum.NOTEPAD} />
 
-            <div>
-              <TextEditor2
-                label="Notepad"
+        <Formik
+          initialValues={{
+            notepad: "",
+            description: "",
+          }}
+          onSubmit={(values) => {
+            console.log(values);
+          }}
+          validationSchema={notepadSchema}
+        >
+          {({ setFieldValue, errors }) => (
+            <WrapFormik>
+              <TextField
+                label="Title notepad"
+                fullWidth
+                name="notepad"
+                placeholder="ex: better version"
                 isRequire
-                getValue={debounce((value) => {
-                  setFieldValue("description", value);
-                }, 300)}
               />
-              {errors.description && <HelperText text={errors.description} />}
-            </div>
 
-            <div className="row-btn">
-              <AppButton type="submit" rightIcon={<IconPlusInCircle />}>
-                Add
-              </AppButton>
-            </div>
-          </WrapFormik>
-        )}
-      </Formik>
-    </WrapCreateNotepad>
+              <div>
+                <TextEditor2
+                  label="Notepad"
+                  isRequire
+                  getValue={debounce((value) => {
+                    setFieldValue("description", value);
+                  }, 300)}
+                />
+                {errors.description && <HelperText text={errors.description} />}
+              </div>
+
+              <div className="row-btn">
+                <AppButton type="submit" rightIcon={<IconPlusInCircle />}>
+                  Add
+                </AppButton>
+              </div>
+            </WrapFormik>
+          )}
+        </Formik>
+      </WrapCreateNotepad>
+    </>
   );
 };
 
