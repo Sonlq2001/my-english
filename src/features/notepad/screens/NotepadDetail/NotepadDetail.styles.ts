@@ -1,8 +1,8 @@
 import { styled } from "styled-components";
 
 export const WrapNotepadDetail = styled.div`
-  max-width: 76.8rem;
-  margin: 0 auto;
+  padding: 2rem;
+  background-color: ${(props) => props.theme.palette.white};
 `;
 
 export const ContentDetail = styled.div`
