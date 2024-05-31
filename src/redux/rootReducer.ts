@@ -1,6 +1,5 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
-import { notepadApi } from "@app/features/notepad/notepad";
 import { authApi, authReducer } from "@app/features/auth/auth";
 import { listeningQuery } from "@app/features/listening/listening";
 import { vocabularyQuery } from "@app/features/vocabulary/vocabulary";
@@ -8,7 +7,6 @@ import { readingQuery } from "@app/features/reading/reading";
 import { writingQuery } from "@app/features/writing/writing";
 
 const rootReducer = combineReducers({
-  [notepadApi.reducerPath]: notepadApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
   [listeningQuery.reducerPath]: listeningQuery.reducer,
   auth: authReducer,

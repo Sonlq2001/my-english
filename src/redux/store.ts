@@ -10,7 +10,6 @@ import {
   REGISTER,
 } from "redux-persist";
 
-import { notepadApi } from "@app/features/notepad/notepad";
 import { authApi } from "@app/features/auth/auth";
 import { listeningQuery } from "@app/features/listening/listening";
 import { vocabularyQuery } from "@app/features/vocabulary/vocabulary";
@@ -27,7 +26,6 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     })
-      .concat(notepadApi.middleware)
       .concat(authApi.middleware)
       .concat(listeningQuery.middleware)
       .concat(vocabularyQuery.middleware)
