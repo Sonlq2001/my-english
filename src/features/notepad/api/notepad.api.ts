@@ -7,6 +7,11 @@ const createNotepadApi = (payload: ReqCreateNotepad) => {
   return api.post(NotepadEndpointsEnum.CREATE_NOTEPAD, payload);
 };
 
+const getListNotepadsApi = () => {
+  return api.get(NotepadEndpointsEnum.GET_LIST_NOTEPADS);
+};
+
 export const notepadApi = {
   createNotepadApi,
+  getListNotepadsApi,
 };
