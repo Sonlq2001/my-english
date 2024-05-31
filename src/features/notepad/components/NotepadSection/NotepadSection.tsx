@@ -1,19 +1,28 @@
 import { FC } from "react";
 
-import { WrapNotepadSection } from "./NotepadSection.styles";
+import {
+  NotepadPathsEnum,
+  ResNotepadItem,
+} from "@app/features/notepad/notepad";
+import { formatDate } from "@app/helpers/time";
 
-const NotepadSection: FC = () => {
+import { WrapNotepadSection } from "./NotepadSection.styles";
+interface NotepadSectionProps {
+  notepad: ResNotepadItem;
+}
+
+const NotepadSection: FC<NotepadSectionProps> = ({ notepad }) => {
   return (
-    <WrapNotepadSection to="/notepad/123">
-      <h3>Cần thiết</h3>
+    <WrapNotepadSection
+      to={NotepadPathsEnum.NOTEPAD_DETAIL.replace(":notepad_id", notepad.id)}
+    >
+      <h3>{notepad.title}</h3>
       <div className="info-notepad">
-        <span>20/12/2023</span>
-        <p className="des-notepad">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
-          maiores perspiciatis, pariatur earum dolorum illo minus ipsum, ducimus
-          molestiae, magni provident distinctio tempora sint impedit iste dolore
-          ad voluptatum eum.
-        </p>
+        <span>{formatDate(notepad.createdAt)}</span>
+        <p
+          className="des-notepad"
+          dangerouslySetInnerHTML={{ __html: notepad.description }}
+        />
       </div>
     </WrapNotepadSection>
   );
