@@ -1,8 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+import { BaseResponse } from "@app/types/app.types";
+
 import { AuthEndpointsEnum } from "../constants/auth.endpoints";
 import { AuthResponse } from "../types/auth.type";
-import { BaseResponse } from "@app/types/app.types";
 
 export const authApi = createApi({
   reducerPath: "authApi",

@@ -2,18 +2,12 @@ import { FC } from "react";
 
 import AppButton from "@app/components/AppButton/AppButton";
 import IconWriting from "@app/assets/images/icon-svg/icon-writing.svg?react";
-
-import { useGetVocabularyQuery } from "../../redux/notepad.api";
+import TitlePage from "@app/components/TitlePage/TitlePage";
 
 import { WrapNotepad, ListNotepad } from "./NotepadScreen.styles";
 import NotepadSection from "../../components/NotepadSection/NotepadSection";
-import TitlePage from "@app/components/TitlePage/TitlePage";
 
 const NotepadScreen: FC = () => {
-  const { data } = useGetVocabularyQuery();
-  // TODO: RTK query
-  console.log(data);
-
   return (
     <>
       <TitlePage
