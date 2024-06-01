@@ -18,15 +18,9 @@ export const createPodcast = createAsyncThunk<ResPodcast, ReqCreatePodcast>(
   }
 );
 
-const initialState = {
-  podcastData: {
-    list: null,
-  },
-};
-
 const settingSlice = createSlice({
   name: "setting",
-  initialState,
+  initialState: {},
   reducers: {},
   extraReducers: () => {},
 });

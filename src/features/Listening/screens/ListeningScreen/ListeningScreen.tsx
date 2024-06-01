@@ -1,29 +1,34 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import clsx from "clsx";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 import AppButton from "@app/components/AppButton/AppButton";
 import TitlePage from "@app/components/TitlePage/TitlePage";
-import { useGetListPodcastQuery } from "@app/features/listening/listening";
 
 import { ListTopic, ListPodcast, WrapContent } from "./ListeningScreen.styles";
 import { LIST_TOPIC } from "../../constants/listening.constants";
+import { useAppDispatch, useAppSelector } from "@app/redux/store";
+import { getListPodcasts } from "@app/features/listening/redux/listening.slice";
 import ItemPodcast from "../../components/ItemPodcast/ItemPodcast";
 
 const ListeningScreen: FC = () => {
+  const dispatch = useAppDispatch();
   const [tabTopic, setTabTopic] = useState<string>("Popular"); // TODO: default topic
-  const { data, isLoading, error } = useGetListPodcastQuery();
+  const [isLoadingListPodcasts, setIsLoadingListPodcasts] =
+    useState<boolean>(true);
+  const listPodcasts = useAppSelector(
+    (state) => state.listening.podcastData.list
+  );
 
   const handleTabTopic = (nameTopic: string) => {
     setTabTopic(nameTopic);
   };
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error || !data) {
-    return <div>Error</div>;
-  }
+  useEffect(() => {
+    dispatch(getListPodcasts())
+      .then(unwrapResult)
+      .finally(() => setIsLoadingListPodcasts(false));
+  }, [dispatch]);
 
   return (
     <>
@@ -48,17 +53,24 @@ const ListeningScreen: FC = () => {
           ))}
         </ListTopic>
 
-        {data.length > 0 && (
-          <ListPodcast>
-            {data.map((podcast) => (
-              <ItemPodcast
-                id={podcast.id}
-                title={podcast.title}
-                topic={podcast.topic.name}
-                key={podcast.id}
-              />
-            ))}
-          </ListPodcast>
+        {isLoadingListPodcasts ? (
+          <div>Loading...</div>
+        ) : (
+          <>
+            {listPodcasts && listPodcasts?.length > 0 && (
+              <ListPodcast>
+                {listPodcasts.map((podcast) => (
+                  <ItemPodcast
+                    id={podcast.id}
+                    title={podcast.title}
+                    topic={podcast.topic}
+                    key={podcast.id}
+                    thumbnail={podcast.thumbnail?.imageUrl}
+                  />
+                ))}
+              </ListPodcast>
+            )}
+          </>
         )}
       </WrapContent>
     </>

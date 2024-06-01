@@ -3,10 +3,7 @@ export type ResPodcast = {
   title: string;
   author: string;
   description: string;
-  topic: {
-    id: string;
-    name: string;
-  };
+  topic: string;
   videoId: string;
   transcripts: {
     text: string;
@@ -16,6 +13,7 @@ export type ResPodcast = {
   }[];
   createdAt: string;
   updatedAt: string;
+  thumbnail: null | { imageUrl: string; publicId: string; id: string };
 };
 
 export type ProgressVideo = {
@@ -33,3 +31,10 @@ export type ControlVideo = {
 };
 
 export type ResListPodcast = Omit<ResPodcast, "transcripts" | "description">[];
+
+export type InitialStateListening = {
+  podcastData: {
+    list: null | ResListPodcast;
+  };
+  podcastDetail: ResPodcast | null;
+};

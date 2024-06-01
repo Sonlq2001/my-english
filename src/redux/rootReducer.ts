@@ -1,7 +1,10 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
 import { authApi, authReducer } from "@app/features/auth/auth";
-import { listeningQuery } from "@app/features/listening/listening";
+import {
+  listeningQuery,
+  listeningReducer,
+} from "@app/features/listening/listening";
 import { vocabularyQuery } from "@app/features/vocabulary/vocabulary";
 import { readingQuery } from "@app/features/reading/reading";
 import { writingQuery } from "@app/features/writing/writing";
@@ -15,6 +18,7 @@ const rootReducer = combineReducers({
   [readingQuery.reducerPath]: readingQuery.reducer,
   [writingQuery.reducerPath]: writingQuery.reducer,
   notepad: notepadReducer,
+  listening: listeningReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
