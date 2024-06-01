@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import ReturnButton from "@app/components/ReturnButton/ReturnButton";
 import TitlePage from "@app/components/TitlePage/TitlePage";
 import { useAppDispatch, useAppSelector } from "@app/redux/store";
-import { getNotepad } from "@app/features/notepad/notepad";
+import { getNotepad, resetNotepad } from "@app/features/notepad/notepad";
 import { formatDate } from "@app/helpers/time";
 
 import { WrapNotepadDetail, ContentDetail } from "./NotepadDetail.styles";
@@ -25,11 +25,15 @@ const NotepadDetail: FC = () => {
       .finally(() => setIsLoadingNotepad(false));
   }, [dispatch, notepad_id]);
 
+  useEffect(() => {
+    return () => {
+      dispatch(resetNotepad());
+    };
+  }, [dispatch]);
+
   if (!notepadItem) {
     return <div>Not found</div>;
   }
-
-  console.log(notepadItem);
 
   return (
     <>

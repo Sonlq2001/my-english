@@ -18,6 +18,5 @@ export const ContentDetail = styled.div`
   }
   .content-editor {
     margin-top: 2rem;
-    line-height: 3rem;
   }
 `;

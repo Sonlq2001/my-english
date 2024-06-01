@@ -28,12 +28,14 @@ interface TextEditorProps {
   label?: string;
   isRequire?: boolean;
   getValue: (value: string) => void;
+  value: string;
 }
 
 const TextEditor: FC<TextEditorProps> = ({
   label,
   isRequire = false,
   getValue,
+  value,
 }) => {
   const editor = useEditor({
     extensions,
@@ -42,6 +44,7 @@ const TextEditor: FC<TextEditorProps> = ({
       const isEmptyText = !editor.state.doc.textContent.trim().length;
       getValue(isEmptyText ? "" : contentTextEditor);
     },
+    content: value,
   });
 
   if (!editor) {
@@ -60,12 +63,7 @@ const TextEditor: FC<TextEditorProps> = ({
         <MenuEditor editor={editor} />
 
         <WrapContentEditor>
-          <EditorContent
-            editor={editor}
-            placeholder="Enter your notes"
-            content=""
-            className="editor-tip-tab"
-          />
+          <EditorContent editor={editor} placeholder="Enter your notes" />
         </WrapContentEditor>
       </WrapTextEditor>
     </Wrap>
