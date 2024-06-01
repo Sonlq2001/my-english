@@ -21,13 +21,8 @@ export const WrapTextEditor = styled.div`
 `;
 
 export const WrapContentEditor = styled.div`
-  height: 35rem;
-  & .editor-tip-tab {
-    height: 100%;
-  }
-
   & .ProseMirror {
-    height: 100%;
+    min-height: 35rem;
     outline: none;
     padding: 1.5rem;
     overflow: auto;

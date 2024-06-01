@@ -6,6 +6,7 @@ import {
   ResNotepad,
   ResNotepadItem,
   InitialStateNotepad,
+  ReqUpdateNotepad,
 } from "@app/features/notepad/types/notepad.type";
 
 export const createNotepad = createAsyncThunk<ResNotepad, ReqCreateNotepad>(
@@ -56,6 +57,18 @@ export const deleteNotepad = createAsyncThunk<string, string>(
   }
 );
 
+export const updateNotepad = createAsyncThunk<ResNotepad, ReqUpdateNotepad>(
+  "notepad/updateNotepad",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const res = await notepadApi.updateNotepadApi(payload);
+      return res.data.metadata;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const initialState: InitialStateNotepad = {
   notepadData: { list: null },
   notepadDetail: null,
@@ -64,7 +77,11 @@ const initialState: InitialStateNotepad = {
 const notepadSlice = createSlice({
   name: "notepad",
   initialState,
-  reducers: {},
+  reducers: {
+    resetNotepad(state) {
+      state.notepadDetail = null;
+    },
+  },
   extraReducers: (build) => {
     // get list notepads
     build.addCase(getListNotepads.fulfilled, (state, action) => {
@@ -94,3 +111,4 @@ const notepadSlice = createSlice({
 });
 
 export const notepadReducer = notepadSlice.reducer;
+export const { resetNotepad } = notepadSlice.actions;

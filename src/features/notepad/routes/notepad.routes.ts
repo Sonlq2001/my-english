@@ -33,4 +33,16 @@ const NOTEPAD_DETAIL: RouteItemDef = {
   component: NotepadDetail,
 };
 
-export const NOTEPAD_ROUTES = [NOTEPAD_SCREEN, CREATE_NOTEPAD, NOTEPAD_DETAIL];
+const UPDATE_NOTEPAD: RouteItemDef = {
+  id: "update-notepad-screen",
+  path: NotepadPathsEnum.UPDATE_NOTEPAD,
+  component: CreateNotepad,
+  isPrivateRoute: true,
+};
+
+export const NOTEPAD_ROUTES = [
+  NOTEPAD_SCREEN,
+  CREATE_NOTEPAD,
+  NOTEPAD_DETAIL,
+  UPDATE_NOTEPAD,
+];

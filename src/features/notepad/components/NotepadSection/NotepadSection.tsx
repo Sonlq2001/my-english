@@ -1,5 +1,6 @@
 import { FC, useState } from "react";
 import { unwrapResult } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
 
 import {
   NotepadPathsEnum,
@@ -20,6 +21,7 @@ interface NotepadSectionProps {
 
 const NotepadSection: FC<NotepadSectionProps> = ({ notepad }) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [openModalConfirmDelete, setOpenModalConfirmDelete] =
     useState<boolean>(false);
   const [disabledBtnDelete, setDisabledBtnDelete] = useState<boolean>(false);
@@ -34,6 +36,12 @@ const NotepadSection: FC<NotepadSectionProps> = ({ notepad }) => {
       .finally(() => {
         setDisabledBtnDelete(false);
       });
+  };
+
+  const handleRedirectToUpdateNotepad = () => {
+    navigate(
+      NotepadPathsEnum.UPDATE_NOTEPAD.replace(":notepad_id", notepad.id)
+    );
   };
 
   return (
@@ -53,7 +61,7 @@ const NotepadSection: FC<NotepadSectionProps> = ({ notepad }) => {
         </div>
 
         <div className="controls" onClick={(e) => e.preventDefault()}>
-          <IconWriting />
+          <IconWriting onClick={handleRedirectToUpdateNotepad} />
           <IconTrash onClick={() => setOpenModalConfirmDelete(true)} />
         </div>
       </WrapNotepadSection>
