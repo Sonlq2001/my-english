@@ -14,6 +14,9 @@ export const ContentDetail = styled.div`
     color: ${(props) => props.theme.palette.gray.semibold};
   }
   h3 {
-    margin: 1rem 0;
+    margin: 1.5rem 0;
+  }
+  .content {
+    margin-top: 2rem;
   }
 `;

@@ -1,28 +1,57 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
+import { unwrapResult } from "@reduxjs/toolkit";
+import { useParams } from "react-router-dom";
 
 import ReturnButton from "@app/components/ReturnButton/ReturnButton";
 import TitlePage from "@app/components/TitlePage/TitlePage";
+import { useAppDispatch, useAppSelector } from "@app/redux/store";
+import { getNotepad } from "@app/features/notepad/notepad";
+import { formatDate } from "@app/helpers/time";
 
 import { WrapNotepadDetail, ContentDetail } from "./NotepadDetail.styles";
 import { NotepadPathsEnum } from "../../constants/notepad.paths";
 
 const NotepadDetail: FC = () => {
+  const [isLoadingNotepad, setIsLoadingNotepad] = useState<boolean>(true);
+  const dispatch = useAppDispatch();
+  const { notepad_id } = useParams<{ notepad_id: string }>();
+  const notepadItem = useAppSelector((state) => state.notepad.notepadDetail);
+
+  useEffect(() => {
+    if (!notepad_id) return;
+
+    dispatch(getNotepad(notepad_id))
+      .then(unwrapResult)
+      .finally(() => setIsLoadingNotepad(false));
+  }, [dispatch, notepad_id]);
+
+  if (!notepadItem) {
+    return <div>Not found</div>;
+  }
+
+  console.log(notepadItem);
+
   return (
     <>
       <TitlePage title="Notebook content" subtitle="Review knowledge." />
 
       <WrapNotepadDetail>
         <ReturnButton to={NotepadPathsEnum.NOTEPAD} />
-        <ContentDetail>
-          <div className="time-notepad">28/02/2023</div>
-          <h3>Stunning royalty-free images & royalty-free stock</h3>
-          <div>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita
-            nesciunt excepturi reiciendis atque explicabo harum itaque quae,
-            dolorem, at commodi, inventore dolorum deserunt voluptas assumenda
-            blanditiis. Quas velit iure porro.
-          </div>
-        </ContentDetail>
+
+        {isLoadingNotepad ? (
+          <div>Loading...</div>
+        ) : (
+          <ContentDetail>
+            <div className="time-notepad">
+              {formatDate(notepadItem.createdAt)}
+            </div>
+            <h3>{notepadItem.title}</h3>
+            <div
+              className="content"
+              dangerouslySetInnerHTML={{ __html: notepadItem.description }}
+            />
+          </ContentDetail>
+        )}
       </WrapNotepadDetail>
     </>
   );
