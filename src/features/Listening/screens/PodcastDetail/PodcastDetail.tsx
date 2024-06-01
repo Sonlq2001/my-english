@@ -1,8 +1,12 @@
-import { FC, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import TitlePage from "@app/components/TitlePage/TitlePage";
 import { formatDate } from "@app/helpers/time";
+import { useAppDispatch, useAppSelector } from "@app/redux/store";
+import { ControlVideo } from "@app/features/listening/types/listening.type";
+import TranscriptPodcast from "@app/features/listening/components/TranscriptPodcast/TranscriptPodcast";
+import VideoPlay from "@app/features/listening/components/VideoPlay/VideoPlay";
 
 import {
   WrapPodcast,
@@ -11,25 +15,27 @@ import {
   DescriptionVideo,
   WrapTranscript,
 } from "./PodcastDetail.styles";
-import { useGetPodcastDetailQuery } from "../../redux/listening.query";
-import TranscriptPodcast from "../../components/TranscriptPodcast/TranscriptPodcast";
-import VideoPlay from "../../components/VideoPlay/VideoPlay";
-import { ControlVideo } from "../../types/listening.type";
+import { getPodcast } from "@app/features/listening/listening";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 const PodcastDetail: FC = () => {
-  const { podcast_id } = useParams<{ podcast_id: string }>();
+  const dispatch = useAppDispatch();
+  const { podcast_id: podcastId } = useParams<{ podcast_id: string }>();
   const [controlVideo, setControlVideo] = useState<ControlVideo>({
     playing: false,
     duration: 0,
     loadedSeconds: 0,
     volume: 100,
   });
+  const [isLoadingGetPodcast, setIsLoadingGetPodcast] = useState<boolean>(true);
 
   const videoPlayRef = useRef<{
     setSeekTo: (seekTo: number) => void;
   }>(null);
 
-  const { data, isLoading, error } = useGetPodcastDetailQuery(podcast_id || "");
+  const podcastDetailData = useAppSelector(
+    (state) => state.listening.podcastDetail
+  );
 
   const handleSeekTo = (seekTo: number) => {
     if (videoPlayRef.current?.setSeekTo) {
@@ -37,13 +43,15 @@ const PodcastDetail: FC = () => {
     }
   };
 
-  if (isLoading) {
-    return <div>Loading....</div>;
-  }
+  useEffect(() => {
+    if (!podcastId) return;
 
-  if (!data || error) {
-    return <div>Error</div>;
-  }
+    dispatch(getPodcast(podcastId))
+      .then(unwrapResult)
+      .finally(() => setIsLoadingGetPodcast(false));
+  }, [dispatch, podcastId]);
+
+  if (!podcastDetailData) return;
 
   return (
     <>
@@ -53,30 +61,39 @@ const PodcastDetail: FC = () => {
       />
 
       <WrapPodcast>
-        <ContentVideo>
-          <VideoPlay
-            ref={videoPlayRef}
-            videoId={data.videoId}
-            controlVideo={controlVideo}
-            setControlVideo={setControlVideo}
-          />
+        {isLoadingGetPodcast ? (
+          <div>Loading...</div>
+        ) : (
+          <>
+            <ContentVideo>
+              <VideoPlay
+                ref={videoPlayRef}
+                videoId={podcastDetailData.videoId}
+                controlVideo={controlVideo}
+                setControlVideo={setControlVideo}
+              />
 
-          <InfoVideo>
-            <h2>{data.title}</h2>
-            <p>{formatDate(data.updatedAt)}</p>
-          </InfoVideo>
-          <DescriptionVideo>{data?.description}</DescriptionVideo>
-        </ContentVideo>
-        <WrapTranscript>
-          <h4>Transcript</h4>
-          <TranscriptPodcast
-            handleSeekTo={handleSeekTo}
-            transcripts={data.transcripts}
-            duration={controlVideo.loadedSeconds}
-            isPlay={controlVideo.playing}
-            setControlVideo={setControlVideo}
-          />
-        </WrapTranscript>
+              <InfoVideo>
+                <h2>{podcastDetailData.title}</h2>
+                <p>{formatDate(podcastDetailData.updatedAt)}</p>
+              </InfoVideo>
+              <DescriptionVideo>
+                {podcastDetailData?.description}
+              </DescriptionVideo>
+            </ContentVideo>
+
+            <WrapTranscript>
+              <h4>Transcript</h4>
+              <TranscriptPodcast
+                handleSeekTo={handleSeekTo}
+                transcripts={podcastDetailData.transcripts}
+                duration={controlVideo.loadedSeconds}
+                isPlay={controlVideo.playing}
+                setControlVideo={setControlVideo}
+              />
+            </WrapTranscript>
+          </>
+        )}
       </WrapPodcast>
     </>
   );
