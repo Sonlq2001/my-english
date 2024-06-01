@@ -9,7 +9,7 @@ import { OverlayModal, WrapModal } from "./Modal.styles";
 interface ModalProps {
   open: true;
   children: ReactNode;
-  textOK: string;
+  textOK?: string;
   onSubmit: () => void;
   onClosed: () => void;
   title: string;

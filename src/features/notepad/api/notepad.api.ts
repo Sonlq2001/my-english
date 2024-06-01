@@ -17,8 +17,15 @@ const getNotepadApi = (notepadId: string) => {
   );
 };
 
+const deleteNotepadApi = (notepadId: string) => {
+  return api.delete(
+    NotepadEndpointsEnum.DELETE_NOTEPAD.replace(":notepad_id", notepadId)
+  );
+};
+
 export const notepadApi = {
   createNotepadApi,
   getListNotepadsApi,
   getNotepadApi,
+  deleteNotepadApi,
 };

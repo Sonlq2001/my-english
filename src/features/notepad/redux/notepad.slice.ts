@@ -44,6 +44,18 @@ export const getNotepad = createAsyncThunk<ResNotepadItem, string>(
   }
 );
 
+export const deleteNotepad = createAsyncThunk<string, string>(
+  "notepad/deleteNotepad",
+  async (notepadId, { rejectWithValue }) => {
+    try {
+      await notepadApi.deleteNotepadApi(notepadId);
+      return notepadId;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const initialState: InitialStateNotepad = {
   notepadData: { list: null },
   notepadDetail: null,
@@ -54,6 +66,7 @@ const notepadSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (build) => {
+    // get list notepads
     build.addCase(getListNotepads.fulfilled, (state, action) => {
       state.notepadData.list = action.payload;
     });
@@ -61,11 +74,21 @@ const notepadSlice = createSlice({
       state.notepadData.list = null;
     });
 
+    // get notepad detail
     build.addCase(getNotepad.fulfilled, (state, action) => {
       state.notepadDetail = action.payload;
     });
     build.addCase(getNotepad.rejected, (state) => {
       state.notepadDetail = null;
+    });
+
+    // delete notepad
+    build.addCase(deleteNotepad.fulfilled, (state, action) => {
+      if (state.notepadData.list) {
+        state.notepadData.list = state.notepadData.list.filter(
+          (item) => item.id !== action.payload
+        );
+      }
     });
   },
 });
