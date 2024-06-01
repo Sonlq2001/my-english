@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { unwrapResult } from "@reduxjs/toolkit";
 
 import AppButton from "@app/components/AppButton/AppButton";
-import IconWriting from "@app/assets/images/icon-svg/icon-writing.svg?react";
+import IconCreateFile from "@app/assets/images/icon-svg/icon-create-file.svg?react";
 import TitlePage from "@app/components/TitlePage/TitlePage";
 import { useAppDispatch, useAppSelector } from "@app/redux/store";
 import { getListNotepads } from "@app/features/notepad/notepad";
@@ -35,7 +35,7 @@ const NotepadScreen: FC = () => {
           <AppButton
             className="btn-add"
             to="/create-notepad"
-            leftIcon={<IconWriting />}
+            leftIcon={<IconCreateFile />}
           />
         </div>
 

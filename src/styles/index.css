@@ -37,7 +37,8 @@ img {
 
 /* custom editor */
 /* custom blockquote */
-.ProseMirror blockquote {
+.ProseMirror blockquote,
+.content-editor blockquote {
   padding-left: 1.8rem;
   border-left: 5px solid #eee;
   p {
@@ -51,7 +52,8 @@ img {
 }
 
 /* custom code block */
-.ProseMirror pre {
+.ProseMirror pre,
+.content-editor pre {
   background-color: #262626;
   color: #fff;
   padding: 1.6rem 2.4rem;
@@ -62,7 +64,8 @@ img {
   font-family: "Poppins", sans-serif;
 }
 
-.ProseMirror ul {
+.ProseMirror ul,
+.content-editor ul {
   list-style: disc;
   list-style-position: outside;
   padding-left: 1.9rem;
@@ -71,13 +74,15 @@ img {
   }
 }
 
-.ProseMirror ol {
+.ProseMirror ol,
+.content-editor ol {
   list-style: decimal;
   padding-left: 1.6rem;
 }
 
 /* custom code */
-.ProseMirror p {
+.ProseMirror p,
+.content-editor p {
   code {
     font-size: 1.6rem;
     font-weight: 600;
@@ -93,14 +98,16 @@ img {
 }
 
 /* custom link */
-.ProseMirror a {
+.ProseMirror a,
+.content-editor a {
   text-decoration: underline;
   color: #1976d2;
   font-weight: 500;
 }
 
 /* set max with default image */
-.ProseMirror img {
+.ProseMirror img,
+.content-editor img {
   max-width: 100%;
   width: auto;
   height: auto;

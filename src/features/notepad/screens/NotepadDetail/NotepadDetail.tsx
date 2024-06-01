@@ -47,7 +47,7 @@ const NotepadDetail: FC = () => {
             </div>
             <h3>{notepadItem.title}</h3>
             <div
-              className="content"
+              className="content-editor"
               dangerouslySetInnerHTML={{ __html: notepadItem.description }}
             />
           </ContentDetail>

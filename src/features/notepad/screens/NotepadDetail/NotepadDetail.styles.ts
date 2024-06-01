@@ -16,7 +16,8 @@ export const ContentDetail = styled.div`
   h3 {
     margin: 1.5rem 0;
   }
-  .content {
+  .content-editor {
     margin-top: 2rem;
+    line-height: 3rem;
   }
 `;
