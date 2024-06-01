@@ -15,4 +15,5 @@ export type ResNotepadItem = ReqCreateNotepad & {
 
 export type InitialStateNotepad = {
   notepadData: { list: null | ResNotepadItem[] };
+  notepadDetail: null | ResNotepadItem;
 };

@@ -11,7 +11,14 @@ const getListNotepadsApi = () => {
   return api.get(NotepadEndpointsEnum.GET_LIST_NOTEPADS);
 };
 
+const getNotepadApi = (notepadId: string) => {
+  return api.get(
+    NotepadEndpointsEnum.GET_NOTEPAD.replace(":notepad_id", notepadId)
+  );
+};
+
 export const notepadApi = {
   createNotepadApi,
   getListNotepadsApi,
+  getNotepadApi,
 };
