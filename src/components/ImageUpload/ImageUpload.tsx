@@ -68,7 +68,10 @@ const ImageUpload: FC<ImageUploadProps> = ({
               <button
                 className="btn-clear"
                 type="button"
-                onClick={handleResetFile}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleResetFile();
+                }}
               >
                 <IconTrash />
               </button>

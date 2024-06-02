@@ -27,7 +27,7 @@ const CustomizeText: FC = () => {
           name=""
           rows={5}
           placeholder="Paste content text content"
-          onChange={(e) => setCustomContent(e.target.value.trim())}
+          onChange={(e) => setCustomContent(e.target.value)}
           value={customContent}
           className={isLayout ? "width-textarea" : ""}
         />

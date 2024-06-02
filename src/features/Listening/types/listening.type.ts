@@ -38,3 +38,21 @@ export type InitialStateListening = {
   };
   podcastDetail: ResPodcast | null;
 };
+
+export type InitCreatePodcast = {
+  title: string;
+  author: string;
+  topic: string;
+  videoId: string;
+  file: File | null;
+  description: string;
+  thumbnail?: string;
+};
+
+export type ReqCreatePodcast = Omit<InitCreatePodcast, "file" | "thumbnail"> & {
+  thumbnail: { publicId: string; imageUrl: string } | null;
+};
+
+export type ReqUpdatePodcast = ReqCreatePodcast & {
+  podcastId: string;
+};

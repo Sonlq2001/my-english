@@ -1,8 +1,11 @@
 import { object, string } from "yup";
 
 import { ruleFile } from "@app/helpers/text-editor.helper";
-import { InitCreatePodcast } from "@app/features/setting/types/create-podcast.type";
 import { TOPIC_KEY } from "@app/features/setting/constants/setting.constants";
+import {
+  InitCreatePodcast,
+  ResPodcast,
+} from "@app/features/listening/types/listening.type";
 
 export const schemaPodcast = object({
   title: string()
@@ -16,11 +19,16 @@ export const schemaPodcast = object({
   file: ruleFile("file").nullable(),
 });
 
-export const initCreatePodcast: InitCreatePodcast = {
-  title: "",
-  author: "",
-  topic: TOPIC_KEY.Life,
-  videoId: "",
-  file: null,
-  description: "",
+export const getInitPodcast = (
+  podcast: ResPodcast | null
+): InitCreatePodcast => {
+  return {
+    title: podcast?.title ?? "",
+    author: podcast?.author ?? "",
+    topic: podcast?.topic ?? TOPIC_KEY.Life,
+    videoId: podcast?.videoId ?? "",
+    file: null,
+    description: podcast?.description ?? "",
+    thumbnail: podcast?.thumbnail?.imageUrl,
+  };
 };
