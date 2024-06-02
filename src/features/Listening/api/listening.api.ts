@@ -11,4 +11,14 @@ const getPodcastApi = (podcastId: string) => {
   );
 };
 
-export const listeningApi = { getListPodcastsApi, getPodcastApi };
+const deletePodcastApi = (podcastId: string) => {
+  return api.delete(
+    ListeningEndpointsEnum.DELETE_PODCAST.replace(":podcast_id", podcastId)
+  );
+};
+
+export const listeningApi = {
+  getListPodcastsApi,
+  getPodcastApi,
+  deletePodcastApi,
+};

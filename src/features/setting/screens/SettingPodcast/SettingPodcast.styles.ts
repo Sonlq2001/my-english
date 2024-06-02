@@ -26,6 +26,7 @@ export const Table = styled.table`
   td {
     text-align: left;
     padding: 1.5rem 1.2rem;
+    line-height: 2.5rem;
   }
   tr:not(:first-child) {
     border-top: 1px solid #f3f3f3;
@@ -44,10 +45,27 @@ export const WrapTile = styled.div`
     border-radius: 100%;
     border: 1px solid #ccc;
   }
+  p {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 `;
 
 export const WrapAction = styled.div`
   display: flex;
   gap: 1rem;
   align-items: center;
+`;
+
+export const ContentConfirm = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  color: red;
+  svg {
+    width: 3rem;
+    height: 3rem;
+  }
 `;

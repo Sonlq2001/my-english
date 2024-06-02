@@ -28,3 +28,5 @@ export const LIST_TOPICS_PODCAST = [
     value: TOPIC_KEY.Music,
   },
 ];
+
+export const HEADER_CELLS = ["STT", "Title", "Author", "Topic", "Action"];
