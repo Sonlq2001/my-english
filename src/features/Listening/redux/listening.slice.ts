@@ -31,6 +31,18 @@ export const getPodcast = createAsyncThunk<ResPodcast, string>(
   }
 );
 
+export const deletePodcast = createAsyncThunk<string, string>(
+  "listening/deletePodcast",
+  async (podcastId, { rejectWithValue }) => {
+    try {
+      await listeningApi.deletePodcastApi(podcastId);
+      return podcastId;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const initialState: InitialStateListening = {
   podcastData: {
     list: null,
@@ -57,6 +69,15 @@ const listeningSlice = createSlice({
     });
     build.addCase(getPodcast.rejected, (state) => {
       state.podcastDetail = null;
+    });
+
+    // delete podcast
+    build.addCase(deletePodcast.fulfilled, (state, action) => {
+      if (state.podcastData.list) {
+        state.podcastData.list = state.podcastData.list.filter(
+          (item) => item.id !== action.payload
+        );
+      }
     });
   },
 });
