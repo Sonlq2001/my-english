@@ -1,5 +1,8 @@
 import { FC } from "react";
 
+import TitlePage from "@app/components/TitlePage/TitlePage";
+import AppButton from "@app/components/AppButton/AppButton";
+
 import Article from "../../components/Article/Article";
 import {
   WrapContentReading,
@@ -8,8 +11,8 @@ import {
   ColumnRight,
   ListArticle,
 } from "./ReadingScreen.styles";
-import TitlePage from "@app/components/TitlePage/TitlePage";
 import { useGetListDocumentsQuery } from "../../redux/reading.query";
+import { ReadingPathsEnum } from "@app/features/reading/reading";
 
 const ReadingScreen: FC = () => {
   const { data, error, isLoading } = useGetListDocumentsQuery();
@@ -40,7 +43,11 @@ const ReadingScreen: FC = () => {
             </ListArticle>
           </ColumnLeft>
 
-          <ColumnRight>column 2</ColumnRight>
+          <ColumnRight>
+            <AppButton fullWidth to={ReadingPathsEnum.CREATE_DOCUMENT}>
+              Create
+            </AppButton>
+          </ColumnRight>
         </LayoutReading>
       </WrapContentReading>
     </>
