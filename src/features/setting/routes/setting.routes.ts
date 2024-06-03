@@ -26,6 +26,11 @@ const SETTING_SCREEN: RouteItemDef = {
       component: CreatePodcast,
     },
     {
+      id: "edit-podcast-setting",
+      path: SettingSubPathsEnum.EDIT_PODCAST,
+      component: CreatePodcast,
+    },
+    {
       id: "general-setting",
       path: SettingSubPathsEnum.GENERAL,
       component: SettingGeneral,

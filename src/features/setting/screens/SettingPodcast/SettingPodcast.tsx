@@ -103,7 +103,16 @@ const SettingPodcast: FC = () => {
                     <td>{item.topic}</td>
                     <td>
                       <WrapAction>
-                        <AppButton variant="outlined" size="small">
+                        <AppButton
+                          to={`${
+                            SettingPathsEnum.SETTINGS
+                          }/${SettingSubPathsEnum.EDIT_PODCAST.replace(
+                            ":podcast_id",
+                            item.id
+                          )}`}
+                          variant="outlined"
+                          size="small"
+                        >
                           Edit
                         </AppButton>
                         <AppButton

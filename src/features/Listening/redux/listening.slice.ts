@@ -3,6 +3,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { listeningApi } from "@app/features/listening/api/listening.api";
 import {
   InitialStateListening,
+  ReqCreatePodcast,
+  ReqUpdatePodcast,
   ResListPodcast,
   ResPodcast,
 } from "@app/features/listening/types/listening.type";
@@ -43,6 +45,30 @@ export const deletePodcast = createAsyncThunk<string, string>(
   }
 );
 
+export const createPodcast = createAsyncThunk<ResPodcast, ReqCreatePodcast>(
+  "setting/createPodcast",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const res = await listeningApi.createPodcastApi(payload);
+      return res.data.metadata;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const updatePodcast = createAsyncThunk<ResPodcast, ReqUpdatePodcast>(
+  "listening/updatePodcast",
+  async (payload, { rejectWithValue }) => {
+    try {
+      const res = await listeningApi.updatePodcastApi(payload);
+      return res.data.metadata;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const initialState: InitialStateListening = {
   podcastData: {
     list: null,
@@ -53,7 +79,11 @@ const initialState: InitialStateListening = {
 const listeningSlice = createSlice({
   name: "listening",
   initialState,
-  reducers: {},
+  reducers: {
+    resetPodcast(state) {
+      state.podcastDetail = null;
+    },
+  },
   extraReducers: (build) => {
     // get list podcast
     build.addCase(getListPodcasts.fulfilled, (state, action) => {
@@ -83,3 +113,4 @@ const listeningSlice = createSlice({
 });
 
 export const listeningReducer = listeningSlice.reducer;
+export const { resetPodcast } = listeningSlice.actions;
