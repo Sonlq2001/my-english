@@ -5,7 +5,10 @@ import AppButton from "@app/components/AppButton/AppButton";
 import IconCreateFile from "@app/assets/images/icon-svg/icon-create-file.svg?react";
 import TitlePage from "@app/components/TitlePage/TitlePage";
 import { useAppDispatch, useAppSelector } from "@app/redux/store";
-import { getListNotepads } from "@app/features/notepad/notepad";
+import {
+  NotepadPathsEnum,
+  getListNotepads,
+} from "@app/features/notepad/notepad";
 import NotepadSection from "@app/features/notepad/components/NotepadSection/NotepadSection";
 
 import { WrapNotepad, ListNotepad } from "./NotepadScreen.styles";
@@ -34,7 +37,7 @@ const NotepadScreen: FC = () => {
         <div className="row-header">
           <AppButton
             className="btn-add"
-            to="/create-notepad"
+            to={NotepadPathsEnum.CREATE_NOTEPAD}
             leftIcon={<IconCreateFile />}
           />
         </div>
