@@ -46,9 +46,17 @@ const CREATE_VOCABULARY: RouteItemDef = {
   isPrivateRoute: true,
 };
 
+const EDIT_VOCABULARY: RouteItemDef = {
+  id: "edit-vocabulary-screen",
+  path: VocabularyPathsEnum.EDIT_VOCABULARY,
+  component: CreateVocabulary,
+  isPrivateRoute: true,
+};
+
 export const VOCABULARY_ROUTES = [
   LIST_VOCABULARY_TOPICS,
   LIST_VOCABULARY,
   VOCABULARY_DETAIL,
   CREATE_VOCABULARY,
+  EDIT_VOCABULARY,
 ];

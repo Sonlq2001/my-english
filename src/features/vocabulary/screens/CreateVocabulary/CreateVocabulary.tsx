@@ -20,7 +20,7 @@ import {
 import { useAppDispatch } from "@app/redux/store";
 import TitlePage from "@app/components/TitlePage/TitlePage";
 import { uploadFile } from "@app/features/app/app";
-import { encodeKeyword } from "@app/helpers/encode-decode-word";
+import { decodeKeyword, encodeKeyword } from "@app/helpers/encode-decode-word";
 
 import { WrapPage, WrapForm, WrapContent } from "./CreateVocabulary.styles";
 import {
@@ -54,6 +54,14 @@ const CreateVocabulary: FC = () => {
       value: item.id,
     }));
   }, [dataTopic]);
+
+  const initDataVocabulary = useMemo(() => {
+    const word = new URLSearchParams(window.location.search).get("word") || "";
+    return {
+      ...initVocabulary,
+      name: decodeKeyword(word),
+    };
+  }, []);
 
   const handleSubmit = async ({ file, ...reset }: TypeInitVocabulary) => {
     try {
@@ -100,7 +108,7 @@ const CreateVocabulary: FC = () => {
           <ReturnButton to="/" />
 
           <Formik
-            initialValues={initVocabulary}
+            initialValues={initDataVocabulary}
             onSubmit={handleSubmit}
             validationSchema={vocabularySchema}
           >

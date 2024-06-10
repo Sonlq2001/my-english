@@ -3,8 +3,12 @@ import { FC } from "react";
 import IconSpeaking2 from "@app/assets/images/icon-svg/icon-speaking-2.svg?react";
 import IconClose from "@app/assets/images/icon-svg/icon-close.svg?react";
 import { convertTextToSpeech } from "@app/helpers/text-to-speech";
-import { useGetVocabularyDetailQuery } from "@app/features/vocabulary/vocabulary";
+import {
+  VocabularyPathsEnum,
+  useGetVocabularyDetailQuery,
+} from "@app/features/vocabulary/vocabulary";
 import ImageNotfound from "@app/assets/images/not-found.png";
+import { encodeKeyword } from "@app/helpers/encode-decode-word";
 
 import { WrapModalTranslate, BodyModal } from "./ModalTranslate.styles";
 import AppButton from "../AppButton/AppButton";
@@ -47,7 +51,16 @@ const ModalTranslate: FC<ModalTranslateProps> = ({
           leftIcon={<IconClose />}
           onClick={onCloseModal}
         />
-        {!data && <AppButton size="small">Save</AppButton>}
+        {!data && (
+          <AppButton
+            size="small"
+            to={`${VocabularyPathsEnum.CREATE_VOCABULARY}?word=${encodeKeyword(
+              currentValue
+            )}`}
+          >
+            Save
+          </AppButton>
+        )}
       </div>
       <BodyModal>
         {data ? (
