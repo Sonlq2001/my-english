@@ -7,9 +7,7 @@ export const schemaCreateDocument = object({
     .required("You have not entered a value")
     .max(100, "Length must not exceed 100 characters"),
   description: string().required("You have not entered a value"),
-  author: string()
-    .required("You have not entered a value")
-    .max(100, "Length must not exceed 100 characters"),
+  author: string().max(100, "Length must not exceed 100 characters").nullable(),
   shortDescription: string()
     .nullable()
     .max(100, "Length must not exceed 100 characters"),

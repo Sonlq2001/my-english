@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import { formatDate } from "@app/helpers/time";
 
 import { WrapArticle } from "./Article.styles";
-import { ResListDocuments } from "../../types/reading.type";
+import { ResDocument } from "../../types/reading.type";
 import { ReadingPathsEnum } from "../../constants/reading.paths";
 
 interface ArticleProps {
-  article: ResListDocuments;
+  article: ResDocument;
 }
 
 const Article: FC<ArticleProps> = ({ article }) => {
