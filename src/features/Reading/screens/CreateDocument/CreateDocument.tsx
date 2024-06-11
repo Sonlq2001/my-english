@@ -1,7 +1,7 @@
-import { FC, useMemo } from "react";
+import { FC, useMemo, useState } from "react";
 import { Formik } from "formik";
 import debounce from "lodash.debounce";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import TitlePage from "@app/components/TitlePage/TitlePage";
 import {
@@ -21,11 +21,28 @@ import {
 } from "@app/features/reading/helpers/create-document.helpers";
 import RadioGroup from "@app/components/RadioGroup/RadioGroup";
 import { LIST_TOPICS_DOCUMENT } from "@app/features/reading/constants/reading.constants";
+import { useAppDispatch } from "@app/redux/store";
+import { createDocument } from "@app/features/reading/redux/reading.slice";
+import { ReqDocument } from "@app/features/reading/types/reading.type";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 const CreateDocument: FC = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const [isLoadingDocument, setIsLoadingDocument] = useState<boolean>(false);
   const { document_id: documentId } = useParams<{ document_id: string }>();
 
-  const handleCreateDocument = () => {};
+  const handleCreateDocument = (values: ReqDocument) => {
+    setIsLoadingDocument(true);
+    dispatch(createDocument(values))
+      .then(unwrapResult)
+      .then((res) => {
+        navigate(
+          ReadingPathsEnum.ARTICLE_DETAIL.replace(":article_id", res.id)
+        );
+      })
+      .finally(() => setIsLoadingDocument(false));
+  };
 
   const { title, subtitle } = useMemo(() => {
     if (documentId) {
@@ -80,7 +97,6 @@ const CreateDocument: FC = () => {
                 fullWidth
                 name="author"
                 placeholder="Article author"
-                isRequire
               />
 
               <div>
@@ -96,7 +112,11 @@ const CreateDocument: FC = () => {
               </div>
 
               <div className="row-btn">
-                <AppButton type="submit" rightIcon={<IconPlusInCircle />}>
+                <AppButton
+                  type="submit"
+                  rightIcon={<IconPlusInCircle />}
+                  disabled={isLoadingDocument}
+                >
                   {documentId ? "Edit" : "Create"}
                 </AppButton>
               </div>
