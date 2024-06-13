@@ -6,7 +6,9 @@ export const WrapMenuEditor = styled.div`
   gap: 1rem;
   background-color: ${(props) => props.theme.palette.gray.extraLight};
   padding: 1rem;
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 
   .menu-heading {
     position: absolute;
