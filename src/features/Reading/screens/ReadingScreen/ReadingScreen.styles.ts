@@ -7,6 +7,7 @@ export const WrapContentReading = styled.div`
 
 export const LayoutReading = styled.div`
   display: flex;
+  gap: 2rem;
 `;
 
 export const ColumnLeft = styled.div`
