@@ -9,6 +9,11 @@ export type ResDocument = {
   updatedAt: string;
 };
 
-export type InitialStateDocument = object; // TODO: init
+export type InitialStateDocument = {
+  documentDetail: null | ResDocument;
+  documentData: {
+    list: null | ResDocument[];
+  };
+};
 
 export type ReqDocument = Omit<ResDocument, "id" | "createdAt" | "updatedAt">;
