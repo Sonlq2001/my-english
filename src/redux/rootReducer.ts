@@ -6,7 +6,7 @@ import {
   listeningReducer,
 } from "@app/features/listening/listening";
 import { vocabularyQuery } from "@app/features/vocabulary/vocabulary";
-import { readingQuery } from "@app/features/reading/reading";
+import { readingQuery, readingReducer } from "@app/features/reading/reading";
 import { writingQuery } from "@app/features/writing/writing";
 import { notepadReducer } from "@app/features/notepad/notepad";
 
@@ -19,6 +19,7 @@ const rootReducer = combineReducers({
   [writingQuery.reducerPath]: writingQuery.reducer,
   notepad: notepadReducer,
   listening: listeningReducer,
+  reading: readingReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -6,4 +6,18 @@ const createDocumentApi = (payload: ReqDocument) => {
   return api.post(ReadingEndpointsEnum.CREATE_DOCUMENT, payload);
 };
 
-export const readingApi = { createDocumentApi };
+const getDocumentListApi = () => {
+  return api.get(ReadingEndpointsEnum.GET_LIST_DOCUMENTS);
+};
+
+const getDocumentApi = (documentId: string) => {
+  return api.get(
+    ReadingEndpointsEnum.GET_DOCUMENT.replace(":document_id", documentId)
+  );
+};
+
+export const readingApi = {
+  createDocumentApi,
+  getDocumentApi,
+  getDocumentListApi,
+};

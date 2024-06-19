@@ -1,7 +1,11 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 import TitlePage from "@app/components/TitlePage/TitlePage";
 import AppButton from "@app/components/AppButton/AppButton";
+import { ReadingPathsEnum } from "@app/features/reading/reading";
+import { useAppDispatch, useAppSelector } from "@app/redux/store";
+import { getDocumentList } from "@app/features/reading/redux/reading.slice";
 
 import Article from "../../components/Article/Article";
 import {
@@ -11,19 +15,20 @@ import {
   ColumnRight,
   ListArticle,
 } from "./ReadingScreen.styles";
-import { useGetListDocumentsQuery } from "../../redux/reading.query";
-import { ReadingPathsEnum } from "@app/features/reading/reading";
 
 const ReadingScreen: FC = () => {
-  const { data, error, isLoading } = useGetListDocumentsQuery();
+  const dispatch = useAppDispatch();
+  const documentList = useAppSelector(
+    (state) => state.reading.documentData.list
+  );
+  const [isLoadingDocumentList, setIsLoadingDocumentList] =
+    useState<boolean>(true);
 
-  if (isLoading) {
-    return <div>Loading....</div>;
-  }
-
-  if (!data || error) {
-    return <div>Error</div>;
-  }
+  useEffect(() => {
+    dispatch(getDocumentList())
+      .then(unwrapResult)
+      .finally(() => setIsLoadingDocumentList(false));
+  }, [dispatch]);
 
   return (
     <>
@@ -33,22 +38,29 @@ const ReadingScreen: FC = () => {
       />
 
       <WrapContentReading>
-        <LayoutReading>
-          <ColumnLeft>
-            <h3>All documents</h3>
+        {isLoadingDocumentList ? (
+          <div>Loading...</div>
+        ) : (
+          <LayoutReading>
+            <ColumnLeft>
+              <h3>All documents</h3>
 
-            <ListArticle>
-              {data.length > 0 &&
-                data.map((doc) => <Article article={doc} key={doc.id} />)}
-            </ListArticle>
-          </ColumnLeft>
+              <ListArticle>
+                {documentList &&
+                  documentList.length > 0 &&
+                  documentList.map((doc) => (
+                    <Article article={doc} key={doc.id} />
+                  ))}
+              </ListArticle>
+            </ColumnLeft>
 
-          <ColumnRight>
-            <AppButton fullWidth to={ReadingPathsEnum.CREATE_DOCUMENT}>
-              Create
-            </AppButton>
-          </ColumnRight>
-        </LayoutReading>
+            <ColumnRight>
+              <AppButton fullWidth to={ReadingPathsEnum.CREATE_DOCUMENT}>
+                Create
+              </AppButton>
+            </ColumnRight>
+          </LayoutReading>
+        )}
       </WrapContentReading>
     </>
   );
