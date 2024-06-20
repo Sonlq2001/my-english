@@ -16,8 +16,15 @@ const getDocumentApi = (documentId: string) => {
   );
 };
 
+const deleteDocumentApi = (documentId: string) => {
+  return api.delete(
+    ReadingEndpointsEnum.DELETE_DOCUMENT.replace(":document_id", documentId)
+  );
+};
+
 export const readingApi = {
   createDocumentApi,
   getDocumentApi,
   getDocumentListApi,
+  deleteDocumentApi,
 };
