@@ -1,12 +1,14 @@
 import { FC, useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
+import { unwrapResult } from "@reduxjs/toolkit";
 
+import { useAppDispatch, useAppSelector } from "@app/redux/store";
 import IconBookmark from "@app/assets/images/icon-svg/icon-bookmark.svg?react";
 import ReturnButton from "@app/components/ReturnButton/ReturnButton";
 import ModalTranslate from "@app/components/ModalTranslate/ModalTranslate";
 import TitlePage from "@app/components/TitlePage/TitlePage";
 import ClickOutside from "@app/components/ClickOutside/ClickOutside";
-import { useGetDocumentQuery } from "@app/features/reading/reading";
+import { getDocument } from "@app/features/reading/reading";
 import { formatDate } from "@app/helpers/time";
 
 import {
@@ -17,14 +19,26 @@ import {
 import { ReadingPathsEnum } from "../../constants/reading.paths";
 
 const ArticleDetail: FC = () => {
-  const { article_id } = useParams<{ article_id: string }>();
+  const dispatch = useAppDispatch();
+  const [isLoadingDoc, setIsLoadingDoc] = useState<boolean>(true);
+  const { article_id: articleId } = useParams<{ article_id: string }>();
   const [positionModal, setPositionModal] = useState<{ x: number; y: number }>({
     x: 0,
     y: 0,
   });
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [currentValue, setCurrentValue] = useState<string>("");
-  const { data, error, isLoading } = useGetDocumentQuery(article_id || "");
+  const documentDetail = useAppSelector(
+    (state) => state.reading.documentDetail
+  );
+
+  useEffect(() => {
+    if (!articleId) return;
+
+    dispatch(getDocument(articleId))
+      .then(unwrapResult)
+      .finally(() => setIsLoadingDoc(false));
+  }, [articleId, dispatch]);
 
   const handleShowModalTranslate = (e: React.MouseEvent<HTMLElement>) => {
     const instanceSelect = document.all
@@ -76,14 +90,6 @@ const ArticleDetail: FC = () => {
     }
   }, [isOpenModal]);
 
-  if (isLoading) {
-    return <div>Loading....</div>;
-  }
-
-  if (!data || error) {
-    return <div>Error</div>;
-  }
-
   return (
     <>
       <TitlePage title="Reading document" subtitle="" />
@@ -95,33 +101,53 @@ const ArticleDetail: FC = () => {
           <IconBookmark />
         </HeaderArticleDetail>
 
-        <h2>{data.title}</h2>
+        {isLoadingDoc ? (
+          <div>Loading...</div>
+        ) : (
+          <>
+            {documentDetail ? (
+              <>
+                <h2>{documentDetail.title}</h2>
 
-        <InfoArticle>
-          {data.author && <span>By: {data.author}</span>}
-          <span className="dot"></span>
-          <span>{formatDate(data.createdAt)}</span>
-        </InfoArticle>
+                <InfoArticle>
+                  {documentDetail.author && (
+                    <span>By: {documentDetail.author}</span>
+                  )}
+                  <span className="dot"></span>
+                  <span>{formatDate(documentDetail.createdAt)}</span>
+                </InfoArticle>
 
-        <div
-          className="content"
-          onDoubleClick={handleShowModalTranslate}
-          onMouseUp={handleShowModalTranslate}
-          onClick={() => setIsOpenModal(false)}
-        >
-          {data.shortDescription && <h4>{data.shortDescription}</h4>}
-          <div dangerouslySetInnerHTML={{ __html: data.description }} />
-        </div>
+                <div
+                  className="content"
+                  onDoubleClick={handleShowModalTranslate}
+                  onMouseUp={handleShowModalTranslate}
+                  onClick={() => setIsOpenModal(false)}
+                >
+                  {documentDetail.shortDescription && (
+                    <h4>{documentDetail.shortDescription}</h4>
+                  )}
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: documentDetail.description,
+                    }}
+                  />
+                </div>
 
-        {isOpenModal && (
-          <ClickOutside onOutsideClick={handleCloseModal}>
-            <ModalTranslate
-              x={positionModal.x}
-              y={positionModal.y}
-              onCloseModal={handleCloseModal}
-              currentValue={currentValue}
-            />
-          </ClickOutside>
+                {isOpenModal && (
+                  <ClickOutside onOutsideClick={handleCloseModal}>
+                    <ModalTranslate
+                      x={positionModal.x}
+                      y={positionModal.y}
+                      onCloseModal={handleCloseModal}
+                      currentValue={currentValue}
+                    />
+                  </ClickOutside>
+                )}
+              </>
+            ) : (
+              <div>Not found</div>
+            )}
+          </>
         )}
       </WrapArticleDetail>
     </>

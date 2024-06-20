@@ -43,6 +43,18 @@ export const getDocument = createAsyncThunk<ResDocument, string>(
   }
 );
 
+export const deleteDocument = createAsyncThunk<string, string>(
+  "reading/deleteDocument",
+  async (documentId, { rejectWithValue }) => {
+    try {
+      await readingApi.deleteDocumentApi(documentId);
+      return documentId;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const initialState: InitialStateDocument = {
   documentDetail: null,
   documentData: {
@@ -69,6 +81,15 @@ const readingSlice = createSlice({
     });
     build.addCase(getDocument.rejected, (state) => {
       state.documentDetail = null;
+    });
+
+    // delete document
+    build.addCase(deleteDocument.fulfilled, (state, action) => {
+      if (state.documentData.list) {
+        state.documentData.list = state.documentData.list.filter(
+          (item) => item.id !== action.payload
+        );
+      }
     });
   },
 });
