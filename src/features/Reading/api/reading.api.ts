@@ -1,6 +1,9 @@
 import api from "@app/api/api";
 import { ReadingEndpointsEnum } from "@app/features/reading/constants/reading.endpoints";
-import { ReqDocument } from "@app/features/reading/types/reading.type";
+import {
+  ReqDocument,
+  ReqUpdateDoc,
+} from "@app/features/reading/types/reading.type";
 
 const createDocumentApi = (payload: ReqDocument) => {
   return api.post(ReadingEndpointsEnum.CREATE_DOCUMENT, payload);
@@ -22,9 +25,17 @@ const deleteDocumentApi = (documentId: string) => {
   );
 };
 
+const updateDocumentApi = ({ documentId, ...rest }: ReqUpdateDoc) => {
+  return api.patch(
+    ReadingEndpointsEnum.EDIT_DOCUMENT.replace(":document_id", documentId),
+    rest
+  );
+};
+
 export const readingApi = {
   createDocumentApi,
   getDocumentApi,
   getDocumentListApi,
   deleteDocumentApi,
+  updateDocumentApi,
 };

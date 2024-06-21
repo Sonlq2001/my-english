@@ -1,7 +1,5 @@
 import { object, string } from "yup";
 
-import { TOPIC_KEY } from "@app/features/reading/constants/reading.constants";
-
 export const schemaCreateDocument = object({
   title: string()
     .required("You have not entered a value")
@@ -12,11 +10,3 @@ export const schemaCreateDocument = object({
     .nullable()
     .max(100, "Length must not exceed 100 characters"),
 });
-
-export const initDocument = {
-  title: "",
-  description: "",
-  author: "",
-  shortDescription: "",
-  topic: TOPIC_KEY.SocialScience,
-};

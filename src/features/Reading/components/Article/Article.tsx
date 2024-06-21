@@ -1,11 +1,14 @@
 import { FC, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 import { formatDate } from "@app/helpers/time";
 import IconWriting from "@app/assets/images/icon-svg/icon-writing.svg?react";
 import IconTrash from "@app/assets/images/icon-svg/icon-trash.svg?react";
 import IconWarning from "@app/assets/images/icon-svg/icon-warning.svg?react";
 import Modal from "@app/components/Modal/Modal";
+import { useAppDispatch } from "@app/redux/store";
+import { deleteDocument } from "@app/features/reading/reading";
 
 import { ContentConfirm, WrapArticle } from "./Article.styles";
 import { ResDocument } from "../../types/reading.type";
@@ -16,11 +19,26 @@ interface ArticleProps {
 }
 
 const Article: FC<ArticleProps> = ({ article }) => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [openModalConfirmDelete, setOpenModalConfirmDelete] =
     useState<boolean>(false);
+  const [disabledBtnSubmit, setDisabledBtnSubmit] = useState<boolean>(false);
 
   const handleRemoveArticle = () => {
-    // TODO: call api delete
+    setDisabledBtnSubmit(true);
+    dispatch(deleteDocument(article.id))
+      .then(unwrapResult)
+      .finally(() => {
+        setOpenModalConfirmDelete(false);
+        setDisabledBtnSubmit(false);
+      });
+  };
+
+  const handleRedirectToEditDoc = () => {
+    navigate(
+      ReadingPathsEnum.EDIT_DOCUMENT.replace(":document_id", article.id)
+    );
   };
 
   return (
@@ -42,7 +60,7 @@ const Article: FC<ArticleProps> = ({ article }) => {
         <span className="time-article">{formatDate(article.createdAt)}</span>
 
         <div className="controls" onClick={(e) => e.preventDefault()}>
-          <IconWriting />
+          <IconWriting onClick={handleRedirectToEditDoc} />
           <IconTrash onClick={() => setOpenModalConfirmDelete(true)} />
         </div>
       </WrapArticle>
@@ -54,6 +72,7 @@ const Article: FC<ArticleProps> = ({ article }) => {
           onClosed={() => setOpenModalConfirmDelete(false)}
           textOK="Delete"
           onSubmit={handleRemoveArticle}
+          disabled={disabledBtnSubmit}
         >
           <ContentConfirm>
             <IconWarning />
