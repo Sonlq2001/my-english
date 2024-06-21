@@ -17,3 +17,7 @@ export type InitialStateDocument = {
 };
 
 export type ReqDocument = Omit<ResDocument, "id" | "createdAt" | "updatedAt">;
+
+export type ReqUpdateDoc = ReqDocument & {
+  documentId: string;
+};

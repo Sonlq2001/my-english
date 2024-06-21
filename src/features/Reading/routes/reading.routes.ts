@@ -34,4 +34,15 @@ const CREATE_DOCUMENT: RouteItemDef = {
   component: CreateDocument,
 };
 
-export const READING_ROUTES = [READING_SCREEN, ARTICLE_DETAIL, CREATE_DOCUMENT];
+const EDIT_DOCUMENT: RouteItemDef = {
+  id: "edit-document-screen",
+  path: ReadingPathsEnum.EDIT_DOCUMENT,
+  component: CreateDocument,
+};
+
+export const READING_ROUTES = [
+  READING_SCREEN,
+  ARTICLE_DETAIL,
+  CREATE_DOCUMENT,
+  EDIT_DOCUMENT,
+];

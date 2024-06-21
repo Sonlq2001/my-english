@@ -4,6 +4,7 @@ import { readingApi } from "@app/features/reading/api/reading.api";
 import {
   InitialStateDocument,
   ReqDocument,
+  ReqUpdateDoc,
   ResDocument,
 } from "@app/features/reading/types/reading.type";
 
@@ -49,6 +50,17 @@ export const deleteDocument = createAsyncThunk<string, string>(
     try {
       await readingApi.deleteDocumentApi(documentId);
       return documentId;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const updateDocument = createAsyncThunk<void, ReqUpdateDoc>(
+  "reading/updateDocument",
+  async (payload, { rejectWithValue }) => {
+    try {
+      await readingApi.updateDocumentApi(payload);
     } catch (error) {
       return rejectWithValue(error);
     }
