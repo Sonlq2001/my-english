@@ -60,7 +60,8 @@ export const updateDocument = createAsyncThunk<void, ReqUpdateDoc>(
   "reading/updateDocument",
   async (payload, { rejectWithValue }) => {
     try {
-      await readingApi.updateDocumentApi(payload);
+      const res = await readingApi.updateDocumentApi(payload);
+      return res.data.metadata;
     } catch (error) {
       return rejectWithValue(error);
     }
@@ -77,7 +78,11 @@ const initialState: InitialStateDocument = {
 const readingSlice = createSlice({
   name: "reading",
   initialState,
-  reducers: {},
+  reducers: {
+    resetDocumentDetail(state) {
+      state.documentDetail = null;
+    },
+  },
   extraReducers: (build) => {
     // get list documents
     build.addCase(getDocumentList.fulfilled, (state, action) => {
@@ -107,3 +112,4 @@ const readingSlice = createSlice({
 });
 
 export const readingReducer = readingSlice.reducer;
+export const { resetDocumentDetail } = readingSlice.actions;

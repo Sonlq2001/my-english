@@ -8,7 +8,10 @@ import ReturnButton from "@app/components/ReturnButton/ReturnButton";
 import ModalTranslate from "@app/components/ModalTranslate/ModalTranslate";
 import TitlePage from "@app/components/TitlePage/TitlePage";
 import ClickOutside from "@app/components/ClickOutside/ClickOutside";
-import { getDocument } from "@app/features/reading/reading";
+import {
+  getDocument,
+  resetDocumentDetail,
+} from "@app/features/reading/reading";
 import { formatDate } from "@app/helpers/time";
 
 import {
@@ -39,6 +42,12 @@ const ArticleDetail: FC = () => {
       .then(unwrapResult)
       .finally(() => setIsLoadingDoc(false));
   }, [articleId, dispatch]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetDocumentDetail());
+    };
+  }, [dispatch]);
 
   const handleShowModalTranslate = (e: React.MouseEvent<HTMLElement>) => {
     const instanceSelect = document.all

@@ -15,19 +15,19 @@ import TextEditor2 from "@app/components/TextEditor2/TextEditor2";
 import AppButton from "@app/components/AppButton/AppButton";
 import IconPlusInCircle from "@app/assets/images/icon-svg/icon-plus-in-circle.svg?react";
 import HelperText from "@app/components/HelperText/HelperText";
-import { ReadingPathsEnum } from "@app/features/reading/reading";
-import { schemaCreateDocument } from "@app/features/reading/helpers/create-document.helpers";
-import RadioGroup from "@app/components/RadioGroup/RadioGroup";
 import {
+  ReadingPathsEnum,
+  getDocument,
+  resetDocumentDetail,
+  updateDocument,
+  createDocument,
+  schemaCreateDocument,
+  ReqDocument,
   LIST_TOPICS_DOCUMENT,
   TOPIC_KEY,
-} from "@app/features/reading/constants/reading.constants";
+} from "@app/features/reading/reading";
+import RadioGroup from "@app/components/RadioGroup/RadioGroup";
 import { useAppDispatch, useAppSelector } from "@app/redux/store";
-import {
-  createDocument,
-  getDocument,
-} from "@app/features/reading/redux/reading.slice";
-import { ReqDocument } from "@app/features/reading/types/reading.type";
 
 const CreateDocument: FC = () => {
   const dispatch = useAppDispatch();
@@ -48,9 +48,19 @@ const CreateDocument: FC = () => {
       .finally(() => setIsLoadingDoc(false));
   }, [documentId, dispatch]);
 
-  const handleCreateDocument = (values: ReqDocument) => {
+  useEffect(() => {
+    return () => {
+      dispatch(resetDocumentDetail());
+    };
+  }, [dispatch]);
+
+  const handleActionDocument = (values: ReqDocument) => {
     setIsLoadingDocument(true);
-    dispatch(createDocument(values))
+    const actionDispatchDoc = documentId
+      ? dispatch(updateDocument({ ...values, documentId }))
+      : dispatch(createDocument(values));
+
+    actionDispatchDoc
       .then(unwrapResult)
       .then((res) => {
         navigate(
@@ -96,7 +106,7 @@ const CreateDocument: FC = () => {
         ) : (
           <Formik
             initialValues={initDoc}
-            onSubmit={handleCreateDocument}
+            onSubmit={handleActionDocument}
             validationSchema={schemaCreateDocument}
           >
             {({ setFieldValue, errors, values }) => (
