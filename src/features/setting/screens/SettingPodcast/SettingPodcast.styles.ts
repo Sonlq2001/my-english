@@ -31,6 +31,12 @@ export const Table = styled.table`
   tr:not(:first-child) {
     border-top: 1px solid #f3f3f3;
   }
+  td span.topic {
+    font-size: 1.4rem;
+    background-color: #fcdbdc;
+    padding: 0.4rem;
+    border-radius: 0.8rem;
+  }
 `;
 
 export const WrapTile = styled.div`
