@@ -100,7 +100,9 @@ const SettingPodcast: FC = () => {
                       </WrapTile>
                     </td>
                     <td>{item.author}</td>
-                    <td>{item.topic}</td>
+                    <td>
+                      <span className="topic">{item.topic}</span>
+                    </td>
                     <td>
                       <WrapAction>
                         <AppButton
