@@ -120,10 +120,12 @@ const ArticleDetail: FC = () => {
 
                 <InfoArticle>
                   {documentDetail.author && (
-                    <span>By: {documentDetail.author}</span>
+                    <span>
+                      By: <i>{documentDetail.author}</i>
+                    </span>
                   )}
                   <span className="dot"></span>
-                  <span>{formatDate(documentDetail.createdAt)}</span>
+                  <i>{formatDate(documentDetail.createdAt)}</i>
                 </InfoArticle>
 
                 <div
@@ -139,6 +141,7 @@ const ArticleDetail: FC = () => {
                     dangerouslySetInnerHTML={{
                       __html: documentDetail.description,
                     }}
+                    className="content-editor"
                   />
                 </div>
 
