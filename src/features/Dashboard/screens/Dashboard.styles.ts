@@ -45,7 +45,7 @@ export const SectionPodcast = styled.article`
     img {
       width: 5rem;
       height: 5rem;
-      border-radius: 50%;
+      border-radius: 1rem;
     }
     .info-podcast {
       display: flex;
