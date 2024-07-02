@@ -9,6 +9,7 @@ import {
 } from "@app/features/dashboard/constants/dashboard.constants";
 import FavoritePodcasts from "@app/features/dashboard/components/FavoritePodcasts/FavoritePodcasts";
 import DocumentsSection from "@app/features/dashboard/components/DocumentsSection/DocumentsSection";
+import PlayPodcasts from "@app/features/dashboard/components/PlayPodcasts/PlayPodcasts";
 
 import BannerSection from "../components/BannerSection/BannerSection";
 import {
@@ -94,6 +95,8 @@ const DashboardScreen: FC = () => {
         {currentTabFavorite === TabFavorite.Tab1 && <FavoritePodcasts />}
 
         {currentTabFavorite === TabFavorite.Tab2 && <DocumentsSection />}
+
+        <PlayPodcasts />
       </ContentRight>
     </DashboardWrap>
   );
