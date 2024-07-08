@@ -81,7 +81,16 @@
 import { FC } from "react";
 
 import ImagePodcast from "@app/assets/images/headphone-amico.png";
-import { BannerListening, WrapListening } from "./ListeningScreen.styles";
+import IconMedal from "@app/assets/images/icon-svg/icon-medal.svg?react";
+import IconFire from "@app/assets/images/icon-svg/icon-fire.svg?react";
+import IconLeaf from "@app/assets/images/icon-svg/icon-four-leaf-clover.svg?react";
+import ListCategories from "@app/features/listening/components/ListCategories/ListCategories";
+
+import {
+  BannerListening,
+  BoxUser,
+  WrapListening,
+} from "./ListeningScreen.styles";
 
 const ReadingScreen: FC = () => {
   return (
@@ -98,8 +107,25 @@ const ReadingScreen: FC = () => {
           <img src={ImagePodcast} alt="" />
         </article>
 
-        <div className="">1234</div>
+        <BoxUser>
+          <img
+            src="https://cdn.pixabay.com/photo/2022/10/17/15/02/photography-7527978_640.jpg"
+            alt=""
+          />
+          <div className="user-info">
+            <h3 className="user-name">Le Quang Son</h3>
+            <span className="total-podcast">50 podcast</span>
+
+            <div className="list-icon">
+              <IconFire />
+              <IconMedal />
+              <IconLeaf />
+            </div>
+          </div>
+        </BoxUser>
       </BannerListening>
+
+      <ListCategories />
     </WrapListening>
   );
 };
