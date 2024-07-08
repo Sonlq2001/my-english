@@ -36,12 +36,14 @@ export const WrapListening = styled.section`
 
 export const BannerListening = styled.section`
   display: flex;
+  gap: 4rem;
   .box-image {
-    width: 70%;
-    height: 22rem;
+    width: 100%;
+    max-width: 70%;
+    height: 20rem;
     background-color: #124372;
     position: relative;
-    border-radius: 3rem;
+    border-radius: 2.5rem;
     img {
       position: absolute;
       right: 4rem;
@@ -62,6 +64,42 @@ export const BannerListening = styled.section`
       }
       p {
         line-height: 2.5rem;
+      }
+    }
+  }
+`;
+
+export const BoxUser = styled.div`
+  display: flex;
+  gap: 1.5rem;
+  flex: 1;
+  padding: 2.5rem;
+  border-radius: 2.5rem;
+  background-color: ${(props) => props.theme.palette.white};
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  img {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 40%;
+  }
+  .user-info {
+    margin-top: 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    .total-podcast {
+      font-size: 1.4rem;
+      color: ${(props) => props.theme.palette.gray.medium};
+    }
+    .list-icon {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+      svg {
+        border-radius: 50%;
+        padding: 3px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
       }
     }
   }
