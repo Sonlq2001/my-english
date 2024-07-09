@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 
 export const SidebarWrap = styled.div`
   min-height: 100vh;
-  width: 22rem;
+  min-width: 22rem;
   padding: 2rem 0;
   background-color: ${(props) => props.theme.palette.white};
   position: relative;

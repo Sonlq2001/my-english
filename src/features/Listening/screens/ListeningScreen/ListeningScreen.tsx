@@ -84,7 +84,8 @@ import ImagePodcast from "@app/assets/images/headphone-amico.png";
 import IconMedal from "@app/assets/images/icon-svg/icon-medal.svg?react";
 import IconFire from "@app/assets/images/icon-svg/icon-fire.svg?react";
 import IconLeaf from "@app/assets/images/icon-svg/icon-four-leaf-clover.svg?react";
-import ListCategories from "@app/features/listening/components/ListCategories/ListCategories";
+import TopicList from "@app/features/listening/components/TopicList/TopicList";
+import PodcastList from "@app/features/listening/components/PodcastList/PodcastList";
 
 import {
   BannerListening,
@@ -125,7 +126,9 @@ const ReadingScreen: FC = () => {
         </BoxUser>
       </BannerListening>
 
-      <ListCategories />
+      <TopicList />
+
+      <PodcastList />
     </WrapListening>
   );
 };
