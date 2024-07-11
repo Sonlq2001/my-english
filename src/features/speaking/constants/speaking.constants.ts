@@ -14,6 +14,7 @@ export const LIST_SPEAKING_STYLE = [
     thumbnail:
       "https://cdn.pixabay.com/photo/2024/03/27/14/01/ai-generated-8659195_640.jpg",
     path: VocabularyPathsEnum.LIST_VOCABULARY_TOPICS,
+    styleColor: "rgb(120 14 14 / 50%)",
   },
   {
     title: "Short text",
@@ -21,6 +22,7 @@ export const LIST_SPEAKING_STYLE = [
     thumbnail:
       "https://cdn.pixabay.com/photo/2020/09/23/02/01/microphone-5594702_1280.jpg",
     path: "/speaking/phrases",
+    styleColor: "rgb(14 90 120 / 50%)",
   },
   {
     title: "Voice to text",
@@ -28,6 +30,7 @@ export const LIST_SPEAKING_STYLE = [
     thumbnail:
       "https://cdn.pixabay.com/photo/2024/02/13/16/24/podcast-8571329_640.jpg",
     path: "/voice-to-text",
+    styleColor: "rgb(120 69 14 / 50%)",
   },
   {
     title: "Voice to text 2",
@@ -35,6 +38,7 @@ export const LIST_SPEAKING_STYLE = [
     thumbnail:
       "https://cdn.pixabay.com/photo/2024/06/06/20/06/singer-8813370_640.png",
     path: "/voice-to-text",
+    styleColor: "rgb(14 120 58 / 50%)",
   },
 ];
 

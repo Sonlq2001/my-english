@@ -6,7 +6,7 @@ export const WrapSpeaking = styled.section`
 
 export const InnerSpeaking = styled.section`
   border-radius: 2.5rem;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.palette.white};
   padding: 2.5rem 3rem;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 `;
@@ -17,7 +17,7 @@ export const ListTypes = styled.div`
   margin-top: 3.5rem;
 `;
 
-export const ItemTypeSpeaking = styled.article`
+export const ItemTypeSpeaking = styled.article<{ styleColor: string }>`
   width: calc(100% / 4);
   border-radius: 2rem;
   overflow: hidden;
@@ -29,7 +29,7 @@ export const ItemTypeSpeaking = styled.article`
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgb(120 14 14 / 50%);
+    background-color: ${(props) => props.styleColor};
   }
   img {
     width: 100%;
