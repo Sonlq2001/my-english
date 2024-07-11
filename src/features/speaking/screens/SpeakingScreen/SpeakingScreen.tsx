@@ -31,8 +31,12 @@
 // export default SpeakingScreen;
 
 import { FC } from "react";
+import { StyleSheetManager } from "styled-components";
+import isPropValid from "@emotion/is-prop-valid";
 
 import AppButton from "@app/components/AppButton/AppButton";
+import IconDoubleArrowRight from "@app/assets/images/icon-svg/icon-keyboard-double-arrow-right.svg?react";
+import FollowChallenge from "@app/features/speaking/components/FollowChallenge/FollowChallenge";
 
 import {
   InnerSpeaking,
@@ -42,6 +46,7 @@ import {
 } from "./SpeakingScreen.styles";
 
 import { LIST_SPEAKING_STYLE } from "../../constants/speaking.constants";
+import { Link } from "react-router-dom";
 
 const SpeakingScreen: FC = () => {
   return (
@@ -51,19 +56,40 @@ const SpeakingScreen: FC = () => {
 
         <ListTypes>
           {LIST_SPEAKING_STYLE.map((type, index) => (
-            <ItemTypeSpeaking key={index}>
-              <img src={type.thumbnail} alt="" />
-              <div className="content-item">
-                <h3>{type.title}</h3>
-                <p>{type.subTitle}</p>
-                <AppButton variant="outlined" className="btn-join">
-                  Join here
-                </AppButton>
-              </div>
-            </ItemTypeSpeaking>
+            <StyleSheetManager
+              key={index}
+              enableVendorPrefixes
+              shouldForwardProp={(propName, elementToBeRendered) => {
+                return typeof elementToBeRendered === "string"
+                  ? isPropValid(propName)
+                  : true;
+              }}
+            >
+              <ItemTypeSpeaking styleColor={type.styleColor}>
+                <Link to={type.path}>
+                  <img
+                    src={type.thumbnail}
+                    alt={`thumbnail-speaking-${index}`}
+                  />
+                  <div className="content-item">
+                    <h3>{type.title}</h3>
+                    <p>{type.subTitle}</p>
+                    <AppButton
+                      variant="outlined"
+                      className="btn-join"
+                      rightIcon={<IconDoubleArrowRight />}
+                    >
+                      Join here
+                    </AppButton>
+                  </div>
+                </Link>
+              </ItemTypeSpeaking>
+            </StyleSheetManager>
           ))}
         </ListTypes>
       </InnerSpeaking>
+
+      <FollowChallenge />
     </WrapSpeaking>
   );
 };
