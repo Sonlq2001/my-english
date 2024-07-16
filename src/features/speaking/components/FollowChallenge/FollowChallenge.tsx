@@ -4,7 +4,7 @@ import {
   InnerFollowChallenge,
   WrapFollowChallenge,
 } from "@app/features/speaking/components/FollowChallenge/FollowChallenge.styles";
-import ImageStackOfBooks from "@app/assets/images/stack-of-books.jpg";
+import ImageStackOfBooks from "@app/assets/images/stack-of-books.png";
 
 const FollowChallenge: FC = () => {
   return (
@@ -17,10 +17,13 @@ const FollowChallenge: FC = () => {
         </div>
 
         <div className="box-slogan">
-          <h2>Study and progress every day</h2>
+          <h2>
+            Life is like riding a bicycle. To keep your balance, you must keep
+            moving.
+          </h2>
           <p>
             Learning is a long process, take it step by step, follow the journey
-            and move forward
+            and move forward.
           </p>
         </div>
         <div className="box-step">
