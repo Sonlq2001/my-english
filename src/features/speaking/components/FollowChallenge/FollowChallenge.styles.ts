@@ -10,15 +10,19 @@ export const WrapFollowChallenge = styled.section`
 
 export const InnerFollowChallenge = styled.section`
   display: flex;
+  align-items: center;
   gap: 5rem;
   margin-top: 3.5rem;
   background-color: #f2f2f2;
-  padding: 2rem;
+  padding: 2.5rem;
   border-radius: 2.5rem;
+  .box-image {
+    max-width: 25%;
+    width: 100%;
+  }
   .box-step,
-  .box-image,
   .box-slogan {
-    flex: 1;
+    width: calc(100% - 25% / 2);
   }
   .box-image {
     img {
@@ -31,6 +35,13 @@ export const InnerFollowChallenge = styled.section`
     flex-direction: column;
     justify-content: center;
     gap: 2rem;
+    h2 {
+      line-height: 3.3rem;
+    }
+    p {
+      line-height: 2.5rem;
+      color: ${(props) => props.theme.palette.gray.medium};
+    }
   }
   .box-step {
     display: flex;
