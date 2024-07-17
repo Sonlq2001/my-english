@@ -1,4 +1,7 @@
 import { VocabularyPathsEnum } from "@app/features/vocabulary/vocabulary";
+import ThumbnailOne from "@app/assets/images/idea.jpg";
+import ThumbnailTwo from "@app/assets/images/step.jpg";
+import ThumbnailThree from "@app/assets/images/success.jpg";
 
 // import ThumbnailOne from "@app/assets/images/voice-assistant.png";
 // import ThumbnailTwo from "@app/assets/images/voice-assistant-amico.png";
@@ -49,4 +52,22 @@ export const LIST_ACTIONS_READING: TypesTabsActions[] = [
   },
   { label: "Customize reading content", tab: TABS_ACTIONS_READING.CUSTOMIZE },
   { label: "Freestyle", tab: TABS_ACTIONS_READING.FREESTYLE },
+];
+
+export const LIST_STEPS = [
+  {
+    title: "Step1",
+    description: "abv",
+    thumbnail: ThumbnailOne,
+  },
+  {
+    title: "Step2",
+    description: "abv",
+    thumbnail: ThumbnailTwo,
+  },
+  {
+    title: "Step3",
+    description: "abv",
+    thumbnail: ThumbnailThree,
+  },
 ];
