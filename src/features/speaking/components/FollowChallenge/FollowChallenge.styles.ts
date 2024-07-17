@@ -55,8 +55,8 @@ export const InnerFollowChallenge = styled.section`
       padding: 1.5rem;
       border-radius: 1.5rem;
       img {
-        width: 8rem;
-        height: 8rem;
+        max-height: 10rem;
+        height: 100%;
         border-radius: 1.5rem;
       }
       .step-intro {

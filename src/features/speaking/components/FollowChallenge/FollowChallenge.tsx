@@ -5,6 +5,7 @@ import {
   WrapFollowChallenge,
 } from "@app/features/speaking/components/FollowChallenge/FollowChallenge.styles";
 import ImageStackOfBooks from "@app/assets/images/stack-of-books.png";
+import { LIST_STEPS } from "@app/features/speaking/constants/speaking.constants";
 
 const FollowChallenge: FC = () => {
   return (
@@ -27,20 +28,15 @@ const FollowChallenge: FC = () => {
           </p>
         </div>
         <div className="box-step">
-          {Array(3)
-            .fill(1)
-            .map((_, index) => (
-              <div className="step" key={index}>
-                <img
-                  src="https://cdn.pixabay.com/photo/2024/06/21/08/21/hut-8843868_1280.jpg"
-                  alt=""
-                />
-                <div className="step-intro">
-                  <h3>Keep going</h3>
-                  <p>Never give up</p>
-                </div>
+          {LIST_STEPS.map((step, index) => (
+            <div className="step" key={`thumbnail-step-${index}`}>
+              <img src={step.thumbnail} alt={`thumbnail-step-${index}`} />
+              <div className="step-intro">
+                <h3>{step.title}</h3>
+                <p>{step.description}</p>
               </div>
-            ))}
+            </div>
+          ))}
         </div>
       </InnerFollowChallenge>
     </WrapFollowChallenge>
