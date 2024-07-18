@@ -17,12 +17,12 @@ export const InnerFollowChallenge = styled.section`
   padding: 2.5rem;
   border-radius: 2.5rem;
   .box-image {
-    max-width: 25%;
+    max-width: 20%;
     width: 100%;
   }
   .box-step,
   .box-slogan {
-    width: calc(100% - 25% / 2);
+    width: calc(100% - 20% / 2);
   }
   .box-image {
     img {
@@ -55,8 +55,9 @@ export const InnerFollowChallenge = styled.section`
       padding: 1.5rem;
       border-radius: 1.5rem;
       img {
-        max-height: 10rem;
-        height: 100%;
+        height: 10rem;
+        max-width: 11rem;
+        width: 100%;
         border-radius: 1.5rem;
       }
       .step-intro {
@@ -65,7 +66,8 @@ export const InnerFollowChallenge = styled.section`
           margin-bottom: 1rem;
         }
         p {
-          font-size: 1.5rem;
+          font-size: 1.4rem;
+          line-height: 2.3rem;
           color: ${(props) => props.theme.palette.gray.medium};
         }
       }

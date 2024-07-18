@@ -56,18 +56,19 @@ export const LIST_ACTIONS_READING: TypesTabsActions[] = [
 
 export const LIST_STEPS = [
   {
-    title: "Step1",
-    description: "abv",
+    title: "Beginning",
+    description: "Planning and setting goals is always a good start.",
     thumbnail: ThumbnailOne,
   },
   {
-    title: "Step2",
-    description: "abv",
+    title: "Ascent process",
+    description:
+      "Every journey of a thousand miles must begin with the first small step.",
     thumbnail: ThumbnailTwo,
   },
   {
-    title: "Step3",
-    description: "abv",
+    title: "Destination",
+    description: "Enjoy the joy of victory after months of effort.",
     thumbnail: ThumbnailThree,
   },
 ];
