@@ -33,27 +33,25 @@
 import { FC } from "react";
 import { StyleSheetManager } from "styled-components";
 import isPropValid from "@emotion/is-prop-valid";
+import { Link } from "react-router-dom";
 
 import AppButton from "@app/components/AppButton/AppButton";
 import IconDoubleArrowRight from "@app/assets/images/icon-svg/icon-keyboard-double-arrow-right.svg?react";
 import FollowChallenge from "@app/features/speaking/components/FollowChallenge/FollowChallenge";
+import ContentContainer from "@app/components/ContentContainer/ContentContainer";
 
 import {
-  InnerSpeaking,
   ItemTypeSpeaking,
   ListTypes,
   WrapSpeaking,
 } from "./SpeakingScreen.styles";
 
 import { LIST_SPEAKING_STYLE } from "../../constants/speaking.constants";
-import { Link } from "react-router-dom";
 
 const SpeakingScreen: FC = () => {
   return (
     <WrapSpeaking>
-      <InnerSpeaking>
-        <h2>Popular</h2>
-
+      <ContentContainer title="Popular">
         <ListTypes>
           {LIST_SPEAKING_STYLE.map((type, index) => (
             <StyleSheetManager
@@ -87,7 +85,7 @@ const SpeakingScreen: FC = () => {
             </StyleSheetManager>
           ))}
         </ListTypes>
-      </InnerSpeaking>
+      </ContentContainer>
 
       <FollowChallenge />
     </WrapSpeaking>

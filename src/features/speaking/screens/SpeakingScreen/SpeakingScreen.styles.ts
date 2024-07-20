@@ -4,13 +4,6 @@ export const WrapSpeaking = styled.section`
   padding-top: 3.5rem;
 `;
 
-export const InnerSpeaking = styled.section`
-  border-radius: 2.5rem;
-  background-color: ${(props) => props.theme.palette.white};
-  padding: 2.5rem 3rem;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-`;
-
 export const ListTypes = styled.div`
   display: flex;
   gap: 2.5rem;

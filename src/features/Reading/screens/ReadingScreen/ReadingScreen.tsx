@@ -72,18 +72,20 @@ import { FC, ElementType } from "react";
 
 import { LIST_TOPICS } from "@app/features/reading/reading";
 import ItemTopic from "@app/features/reading/components/ItemTopic/ItemTopic";
+import ContentContainer from "@app/components/ContentContainer/ContentContainer";
+import ItemArticle from "@app/features/reading/components/ItemArticle/ItemArticle";
 
 import {
   WrapReadingScreen,
-  SectionListTopics,
   ListTopics,
+  SectionLayoutReading,
+  SectionArticleList,
 } from "./ReadingScreen.styles";
 
 const ReadingScreen: FC = () => {
   return (
     <WrapReadingScreen>
-      <SectionListTopics>
-        <h2>Topics</h2>
+      <ContentContainer title="Topics">
         <ListTopics>
           {LIST_TOPICS.map((topic, index) => {
             const IconTopic = topic.thumbnail as ElementType;
@@ -96,7 +98,23 @@ const ReadingScreen: FC = () => {
             );
           })}
         </ListTopics>
-      </SectionListTopics>
+      </ContentContainer>
+
+      <SectionLayoutReading>
+        <ContentContainer className="article-list" title="Article list">
+          <SectionArticleList>
+            <ItemArticle />
+            <ItemArticle />
+            <ItemArticle />
+            <ItemArticle />
+            <ItemArticle />
+          </SectionArticleList>
+        </ContentContainer>
+
+        <ContentContainer className="memo-article" title="Memo article">
+          <div></div>
+        </ContentContainer>
+      </SectionLayoutReading>
     </WrapReadingScreen>
   );
 };
