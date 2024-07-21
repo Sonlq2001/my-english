@@ -74,6 +74,7 @@ import { LIST_TOPICS } from "@app/features/reading/reading";
 import ItemTopic from "@app/features/reading/components/ItemTopic/ItemTopic";
 import ContentContainer from "@app/components/ContentContainer/ContentContainer";
 import ItemArticle from "@app/features/reading/components/ItemArticle/ItemArticle";
+import ListMemoArticles from "@app/features/reading/components/ListMemoArticles/ListMemoArticles";
 
 import {
   WrapReadingScreen,
@@ -112,7 +113,7 @@ const ReadingScreen: FC = () => {
         </ContentContainer>
 
         <ContentContainer className="memo-article" title="Memo article">
-          <div></div>
+          <ListMemoArticles />
         </ContentContainer>
       </SectionLayoutReading>
     </WrapReadingScreen>
