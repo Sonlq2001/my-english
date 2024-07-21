@@ -14,6 +14,7 @@ export const SectionLayoutReading = styled.section`
   display: flex;
   margin-top: 3rem;
   gap: 3rem;
+  align-items: flex-start;
   .article-list {
     width: 70%;
   }
