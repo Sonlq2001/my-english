@@ -2,6 +2,9 @@ import { styled } from "styled-components";
 
 export const WrapListMemoArticles = styled.section`
   margin-top: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `;
 
 export const ItemMemoArticle = styled.article`
