@@ -15,6 +15,13 @@ const ListMemoArticles: FC = () => {
         </span>
         <button className="btn-continue">Continue</button>
       </ItemMemoArticle>
+      <ItemMemoArticle>
+        <span>He left the company after working there for 10 years</span>
+        <span className="last-open">
+          Last open: <i>10:30 21/07/2024</i>
+        </span>
+        <button className="btn-continue">Continue</button>
+      </ItemMemoArticle>
     </WrapListMemoArticles>
   );
 };
