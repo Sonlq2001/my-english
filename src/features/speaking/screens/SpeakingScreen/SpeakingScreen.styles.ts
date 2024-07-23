@@ -50,6 +50,15 @@ export const ItemTypeSpeaking = styled.article<{ styleColor: string }>`
       border: none;
       border-radius: 2rem;
       margin-left: auto;
+      & span {
+        margin-left: 4px;
+      }
+      svg {
+        transition: 0.3s ease;
+      }
+      &:hover svg {
+        transform: translateX(5px);
+      }
     }
   }
 `;
