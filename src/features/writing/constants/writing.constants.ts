@@ -1,23 +1,33 @@
 import { WritingPathsEnum } from "../constants/writing.paths";
 
-import ImageOne from "@app/assets/images/writing-1.jpeg";
-import ImageTwo from "@app/assets/images/writing-2.png";
-import ImageThree from "@app/assets/images/writing-3.jpeg";
+import ImageOne from "@app/assets/images/icon-svg/icon-world-map.svg?react";
+import ImageTwo from "@app/assets/images/icon-svg/icon-pinia-light.svg?react";
+import ImageThree from "@app/assets/images/icon-svg/icon-game.svg?react";
+import ImageFour from "@app/assets/images/icon-svg/icon-fish.svg?react";
 
 export const LIST_WRITING_STYLE = [
   {
-    title: "Write according to the model",
-    thumbnail: ImageOne,
-    path: WritingPathsEnum.WRITING_MODEL,
+    title: "Write topic",
+    icon: ImageOne,
+    path: WritingPathsEnum.WITE_TOPIC,
+    color: "#fbab5e",
   },
   {
-    title: "Write by topic",
-    thumbnail: ImageTwo,
-    path: WritingPathsEnum.WITE_TOPIC,
+    title: "Write according to the model",
+    icon: ImageTwo,
+    path: WritingPathsEnum.WRITING_MODEL,
+    color: "#8970d5",
+  },
+  {
+    title: "Play game",
+    icon: ImageThree,
+    path: WritingPathsEnum.WRITING_MODEL,
+    color: "#ff4e4e",
   },
   {
     title: "Write freely",
-    thumbnail: ImageThree,
-    path: "/voice-to-text", // TODO: path
+    icon: ImageFour,
+    path: WritingPathsEnum.WRITING_MODEL,
+    color: "#579be2",
   },
 ];
