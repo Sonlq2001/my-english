@@ -64,6 +64,13 @@ export const BannerContent = styled.div`
     color: ${(props) => props.theme.palette.white};
     background-color: ${(props) => props.theme.palette.primary.main};
   }
+  .img-rock-band {
+    position: absolute;
+    max-width: 25rem;
+    right: 4rem;
+    bottom: 0;
+    z-index: 0;
+  }
 `;
 
 export const DecoBanner = styled.section`

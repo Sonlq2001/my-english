@@ -4,6 +4,7 @@ import SectionTitle from "@app/components/SectionTitle/SectionTitle";
 import IconParty from "@app/assets/images/icon-svg/icon-party-popper.svg?react";
 import IconStarBold from "@app/assets/images/icon-svg/icon-star-bold.svg?react";
 import IconHeart from "@app/assets/images/icon-svg/icon-heart.svg?react";
+import ImagePodcast from "@app/assets/images/image-podcast.png";
 
 import {
   BannerSectionWrap,
@@ -37,6 +38,8 @@ const BannerSection: FC = () => {
           <Fireworks className="firework2" size="small" time={2.4} />
           <Fireworks className="firework3" size="larger" time={2.2} />
         </DecoBanner>
+
+        <img src={ImagePodcast} alt="" className="img-rock-band" />
       </BannerContent>
     </BannerSectionWrap>
   );
