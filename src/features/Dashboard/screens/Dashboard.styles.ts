@@ -10,7 +10,7 @@ export const ContentLeft = styled.section`
 `;
 
 export const ContentRight = styled.section`
-  max-width: 40rem;
+  max-width: 35rem;
   width: 100%;
   padding: 2.5rem;
 `;
