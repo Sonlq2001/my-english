@@ -20,54 +20,69 @@ import IconNotepad from "@app/assets/images/icon-svg/icon-notepad.svg?react";
 import IconSetting from "@app/assets/images/icon-svg/icon-setting.svg?react";
 import { NavbarMenus } from "@app/types/app.types";
 
-export const NAVBAR_MENUS: NavbarMenus[] = [
+export const NAVBAR_MENUS: { title: string; menus: NavbarMenus[] }[] = [
   {
-    id: "home", //TODO: id
-    path: DashboardPathsEnum.DASHBOARD,
-    icon: IconDashboard,
-    label: "Dashboard",
+    title: "Menu",
+    menus: [
+      {
+        id: "home", //TODO: id
+        path: DashboardPathsEnum.DASHBOARD,
+        icon: IconDashboard,
+        label: "Dashboard",
+      },
+    ],
   },
   {
-    id: "listening",
-    path: ListeningPathsEnum.LISTENING,
-    icon: IconListening,
-    label: "Listening",
+    title: "Skills",
+    menus: [
+      {
+        id: "listening",
+        path: ListeningPathsEnum.LISTENING,
+        icon: IconListening,
+        label: "Listening",
+      },
+      {
+        id: "Speaking",
+        path: SpeakingPathsEnum.SPEAKING,
+        icon: IconSpeaking,
+        label: "Speaking",
+      },
+      {
+        id: "Reading",
+        path: ReadingPathsEnum.READING,
+        icon: IconReading,
+        label: "Reading",
+      },
+      {
+        id: "Writing",
+        path: WritingPathsEnum.WRITING,
+        icon: IconWriting,
+        label: "Writing",
+      },
+    ],
   },
   {
-    id: "Speaking",
-    path: SpeakingPathsEnum.SPEAKING,
-    icon: IconSpeaking,
-    label: "Speaking",
-  },
-  {
-    id: "Reading",
-    path: ReadingPathsEnum.READING,
-    icon: IconReading,
-    label: "Reading",
-  },
-  {
-    id: "Writing",
-    path: WritingPathsEnum.WRITING,
-    icon: IconWriting,
-    label: "Writing",
-  },
-  {
-    id: "Vocabulary",
-    path: VocabularyPathsEnum.LIST_VOCABULARY_TOPICS,
-    icon: IconVocabulary,
-    label: "Vocabulary",
-  },
-  {
-    id: "Notepad",
-    path: NotepadPathsEnum.NOTEPAD,
-    icon: IconNotepad,
-    label: "Notepad",
-  },
-  {
-    id: "Settings",
-    path: `${SettingPathsEnum.SETTINGS}/${SettingSubPathsEnum.GENERAL}`,
-    icon: IconSetting,
-    label: "Settings",
-    customActive: true,
+    title: "Manage",
+    menus: [
+      {
+        id: "Vocabulary",
+        path: VocabularyPathsEnum.LIST_VOCABULARY_TOPICS,
+        icon: IconVocabulary,
+        label: "Vocabulary",
+      },
+      {
+        id: "Notepad",
+        path: NotepadPathsEnum.NOTEPAD,
+        icon: IconNotepad,
+        label: "Notepad",
+      },
+      {
+        id: "Settings",
+        path: `${SettingPathsEnum.SETTINGS}/${SettingSubPathsEnum.GENERAL}`,
+        icon: IconSetting,
+        label: "Settings",
+        customActive: true,
+      },
+    ],
   },
 ];
