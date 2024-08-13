@@ -7,6 +7,7 @@ import {
 import ImageStackOfBooks from "@app/assets/images/stack-of-books.png";
 import { LIST_STEPS } from "@app/features/speaking/constants/speaking.constants";
 import ContentContainer from "@app/components/ContentContainer/ContentContainer";
+import LazyImage from "@app/components/LazyImage/LazyImage";
 
 const FollowChallenge: FC = () => {
   return (
@@ -14,7 +15,7 @@ const FollowChallenge: FC = () => {
       <ContentContainer title="Follow">
         <InnerFollowChallenge>
           <div className="box-image">
-            <img src={ImageStackOfBooks} alt="" />
+            <LazyImage src={ImageStackOfBooks} alt="" />
           </div>
 
           <div className="box-slogan">
@@ -30,7 +31,10 @@ const FollowChallenge: FC = () => {
           <div className="box-step">
             {LIST_STEPS.map((step, index) => (
               <div className="step" key={`thumbnail-step-${index}`}>
-                <img src={step.thumbnail} alt={`thumbnail-step-${index}`} />
+                <LazyImage
+                  src={step.thumbnail}
+                  alt={`thumbnail-step-${index}`}
+                />
                 <div className="step-intro">
                   <h3>{step.title}</h3>
                   <p>{step.description}</p>

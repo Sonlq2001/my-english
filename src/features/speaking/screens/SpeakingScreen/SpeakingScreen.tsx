@@ -39,6 +39,7 @@ import AppButton from "@app/components/AppButton/AppButton";
 import IconDoubleArrowRight from "@app/assets/images/icon-svg/icon-keyboard-double-arrow-right.svg?react";
 import FollowChallenge from "@app/features/speaking/components/FollowChallenge/FollowChallenge";
 import ContentContainer from "@app/components/ContentContainer/ContentContainer";
+import LazyImage from "@app/components/LazyImage/LazyImage";
 
 import {
   ItemTypeSpeaking,
@@ -65,7 +66,7 @@ const SpeakingScreen: FC = () => {
             >
               <ItemTypeSpeaking styleColor={type.styleColor}>
                 <Link to={type.path}>
-                  <img
+                  <LazyImage
                     src={type.thumbnail}
                     alt={`thumbnail-speaking-${index}`}
                   />
