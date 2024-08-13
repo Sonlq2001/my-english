@@ -1,7 +1,6 @@
 import { styled } from "styled-components";
 
 export const BannerSectionWrap = styled.div`
-  background-color: ${(props) => props.theme.palette.white};
   padding: 4rem 3rem;
 `;
 

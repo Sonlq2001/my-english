@@ -5,8 +5,8 @@ export const WrapPlayPodcasts = styled.article`
 `;
 
 export const BoxPlayer = styled.div`
-  margin-top: 2rem;
-  background-color: #f5f5f5;
+  margin-top: 1.5rem;
+  background-color: #fbfbfc;
   border-radius: 10px;
   .inner-player {
     padding: 3rem;

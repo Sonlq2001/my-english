@@ -3,9 +3,9 @@ import { FC } from "react";
 import IconSun from "@app/assets/images/icon-svg/icon-sun.svg?react";
 import IconMoon from "@app/assets/images/icon-svg/icon-moon.svg?react";
 
-import { WrapButtonTheme } from "./ButtonTheme.style";
+import { WrapButtonTheme } from "./SwitchTheme.styles";
 
-const ButtonTheme: FC = () => {
+const SwitchTheme: FC = () => {
   return (
     <WrapButtonTheme>
       <input type="checkbox" className="checkbox" id="checkbox" />
@@ -18,4 +18,4 @@ const ButtonTheme: FC = () => {
   );
 };
 
-export default ButtonTheme;
+export default SwitchTheme;

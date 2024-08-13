@@ -10,6 +10,7 @@ import {
 import FavoritePodcasts from "@app/features/dashboard/components/FavoritePodcasts/FavoritePodcasts";
 import DocumentsSection from "@app/features/dashboard/components/DocumentsSection/DocumentsSection";
 import PlayPodcasts from "@app/features/dashboard/components/PlayPodcasts/PlayPodcasts";
+import Skills from "@app/features/dashboard/components/Skills/Skills";
 
 import BannerSection from "../components/BannerSection/BannerSection";
 import {
@@ -30,6 +31,8 @@ const DashboardScreen: FC = () => {
     <DashboardWrap>
       <ContentLeft>
         <BannerSection />
+
+        <Skills />
 
         <WrapPodcast>
           <h3>Most popular</h3>
