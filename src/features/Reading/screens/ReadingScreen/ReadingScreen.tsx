@@ -105,10 +105,6 @@ const ReadingScreen: FC = () => {
         <ContentContainer className="article-list" title="Article list">
           <SectionArticleList>
             <ItemArticle />
-            <ItemArticle />
-            <ItemArticle />
-            <ItemArticle />
-            <ItemArticle />
           </SectionArticleList>
         </ContentContainer>
 

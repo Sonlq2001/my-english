@@ -1,13 +1,14 @@
 import { FC } from "react";
 
 import IconDoubleArrowRight from "@app/assets/images/icon-svg/icon-keyboard-double-arrow-right.svg?react";
+import LazyImage from "@app/components/LazyImage/LazyImage";
 
 import { WrapItemArticle } from "./ItemArticle.styles";
 
 const ItemArticle: FC = () => {
   return (
     <WrapItemArticle>
-      <img
+      <LazyImage
         src="https://cdn.pixabay.com/photo/2023/08/19/13/42/flowers-8200510_1280.jpg"
         alt=""
       />

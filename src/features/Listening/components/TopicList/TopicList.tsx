@@ -3,6 +3,7 @@ import Slider from "react-slick";
 
 import IconLeft from "@app/assets/images/icon-svg/icon-left.svg?react";
 import IconRight from "@app/assets/images/icon-svg/icon-right.svg?react";
+import LazyImage from "@app/components/LazyImage/LazyImage";
 
 import {
   HeaderBox,
@@ -49,7 +50,10 @@ const TopicList: FC = () => {
           {TOPIC_LIST_PODCAST.map((topic, index) => (
             <ItemCarousel key={index}>
               <div className="cate-image">
-                <img src={topic.thumbnail} alt={`thumbnail-topic-${index}`} />
+                <LazyImage
+                  src={topic.thumbnail}
+                  alt={`thumbnail-topic-${index}`}
+                />
               </div>
               <h3>{topic.title}</h3>
               <p>{topic.subTitle}</p>

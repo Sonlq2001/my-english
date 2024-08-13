@@ -86,6 +86,7 @@ import IconFire from "@app/assets/images/icon-svg/icon-fire.svg?react";
 import IconLeaf from "@app/assets/images/icon-svg/icon-four-leaf-clover.svg?react";
 import TopicList from "@app/features/listening/components/TopicList/TopicList";
 import PodcastList from "@app/features/listening/components/PodcastList/PodcastList";
+import LazyImage from "@app/components/LazyImage/LazyImage";
 
 import {
   BannerListening,
@@ -105,11 +106,11 @@ const ReadingScreen: FC = () => {
               Consequuntur saepe nihil repellat doloribus numquam reiciendis
             </p>
           </div>
-          <img src={ImagePodcast} alt="" />
+          <LazyImage src={ImagePodcast} alt="" />
         </article>
 
         <BoxUser>
-          <img
+          <LazyImage
             src="https://cdn.pixabay.com/photo/2022/10/17/15/02/photography-7527978_640.jpg"
             alt=""
           />

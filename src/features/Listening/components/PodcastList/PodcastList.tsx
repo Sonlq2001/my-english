@@ -5,6 +5,7 @@ import IconRight from "@app/assets/images/icon-svg/icon-right.svg?react";
 import IconPlay from "@app/assets/images/icon-svg/icon-play.svg?react";
 import IconStar from "@app/assets/images/icon-svg/icon-star.svg?react";
 import IconThreeDotsVertical from "@app/assets/images/icon-svg/icon-three-dots-vertical.svg?react";
+import LazyImage from "@app/components/LazyImage/LazyImage";
 
 import {
   HeaderBox,
@@ -37,7 +38,7 @@ const PodcastList: FC = () => {
           .map((_, index) => (
             <ItemPodcast key={index}>
               <div className="info-podcast">
-                <img
+                <LazyImage
                   src="https://cdn.pixabay.com/photo/2018/03/20/13/22/sound-3243259_640.jpg"
                   alt=""
                 />

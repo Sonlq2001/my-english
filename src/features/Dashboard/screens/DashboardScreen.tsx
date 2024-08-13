@@ -11,6 +11,7 @@ import FavoritePodcasts from "@app/features/dashboard/components/FavoritePodcast
 import DocumentsSection from "@app/features/dashboard/components/DocumentsSection/DocumentsSection";
 import PlayPodcasts from "@app/features/dashboard/components/PlayPodcasts/PlayPodcasts";
 import Skills from "@app/features/dashboard/components/Skills/Skills";
+import LazyImage from "@app/components/LazyImage/LazyImage";
 
 import BannerSection from "../components/BannerSection/BannerSection";
 import {
@@ -42,7 +43,7 @@ const DashboardScreen: FC = () => {
               <span className="index-podcast">01</span>
 
               <div className="content-podcast">
-                <img
+                <LazyImage
                   src="https://cdn.pixabay.com/photo/2023/06/11/01/24/flowers-8055013_640.jpg"
                   alt=""
                 />
@@ -62,7 +63,7 @@ const DashboardScreen: FC = () => {
               <span className="index-podcast">01</span>
 
               <div className="content-podcast">
-                <img
+                <LazyImage
                   src="https://cdn.pixabay.com/photo/2023/06/11/01/24/flowers-8055013_640.jpg"
                   alt=""
                 />
