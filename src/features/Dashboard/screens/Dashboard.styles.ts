@@ -7,6 +7,8 @@ export const DashboardWrap = styled.div`
 export const ContentLeft = styled.section`
   flex: 1;
   border-right: 1px solid #eee;
+  background-color: #fbfbfc;
+  min-height: calc(100vh - 5.4rem);
 `;
 
 export const ContentRight = styled.section`
@@ -16,17 +18,12 @@ export const ContentRight = styled.section`
 `;
 
 export const WrapPodcast = styled.section`
-  padding: 2.5rem;
   > h3 {
     font-weight: 500;
-    padding-bottom: 2rem;
-    margin-bottom: 2rem;
-    border-bottom: 1px solid #eee;
+    padding: 0 3rem;
   }
   .list-section {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+    margin-top: 1.5rem;
   }
 `;
 
@@ -34,6 +31,10 @@ export const SectionPodcast = styled.article`
   display: flex;
   align-items: center;
   gap: 3rem;
+  padding: 1rem 3rem;
+  &:hover {
+    background-color: ${(props) => props.theme.palette.white};
+  }
   .index-podcast {
     font-weight: 500;
   }

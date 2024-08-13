@@ -4,7 +4,7 @@ import clsx from "clsx";
 import AppButton from "@app/components/AppButton/AppButton";
 import { NAVBAR_MENUS } from "@app/constants/navbar.constants";
 import { SettingPathsEnum } from "@app/features/setting/setting";
-import ButtonTheme from "@app/features/dashboard/components/ButtonTheme/ButtonTheme";
+import SwitchTheme from "@app/features/dashboard/components/SwitchTheme/SwitchTheme";
 
 import {
   SidebarWrap,
@@ -54,7 +54,7 @@ const Sidebar: FC = () => {
         })}
       </ListMenu>
 
-      <ButtonTheme />
+      <SwitchTheme />
     </SidebarWrap>
   );
 };

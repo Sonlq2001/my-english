@@ -13,7 +13,7 @@ export const SidebarWrap = styled.div`
     display: block;
     position: absolute;
     top: 0;
-    right: -2px;
+    right: -1px;
     bottom: 0;
     width: 1px;
     height: 100%;
