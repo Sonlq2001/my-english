@@ -1,7 +1,6 @@
 import { styled } from "styled-components";
-import { Link } from "react-router-dom";
 
-export const WrapContentListTopics = styled(Link)`
+export const WrapContentListTopics = styled.section`
   display: inline-block;
   padding-top: 3.5rem;
 `;

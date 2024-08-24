@@ -1,11 +1,12 @@
+import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 
-export const WrapFlatCard = styled.article<{ themeColor: string }>`
+export const WrapFlashcard = styled(Link)<{ themecolor: string }>`
   display: flex;
   gap: 1rem;
   align-items: flex-start;
   .flat-bg {
-    background-color: ${(props) => props.themeColor};
+    background-color: ${(props) => props.themecolor};
     min-width: 5rem;
     min-height: 5rem;
     border-radius: 1rem;

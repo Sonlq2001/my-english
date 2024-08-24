@@ -1,15 +1,15 @@
-import { FC } from "react";
+import { FC, memo } from "react";
 import { StyleSheetManager } from "styled-components";
 import isPropValid from "@emotion/is-prop-valid";
 
-import { WrapFlatCard } from "./FlatCardTopic.styles";
+import { WrapFlashcard } from "./FlashcardTopic.styles";
 
-interface FlatCardTopicProps {
+interface FlashcardTopicProps {
   title: string;
   theme: string;
 }
 
-const FlatCardTopic: FC<FlatCardTopicProps> = ({ title, theme }) => {
+const FlashcardTopic: FC<FlashcardTopicProps> = ({ title, theme }) => {
   return (
     <StyleSheetManager
       enableVendorPrefixes
@@ -19,12 +19,12 @@ const FlatCardTopic: FC<FlatCardTopicProps> = ({ title, theme }) => {
           : true;
       }}
     >
-      <WrapFlatCard themeColor={theme}>
+      <WrapFlashcard to="/list-vocabulary/Times" themecolor={theme}>
         <div className="flat-bg" />
         <p className="flat-title">{title}</p>
-      </WrapFlatCard>
+      </WrapFlashcard>
     </StyleSheetManager>
   );
 };
 
-export default FlatCardTopic;
+export default memo(FlashcardTopic);

@@ -14,7 +14,8 @@ export const Vocabulary = styled(Link)`
   }
 
   img {
-    width: 5rem;
+    max-width: 5rem;
+    width: 100%;
     height: 5rem;
     border-radius: 50%;
     border: 1px solid ${(props) => props.theme.palette.gray.extraLight};
@@ -22,9 +23,11 @@ export const Vocabulary = styled(Link)`
 
   .vocabulary-info {
     flex-grow: 1;
+    margin-right: 2.5rem;
     p {
       font-style: italic;
       margin-top: 0.5rem;
+      white-space: nowrap;
     }
   }
 
