@@ -56,7 +56,7 @@
 import { FC } from "react";
 
 import ContentContainer from "@app/components/ContentContainer/ContentContainer";
-import FlatCardTopic from "@app/features/vocabulary/components/FlatCardTopic/FlatCardTopic";
+import FlashcardTopic from "@app/features/vocabulary/components/FlashcardTopic/FlashcardTopic";
 import { LIST_CARDS_TOPIC } from "@app/features/vocabulary/constants/vocabulary.constants";
 
 import {
@@ -67,11 +67,11 @@ import {
 const ListVocabularyTopics: FC = () => {
   return (
     // TODO: Link
-    <WrapContentListTopics to="/">
+    <WrapContentListTopics>
       <ContentContainer title="List topic">
         <InnerContentList>
           {LIST_CARDS_TOPIC.map((topic, index) => (
-            <FlatCardTopic key={`topic-${index}`} {...topic} />
+            <FlashcardTopic key={`topic-${index}`} {...topic} />
           ))}
         </InnerContentList>
       </ContentContainer>
