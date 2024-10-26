@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from "react";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 import {
   SectionLeft,
@@ -8,13 +9,15 @@ import {
   ItemDay,
   BannerRemind,
   BannerRemindContent,
+  Bookmark,
+  TitleMarker,
 } from "@app/features/notepad/screens/NotepadScreen/NotepadScreen.styles";
 import ContentContainer from "@app/components/ContentContainer/ContentContainer";
 import NotepadSection from "@app/features/notepad/components/NotepadSection/NotepadSection";
 import { useAppDispatch, useAppSelector } from "@app/redux/store";
-import { unwrapResult } from "@reduxjs/toolkit";
 import { getListNotepads } from "@app/features/notepad/notepad";
 import ImageSchedule from "@app/assets/images/schedule.png";
+import IconClock from "@app/assets/images/icon-svg/icon-clock.svg?react";
 
 const NotepadScreen: FC = () => {
   const dispatch = useAppDispatch();
@@ -93,7 +96,28 @@ const NotepadScreen: FC = () => {
           )}
         </ContentContainer>
       </SectionLeft>
-      <SectionRight>right</SectionRight>
+      <SectionRight>
+        <ContentContainer>
+          <TitleMarker>The notes are of most interest to you</TitleMarker>
+          <Bookmark $point={1}>
+            <IconClock />
+            <h3>50 động từ tiếng anh phổ biến</h3>
+            <p>Note: Buổi tới học về từ vựng chủ đề phim ảnh</p>
+          </Bookmark>
+
+          <Bookmark $point={2}>
+            <IconClock />
+            <h3>Tài liệu cần thiết cho người mới học tiếng anh.</h3>
+            <p>Note: Buổi tới học về từ vựng chủ đề phim ảnh</p>
+          </Bookmark>
+
+          <Bookmark $point={3}>
+            <IconClock />
+            <h3>Tài liệu cần thiết cho người mới học tiếng anh.</h3>
+            <p>Note: Buổi tới học về từ vựng chủ đề phim ảnh</p>
+          </Bookmark>
+        </ContentContainer>
+      </SectionRight>
     </WrapNotepad>
   );
 };

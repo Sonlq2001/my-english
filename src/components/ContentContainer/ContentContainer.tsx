@@ -3,7 +3,7 @@ import { FC, HTMLAttributes, ReactNode } from "react";
 import { WrapContentContainer } from "./ContentContainer.styles";
 
 interface ContentContainerProps extends HTMLAttributes<HTMLDivElement> {
-  title: string;
+  title?: string;
   children: ReactNode;
 }
 
@@ -14,7 +14,7 @@ const ContentContainer: FC<ContentContainerProps> = ({
 }) => {
   return (
     <WrapContentContainer {...props}>
-      <h2>{title}</h2>
+      {title && <h1>{title}</h1>}
       {children}
     </WrapContentContainer>
   );
