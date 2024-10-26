@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 export const WrapNotepad = styled.div`
   display: flex;
   padding-top: 3.5rem;
-  gap: 2rem;
+  gap: 3rem;
 `;
 
 export const SectionLeft = styled.section`
@@ -11,7 +11,7 @@ export const SectionLeft = styled.section`
 `;
 
 export const SectionRight = styled.section`
-  max-width: 25rem;
+  max-width: 30rem;
   width: 100%;
 `;
 
@@ -65,4 +65,36 @@ export const BannerRemindContent = styled.div`
     margin-left: 1rem;
     color: ${(props) => props.theme.palette.primary.light};
   }
+`;
+
+export const Bookmark = styled.article<{ $point: number }>`
+  background-color: ${(props) => {
+    switch (props.$point) {
+      case 1:
+        return "#f1faff";
+      case 2:
+        return "#fff5e9";
+      default:
+        return "#f8f5fe";
+    }
+  }};
+  padding: 1.5rem;
+  border-radius: 1rem;
+  h3 {
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin: 1rem 0;
+  }
+  p {
+    font-size: 1.4rem;
+    font-style: italic;
+  }
+  & + & {
+    margin-top: 2rem;
+  }
+`;
+
+export const TitleMarker = styled.h2`
+  font-size: 1.7rem;
+  margin-bottom: 2rem;
 `;
