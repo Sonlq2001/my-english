@@ -39,14 +39,8 @@ export const AudioPlayControl = styled.div`
   svg {
     cursor: pointer;
   }
-
   svg.icon-play-back-right {
     transform: rotate(180deg);
-  }
-
-  svg.icon-play {
-    width: 5rem;
-    height: 5rem;
   }
 `;
 
@@ -65,6 +59,11 @@ export const AudioTimeLine = styled.div`
     border-radius: 0.4rem;
     height: 0.5rem;
     background: ${(props) => props.theme.palette.gray.medium};
+  }
+
+  .start-time,
+  .end-time {
+    white-space: nowrap;
   }
 
   /* Thumb: webkit */
@@ -113,5 +112,13 @@ export const AudioTimeLine = styled.div`
   .icon-volume {
     margin-left: 2.5rem;
     cursor: pointer;
+  }
+`;
+
+export const ButtonControlPlay = styled.button`
+  background-color: transparent;
+  svg.icon-play {
+    width: 5rem;
+    height: 5rem;
   }
 `;
