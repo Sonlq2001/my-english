@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
 
 import SectionTitle from "@app/components/SectionTitle/SectionTitle";
 import IconPlayAudio from "@app/assets/images/icon-svg/icon-play-audio.svg?react";
@@ -9,8 +9,16 @@ import {
   BoxPlayer,
   WrapControlPlayer,
 } from "./PlayPodcasts.styles";
+import { PlayerContext } from "@app/components/PlayerProvider/PlayerProvider";
 
 const PlayPodcasts: FC = () => {
+  const { playVideo } = useContext(PlayerContext);
+
+  const handlePlayVideo = () => {
+    if (playVideo) {
+      playVideo("https://www.youtube.com/watch?v=zJ_Cp5ZfvlU");
+    }
+  };
   return (
     <WrapPlayPodcasts>
       <SectionTitle title="Now Playing" />
@@ -28,7 +36,7 @@ const PlayPodcasts: FC = () => {
         <WrapControlPlayer>
           <IconPlayBack />
 
-          <IconPlayAudio className="icon-play" />
+          <IconPlayAudio className="icon-play" onClick={handlePlayVideo} />
 
           <IconPlayBack className="icon-play-back-right" />
         </WrapControlPlayer>
