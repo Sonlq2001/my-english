@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const WrapNotepad = styled.div`
+export const WrapNotepad = styled.main`
   display: flex;
   padding-top: 3.5rem;
   gap: 3rem;

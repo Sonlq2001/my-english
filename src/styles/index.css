@@ -149,3 +149,21 @@ img {
 ::-webkit-scrollbar-thumb:hover {
   background: #bdbdbd;
 }
+
+/* animation for rotate album */
+.pause-rotate-album {
+  animation: rotateAlbum 13s linear infinite;
+  animation-play-state: paused;
+}
+.running-rotate-album {
+  animation: rotateAlbum 13s linear infinite;
+  animation-play-state: running;
+}
+@keyframes rotateAlbum {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

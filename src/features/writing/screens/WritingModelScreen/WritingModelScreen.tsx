@@ -32,7 +32,7 @@ const WritingModelScreen: FC = () => {
   }
 
   return (
-    <>
+    <main>
       <TitlePage
         title="Practice writing with short examples"
         subtitle="Write from the simplest things."
@@ -68,7 +68,7 @@ const WritingModelScreen: FC = () => {
           ></textarea>
         </WrapTextarea>
       </WrapWritingModel>
-    </>
+    </main>
   );
 };
 

@@ -87,7 +87,7 @@ const CreateNotepad: FC = () => {
   }, [notepadItem?.description, notepadItem?.title]);
 
   return (
-    <>
+    <main>
       <TitlePage title={title} subtitle={subtitle} />
 
       <WrapCreateNotepad>
@@ -139,7 +139,7 @@ const CreateNotepad: FC = () => {
           </Formik>
         )}
       </WrapCreateNotepad>
-    </>
+    </main>
   );
 };
 

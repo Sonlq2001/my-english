@@ -95,7 +95,7 @@ const CreateDocument: FC = () => {
   }, [documentDetail]);
 
   return (
-    <>
+    <main>
       <TitlePage title={title} subtitle={subtitle} />
 
       <WrapCreateDocument>
@@ -167,7 +167,7 @@ const CreateDocument: FC = () => {
           </Formik>
         )}
       </WrapCreateDocument>
-    </>
+    </main>
   );
 };
 

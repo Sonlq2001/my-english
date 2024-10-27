@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import { Form } from "formik";
 
-export const WrapWriting = styled.div`
+export const WrapWriting = styled.main`
   max-width: 76.8rem;
   margin: 0 auto;
 `;

@@ -52,7 +52,7 @@ const SettingPodcast: FC = () => {
   };
 
   return (
-    <>
+    <main>
       <TitleSetting title="Podcast" subtitle="Customize your podcast" />
 
       <HeaderSetting>
@@ -153,7 +153,7 @@ const SettingPodcast: FC = () => {
           )}
         </WrapTable>
       )}
-    </>
+    </main>
   );
 };
 

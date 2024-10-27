@@ -45,7 +45,7 @@ const VoiceToTextScreen: FC = () => {
   }, [resetTranscript, tab]);
 
   return (
-    <>
+    <main>
       <TitlePage
         title="Speech to text"
         subtitle="Practice pronunciation and speaking in short paragraphs."
@@ -101,7 +101,7 @@ const VoiceToTextScreen: FC = () => {
           )}
         </FooterContent>
       </WrapContent>
-    </>
+    </main>
   );
 };
 

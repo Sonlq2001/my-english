@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const WrapSpeaking = styled.section`
+export const WrapSpeaking = styled.main`
   padding-top: 3.5rem;
 `;
 

@@ -1,4 +1,5 @@
 import { FC, useContext } from "react";
+import clsx from "clsx";
 
 import IconPlayAudio from "@app/assets/images/icon-svg/icon-play-audio.svg?react";
 import IconPlayBack from "@app/assets/images/icon-svg/icon-play-back.svg?react";
@@ -47,7 +48,10 @@ const AudioPlay: FC = () => {
       <AudioInfo>
         <img
           src="https://cdn.pixabay.com/photo/2023/04/13/17/49/dare-7923106_1280.jpg"
-          alt=""
+          alt="podcast"
+          className={clsx(
+            controlVideo.playing ? "running-rotate-album" : "pause-rotate-album"
+          )}
         />
         <p>le quang son</p>
       </AudioInfo>

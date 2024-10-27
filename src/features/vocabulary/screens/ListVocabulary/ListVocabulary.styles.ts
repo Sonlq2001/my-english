@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const WrapPage = styled.section`
+export const WrapPage = styled.main`
   padding-top: 3.5rem;
   display: flex;
   gap: 2rem;

@@ -98,7 +98,7 @@ const CreateVocabulary: FC = () => {
   }
 
   return (
-    <>
+    <main>
       <TitlePage
         title="Create vocabulary"
         subtitle="Fill more of your vocabulary."
@@ -185,7 +185,7 @@ const CreateVocabulary: FC = () => {
           </Formik>
         </WrapContent>
       </WrapPage>
-    </>
+    </main>
   );
 };
 

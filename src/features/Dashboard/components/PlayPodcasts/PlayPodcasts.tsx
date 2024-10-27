@@ -1,4 +1,5 @@
 import { FC, useContext } from "react";
+import clsx from "clsx";
 
 import SectionTitle from "@app/components/SectionTitle/SectionTitle";
 import IconPlayAudio from "@app/assets/images/icon-svg/icon-play-audio.svg?react";
@@ -12,11 +13,11 @@ import {
 import { PlayerContext } from "@app/components/PlayerProvider/PlayerProvider";
 
 const PlayPodcasts: FC = () => {
-  const { playVideo } = useContext(PlayerContext);
+  const { playVideo, controlVideo } = useContext(PlayerContext);
 
   const handlePlayVideo = () => {
     if (playVideo) {
-      playVideo("https://www.youtube.com/watch?v=zJ_Cp5ZfvlU");
+      playVideo("https://www.youtube.com/watch?v=HidWExUWxfc");
     }
   };
   return (
@@ -25,10 +26,17 @@ const PlayPodcasts: FC = () => {
 
       <BoxPlayer>
         <div className="inner-player">
-          <img
-            src="https://cdn.pixabay.com/photo/2021/11/25/19/50/tape-6824489_640.jpg"
-            alt=""
-          />
+          <div className="box-image">
+            <img
+              src="https://cdn.pixabay.com/photo/2021/11/25/19/50/tape-6824489_640.jpg"
+              alt="podcast"
+              className={clsx(
+                controlVideo.playing
+                  ? "running-rotate-album"
+                  : "pause-rotate-album"
+              )}
+            />
+          </div>
           <h4>What is of Jakzel Fashion Week ?</h4>
           <p>Sown</p>
         </div>
