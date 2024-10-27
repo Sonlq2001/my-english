@@ -36,7 +36,7 @@ const NotepadDetail: FC = () => {
   }
 
   return (
-    <>
+    <main>
       <TitlePage title="Notebook content" subtitle="Review knowledge." />
 
       <WrapNotepadDetail>
@@ -57,7 +57,7 @@ const NotepadDetail: FC = () => {
           </ContentDetail>
         )}
       </WrapNotepadDetail>
-    </>
+    </main>
   );
 };
 

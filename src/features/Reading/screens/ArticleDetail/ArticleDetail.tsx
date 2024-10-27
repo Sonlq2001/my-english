@@ -100,7 +100,7 @@ const ArticleDetail: FC = () => {
   }, [isOpenModal]);
 
   return (
-    <>
+    <main>
       <TitlePage title="Reading document" subtitle="" />
 
       <WrapArticleDetail>
@@ -162,7 +162,7 @@ const ArticleDetail: FC = () => {
           </>
         )}
       </WrapArticleDetail>
-    </>
+    </main>
   );
 };
 

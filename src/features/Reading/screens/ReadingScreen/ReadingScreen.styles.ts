@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const WrapReadingScreen = styled.section`
+export const WrapReadingScreen = styled.main`
   padding-top: 3.5rem;
 `;
 

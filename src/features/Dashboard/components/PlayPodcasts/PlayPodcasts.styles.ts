@@ -14,12 +14,23 @@ export const BoxPlayer = styled.div`
     flex-direction: column;
     align-items: center;
   }
-  img {
-    max-width: 70%;
+  .box-image {
+    max-width: 80%;
     width: 100%;
+    position: relative;
+    padding-top: 80%;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+  img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     border-radius: 1rem;
     box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
   }
+
   h4 {
     margin: 1.5rem 0 1rem 0;
   }

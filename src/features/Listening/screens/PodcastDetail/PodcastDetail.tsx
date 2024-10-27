@@ -54,7 +54,7 @@ const PodcastDetail: FC = () => {
   if (!podcastDetailData) return;
 
   return (
-    <>
+    <main>
       <TitlePage
         title="Discovery podcasts"
         subtitle="Listening practice is easier with podcast transcripts."
@@ -95,7 +95,7 @@ const PodcastDetail: FC = () => {
           </>
         )}
       </WrapPodcast>
-    </>
+    </main>
   );
 };
 

@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const ListWritingStyle = styled.div`
+export const ListWritingStyle = styled.main`
   padding-top: 3.5rem;
 `;
 

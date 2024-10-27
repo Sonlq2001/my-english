@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const WrapContentListTopics = styled.section`
+export const WrapContentListTopics = styled.main`
   display: inline-block;
   padding-top: 3.5rem;
 `;

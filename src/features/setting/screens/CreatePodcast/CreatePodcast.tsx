@@ -92,7 +92,7 @@ const CreatePodcast: FC = () => {
   }, [podcastId]);
 
   return (
-    <>
+    <main>
       <TitleSetting title={title} subtitle={subtitle} />
 
       <WrapBackPage>
@@ -176,7 +176,7 @@ const CreatePodcast: FC = () => {
           )}
         </Formik>
       )}
-    </>
+    </main>
   );
 };
 

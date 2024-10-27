@@ -36,7 +36,7 @@ const VocabularyDetail: FC = () => {
   }
 
   return (
-    <>
+    <main>
       <TitlePage title="Vocabulary" subtitle="Every day a new word." />
 
       <WrapVocabularyDetail>
@@ -80,7 +80,7 @@ const VocabularyDetail: FC = () => {
           </ol>
         </ListInfoVocabulary>
       </WrapVocabularyDetail>
-    </>
+    </main>
   );
 };
 
