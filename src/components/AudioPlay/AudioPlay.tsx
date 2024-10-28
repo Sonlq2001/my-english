@@ -27,19 +27,27 @@ const AudioPlay: FC = () => {
     seekToVideo,
     controlVideo,
     videoRunningTime,
+    pauseVideo,
+    videoId,
   } = useContext(PlayerContext);
 
   if (!isOpenAudio) return;
 
   const handlePlayVideo = () => {
     if (playVideo) {
-      playVideo("https://www.youtube.com/watch?v=zJ_Cp5ZfvlU");
+      playVideo(videoId || "https://www.youtube.com/watch?v=zJ_Cp5ZfvlU");
     }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (seekToVideo) {
       seekToVideo(Number(e.target.value));
+    }
+  };
+
+  const handlePauseVideo = () => {
+    if (pauseVideo) {
+      pauseVideo();
     }
   };
 
@@ -61,11 +69,11 @@ const AudioPlay: FC = () => {
 
           <IconPlayBack />
 
-          <ButtonControlPlay onClick={handlePlayVideo}>
+          <ButtonControlPlay>
             {controlVideo.playing ? (
-              <IconPause className="icon-play" />
+              <IconPause className="icon-play" onClick={handlePauseVideo} />
             ) : (
-              <IconPlayAudio className="icon-play" />
+              <IconPlayAudio className="icon-play" onClick={handlePlayVideo} />
             )}
           </ButtonControlPlay>
 
