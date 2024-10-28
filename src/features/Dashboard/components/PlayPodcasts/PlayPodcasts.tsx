@@ -13,11 +13,15 @@ import {
 import { PlayerContext } from "@app/components/PlayerProvider/PlayerProvider";
 
 const PlayPodcasts: FC = () => {
-  const { playVideo, controlVideo } = useContext(PlayerContext);
+  const { playVideo, controlVideo, toggleNavbarAudioPlay } =
+    useContext(PlayerContext);
 
   const handlePlayVideo = () => {
     if (playVideo) {
       playVideo("https://www.youtube.com/watch?v=HidWExUWxfc");
+    }
+    if (toggleNavbarAudioPlay) {
+      toggleNavbarAudioPlay(true);
     }
   };
   return (

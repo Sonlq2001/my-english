@@ -6,7 +6,7 @@ import {
   ControlVideo,
   ProgressVideo,
 } from "@app/features/listening/types/listening.type";
-import { YOUTUBE_EMBEDDED_LINK } from "@app/constants/app.constants";
+import ReactPlayerVideo from "@app/components/ReactPlayerVideo/ReactPlayerVideo";
 
 const initControlVideo = {
   playing: false,
@@ -19,15 +19,19 @@ export const PlayerContext = createContext<{
   isOpenAudio: boolean;
   controlVideo: ControlVideo;
   videoRunningTime: number;
-  playVideo?: (videoId: string) => void;
+  playVideo?: (id: string) => void;
+  pauseVideo?: () => void;
   seekToVideo?: (value: number) => void;
   durationVideo?: (value: number) => void;
-  endVideo?: (value: number) => void;
+  endVideo?: () => void;
   progressVideo?: (value: ProgressVideo) => void;
+  videoId: string;
+  toggleNavbarAudioPlay?: (open: boolean) => void;
 }>({
   isOpenAudio: false,
   videoRunningTime: 0,
   controlVideo: initControlVideo,
+  videoId: "",
 });
 
 const PlayerProvider = ({ children }: { children: ReactNode }) => {
@@ -39,8 +43,15 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
 
   const playVideo = (id: string) => {
     setVideoId(id);
-    setIsOpenAudio(true);
-    setControlVideo({ ...controlVideo, playing: !controlVideo.playing });
+    setControlVideo({ ...controlVideo, playing: true });
+  };
+
+  const toggleNavbarAudioPlay = (open: boolean) => {
+    setIsOpenAudio(Boolean(open));
+  };
+
+  const pauseVideo = () => {
+    setControlVideo({ ...controlVideo, playing: false });
   };
 
   const durationVideo = (e: number) => {
@@ -52,7 +63,7 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const endVideo = () => {
-    setControlVideo({ ...controlVideo, playing: false });
+    setControlVideo({ ...initControlVideo, volume: controlVideo.volume });
   };
 
   const seekToVideo = (value: number) => {
@@ -61,7 +72,7 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const videoRunningTime = useMemo(() => {
-    return (controlVideo.loadedSeconds / controlVideo.duration) * 100;
+    return (controlVideo.loadedSeconds / controlVideo.duration) * 100 || 0;
   }, [controlVideo.duration, controlVideo.loadedSeconds]);
 
   const provider = {
@@ -73,20 +84,25 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
     endVideo,
     seekToVideo,
     videoRunningTime,
+    pauseVideo,
+    videoId,
+    toggleNavbarAudioPlay,
   };
 
   return (
     <PlayerContext.Provider value={provider}>
-      <ReactPlayer
-        ref={videoRef}
-        url={YOUTUBE_EMBEDDED_LINK.replace(":youtube_id", videoId)}
-        onDuration={durationVideo}
-        onProgress={progressVideo}
-        onEnded={endVideo}
-        style={{ display: "none" }}
-        playing={controlVideo.playing}
-        volume={controlVideo.volume}
-      />
+      {isOpenAudio && (
+        <ReactPlayerVideo
+          ref={videoRef}
+          videoId={videoId}
+          onDuration={durationVideo}
+          onProgress={progressVideo}
+          onEnded={endVideo}
+          style={{ display: "none" }}
+          playing={controlVideo.playing}
+          volume={controlVideo.volume}
+        />
+      )}
       {children}
       <AudioPlay />
     </PlayerContext.Provider>
