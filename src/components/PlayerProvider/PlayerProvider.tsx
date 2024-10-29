@@ -63,12 +63,13 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const endVideo = () => {
-    setControlVideo({ ...initControlVideo, volume: controlVideo.volume });
+    setControlVideo({ ...controlVideo, playing: false });
   };
 
   const seekToVideo = (value: number) => {
     if (!videoRef.current) return;
     videoRef.current.seekTo(value);
+    setControlVideo({ ...controlVideo, playing: true });
   };
 
   const videoRunningTime = useMemo(() => {
@@ -101,6 +102,7 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
           style={{ display: "none" }}
           playing={controlVideo.playing}
           volume={controlVideo.volume}
+          onPause={pauseVideo}
         />
       )}
       {children}
