@@ -20,11 +20,14 @@ import {
 import { PlayerContext } from "@app/components/PlayerProvider/PlayerProvider";
 import { convertSeconds } from "@app/helpers/time";
 
-const AudioPlay: FC = () => {
+interface AudioPlayProps {
+  seekToVideo: (value: number) => void;
+}
+
+const AudioPlay: FC<AudioPlayProps> = ({ seekToVideo }) => {
   const {
     isOpenAudio,
     playVideo,
-    seekToVideo,
     controlVideo,
     videoRunningTime,
     pauseVideo,
@@ -40,9 +43,7 @@ const AudioPlay: FC = () => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (seekToVideo) {
-      seekToVideo(Number(e.target.value));
-    }
+    seekToVideo(Number(e.target.value));
   };
 
   const handlePauseVideo = () => {

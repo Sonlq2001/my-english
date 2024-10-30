@@ -1,37 +1,39 @@
-import { FC, memo, useEffect, Dispatch, SetStateAction, useRef } from "react";
+import { FC, memo, useEffect, useRef, useContext } from "react";
 
 import { convertSeconds } from "@app/helpers/time";
-
 import { WrapTranscript, SectionTranscript } from "./TranscriptPodcast.styles";
-import { ControlVideo } from "../../types/listening.type";
+import { PlayerContext } from "@app/components/PlayerProvider/PlayerProvider";
 
 interface TranscriptPodcastProps {
   transcripts: { text: string; duration: number; offset: number }[];
   handleSeekTo: (seekTo: number) => void;
-  duration: number;
-  isPlay: boolean;
-  setControlVideo: Dispatch<SetStateAction<ControlVideo>>;
 }
 
 const TranscriptPodcast: FC<TranscriptPodcastProps> = ({
   transcripts = [],
   handleSeekTo,
-  duration,
-  isPlay,
-  setControlVideo,
 }) => {
   const isSCroll = useRef<boolean>(false);
   const elementListTranscript = useRef<HTMLDivElement>(null);
+  const { playVideo, controlVideo, videoId } = useContext(PlayerContext);
+
   const handleSpecifyVideoTime = (seconds: number): void => {
     handleSeekTo(seconds);
-    setControlVideo((prev) => ({ ...prev, playing: true }));
+    if (playVideo) {
+      playVideo(videoId);
+    }
     isSCroll.current = true;
   };
 
   useEffect(() => {
-    if (!isPlay || isSCroll.current || !elementListTranscript.current) return;
+    if (
+      !controlVideo.playing ||
+      isSCroll.current ||
+      !elementListTranscript.current
+    )
+      return;
     const currentTranscript =
-      elementListTranscript.current.querySelector(".active");
+      elementListTranscript.current.querySelector(".active-transcript");
 
     if (currentTranscript) {
       // TODO: not working
@@ -40,7 +42,7 @@ const TranscriptPodcast: FC<TranscriptPodcastProps> = ({
         top: currentTranscript.clientHeight + 100,
       });
     }
-  }, [isPlay, duration]);
+  }, [controlVideo.playing, controlVideo.loadedSeconds]);
 
   const handleMouseOver = () => {
     isSCroll.current = true;
@@ -58,13 +60,13 @@ const TranscriptPodcast: FC<TranscriptPodcastProps> = ({
       <div className="list-transcript" ref={elementListTranscript}>
         {transcripts.map((transcript, index) => {
           const isActive =
-            duration >= transcript.offset &&
-            duration < transcripts[index + 1]?.offset;
+            controlVideo.loadedSeconds >= transcript.offset &&
+            controlVideo.loadedSeconds < transcripts[index + 1]?.offset;
 
           return (
             <SectionTranscript
               key={`transcript-${index}`}
-              className={isActive ? "active" : ""}
+              className={isActive ? "active-transcript" : ""}
             >
               <div className="time-part">
                 {convertSeconds(transcript.offset)}
@@ -73,7 +75,7 @@ const TranscriptPodcast: FC<TranscriptPodcastProps> = ({
                 className="content-section"
                 onClick={() => handleSpecifyVideoTime(transcript.offset)}
               >
-                <p>{transcript.text}</p>
+                <p>{transcript.text.replaceAll(`&amp;#39;`, `'`)}</p>
               </div>
             </SectionTranscript>
           );
