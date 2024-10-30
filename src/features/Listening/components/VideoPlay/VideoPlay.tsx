@@ -1,11 +1,9 @@
-import { FC, useRef, forwardRef, useImperativeHandle, useMemo } from "react";
-import ReactPlayer from "react-player";
+import { FC, forwardRef, useContext, useImperativeHandle, useRef } from "react";
 
-import { YOUTUBE_EMBEDDED_LINK } from "@app/constants/app.constants";
 import IconPlayAudio from "@app/assets/images/icon-svg/icon-play-audio.svg?react";
 import IconPause from "@app/assets/images/icon-svg/icon-pause.svg?react";
-import IconVolume from "@app/assets/images/icon-svg/icon-volume.svg?react";
-import IconMute from "@app/assets/images/icon-svg/icon-mute.svg?react";
+// import IconVolume from "@app/assets/images/icon-svg/icon-volume.svg?react";
+// import IconMute from "@app/assets/images/icon-svg/icon-mute.svg?react";
 import InputRange from "@app/components/InputRange/InputRange";
 import { convertSeconds } from "@app/helpers/time";
 
@@ -14,124 +12,122 @@ import {
   WrapControlVideo,
   ButtonPlay,
   WrapProgressVideo,
-  WrapVolume,
+  // WrapVolume,
 } from "./VideoPlay.styles";
-import { ProgressVideo, ControlVideo } from "../../types/listening.type";
+import ReactPlayerVideo from "@app/components/ReactPlayerVideo/ReactPlayerVideo";
+import { PlayerContext } from "@app/components/PlayerProvider/PlayerProvider";
+import ReactPlayer from "react-player";
 
-const MIN_VOLUME = 0;
-const MAX_VOLUME = 100;
+// const MIN_VOLUME = 0;
+// const MAX_VOLUME = 100;
 
 interface VideoPlayProps {
   videoId: string;
-  ref: React.Ref<unknown>;
-  controlVideo: ControlVideo;
-  setControlVideo: (control: ControlVideo) => void;
+  ref: React.Ref<{
+    setSeekTo: (seekTo: number) => void;
+  }>;
 }
 
-const VideoPlay: FC<VideoPlayProps> = forwardRef(
-  ({ videoId, controlVideo, setControlVideo }, ref) => {
-    const videoRef = useRef<ReactPlayer>(null);
-    const preVolume = useRef<number>(MIN_VOLUME);
+const VideoPlay: FC<VideoPlayProps> = forwardRef(({ videoId }, ref) => {
+  const videoRef = useRef<ReactPlayer>(null);
+  // const preVolume = useRef<number>(MIN_VOLUME);
 
-    useImperativeHandle(ref, () => ({
-      setSeekTo: (value: number) => {
-        if (!videoRef.current) return;
-        videoRef.current.seekTo(Number(value));
-      },
-    }));
+  const {
+    playVideo,
+    controlVideo,
+    videoRunningTime,
+    pauseVideo,
+    videoId: videoIdContext,
+    durationVideo,
+    endVideo,
+    progressVideo,
+    autoPlayVideo,
+  } = useContext(PlayerContext);
 
-    const handleDurationVideo = (e: number) => {
-      setControlVideo({ ...controlVideo, duration: e });
-    };
-
-    const handleProgressVideo = (e: ProgressVideo) => {
-      setControlVideo({ ...controlVideo, loadedSeconds: e.playedSeconds });
-    };
-
-    const handleEndVideo = () => {
-      setControlVideo({ ...controlVideo, playing: false });
-    };
-
-    const handleSeekTo = (e: React.ChangeEvent<HTMLInputElement>) => {
+  useImperativeHandle(ref, () => ({
+    setSeekTo: (value: number) => {
       if (!videoRef.current) return;
-      videoRef.current.seekTo(Number(e.target.value));
-    };
+      videoRef.current.seekTo(Number(value));
+    },
+  }));
+  const handleSeekTo = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!videoRef.current) return;
+    autoPlayVideo && autoPlayVideo();
+    videoRef.current.seekTo(Number(e.target.value));
+  };
 
-    const progressVideo = useMemo(() => {
-      return (controlVideo.loadedSeconds / controlVideo.duration) * 100;
-    }, [controlVideo.duration, controlVideo.loadedSeconds]);
+  // const handleVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setControlVideo({ ...controlVideo, volume: Number(e.target.value) });
+  //   preVolume.current = Number(e.target.value);
+  // };
 
-    const handleVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setControlVideo({ ...controlVideo, volume: Number(e.target.value) });
-      preVolume.current = Number(e.target.value);
-    };
+  // const handleMuteVideo = () => {
+  //   setControlVideo({
+  //     ...controlVideo,
+  //     volume: controlVideo.volume
+  //       ? MIN_VOLUME
+  //       : preVolume.current || MAX_VOLUME,
+  //   });
+  // };
 
-    const handleMuteVideo = () => {
-      setControlVideo({
-        ...controlVideo,
-        volume: controlVideo.volume
-          ? MIN_VOLUME
-          : preVolume.current || MAX_VOLUME,
-      });
-    };
+  return (
+    <>
+      <WrapVideoPlay>
+        <ReactPlayerVideo
+          ref={videoRef}
+          videoId={videoId}
+          onDuration={durationVideo}
+          onProgress={progressVideo}
+          onEnded={endVideo}
+          playing={controlVideo.playing}
+          volume={controlVideo.volume}
+          width="auto"
+          height="auto"
+        />
+        {!controlVideo.playing && <div className="thumbnail" />}
+      </WrapVideoPlay>
 
-    return (
-      <>
-        <WrapVideoPlay>
-          <ReactPlayer
-            ref={videoRef}
-            url={YOUTUBE_EMBEDDED_LINK.replace(":youtube_id", videoId)}
-            width="auto"
-            height="auto"
-            onDuration={handleDurationVideo}
-            onProgress={handleProgressVideo}
-            onEnded={handleEndVideo}
-            playing={controlVideo.playing}
-            volume={controlVideo.volume}
-          />
-          {!controlVideo.playing && <div className="thumbnail" />}
-        </WrapVideoPlay>
+      <WrapControlVideo>
+        <ButtonPlay
+          onClick={() => {
+            if (!controlVideo.playing) {
+              playVideo && playVideo(videoIdContext || videoId);
+            } else {
+              pauseVideo && pauseVideo();
+            }
+          }}
+        >
+          {controlVideo.playing ? <IconPause /> : <IconPlayAudio />}
+        </ButtonPlay>
 
-        <WrapControlVideo>
-          <ButtonPlay
-            onClick={() => {
-              setControlVideo({
-                ...controlVideo,
-                playing: !controlVideo.playing,
-              });
-            }}
-          >
-            {controlVideo.playing ? <IconPause /> : <IconPlayAudio />}
-          </ButtonPlay>
-
-          <WrapProgressVideo>
-            <InputRange
-              type="range"
-              min={1}
-              step={1}
-              value={controlVideo.loadedSeconds}
-              max={controlVideo.duration}
-              style={{
-                background: `linear-gradient(
+        <WrapProgressVideo>
+          <InputRange
+            type="range"
+            min={1}
+            step={1}
+            value={controlVideo.loadedSeconds}
+            max={controlVideo.duration}
+            style={{
+              background: `linear-gradient(
                 to right,
-                #1976d2 ${progressVideo}%,
-                #999999 ${progressVideo}%
+                #1976d2 ${videoRunningTime}%,
+                #999999 ${videoRunningTime}%
               )`,
-              }}
-              onChange={handleSeekTo}
-            />
-            <div className="time-progress">
-              <span className="start">
-                {convertSeconds(controlVideo.loadedSeconds, true)}
-              </span>
-              /
-              <span className="end">
-                {convertSeconds(controlVideo.duration, true)}
-              </span>
-            </div>
-          </WrapProgressVideo>
+            }}
+            onChange={handleSeekTo}
+          />
+          <div className="time-progress">
+            <span className="start">
+              {convertSeconds(controlVideo.loadedSeconds, true)}
+            </span>
+            /
+            <span className="end">
+              {convertSeconds(controlVideo.duration, true)}
+            </span>
+          </div>
+        </WrapProgressVideo>
 
-          <WrapVolume>
+        {/* <WrapVolume>
             <div className="btn-volume" onClick={handleMuteVideo}>
               {controlVideo.volume === MIN_VOLUME ? (
                 <IconMute />
@@ -147,11 +143,10 @@ const VideoPlay: FC<VideoPlayProps> = forwardRef(
               value={controlVideo.volume}
               onChange={handleVolume}
             />
-          </WrapVolume>
-        </WrapControlVideo>
-      </>
-    );
-  }
-);
+          </WrapVolume> */}
+      </WrapControlVideo>
+    </>
+  );
+});
 
 export default VideoPlay;

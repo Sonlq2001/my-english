@@ -38,7 +38,7 @@ export const SectionTranscript = styled.div`
       line-height: 2.5rem;
     }
   }
-  &.active {
+  &.active-transcript {
     .time-part,
     .content-section {
       background-color: #fcdbdc;

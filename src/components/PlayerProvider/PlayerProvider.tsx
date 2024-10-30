@@ -21,12 +21,12 @@ export const PlayerContext = createContext<{
   videoRunningTime: number;
   playVideo?: (id: string) => void;
   pauseVideo?: () => void;
-  seekToVideo?: (value: number) => void;
   durationVideo?: (value: number) => void;
   endVideo?: () => void;
   progressVideo?: (value: ProgressVideo) => void;
   videoId: string;
   toggleNavbarAudioPlay?: (open: boolean) => void;
+  autoPlayVideo?: () => void;
 }>({
   isOpenAudio: false,
   videoRunningTime: 0,
@@ -43,6 +43,10 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
 
   const playVideo = (id: string) => {
     setVideoId(id);
+    autoPlayVideo();
+  };
+
+  const autoPlayVideo = () => {
     setControlVideo({ ...controlVideo, playing: true });
   };
 
@@ -66,15 +70,17 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
     setControlVideo({ ...controlVideo, playing: false });
   };
 
-  const seekToVideo = (value: number) => {
-    if (!videoRef.current) return;
-    videoRef.current.seekTo(value);
-    setControlVideo({ ...controlVideo, playing: true });
-  };
-
   const videoRunningTime = useMemo(() => {
     return (controlVideo.loadedSeconds / controlVideo.duration) * 100 || 0;
   }, [controlVideo.duration, controlVideo.loadedSeconds]);
+
+  const seekToVideo = (value: number) => {
+    autoPlayVideo();
+    setTimeout(() => {
+      if (!videoRef.current) return;
+      videoRef.current.seekTo(value);
+    }, 100);
+  };
 
   const provider = {
     playVideo,
@@ -83,11 +89,11 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
     durationVideo,
     progressVideo,
     endVideo,
-    seekToVideo,
     videoRunningTime,
     pauseVideo,
     videoId,
     toggleNavbarAudioPlay,
+    autoPlayVideo,
   };
 
   return (
@@ -106,7 +112,7 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
         />
       )}
       {children}
-      <AudioPlay />
+      <AudioPlay seekToVideo={seekToVideo} />
     </PlayerContext.Provider>
   );
 };

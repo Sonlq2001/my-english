@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import TitlePage from "@app/components/TitlePage/TitlePage";
 import { formatDate } from "@app/helpers/time";
 import { useAppDispatch, useAppSelector } from "@app/redux/store";
-import { ControlVideo } from "@app/features/listening/types/listening.type";
 import TranscriptPodcast from "@app/features/listening/components/TranscriptPodcast/TranscriptPodcast";
 import VideoPlay from "@app/features/listening/components/VideoPlay/VideoPlay";
 
@@ -21,18 +20,11 @@ import { unwrapResult } from "@reduxjs/toolkit";
 const PodcastDetail: FC = () => {
   const dispatch = useAppDispatch();
   const { podcast_id: podcastId } = useParams<{ podcast_id: string }>();
-  const [controlVideo, setControlVideo] = useState<ControlVideo>({
-    playing: false,
-    duration: 0,
-    loadedSeconds: 0,
-    volume: 100,
-  });
   const [isLoadingGetPodcast, setIsLoadingGetPodcast] = useState<boolean>(true);
 
   const videoPlayRef = useRef<{
     setSeekTo: (seekTo: number) => void;
   }>(null);
-
   const podcastDetailData = useAppSelector(
     (state) => state.listening.podcastDetail
   );
@@ -69,8 +61,6 @@ const PodcastDetail: FC = () => {
               <VideoPlay
                 ref={videoPlayRef}
                 videoId={podcastDetailData.videoId}
-                controlVideo={controlVideo}
-                setControlVideo={setControlVideo}
               />
 
               <InfoVideo>
@@ -87,9 +77,6 @@ const PodcastDetail: FC = () => {
               <TranscriptPodcast
                 handleSeekTo={handleSeekTo}
                 transcripts={podcastDetailData.transcripts}
-                duration={controlVideo.loadedSeconds}
-                isPlay={controlVideo.playing}
-                setControlVideo={setControlVideo}
               />
             </WrapTranscript>
           </>
