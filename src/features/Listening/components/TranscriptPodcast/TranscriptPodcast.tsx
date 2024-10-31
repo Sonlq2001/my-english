@@ -15,12 +15,12 @@ const TranscriptPodcast: FC<TranscriptPodcastProps> = ({
 }) => {
   const isSCroll = useRef<boolean>(false);
   const elementListTranscript = useRef<HTMLDivElement>(null);
-  const { playVideo, controlVideo, videoId } = useContext(PlayerContext);
+  const { autoPlayVideo, controlVideo } = useContext(PlayerContext);
 
   const handleSpecifyVideoTime = (seconds: number): void => {
     handleSeekTo(seconds);
-    if (playVideo) {
-      playVideo(videoId);
+    if (autoPlayVideo) {
+      autoPlayVideo();
     }
     isSCroll.current = true;
   };
