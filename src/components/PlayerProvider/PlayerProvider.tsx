@@ -63,23 +63,33 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const progressVideo = (e: ProgressVideo) => {
+    if (Math.ceil(e.loadedSeconds) === controlVideo.duration) {
+      return;
+    }
     setControlVideo({ ...controlVideo, loadedSeconds: e.playedSeconds });
   };
 
   const endVideo = () => {
-    setControlVideo({ ...controlVideo, playing: false });
+    setControlVideo({
+      ...controlVideo,
+      playing: false,
+      loadedSeconds: controlVideo.duration,
+    });
   };
 
   const videoRunningTime = useMemo(() => {
     return (controlVideo.loadedSeconds / controlVideo.duration) * 100 || 0;
   }, [controlVideo.duration, controlVideo.loadedSeconds]);
 
+  // function is not use in context
   const seekToVideo = (value: number) => {
+    if (!videoRef.current) return;
+    videoRef.current.seekTo(value);
+
+    if (value === controlVideo.duration) {
+      return;
+    }
     autoPlayVideo();
-    setTimeout(() => {
-      if (!videoRef.current) return;
-      videoRef.current.seekTo(value);
-    }, 100);
   };
 
   const provider = {

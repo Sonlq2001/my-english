@@ -1,17 +1,17 @@
 import { FC, forwardRef, useContext, useImperativeHandle, useRef } from "react";
 
-import IconPlayAudio from "@app/assets/images/icon-svg/icon-play-audio.svg?react";
-import IconPause from "@app/assets/images/icon-svg/icon-pause.svg?react";
+// import IconPlayAudio from "@app/assets/images/icon-svg/icon-play-audio.svg?react";
+// import IconPause from "@app/assets/images/icon-svg/icon-pause.svg?react";
 // import IconVolume from "@app/assets/images/icon-svg/icon-volume.svg?react";
 // import IconMute from "@app/assets/images/icon-svg/icon-mute.svg?react";
-import InputRange from "@app/components/InputRange/InputRange";
-import { convertSeconds } from "@app/helpers/time";
+// import InputRange from "@app/components/InputRange/InputRange";
+// import { convertSeconds } from "@app/helpers/time";
 
 import {
   WrapVideoPlay,
-  WrapControlVideo,
-  ButtonPlay,
-  WrapProgressVideo,
+  // WrapControlVideo,
+  // ButtonPlay,
+  // WrapProgressVideo,
   // WrapVolume,
 } from "./VideoPlay.styles";
 import ReactPlayerVideo from "@app/components/ReactPlayerVideo/ReactPlayerVideo";
@@ -33,15 +33,15 @@ const VideoPlay: FC<VideoPlayProps> = forwardRef(({ videoId }, ref) => {
   // const preVolume = useRef<number>(MIN_VOLUME);
 
   const {
-    playVideo,
+    // playVideo,
     controlVideo,
-    videoRunningTime,
-    pauseVideo,
-    videoId: videoIdContext,
+    // videoRunningTime,
+    // pauseVideo,
+    // videoId: videoIdContext,
     durationVideo,
     endVideo,
     progressVideo,
-    autoPlayVideo,
+    // autoPlayVideo,
   } = useContext(PlayerContext);
 
   useImperativeHandle(ref, () => ({
@@ -50,11 +50,18 @@ const VideoPlay: FC<VideoPlayProps> = forwardRef(({ videoId }, ref) => {
       videoRef.current.seekTo(Number(value));
     },
   }));
-  const handleSeekTo = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!videoRef.current) return;
-    autoPlayVideo && autoPlayVideo();
-    videoRef.current.seekTo(Number(e.target.value));
-  };
+  // const handleSeekTo = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (!videoRef.current) return;
+  //   const valueSeekTo = Number(e.target.value);
+  //   videoRef.current.seekTo(valueSeekTo);
+
+  //   if (valueSeekTo === controlVideo.duration && endVideo) {
+  //     return;
+  //   }
+  //   if (autoPlayVideo) {
+  //     autoPlayVideo();
+  //   }
+  // };
 
   // const handleVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
   //   setControlVideo({ ...controlVideo, volume: Number(e.target.value) });
@@ -83,11 +90,12 @@ const VideoPlay: FC<VideoPlayProps> = forwardRef(({ videoId }, ref) => {
           volume={controlVideo.volume}
           width="auto"
           height="auto"
+          controls
         />
         {!controlVideo.playing && <div className="thumbnail" />}
       </WrapVideoPlay>
 
-      <WrapControlVideo>
+      {/* <WrapControlVideo>
         <ButtonPlay
           onClick={() => {
             if (!controlVideo.playing) {
@@ -127,7 +135,7 @@ const VideoPlay: FC<VideoPlayProps> = forwardRef(({ videoId }, ref) => {
           </div>
         </WrapProgressVideo>
 
-        {/* <WrapVolume>
+        <WrapVolume>
             <div className="btn-volume" onClick={handleMuteVideo}>
               {controlVideo.volume === MIN_VOLUME ? (
                 <IconMute />
@@ -143,8 +151,8 @@ const VideoPlay: FC<VideoPlayProps> = forwardRef(({ videoId }, ref) => {
               value={controlVideo.volume}
               onChange={handleVolume}
             />
-          </WrapVolume> */}
-      </WrapControlVideo>
+          </WrapVolume>
+      </WrapControlVideo> */}
     </>
   );
 });
