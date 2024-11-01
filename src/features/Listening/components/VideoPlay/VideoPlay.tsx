@@ -33,23 +33,31 @@ const VideoPlay: FC<VideoPlayProps> = forwardRef(({ videoId }, ref) => {
   // const preVolume = useRef<number>(MIN_VOLUME);
 
   const {
-    // playVideo,
+    playVideo,
     controlVideo,
     // videoRunningTime,
-    // pauseVideo,
+    pauseVideo,
     // videoId: videoIdContext,
     durationVideo,
     endVideo,
     progressVideo,
-    // autoPlayVideo,
+    playPause,
   } = useContext(PlayerContext);
 
   useImperativeHandle(ref, () => ({
     setSeekTo: (value: number) => {
-      if (!videoRef.current) return;
+      if (!videoRef.current || value === controlVideo.loadedSeconds) return;
+
       videoRef.current.seekTo(Number(value));
     },
   }));
+
+  const handlePlayVideo = () => {
+    if (playVideo) {
+      playVideo(videoId);
+    }
+  };
+
   // const handleSeekTo = (e: React.ChangeEvent<HTMLInputElement>) => {
   //   if (!videoRef.current) return;
   //   const valueSeekTo = Number(e.target.value);
@@ -91,6 +99,9 @@ const VideoPlay: FC<VideoPlayProps> = forwardRef(({ videoId }, ref) => {
           width="auto"
           height="auto"
           controls
+          onReady={playPause}
+          onPlay={handlePlayVideo}
+          onPause={pauseVideo}
         />
         {!controlVideo.playing && <div className="thumbnail" />}
       </WrapVideoPlay>

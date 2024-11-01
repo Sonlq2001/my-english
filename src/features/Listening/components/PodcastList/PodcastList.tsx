@@ -26,6 +26,7 @@ const PodcastList: FC = () => {
           size="small"
           rightIcon={<IconRight />}
           className="btn-see-all"
+          to="/listening/podcast/list"
         >
           See all
         </AppButton>
