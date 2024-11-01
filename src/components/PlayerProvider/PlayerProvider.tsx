@@ -20,18 +20,23 @@ export const PlayerContext = createContext<{
   controlVideo: ControlVideo;
   videoRunningTime: number;
   playVideo?: (id: string) => void;
-  pauseVideo?: () => void;
+  pauseVideo: () => void;
   durationVideo?: (value: number) => void;
-  endVideo?: () => void;
+  endVideo: () => void;
   progressVideo?: (value: ProgressVideo) => void;
   videoId: string;
   toggleNavbarAudioPlay?: (open: boolean) => void;
-  autoPlayVideo?: () => void;
+  autoPlayVideo: () => void;
+  playPause: () => void;
 }>({
   isOpenAudio: false,
   videoRunningTime: 0,
   controlVideo: initControlVideo,
   videoId: "",
+  playPause: () => {},
+  pauseVideo: () => {},
+  endVideo: () => {},
+  autoPlayVideo: () => {},
 });
 
 const PlayerProvider = ({ children }: { children: ReactNode }) => {
@@ -46,16 +51,22 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
     autoPlayVideo();
   };
 
-  const autoPlayVideo = () => {
-    setControlVideo({ ...controlVideo, playing: true });
-  };
-
-  const toggleNavbarAudioPlay = (open: boolean) => {
-    setIsOpenAudio(Boolean(open));
+  const playPause = () => {
+    setControlVideo({ ...controlVideo, playing: !controlVideo.playing });
   };
 
   const pauseVideo = () => {
     setControlVideo({ ...controlVideo, playing: false });
+  };
+
+  const autoPlayVideo = () => {
+    if (!controlVideo.playing) {
+      setControlVideo({ ...controlVideo, playing: true });
+    }
+  };
+
+  const toggleNavbarAudioPlay = (open: boolean) => {
+    setIsOpenAudio(Boolean(open));
   };
 
   const durationVideo = (e: number) => {
@@ -63,7 +74,7 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const progressVideo = (e: ProgressVideo) => {
-    if (Math.ceil(e.loadedSeconds) === controlVideo.duration) {
+    if (Math.round(e.loadedSeconds) === controlVideo.duration) {
       return;
     }
     setControlVideo({ ...controlVideo, loadedSeconds: e.playedSeconds });
@@ -104,6 +115,7 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
     videoId,
     toggleNavbarAudioPlay,
     autoPlayVideo,
+    playPause,
   };
 
   return (
@@ -119,6 +131,7 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
           playing={controlVideo.playing}
           volume={controlVideo.volume}
           onPause={pauseVideo}
+          onReady={playPause}
         />
       )}
       {children}

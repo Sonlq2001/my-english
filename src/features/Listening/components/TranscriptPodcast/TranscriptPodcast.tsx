@@ -36,10 +36,12 @@ const TranscriptPodcast: FC<TranscriptPodcastProps> = ({
       elementListTranscript.current.querySelector(".active-transcript");
 
     if (currentTranscript) {
-      // TODO: not working
-      currentTranscript.scrollTo({
+      const indexTranscript = Number(currentTranscript.getAttribute("data-id"));
+
+      elementListTranscript.current.scrollTo({
         behavior: "smooth",
-        top: currentTranscript.clientHeight + 100,
+        top:
+          (Math.floor(currentTranscript.clientHeight) + 15) * indexTranscript,
       });
     }
   }, [controlVideo.playing, controlVideo.loadedSeconds]);
@@ -51,13 +53,15 @@ const TranscriptPodcast: FC<TranscriptPodcastProps> = ({
   const handleMouseLeave = () => {
     isSCroll.current = false;
   };
-
+  // console.log(controlVideo);
   return (
     <WrapTranscript
       onMouseOver={handleMouseOver}
       onMouseLeave={handleMouseLeave}
+      ref={elementListTranscript}
+      className="wrap-transcript"
     >
-      <div className="list-transcript" ref={elementListTranscript}>
+      <div className="list-transcript">
         {transcripts.map((transcript, index) => {
           const isActive =
             controlVideo.loadedSeconds >= transcript.offset &&
@@ -65,8 +69,9 @@ const TranscriptPodcast: FC<TranscriptPodcastProps> = ({
 
           return (
             <SectionTranscript
-              key={`transcript-${index}`}
+              key={`transcript-${index + 1}`}
               className={isActive ? "active-transcript" : ""}
+              data-id={index}
             >
               <div className="time-part">
                 {convertSeconds(transcript.offset)}
