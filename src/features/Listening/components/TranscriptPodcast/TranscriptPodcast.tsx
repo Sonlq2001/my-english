@@ -30,8 +30,10 @@ const TranscriptPodcast: FC<TranscriptPodcastProps> = ({
       !controlVideo.playing ||
       isSCroll.current ||
       !elementListTranscript.current
-    )
+    ) {
       return;
+    }
+
     const currentTranscript =
       elementListTranscript.current.querySelector(".active-transcript");
 
@@ -53,7 +55,7 @@ const TranscriptPodcast: FC<TranscriptPodcastProps> = ({
   const handleMouseLeave = () => {
     isSCroll.current = false;
   };
-  // console.log(controlVideo);
+
   return (
     <WrapTranscript
       onMouseOver={handleMouseOver}

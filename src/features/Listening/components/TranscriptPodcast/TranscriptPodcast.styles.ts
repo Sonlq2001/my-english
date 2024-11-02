@@ -16,7 +16,8 @@ export const WrapTranscript = styled.div`
 `;
 
 export const SectionTranscript = styled.div`
-  height: 58px;
+  max-height: 5.8rem;
+  height: 100%;
   .time-part {
     padding: 0.5rem 1rem;
     border-radius: 2rem;
