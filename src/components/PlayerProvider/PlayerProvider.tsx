@@ -96,11 +96,7 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
   const seekToVideo = (value: number) => {
     if (!videoRef.current) return;
     videoRef.current.seekTo(value);
-
-    if (value === controlVideo.duration) {
-      return;
-    }
-    autoPlayVideo();
+    setControlVideo({ ...controlVideo, playing: true, loadedSeconds: value });
   };
 
   const provider = {
