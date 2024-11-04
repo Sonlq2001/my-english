@@ -1,36 +1,33 @@
-import { FC, memo, useEffect, useRef, useContext } from "react";
+import { FC, memo, useEffect, useRef } from "react";
 
 import { convertSeconds } from "@app/helpers/time";
 import { WrapTranscript, SectionTranscript } from "./TranscriptPodcast.styles";
-import { PlayerContext } from "@app/components/PlayerProvider/PlayerProvider";
+import { ControlVideo } from "@app/features/listening/types/listening.type";
 
 interface TranscriptPodcastProps {
   transcripts: { text: string; duration: number; offset: number }[];
   handleSeekTo: (seekTo: number) => void;
+  setControlVideo: (control: ControlVideo) => void;
+  controlVideo: ControlVideo;
 }
 
 const TranscriptPodcast: FC<TranscriptPodcastProps> = ({
   transcripts = [],
   handleSeekTo,
+  controlVideo,
+  setControlVideo,
 }) => {
   const isSCroll = useRef<boolean>(false);
   const elementListTranscript = useRef<HTMLDivElement>(null);
-  const { autoPlayVideo, controlVideo } = useContext(PlayerContext);
 
   const handleSpecifyVideoTime = (seconds: number): void => {
     handleSeekTo(seconds);
-    if (autoPlayVideo) {
-      autoPlayVideo();
-    }
+    setControlVideo({ ...controlVideo, playing: true });
     isSCroll.current = true;
   };
 
   useEffect(() => {
-    if (
-      !controlVideo.playing ||
-      isSCroll.current ||
-      !elementListTranscript.current
-    ) {
+    if (isSCroll.current || !elementListTranscript.current) {
       return;
     }
 
@@ -46,7 +43,7 @@ const TranscriptPodcast: FC<TranscriptPodcastProps> = ({
           (Math.floor(currentTranscript.clientHeight) + 15) * indexTranscript,
       });
     }
-  }, [controlVideo.playing, controlVideo.loadedSeconds]);
+  }, [controlVideo.loadedSeconds]);
 
   const handleMouseOver = () => {
     isSCroll.current = true;

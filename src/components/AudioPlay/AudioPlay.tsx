@@ -25,16 +25,8 @@ interface AudioPlayProps {
 }
 
 const AudioPlay: FC<AudioPlayProps> = ({ seekToVideo }) => {
-  const {
-    isOpenAudio,
-    playVideo,
-    controlVideo,
-    videoRunningTime,
-    pauseVideo,
-    videoId,
-  } = useContext(PlayerContext);
-
-  if (!isOpenAudio) return;
+  const { playVideo, controlVideo, videoRunningTime, pauseVideo, videoId } =
+    useContext(PlayerContext);
 
   const handlePlayVideo = () => {
     if (playVideo) {

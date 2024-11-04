@@ -74,3 +74,12 @@ export const BoxUser = styled.div`
     }
   }
 `;
+
+export const PodcastList = styled.section`
+  margin-top: 3rem;
+  display: flex;
+  gap: 3rem;
+  & > * {
+    flex: 1;
+  }
+`;

@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const WrapTopicList = styled.div`
+export const WrapTopicList = styled.section`
   margin-top: 3rem;
   border-radius: 2.5rem;
   background-color: ${(props) => props.theme.palette.white};
@@ -8,7 +8,7 @@ export const WrapTopicList = styled.div`
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 `;
 
-export const HeaderBox = styled.section`
+export const HeaderBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -30,7 +30,7 @@ export const HeaderBox = styled.section`
   }
 `;
 
-export const WrapCarousel = styled.section`
+export const WrapCarousel = styled.div`
   margin-top: 3.5rem;
   .slick-slider {
     max-width: calc(100vw - 22rem - 8rem - 7rem);

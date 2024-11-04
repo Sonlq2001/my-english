@@ -7,13 +7,7 @@ import {
   ProgressVideo,
 } from "@app/features/listening/types/listening.type";
 import ReactPlayerVideo from "@app/components/ReactPlayerVideo/ReactPlayerVideo";
-
-const initControlVideo = {
-  playing: false,
-  duration: 0,
-  loadedSeconds: 0,
-  volume: 100,
-};
+import { initControlVideo } from "@app/constants/app.constants";
 
 export const PlayerContext = createContext<{
   isOpenAudio: boolean;
@@ -131,7 +125,7 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
         />
       )}
       {children}
-      <AudioPlay seekToVideo={seekToVideo} />
+      {isOpenAudio && <AudioPlay seekToVideo={seekToVideo} />}
     </PlayerContext.Provider>
   );
 };

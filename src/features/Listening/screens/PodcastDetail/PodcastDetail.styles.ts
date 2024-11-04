@@ -25,6 +25,7 @@ export const InfoVideo = styled.div`
 
 export const DescriptionVideo = styled.div`
   margin-top: 2rem;
+  line-height: 2.5rem;
 `;
 
 export const WrapTranscript = styled.div`

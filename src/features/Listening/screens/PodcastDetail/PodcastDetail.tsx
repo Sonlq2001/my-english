@@ -1,11 +1,13 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import TitlePage from "@app/components/TitlePage/TitlePage";
 import { formatDate } from "@app/helpers/time";
-import { useAppDispatch, useAppSelector } from "@app/redux/store";
 import TranscriptPodcast from "@app/features/listening/components/TranscriptPodcast/TranscriptPodcast";
 import VideoPlay from "@app/features/listening/components/VideoPlay/VideoPlay";
+import { useGetPodcastDetailQuery } from "@app/features/listening/listening";
+import { ControlVideo } from "@app/features/listening/types/listening.type";
+import { initControlVideo } from "@app/constants/app.constants";
 
 import {
   WrapPodcast,
@@ -14,20 +16,16 @@ import {
   DescriptionVideo,
   WrapTranscript,
 } from "./PodcastDetail.styles";
-import { getPodcast } from "@app/features/listening/listening";
-import { unwrapResult } from "@reduxjs/toolkit";
 
 const PodcastDetail: FC = () => {
-  const dispatch = useAppDispatch();
-  const { podcast_id: podcastId } = useParams<{ podcast_id: string }>();
-  const [isLoadingGetPodcast, setIsLoadingGetPodcast] = useState<boolean>(true);
+  const { podcast_id } = useParams<{ podcast_id: string }>();
+  const [controlVideo, setControlVideo] =
+    useState<ControlVideo>(initControlVideo);
+  const { data, isLoading } = useGetPodcastDetailQuery(podcast_id || "");
 
   const videoPlayRef = useRef<{
     setSeekTo: (seekTo: number) => void;
   }>(null);
-  const podcastDetailData = useAppSelector(
-    (state) => state.listening.podcastDetail
-  );
 
   const handleSeekTo = (seekTo: number) => {
     if (videoPlayRef.current?.setSeekTo) {
@@ -35,15 +33,7 @@ const PodcastDetail: FC = () => {
     }
   };
 
-  useEffect(() => {
-    if (!podcastId) return;
-
-    dispatch(getPodcast(podcastId))
-      .then(unwrapResult)
-      .finally(() => setIsLoadingGetPodcast(false));
-  }, [dispatch, podcastId]);
-
-  if (!podcastDetailData) return;
+  if (!data) return;
 
   return (
     <main>
@@ -53,30 +43,32 @@ const PodcastDetail: FC = () => {
       />
 
       <WrapPodcast>
-        {isLoadingGetPodcast ? (
+        {isLoading ? (
           <div>Loading...</div>
         ) : (
           <>
             <ContentVideo>
               <VideoPlay
                 ref={videoPlayRef}
-                videoId={podcastDetailData.videoId}
+                videoId={data.videoId}
+                setControlVideo={setControlVideo}
+                controlVideo={controlVideo}
               />
 
               <InfoVideo>
-                <h2>{podcastDetailData.title}</h2>
-                <p>{formatDate(podcastDetailData.updatedAt)}</p>
+                <h2>{data.title}</h2>
+                <p>{formatDate(data.updatedAt)}</p>
               </InfoVideo>
-              <DescriptionVideo>
-                {podcastDetailData?.description}
-              </DescriptionVideo>
+              <DescriptionVideo>{data?.description}</DescriptionVideo>
             </ContentVideo>
 
             <WrapTranscript>
               <h4>Transcript</h4>
               <TranscriptPodcast
                 handleSeekTo={handleSeekTo}
-                transcripts={podcastDetailData.transcripts}
+                transcripts={data.transcripts}
+                setControlVideo={setControlVideo}
+                controlVideo={controlVideo}
               />
             </WrapTranscript>
           </>
