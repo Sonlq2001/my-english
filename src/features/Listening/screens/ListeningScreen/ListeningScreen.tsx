@@ -94,7 +94,7 @@ import {
   WrapListening,
 } from "./ListeningScreen.styles";
 
-const ReadingScreen: FC = () => {
+const ListeningScreen: FC = () => {
   return (
     <WrapListening>
       <BannerListening>
@@ -134,4 +134,4 @@ const ReadingScreen: FC = () => {
   );
 };
 
-export default ReadingScreen;
+export default ListeningScreen;

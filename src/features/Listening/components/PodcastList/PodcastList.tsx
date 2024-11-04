@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Link } from "react-router-dom";
 
 import AppButton from "@app/components/AppButton/AppButton";
 import IconRight from "@app/assets/images/icon-svg/icon-right.svg?react";
@@ -6,6 +7,10 @@ import IconPlay from "@app/assets/images/icon-svg/icon-play.svg?react";
 import IconStar from "@app/assets/images/icon-svg/icon-star.svg?react";
 import IconThreeDotsVertical from "@app/assets/images/icon-svg/icon-three-dots-vertical.svg?react";
 import LazyImage from "@app/components/LazyImage/LazyImage";
+import {
+  ListeningPathsEnum,
+  useGetListPodcastQuery,
+} from "@app/features/listening/listening";
 
 import {
   HeaderBox,
@@ -16,6 +21,8 @@ import {
 } from "./PodcastList.styles";
 
 const PodcastList: FC = () => {
+  const { data, isLoading } = useGetListPodcastQuery();
+
   return (
     <WrapPodcastList>
       <HeaderBox>
@@ -32,34 +39,46 @@ const PodcastList: FC = () => {
         </AppButton>
       </HeaderBox>
 
-      {/* TODO: map data */}
       <ListDataPodcast>
-        {Array(5)
-          .fill(1)
-          .map((_, index) => (
-            <ItemPodcast key={index}>
-              <div className="info-podcast">
-                <LazyImage
-                  src="https://cdn.pixabay.com/photo/2018/03/20/13/22/sound-3243259_640.jpg"
-                  alt=""
-                />
-                <div className="text-podcast">
-                  <span className="title-podcast">
-                    If you need anything, just say
-                  </span>
-                  <span className="auth-podcast">English today</span>
-                </div>
-              </div>
+        {isLoading ? (
+          // TODO: Loading skeleton
+          <div>Loading...</div>
+        ) : (
+          <>
+            {data && data?.length > 0 ? (
+              data.map((podcastItem) => (
+                <ItemPodcast key={podcastItem.id}>
+                  <Link
+                    to={ListeningPathsEnum.PODCAST_DETAIL.replace(
+                      ":podcast_id",
+                      podcastItem.id
+                    )}
+                    className="info-podcast"
+                  >
+                    <LazyImage
+                      src={podcastItem.thumbnail?.imageUrl || ""}
+                      alt={podcastItem.title}
+                    />
+                    <div className="text-podcast">
+                      <h3 className="title-podcast">{podcastItem.title}</h3>
+                      <span className="auth-podcast">{podcastItem.topic}</span>
+                    </div>
+                  </Link>
 
-              <ActionPodcast>
-                <span>9:52</span>
-                <IconStar className="svg-star" />
-                <IconPlay className="svg-play" />
-              </ActionPodcast>
-
-              <IconThreeDotsVertical />
-            </ItemPodcast>
-          ))}
+                  <ActionPodcast>
+                    <span>9:52</span>
+                    <IconStar className="svg-star" />
+                    <IconPlay className="svg-play" />
+                  </ActionPodcast>
+                  <IconThreeDotsVertical />
+                </ItemPodcast>
+              ))
+            ) : (
+              // TODO: Component empty
+              <div>Empty</div>
+            )}
+          </>
+        )}
       </ListDataPodcast>
     </WrapPodcastList>
   );
