@@ -22,17 +22,17 @@ export const HeaderBox = styled.div`
   }
 `;
 
-export const ListDataPodcast = styled.section`
+export const ListDataPodcast = styled.ul`
   margin-top: 3.5rem;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  list-style-type: none;
 `;
 
-export const ItemPodcast = styled.article`
+export const ItemPodcast = styled.li`
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 4rem;
   padding: 8px;
   border-radius: 5px;
@@ -55,6 +55,8 @@ export const ItemPodcast = styled.article`
     }
     .title-podcast {
       font-weight: 500;
+      font-size: 1.6rem;
+      line-height: 1.8rem;
     }
     .auth-podcast {
       font-size: 1.4rem;
@@ -66,7 +68,9 @@ export const ItemPodcast = styled.article`
 export const ActionPodcast = styled.div`
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 6rem;
+  flex: 1;
   span {
     font-size: 1.5rem;
     color: ${(props) => props.theme.palette.gray.medium};

@@ -1,16 +1,17 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 
 import { BaseResponse } from "@app/types/app.types";
 import { toCamel } from "@app/helpers/convert-object";
-
-import { ListeningEndpointsEnum } from "../constants/listening.endpoints";
-import { ResPodcast, ResListPodcast } from "../types/listening.type";
+import { baseQueryWithAuth } from "@app/features/setting/helpers/get-base-query-auth";
+import {
+  ResListPodcast,
+  ResPodcast,
+} from "@app/features/listening/types/listening.type";
+import { ListeningEndpointsEnum } from "@app/features/listening/constants/listening.endpoints";
 
 export const listeningQuery = createApi({
   reducerPath: "listeningQuery",
-  baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_BASE_API,
-  }),
+  baseQuery: baseQueryWithAuth,
 
   endpoints: (build) => ({
     getPodcastDetail: build.query<ResPodcast, string>({
