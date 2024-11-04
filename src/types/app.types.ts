@@ -33,3 +33,8 @@ export type TypeMenuImage = {
   alt: string;
   tab: TABS_UPLOAD;
 };
+
+export type QueryParamsUrl = {
+  page: number;
+  perPage: number;
+};

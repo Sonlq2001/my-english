@@ -1,7 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 
-import { BaseResponse } from "@app/types/app.types";
-import { toCamel } from "@app/helpers/convert-object";
+import { QueryParamsUrl } from "@app/types/app.types";
 import { baseQueryWithAuth } from "@app/features/setting/helpers/get-base-query-auth";
 import {
   ResListPodcast,
@@ -12,7 +11,6 @@ import { ListeningEndpointsEnum } from "@app/features/listening/constants/listen
 export const listeningQuery = createApi({
   reducerPath: "listeningQuery",
   baseQuery: baseQueryWithAuth,
-
   endpoints: (build) => ({
     getPodcastDetail: build.query<ResPodcast, string>({
       query: (podcastId) => ({
@@ -20,17 +18,14 @@ export const listeningQuery = createApi({
           ":podcast_id",
           podcastId
         ),
-        method: "GET",
       }),
-      transformResponse: (rawResult: BaseResponse<ResPodcast>) => {
-        return toCamel(rawResult.metadata) as ResPodcast;
-      },
     }),
-
-    getListPodcast: build.query<ResListPodcast, void>({
-      query: () => ListeningEndpointsEnum.GET_LIST_PODCAST,
-      transformResponse: (rawResult: BaseResponse<ResListPodcast>) => {
-        return toCamel(rawResult.metadata) as ResListPodcast;
+    getListPodcast: build.query<ResListPodcast, QueryParamsUrl>({
+      query: (params) => {
+        return {
+          url: ListeningEndpointsEnum.GET_LIST_PODCAST,
+          params,
+        };
       },
     }),
   }),

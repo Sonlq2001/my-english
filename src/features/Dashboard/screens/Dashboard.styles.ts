@@ -27,7 +27,7 @@ export const WrapPodcast = styled.section`
   }
 `;
 
-export const SectionPodcast = styled.article`
+export const SectionPodcast = styled.li`
   display: flex;
   align-items: center;
   gap: 3rem;

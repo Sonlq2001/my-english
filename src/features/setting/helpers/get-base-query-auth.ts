@@ -8,6 +8,9 @@ import {
 import { refreshToken } from "@app/features/auth/auth";
 import { unwrapResult } from "@reduxjs/toolkit";
 
+import { BaseResponse } from "@app/types/app.types";
+import { toSnakeCase, toCamel } from "@app/helpers/convert-object";
+
 const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_BASE_API,
   prepareHeaders: (headers, { getState }) => {
@@ -27,6 +30,10 @@ export const baseQueryWithAuth: BaseQueryFn<
   unknown,
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
+  if (typeof args !== "string") {
+    args.params = toSnakeCase(args.params);
+  }
+
   let result = await baseQuery(args, api, extraOptions);
 
   if (result.error && result.error.status === 408) {
@@ -39,5 +46,6 @@ export const baseQueryWithAuth: BaseQueryFn<
       // TODO: refresh token fail -> logout
     }
   }
+  result.data = toCamel((result.data as BaseResponse<unknown>).metadata);
   return result;
 };

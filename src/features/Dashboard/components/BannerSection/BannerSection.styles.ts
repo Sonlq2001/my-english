@@ -62,6 +62,7 @@ export const BannerContent = styled.div`
     font-weight: 600;
     color: ${(props) => props.theme.palette.white};
     background-color: ${(props) => props.theme.palette.primary.main};
+    display: inline-block;
   }
   .img-rock-band {
     position: absolute;
