@@ -21,7 +21,7 @@ import {
 } from "./PodcastList.styles";
 
 const PodcastList: FC = () => {
-  const { data, isLoading } = useGetListPodcastQuery();
+  const { data, isLoading } = useGetListPodcastQuery({ page: 1, perPage: 20 });
 
   return (
     <WrapPodcastList>

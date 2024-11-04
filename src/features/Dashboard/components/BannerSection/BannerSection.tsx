@@ -1,19 +1,33 @@
-import { FC } from "react";
+import { FC, useMemo } from "react";
 
 import SectionTitle from "@app/components/SectionTitle/SectionTitle";
 import IconParty from "@app/assets/images/icon-svg/icon-party-popper.svg?react";
 import IconStarBold from "@app/assets/images/icon-svg/icon-star-bold.svg?react";
 import IconHeart from "@app/assets/images/icon-svg/icon-heart.svg?react";
 import ImagePodcast from "@app/assets/images/image-podcast.png";
+import Fireworks from "@app/components/Fireworks/Fireworks";
+import {
+  ListeningPathsEnum,
+  useGetListPodcastQuery,
+} from "@app/features/listening/listening";
 
 import {
   BannerSectionWrap,
   BannerContent,
   DecoBanner,
 } from "./BannerSection.styles";
-import Fireworks from "@app/components/Fireworks/Fireworks";
+import { Link } from "react-router-dom";
 
 const BannerSection: FC = () => {
+  const { data } = useGetListPodcastQuery({ page: 1, perPage: 5 });
+
+  const podcastIdLatest = useMemo(() => {
+    if (data && data.length > 0) {
+      return data[0].id;
+    }
+    return null;
+  }, [data]);
+
   return (
     <BannerSectionWrap>
       <SectionTitle title="Out Now" icon={<IconParty />} />
@@ -31,7 +45,15 @@ const BannerSection: FC = () => {
           </span>
           Start enjoying
         </div>
-        <button className="btn-listen">Listen Now</button>
+        <Link
+          className="btn-listen"
+          to={ListeningPathsEnum.PODCAST_DETAIL.replace(
+            ":podcast_id",
+            podcastIdLatest || ""
+          )}
+        >
+          Listen Now
+        </Link>
 
         <DecoBanner>
           <Fireworks className="firework1" />

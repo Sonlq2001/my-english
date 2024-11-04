@@ -12,6 +12,7 @@ import DocumentsSection from "@app/features/dashboard/components/DocumentsSectio
 import PlayPodcasts from "@app/features/dashboard/components/PlayPodcasts/PlayPodcasts";
 import Skills from "@app/features/dashboard/components/Skills/Skills";
 import LazyImage from "@app/components/LazyImage/LazyImage";
+import { useGetListPodcastQuery } from "@app/features/listening/listening";
 
 import BannerSection from "../components/BannerSection/BannerSection";
 import {
@@ -27,6 +28,7 @@ const DashboardScreen: FC = () => {
   const [currentTabFavorite, setCurrentTabFavorite] = useState(
     TabFavorite.Tab1
   );
+  const { data } = useGetListPodcastQuery({ page: 1, perPage: 5 });
 
   return (
     <DashboardWrap>
@@ -38,47 +40,31 @@ const DashboardScreen: FC = () => {
         <WrapPodcast>
           <h3>Most popular</h3>
 
-          <div className="list-section">
-            <SectionPodcast>
-              <span className="index-podcast">01</span>
+          {data && data.length > 0 && (
+            <ul className="list-section">
+              {data.map((podcastItem, index) => (
+                <SectionPodcast key={podcastItem.id}>
+                  <span className="index-podcast">{`0${index + 1}`}</span>
 
-              <div className="content-podcast">
-                <LazyImage
-                  src="https://cdn.pixabay.com/photo/2023/06/11/01/24/flowers-8055013_640.jpg"
-                  alt=""
-                />
-                <div className="info-podcast">
-                  <h4>How to be a productive person</h4>
-                  <span>Johnson Alert</span>
-                </div>
-              </div>
+                  <div className="content-podcast">
+                    <LazyImage
+                      src={podcastItem.thumbnail?.imageUrl || ""}
+                      alt={podcastItem.title}
+                    />
+                    <div className="info-podcast">
+                      <h4>{podcastItem.title}</h4>
+                      <span>{podcastItem.author}</span>
+                    </div>
+                  </div>
 
-              <div className="time-podcast">
-                <IconClock />
-                <span>4:30</span>
-              </div>
-            </SectionPodcast>
-
-            <SectionPodcast>
-              <span className="index-podcast">01</span>
-
-              <div className="content-podcast">
-                <LazyImage
-                  src="https://cdn.pixabay.com/photo/2023/06/11/01/24/flowers-8055013_640.jpg"
-                  alt=""
-                />
-                <div className="info-podcast">
-                  <h4>How to be a productive person</h4>
-                  <span>Johnson Alert</span>
-                </div>
-              </div>
-
-              <div className="time-podcast">
-                <IconClock />
-                <span>4:30</span>
-              </div>
-            </SectionPodcast>
-          </div>
+                  <div className="time-podcast">
+                    <IconClock />
+                    <span>4:30</span>
+                  </div>
+                </SectionPodcast>
+              ))}
+            </ul>
+          )}
         </WrapPodcast>
       </ContentLeft>
 
