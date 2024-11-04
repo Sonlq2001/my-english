@@ -11,22 +11,22 @@ import {
   ListeningPathsEnum,
   useGetListPodcastQuery,
 } from "@app/features/listening/listening";
+import { WrapContentContainer } from "@app/components/ContentContainer/ContentContainer.styles";
 
 import {
   HeaderBox,
   ListDataPodcast,
-  WrapPodcastList,
   ItemPodcast,
   ActionPodcast,
-} from "./PodcastList.styles";
+} from "./VideoPodcastList.styles";
 
-const PodcastList: FC = () => {
+const VideoPodcastList: FC = () => {
   const { data, isLoading } = useGetListPodcastQuery({ page: 1, perPage: 20 });
 
   return (
-    <WrapPodcastList>
+    <WrapContentContainer>
       <HeaderBox>
-        <h2>Podcast list</h2>
+        <h2>Video podcast list</h2>
 
         <AppButton
           variant="outlined"
@@ -80,8 +80,8 @@ const PodcastList: FC = () => {
           </>
         )}
       </ListDataPodcast>
-    </WrapPodcastList>
+    </WrapContentContainer>
   );
 };
 
-export default PodcastList;
+export default VideoPodcastList;

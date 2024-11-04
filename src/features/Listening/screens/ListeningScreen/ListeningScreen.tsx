@@ -5,20 +5,22 @@ import IconMedal from "@app/assets/images/icon-svg/icon-medal.svg?react";
 import IconFire from "@app/assets/images/icon-svg/icon-fire.svg?react";
 import IconLeaf from "@app/assets/images/icon-svg/icon-four-leaf-clover.svg?react";
 import TopicList from "@app/features/listening/components/TopicList/TopicList";
-import PodcastList from "@app/features/listening/components/PodcastList/PodcastList";
+import VideoPodcastList from "@app/features/listening/components/VideoPodcastList/VideoPodcastList";
 import LazyImage from "@app/components/LazyImage/LazyImage";
 
 import {
   BannerListening,
   BoxUser,
+  PodcastList,
   WrapListening,
 } from "./ListeningScreen.styles";
+import PodcastAudioList from "@app/features/listening/components/PodcastAudioList/PodcastAudioList";
 
 const ListeningScreen: FC = () => {
   return (
     <WrapListening>
       <BannerListening>
-        <article className="box-image">
+        <div className="box-image">
           <div className="content-banner">
             <h1>Mind the music</h1>
             <p>
@@ -27,7 +29,7 @@ const ListeningScreen: FC = () => {
             </p>
           </div>
           <LazyImage src={ImagePodcast} alt="" />
-        </article>
+        </div>
 
         <BoxUser>
           <LazyImage
@@ -49,7 +51,10 @@ const ListeningScreen: FC = () => {
 
       <TopicList />
 
-      <PodcastList />
+      <PodcastList>
+        <VideoPodcastList />
+        <PodcastAudioList />
+      </PodcastList>
     </WrapListening>
   );
 };

@@ -30,3 +30,10 @@ export enum CONTENT_TYPES_HEADER {
 
 export const YOUTUBE_EMBEDDED_LINK =
   "https://www.youtube.com/embed/:youtube_id";
+
+export const initControlVideo = {
+  playing: false,
+  duration: 0,
+  loadedSeconds: 0,
+  volume: 100,
+};
