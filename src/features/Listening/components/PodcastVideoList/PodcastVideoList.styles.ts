@@ -49,6 +49,10 @@ export const ItemPodcast = styled.li`
       font-weight: 500;
       font-size: 1.6rem;
       line-height: 1.8rem;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
     }
     .auth-podcast {
       font-size: 1.4rem;
@@ -61,15 +65,12 @@ export const ActionPodcast = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 6rem;
+  gap: 3rem;
   flex: 1;
   span {
     font-size: 1.5rem;
     color: ${(props) => props.theme.palette.gray.medium};
     font-weight: 500;
-  }
-  .svg-star {
-    color: #d0a81b;
   }
   .svg-play {
     color: ${(props) => props.theme.palette.primary.main};

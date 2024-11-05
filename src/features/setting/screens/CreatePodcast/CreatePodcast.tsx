@@ -75,7 +75,7 @@ const CreatePodcast: FC = () => {
       const res = unwrapResult(await dispatchAction);
 
       navigate(
-        ListeningPathsEnum.PODCAST_DETAIL.replace(":podcast_id", res.id)
+        ListeningPathsEnum.PODCAST_VIDEO_DETAIL.replace(":podcast_id", res.id)
       );
     } catch (error) {
       // TODO: Error

@@ -37,4 +37,7 @@ export type TypeMenuImage = {
 export type QueryParamsUrl = {
   page: number;
   perPage: number;
+  type?: TypePodCast;
 };
+
+export type TypePodCast = "VIDEO" | "AUDIO";

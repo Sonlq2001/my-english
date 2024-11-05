@@ -1,5 +1,6 @@
 export enum ListeningPathsEnum {
   LISTENING = "/listening",
-  PODCAST_DETAIL = "/listening/:podcast_id",
-  PODCAST_LIST_TOPIC = "/listening/podcast/list",
+  PODCAST_VIDEO_DETAIL = "/listening/podcast/video/:podcast_id",
+  PODCAST_LIST = "/listening/podcast/list",
+  PODCAST_AUDIO_DETAIL = "/listening/podcast/audio/:podcast_id",
 }

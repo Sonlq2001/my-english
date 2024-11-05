@@ -1,5 +1,4 @@
-import { FC, useEffect, useState } from "react";
-import { unwrapResult } from "@reduxjs/toolkit";
+import { FC } from "react";
 
 import {
   SectionLeft,
@@ -11,27 +10,22 @@ import {
   BannerRemindContent,
   Bookmark,
   TitleMarker,
+  CurrentDate,
 } from "@app/features/notepad/screens/NotepadScreen/NotepadScreen.styles";
 import ContentContainer from "@app/components/ContentContainer/ContentContainer";
 import NotepadSection from "@app/features/notepad/components/NotepadSection/NotepadSection";
-import { useAppDispatch, useAppSelector } from "@app/redux/store";
-import { getListNotepads } from "@app/features/notepad/notepad";
 import ImageSchedule from "@app/assets/images/schedule.png";
 import IconClock from "@app/assets/images/icon-svg/icon-clock.svg?react";
+import getDaysOfWeek from "@app/helpers/get-day-of-week";
+
+import { useGetListNotepadsQuery } from "../../notepad";
+import { monthsName } from "@app/constants/app.constants";
 
 const NotepadScreen: FC = () => {
-  const dispatch = useAppDispatch();
-  const listNotepads = useAppSelector(
-    (state) => state.notepad.notepadData.list
-  );
-  const [isLoadingListNotepads, setIsLoadingListNotepads] =
-    useState<boolean>(true);
+  const { data, isLoading } = useGetListNotepadsQuery({ page: 1, perPage: 20 });
 
-  useEffect(() => {
-    dispatch(getListNotepads())
-      .then(unwrapResult)
-      .finally(() => setIsLoadingListNotepads(false));
-  }, [dispatch]);
+  const currentMonth = new Date().getMonth();
+  const currentYear = new Date().getFullYear();
 
   return (
     <WrapNotepad>
@@ -53,45 +47,32 @@ const NotepadScreen: FC = () => {
             </BannerRemindContent>
             <img src={ImageSchedule} alt="schedule" />
           </BannerRemind>
+
+          <CurrentDate>
+            {monthsName[currentMonth]}, {currentYear}
+          </CurrentDate>
+
           <WrapWeek>
-            <ItemDay>
-              <span className="day-name">Monday</span>
-              <span className="day-number">21</span>
-            </ItemDay>
-            <ItemDay>
-              <span className="day-name">Tuesday</span>
-              <span className="day-number">21</span>
-            </ItemDay>
-            <ItemDay>
-              <span className="day-name">Wednesday</span>
-              <span className="day-number">21</span>
-            </ItemDay>
-            <ItemDay>
-              <span className="day-name">Thursday</span>
-              <span className="day-number">21</span>
-            </ItemDay>
-            <ItemDay>
-              <span className="day-name">Friday</span>
-              <span className="day-number">21</span>
-            </ItemDay>
-            <ItemDay>
-              <span className="day-name">Saturday</span>
-              <span className="day-number">21</span>
-            </ItemDay>
-            <ItemDay>
-              <span className="day-name">Sunday</span>
-              <span className="day-number">21</span>
-            </ItemDay>
+            {getDaysOfWeek().map((day) => (
+              <ItemDay key={day.dayName} className={day.active ? "active" : ""}>
+                <span className="day-name">{day.dayName}</span>
+                <span className="day-number">{day.dayNumber}</span>
+              </ItemDay>
+            ))}
           </WrapWeek>
 
-          {isLoadingListNotepads ? (
+          {isLoading ? (
             // TODO: Loading
             <div>Loading...</div>
           ) : (
             <>
-              {listNotepads?.map((item) => (
-                <NotepadSection key={item.id} notepad={item} />
-              ))}
+              {data && data.length > 0 ? (
+                data.map((item) => (
+                  <NotepadSection key={item.id} notepad={item} />
+                ))
+              ) : (
+                <div>Empty</div>
+              )}
             </>
           )}
         </ContentContainer>

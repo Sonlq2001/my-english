@@ -5,7 +5,8 @@ import IconMedal from "@app/assets/images/icon-svg/icon-medal.svg?react";
 import IconFire from "@app/assets/images/icon-svg/icon-fire.svg?react";
 import IconLeaf from "@app/assets/images/icon-svg/icon-four-leaf-clover.svg?react";
 import TopicList from "@app/features/listening/components/TopicList/TopicList";
-import VideoPodcastList from "@app/features/listening/components/VideoPodcastList/VideoPodcastList";
+import PodcastVideoList from "@app/features/listening/components/PodcastVideoList/PodcastVideoList";
+import PodcastAudioList from "@app/features/listening/components/PodcastAudioList/PodcastAudioList";
 import LazyImage from "@app/components/LazyImage/LazyImage";
 
 import {
@@ -14,7 +15,6 @@ import {
   PodcastList,
   WrapListening,
 } from "./ListeningScreen.styles";
-import PodcastAudioList from "@app/features/listening/components/PodcastAudioList/PodcastAudioList";
 
 const ListeningScreen: FC = () => {
   return (
@@ -52,7 +52,7 @@ const ListeningScreen: FC = () => {
       <TopicList />
 
       <PodcastList>
-        <VideoPodcastList />
+        <PodcastVideoList />
         <PodcastAudioList />
       </PodcastList>
     </WrapListening>

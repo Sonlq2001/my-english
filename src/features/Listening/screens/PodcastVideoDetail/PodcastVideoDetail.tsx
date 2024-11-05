@@ -15,9 +15,9 @@ import {
   InfoVideo,
   DescriptionVideo,
   WrapTranscript,
-} from "./PodcastDetail.styles";
+} from "./PodcastVideoDetail.styles";
 
-const PodcastDetail: FC = () => {
+const PodcastVideoDetail: FC = () => {
   const { podcast_id } = useParams<{ podcast_id: string }>();
   const [controlVideo, setControlVideo] =
     useState<ControlVideo>(initControlVideo);
@@ -78,4 +78,4 @@ const PodcastDetail: FC = () => {
   );
 };
 
-export default PodcastDetail;
+export default PodcastVideoDetail;

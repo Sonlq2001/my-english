@@ -15,6 +15,7 @@ import { listeningQuery } from "@app/features/listening/listening";
 import { vocabularyQuery } from "@app/features/vocabulary/vocabulary";
 import { readingQuery } from "@app/features/reading/reading";
 import { writingQuery } from "@app/features/writing/writing";
+import { notepadQuery } from "@app/features/notepad/notepad";
 
 import rootReducer from "./rootReducer";
 
@@ -30,7 +31,8 @@ export const store = configureStore({
       .concat(listeningQuery.middleware)
       .concat(vocabularyQuery.middleware)
       .concat(readingQuery.middleware)
-      .concat(writingQuery.middleware),
+      .concat(writingQuery.middleware)
+      .concat(notepadQuery.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

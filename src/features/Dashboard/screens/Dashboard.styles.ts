@@ -68,6 +68,19 @@ export const SectionPodcast = styled.li`
   }
 `;
 
+export const LabelChipTypePodcast = styled.span<{ type: "VIDEO" | "AUDIO" }>`
+  font-size: 1.3rem;
+  margin-right: 5rem;
+  text-transform: lowercase;
+  border-radius: 1.5rem;
+  padding: 0.5rem 1rem;
+  background-color: ${(props) =>
+    props.type === "VIDEO" ? "#b8040433" : "#2d849f33"};
+  &:first-letter {
+    text-transform: uppercase;
+  }
+`;
+
 export const TabsFavorite = styled.section`
   display: flex;
   align-items: center;

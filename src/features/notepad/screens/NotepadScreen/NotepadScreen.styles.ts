@@ -20,7 +20,7 @@ export const WrapWeek = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 4rem;
-  margin: 4rem 0 3rem 0;
+  margin-bottom: 3rem;
   border-bottom: 1px solid ${(props) => props.theme.palette.gray.extraLight};
   padding-bottom: 2rem;
   overflow: auto;
@@ -36,7 +36,9 @@ export const ItemDay = styled.div`
   align-items: center;
   padding: 1rem;
   cursor: pointer;
-  border-bottom: 3px solid ${(props) => props.theme.palette.primary.light};
+  &.active {
+    border-bottom: 3px solid ${(props) => props.theme.palette.primary.light};
+  }
   .day-name {
     font-weight: 600;
   }
@@ -97,4 +99,11 @@ export const Bookmark = styled.article<{ $point: number }>`
 export const TitleMarker = styled.h2`
   font-size: 1.7rem;
   margin-bottom: 2rem;
+`;
+
+export const CurrentDate = styled.div`
+  text-align: right;
+  font-size: 2.3rem;
+  font-weight: 600;
+  margin: 4rem 0 3rem 0;
 `;

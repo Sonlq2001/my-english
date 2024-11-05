@@ -37,3 +37,18 @@ export const initControlVideo = {
   loadedSeconds: 0,
   volume: 100,
 };
+
+export const monthsName = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];

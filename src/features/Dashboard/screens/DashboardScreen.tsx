@@ -19,6 +19,7 @@ import {
   ContentLeft,
   ContentRight,
   DashboardWrap,
+  LabelChipTypePodcast,
   SectionPodcast,
   TabsFavorite,
   WrapPodcast,
@@ -58,6 +59,9 @@ const DashboardScreen: FC = () => {
                   </div>
 
                   <div className="time-podcast">
+                    <LabelChipTypePodcast type={podcastItem.type}>
+                      {podcastItem.type}
+                    </LabelChipTypePodcast>
                     <IconClock />
                     <span>4:30</span>
                   </div>
