@@ -38,6 +38,7 @@ export const WrapItemArticle = styled.article`
       font-size: 1.3rem;
       background-color: ${(props) => props.theme.palette.primary.main};
       color: ${(props) => props.theme.palette.white};
+      width: fit-content;
       &:hover svg {
         transform: translateX(5px);
       }

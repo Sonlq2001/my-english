@@ -7,7 +7,6 @@ import { baseQueryWithAuth } from "@app/features/setting/helpers/get-base-query-
 export const readingQuery = createApi({
   reducerPath: "readingQuery",
   baseQuery: baseQueryWithAuth,
-
   endpoints: (build) => ({
     getListDocuments: build.query<ResDocument[], void>({
       query: () => ReadingEndpointsEnum.GET_LIST_DOCUMENTS,
