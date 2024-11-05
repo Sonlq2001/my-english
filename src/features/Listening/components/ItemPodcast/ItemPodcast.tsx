@@ -20,7 +20,9 @@ interface ItemPodcastProps {
 
 const ItemPodcast: FC<ItemPodcastProps> = ({ title, topic, id, thumbnail }) => {
   return (
-    <Link to={ListeningPathsEnum.PODCAST_DETAIL.replace(":podcast_id", id)}>
+    <Link
+      to={ListeningPathsEnum.PODCAST_VIDEO_DETAIL.replace(":podcast_id", id)}
+    >
       <WrapContentPodcast>
         <ContentPodcast>
           <h3>{title}</h3>

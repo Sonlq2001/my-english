@@ -1,3 +1,5 @@
+import { TypePodCast } from "@app/types/app.types";
+
 export type ResPodcast = {
   id: string;
   title: string;
@@ -14,6 +16,7 @@ export type ResPodcast = {
   createdAt: string;
   updatedAt: string;
   thumbnail: null | { imageUrl: string; publicId: string; id: string };
+  type: TypePodCast;
 };
 
 export type ProgressVideo = {

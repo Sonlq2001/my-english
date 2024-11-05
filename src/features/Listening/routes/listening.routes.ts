@@ -7,11 +7,14 @@ import { ListeningPathsEnum } from "../constants/listening.paths";
 const ListeningScreen = lazy(
   () => import("../screens/ListeningScreen/ListeningScreen")
 );
-const PodcastDetail = lazy(
-  () => import("../screens/PodcastDetail/PodcastDetail")
+const PodcastVideoDetail = lazy(
+  () => import("../screens/PodcastVideoDetail/PodcastVideoDetail")
 );
-const PodcastTopicList = lazy(
-  () => import("../screens/PodcastTopicList/PodcastTopicList")
+const PodcastListScreen = lazy(
+  () => import("../screens/PodcastListScreen/PodcastListScreen")
+);
+const PodcastAudioDetail = lazy(
+  () => import("../screens/PodcastAudioDetail/PodcastAudioDetail")
 );
 
 const LISTENING_SCREEN: RouteItemDef = {
@@ -20,20 +23,27 @@ const LISTENING_SCREEN: RouteItemDef = {
   component: ListeningScreen,
 };
 
-const PODCAST_DETAIL_SCREEN: RouteItemDef = {
-  id: "podcast-detail-screen",
-  path: ListeningPathsEnum.PODCAST_DETAIL,
-  component: PodcastDetail,
+const PODCAST_VIDEO_DETAIL_SCREEN: RouteItemDef = {
+  id: "podcast-video-detail-screen",
+  path: ListeningPathsEnum.PODCAST_VIDEO_DETAIL,
+  component: PodcastVideoDetail,
 };
 
-const PODCAST_TOPIC_LIST_SCREEN: RouteItemDef = {
-  id: "podcast-topic-list",
-  path: ListeningPathsEnum.PODCAST_LIST_TOPIC,
-  component: PodcastTopicList,
+const PODCAST_LIST_SCREEN: RouteItemDef = {
+  id: "podcast-list-screen",
+  path: ListeningPathsEnum.PODCAST_LIST,
+  component: PodcastListScreen,
+};
+
+const PODCAST_AUDIO_DETAIL_SCREEN: RouteItemDef = {
+  id: "podcast-audio-detail-screen",
+  path: ListeningPathsEnum.PODCAST_AUDIO_DETAIL,
+  component: PodcastAudioDetail,
 };
 
 export const LISTENING_ROUTES = [
   LISTENING_SCREEN,
-  PODCAST_DETAIL_SCREEN,
-  PODCAST_TOPIC_LIST_SCREEN,
+  PODCAST_VIDEO_DETAIL_SCREEN,
+  PODCAST_LIST_SCREEN,
+  PODCAST_AUDIO_DETAIL_SCREEN,
 ];

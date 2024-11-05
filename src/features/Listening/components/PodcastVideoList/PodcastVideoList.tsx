@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import AppButton from "@app/components/AppButton/AppButton";
 import IconRight from "@app/assets/images/icon-svg/icon-right.svg?react";
 import IconPlay from "@app/assets/images/icon-svg/icon-play.svg?react";
-import IconStar from "@app/assets/images/icon-svg/icon-star.svg?react";
-import IconThreeDotsVertical from "@app/assets/images/icon-svg/icon-three-dots-vertical.svg?react";
 import LazyImage from "@app/components/LazyImage/LazyImage";
 import {
   ListeningPathsEnum,
@@ -18,10 +16,14 @@ import {
   ListDataPodcast,
   ItemPodcast,
   ActionPodcast,
-} from "./VideoPodcastList.styles";
+} from "./PodcastVideoList.styles";
 
-const VideoPodcastList: FC = () => {
-  const { data, isLoading } = useGetListPodcastQuery({ page: 1, perPage: 20 });
+const PodcastVideoList: FC = () => {
+  const { data, isLoading } = useGetListPodcastQuery({
+    page: 1,
+    perPage: 5,
+    type: "VIDEO",
+  });
 
   return (
     <WrapContentContainer>
@@ -33,7 +35,7 @@ const VideoPodcastList: FC = () => {
           size="small"
           rightIcon={<IconRight />}
           className="btn-see-all"
-          to="/listening/podcast/list"
+          to={`${ListeningPathsEnum.PODCAST_LIST}?type=video`}
         >
           See all
         </AppButton>
@@ -49,7 +51,7 @@ const VideoPodcastList: FC = () => {
               data.map((podcastItem) => (
                 <ItemPodcast key={podcastItem.id}>
                   <Link
-                    to={ListeningPathsEnum.PODCAST_DETAIL.replace(
+                    to={ListeningPathsEnum.PODCAST_VIDEO_DETAIL.replace(
                       ":podcast_id",
                       podcastItem.id
                     )}
@@ -67,10 +69,8 @@ const VideoPodcastList: FC = () => {
 
                   <ActionPodcast>
                     <span>9:52</span>
-                    <IconStar className="svg-star" />
                     <IconPlay className="svg-play" />
                   </ActionPodcast>
-                  <IconThreeDotsVertical />
                 </ItemPodcast>
               ))
             ) : (
@@ -84,4 +84,4 @@ const VideoPodcastList: FC = () => {
   );
 };
 
-export default VideoPodcastList;
+export default PodcastVideoList;

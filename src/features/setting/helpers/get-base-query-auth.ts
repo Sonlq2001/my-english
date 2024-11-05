@@ -5,7 +5,11 @@ import {
   type FetchArgs,
   type FetchBaseQueryError,
 } from "@reduxjs/toolkit/query";
-import { refreshToken } from "@app/features/auth/auth";
+import {
+  AuthPathsEnum,
+  logoutAction,
+  refreshToken,
+} from "@app/features/auth/auth";
 import { unwrapResult } from "@reduxjs/toolkit";
 
 import { BaseResponse } from "@app/types/app.types";
@@ -36,16 +40,28 @@ export const baseQueryWithAuth: BaseQueryFn<
 
   let result = await baseQuery(args, api, extraOptions);
 
-  if (result.error && result.error.status === 408) {
-    const res = unwrapResult(await api.dispatch(refreshToken()));
+  // TODO: refactor code later
+  if (result.error) {
+    const status = result.error.status;
+    if (status === 408) {
+      const res = unwrapResult(await api.dispatch(refreshToken()));
 
-    if (res.accessToken) {
-      // retry the initial query
-      result = await baseQuery(args, api, extraOptions);
-    } else {
-      // TODO: refresh token fail -> logout
+      if (res.accessToken) {
+        // retry the initial query
+        result = await baseQuery(args, api, extraOptions);
+      } else {
+        // TODO: refresh token fail -> logout
+        api.dispatch(logoutAction());
+        window.location.href = AuthPathsEnum.LOGIN;
+      }
+    }
+
+    if (status == 403) {
+      api.dispatch(logoutAction());
+      window.location.href = AuthPathsEnum.LOGIN;
     }
   }
-  result.data = toCamel((result.data as BaseResponse<unknown>).metadata);
+
+  result.data = toCamel((result.data as BaseResponse<unknown>)?.metadata);
   return result;
 };

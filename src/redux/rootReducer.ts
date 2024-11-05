@@ -9,6 +9,7 @@ import { vocabularyQuery } from "@app/features/vocabulary/vocabulary";
 import { readingQuery, readingReducer } from "@app/features/reading/reading";
 import { writingQuery } from "@app/features/writing/writing";
 import { notepadReducer } from "@app/features/notepad/notepad";
+import { notepadQuery } from "@app/features/notepad/notepad";
 
 const rootReducer = combineReducers({
   [authApi.reducerPath]: authApi.reducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   [vocabularyQuery.reducerPath]: vocabularyQuery.reducer,
   [readingQuery.reducerPath]: readingQuery.reducer,
   [writingQuery.reducerPath]: writingQuery.reducer,
+  [notepadQuery.reducerPath]: notepadQuery.reducer,
   notepad: notepadReducer,
   listening: listeningReducer,
   reading: readingReducer,

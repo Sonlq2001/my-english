@@ -47,7 +47,7 @@ const BannerSection: FC = () => {
         </div>
         <Link
           className="btn-listen"
-          to={ListeningPathsEnum.PODCAST_DETAIL.replace(
+          to={ListeningPathsEnum.PODCAST_VIDEO_DETAIL.replace(
             ":podcast_id",
             podcastIdLatest || ""
           )}
