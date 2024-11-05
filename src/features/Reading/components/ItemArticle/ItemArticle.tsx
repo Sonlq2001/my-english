@@ -1,11 +1,19 @@
 import { FC } from "react";
+import { Link } from "react-router-dom";
 
 import IconDoubleArrowRight from "@app/assets/images/icon-svg/icon-keyboard-double-arrow-right.svg?react";
 import LazyImage from "@app/components/LazyImage/LazyImage";
 
+import { ReadingPathsEnum, ResDocument } from "@app/features/reading/reading";
+import { formatDate } from "@app/helpers/time";
+
 import { WrapItemArticle } from "./ItemArticle.styles";
 
-const ItemArticle: FC = () => {
+interface ItemArticleProps {
+  document: Pick<ResDocument, "title" | "topic" | "createdAt" | "id">;
+}
+
+const ItemArticle: FC<ItemArticleProps> = ({ document }) => {
   return (
     <WrapItemArticle>
       <LazyImage
@@ -14,14 +22,20 @@ const ItemArticle: FC = () => {
       />
       <div className="article-content">
         <header className="article-header">
-          <span className="article-cate">Music</span>
-          <span className="article-date">20/07/2024</span>
+          <span className="article-cate">{document.topic}</span>
+          <span className="article-date">{formatDate(document.createdAt)}</span>
         </header>
-        <h3>I don't see the point of doing that</h3>
-        <button className="btn-read">
+        <h3>{document.title}</h3>
+        <Link
+          to={ReadingPathsEnum.ARTICLE_DETAIL.replace(
+            ":article_id",
+            document.id
+          )}
+          className="btn-read"
+        >
           <span className="text-read">Read</span>
           <IconDoubleArrowRight />
-        </button>
+        </Link>
       </div>
     </WrapItemArticle>
   );
