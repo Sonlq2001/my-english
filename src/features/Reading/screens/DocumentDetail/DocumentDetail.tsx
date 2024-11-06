@@ -1,53 +1,33 @@
 import { FC, useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
-import { unwrapResult } from "@reduxjs/toolkit";
 
-import { useAppDispatch, useAppSelector } from "@app/redux/store";
 import IconBookmark from "@app/assets/images/icon-svg/icon-bookmark.svg?react";
 import ReturnButton from "@app/components/ReturnButton/ReturnButton";
 import ModalTranslate from "@app/components/ModalTranslate/ModalTranslate";
 import TitlePage from "@app/components/TitlePage/TitlePage";
 import ClickOutside from "@app/components/ClickOutside/ClickOutside";
-import {
-  getDocument,
-  resetDocumentDetail,
-} from "@app/features/reading/reading";
+import { useGetDocumentQuery } from "@app/features/reading/reading";
 import { formatDate } from "@app/helpers/time";
 
 import {
   WrapArticleDetail,
   HeaderArticleDetail,
   InfoArticle,
-} from "./ArticleDetail.styles";
+} from "./DocumentDetail.styles";
 import { ReadingPathsEnum } from "../../constants/reading.paths";
 
-const ArticleDetail: FC = () => {
-  const dispatch = useAppDispatch();
-  const [isLoadingDoc, setIsLoadingDoc] = useState<boolean>(true);
-  const { article_id: articleId } = useParams<{ article_id: string }>();
+const DocumentDetail: FC = () => {
+  const { document_id: documentId } = useParams<{ document_id: string }>();
   const [positionModal, setPositionModal] = useState<{ x: number; y: number }>({
     x: 0,
     y: 0,
   });
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
   const [currentValue, setCurrentValue] = useState<string>("");
-  const documentDetail = useAppSelector(
-    (state) => state.reading.documentDetail
+
+  const { data: documentDetail, isLoading } = useGetDocumentQuery(
+    documentId || ""
   );
-
-  useEffect(() => {
-    if (!articleId) return;
-
-    dispatch(getDocument(articleId))
-      .then(unwrapResult)
-      .finally(() => setIsLoadingDoc(false));
-  }, [articleId, dispatch]);
-
-  useEffect(() => {
-    return () => {
-      dispatch(resetDocumentDetail());
-    };
-  }, [dispatch]);
 
   const handleShowModalTranslate = (e: React.MouseEvent<HTMLElement>) => {
     const instanceSelect = document.all
@@ -99,6 +79,10 @@ const ArticleDetail: FC = () => {
     }
   }, [isOpenModal]);
 
+  const handleMarkDocument = () => {
+    console.log("hi");
+  };
+
   return (
     <main>
       <TitlePage title="Reading document" subtitle="" />
@@ -107,10 +91,10 @@ const ArticleDetail: FC = () => {
         <ReturnButton to={ReadingPathsEnum.READING} />
 
         <HeaderArticleDetail>
-          <IconBookmark />
+          <IconBookmark onClick={handleMarkDocument} />
         </HeaderArticleDetail>
 
-        {isLoadingDoc ? (
+        {isLoading ? (
           <div>Loading...</div>
         ) : (
           <>
@@ -166,4 +150,4 @@ const ArticleDetail: FC = () => {
   );
 };
 
-export default ArticleDetail;
+export default DocumentDetail;

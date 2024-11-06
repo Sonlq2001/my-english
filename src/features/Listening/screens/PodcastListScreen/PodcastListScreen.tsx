@@ -12,7 +12,7 @@ const PodcastListScreen = () => {
     .get("type")
     ?.toLocaleUpperCase() as TypePodCast;
 
-  const { data, isLoading } = useGetListPodcastQuery({
+  const { data: podcastList, isLoading } = useGetListPodcastQuery({
     page: 1,
     perPage: 20,
     type: typePodcast || "VIDEO",
@@ -35,9 +35,9 @@ const PodcastListScreen = () => {
             <div>Loading...</div>
           ) : (
             <>
-              {data && data.length > 0 && (
+              {podcastList?.data && podcastList.data.length > 0 && (
                 <ol>
-                  {data.map((item, index) => (
+                  {podcastList?.data.map((item, index) => (
                     <ItemAudio
                       key={item.id}
                       data={{

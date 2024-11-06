@@ -16,9 +16,10 @@ export type OptionsType = {
 }[];
 
 export type BaseResponse<T> = {
-  message: string;
-  status: number;
-  metadata: T;
+  data: T;
+  meta: {
+    total: number;
+  };
 };
 
 export type MenuEditors<T> = {

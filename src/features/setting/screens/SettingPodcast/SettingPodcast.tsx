@@ -9,6 +9,7 @@ import {
 import {
   deletePodcast,
   getListPodcasts,
+  useGetListPodcastQuery,
 } from "@app/features/listening/listening";
 import { useAppDispatch, useAppSelector } from "@app/redux/store";
 import { HEADER_CELLS } from "@app/features/setting/constants/setting.constants";
@@ -27,21 +28,15 @@ import {
 
 const SettingPodcast: FC = () => {
   const dispatch = useAppDispatch();
-  const [isLoadingListPodcasts, setIsLoadingListPodcasts] =
-    useState<boolean>(true);
+  const [idPodcast, setIdPodcast] = useState<string | null>(null);
   const [openModalConfirmDelete, setOpenModalConfirmDelete] =
     useState<boolean>(false);
   const [disabledBtnDelete, setDisabledBtnDelete] = useState<boolean>(false);
 
-  const listPodcasts = useAppSelector(
-    (state) => state.listening.podcastData.list
-  );
-
-  useEffect(() => {
-    dispatch(getListPodcasts())
-      .then(unwrapResult)
-      .finally(() => setIsLoadingListPodcasts(false));
-  }, [dispatch]);
+  const { data: podcastList, isLoading } = useGetListPodcastQuery({
+    page: 1,
+    perPage: 10,
+  });
 
   const handleDeleteNotepad = async (podcastId: string) => {
     setDisabledBtnDelete(true);
@@ -64,11 +59,11 @@ const SettingPodcast: FC = () => {
         </AppButton>
       </HeaderSetting>
 
-      {isLoadingListPodcasts ? (
+      {isLoading ? (
         <div>Loading...</div>
       ) : (
         <WrapTable>
-          {listPodcasts && listPodcasts.length > 0 ? (
+          {podcastList?.data && podcastList.data.length > 0 ? (
             <Table>
               <thead>
                 <tr>
@@ -81,7 +76,7 @@ const SettingPodcast: FC = () => {
                 </tr>
               </thead>
               <tbody>
-                {listPodcasts.map((item, index) => (
+                {podcastList.data.map((item, index) => (
                   <tr key={item.id}>
                     <td>
                       <input type="checkbox" />
@@ -120,30 +115,15 @@ const SettingPodcast: FC = () => {
                         <AppButton
                           variant="outlined"
                           size="small"
-                          onClick={() => setOpenModalConfirmDelete(true)}
+                          onClick={() => {
+                            setOpenModalConfirmDelete(true);
+                            setIdPodcast(item.id);
+                          }}
                         >
                           Delete
                         </AppButton>
                       </WrapAction>
                     </td>
-
-                    {openModalConfirmDelete && (
-                      <Modal
-                        title="You really want to delete !"
-                        open
-                        onClosed={() => setOpenModalConfirmDelete(false)}
-                        textOK="Delete"
-                        onSubmit={() => handleDeleteNotepad(item.id)}
-                        disabled={disabledBtnDelete}
-                      >
-                        <ContentConfirm>
-                          <IconWarning />
-                          <p>
-                            You will not be able to restore it after deletion.
-                          </p>
-                        </ContentConfirm>
-                      </Modal>
-                    )}
                   </tr>
                 ))}
               </tbody>
@@ -152,6 +132,25 @@ const SettingPodcast: FC = () => {
             <div>No data</div>
           )}
         </WrapTable>
+      )}
+
+      {openModalConfirmDelete && idPodcast && (
+        <Modal
+          title="You really want to delete !"
+          open
+          onClosed={() => {
+            console.log("close");
+            setOpenModalConfirmDelete(false);
+          }}
+          textOK="Delete"
+          onSubmit={() => handleDeleteNotepad(idPodcast)}
+          disabled={disabledBtnDelete}
+        >
+          <ContentConfirm>
+            <IconWarning />
+            <p>You will not be able to restore it after deletion.</p>
+          </ContentConfirm>
+        </Modal>
       )}
     </main>
   );

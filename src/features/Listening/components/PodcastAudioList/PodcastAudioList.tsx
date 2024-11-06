@@ -9,7 +9,7 @@ import ItemAudio from "../ItemAudio/ItemAudio";
 import { AudioList } from "./PodcastAudioList.styles";
 
 const PodcastAudioList = () => {
-  const { data, isLoading } = useGetListPodcastQuery({
+  const { data: podcastList, isLoading } = useGetListPodcastQuery({
     page: 1,
     perPage: 5,
     type: "AUDIO",
@@ -34,9 +34,9 @@ const PodcastAudioList = () => {
         <div>Loading...</div>
       ) : (
         <>
-          {data && data.length > 0 && (
+          {podcastList?.data && podcastList.data.length > 0 && (
             <AudioList>
-              {data.map((item, index) => (
+              {podcastList?.data.map((item, index) => (
                 <ItemAudio
                   key={item.id}
                   data={{

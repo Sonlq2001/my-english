@@ -10,7 +10,7 @@ import {
   REGISTER,
 } from "redux-persist";
 
-import { authApi } from "@app/features/auth/auth";
+import { authQuery } from "@app/features/auth/auth";
 import { listeningQuery } from "@app/features/listening/listening";
 import { vocabularyQuery } from "@app/features/vocabulary/vocabulary";
 import { readingQuery } from "@app/features/reading/reading";
@@ -27,7 +27,7 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     })
-      .concat(authApi.middleware)
+      .concat(authQuery.middleware)
       .concat(listeningQuery.middleware)
       .concat(vocabularyQuery.middleware)
       .concat(readingQuery.middleware)

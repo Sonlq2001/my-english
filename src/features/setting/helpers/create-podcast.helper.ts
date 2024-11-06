@@ -30,5 +30,6 @@ export const getInitPodcast = (
     file: null,
     description: podcast?.description ?? "",
     thumbnail: podcast?.thumbnail?.imageUrl,
+    type: "VIDEO",
   };
 };

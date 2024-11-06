@@ -8,8 +8,8 @@ const ReadingScreen = lazy(
   () => import("../screens/ReadingScreen/ReadingScreen")
 );
 
-const ArticleDetail = lazy(
-  () => import("../screens/ArticleDetail/ArticleDetail")
+const DocumentDetail = lazy(
+  () => import("../screens/DocumentDetail/DocumentDetail")
 );
 
 const CreateDocument = lazy(
@@ -23,9 +23,9 @@ const READING_SCREEN: RouteItemDef = {
 };
 
 const ARTICLE_DETAIL: RouteItemDef = {
-  id: "article-detail-screen",
-  path: ReadingPathsEnum.ARTICLE_DETAIL,
-  component: ArticleDetail,
+  id: "document-detail-screen",
+  path: ReadingPathsEnum.DOCUMENT_DETAIL,
+  component: DocumentDetail,
 };
 
 const CREATE_DOCUMENT: RouteItemDef = {

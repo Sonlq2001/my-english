@@ -19,7 +19,7 @@ import {
 } from "./PodcastVideoList.styles";
 
 const PodcastVideoList: FC = () => {
-  const { data, isLoading } = useGetListPodcastQuery({
+  const { data: podcastList, isLoading } = useGetListPodcastQuery({
     page: 1,
     perPage: 5,
     type: "VIDEO",
@@ -47,8 +47,8 @@ const PodcastVideoList: FC = () => {
           <div>Loading...</div>
         ) : (
           <>
-            {data && data?.length > 0 ? (
-              data.map((podcastItem) => (
+            {podcastList?.data && podcastList.data.length > 0 ? (
+              podcastList.data.map((podcastItem) => (
                 <ItemPodcast key={podcastItem.id}>
                   <Link
                     to={ListeningPathsEnum.PODCAST_VIDEO_DETAIL.replace(

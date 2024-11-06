@@ -11,7 +11,10 @@ import {
   SettingPathsEnum,
   SettingSubPathsEnum,
 } from "@app/features/setting/setting";
-import { LIST_TOPICS_PODCAST } from "@app/features/setting/constants/setting.constants";
+import {
+  LIST_TOPICS_PODCAST,
+  OPTIONS_TYPE_PODCAST,
+} from "@app/features/setting/constants/setting.constants";
 import RadioGroup from "@app/components/RadioGroup/RadioGroup";
 import {
   getInitPodcast,
@@ -75,7 +78,10 @@ const CreatePodcast: FC = () => {
       const res = unwrapResult(await dispatchAction);
 
       navigate(
-        ListeningPathsEnum.PODCAST_VIDEO_DETAIL.replace(":podcast_id", res.id)
+        (res.type === "VIDEO"
+          ? ListeningPathsEnum.PODCAST_VIDEO_DETAIL
+          : ListeningPathsEnum.PODCAST_AUDIO_DETAIL
+        ).replace(":podcast_id", res.id)
       );
     } catch (error) {
       // TODO: Error
@@ -147,6 +153,12 @@ const CreatePodcast: FC = () => {
                 name="description"
                 placeholder="Description video or podcast"
                 isRequire
+              />
+
+              <RadioGroup
+                options={OPTIONS_TYPE_PODCAST}
+                name="type"
+                label="Type podcast"
               />
 
               <div>

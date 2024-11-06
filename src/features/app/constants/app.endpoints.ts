@@ -1,3 +1,3 @@
 export enum AppEndpointsEnum {
-  UPLOAD_FILE = "/upload/file",
+  UPLOAD_FILE = "/file/upload",
 }

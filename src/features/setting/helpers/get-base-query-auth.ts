@@ -1,18 +1,18 @@
-import { RootState } from "@app/redux/rootReducer";
+import get from "lodash.get";
 import {
   fetchBaseQuery,
   type BaseQueryFn,
   type FetchArgs,
   type FetchBaseQueryError,
 } from "@reduxjs/toolkit/query";
+import { unwrapResult } from "@reduxjs/toolkit";
+
 import {
   AuthPathsEnum,
   logoutAction,
   refreshToken,
 } from "@app/features/auth/auth";
-import { unwrapResult } from "@reduxjs/toolkit";
-
-import { BaseResponse } from "@app/types/app.types";
+import { RootState } from "@app/redux/rootReducer";
 import { toSnakeCase, toCamel } from "@app/helpers/convert-object";
 
 const baseQuery = fetchBaseQuery({
@@ -62,6 +62,6 @@ export const baseQueryWithAuth: BaseQueryFn<
     }
   }
 
-  result.data = toCamel((result.data as BaseResponse<unknown>)?.metadata);
+  result.data = toCamel(get(result, "data.metadata"));
   return result;
 };

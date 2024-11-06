@@ -22,7 +22,10 @@ import { useGetListNotepadsQuery } from "../../notepad";
 import { monthsName } from "@app/constants/app.constants";
 
 const NotepadScreen: FC = () => {
-  const { data, isLoading } = useGetListNotepadsQuery({ page: 1, perPage: 20 });
+  const { data: notepadList, isLoading } = useGetListNotepadsQuery({
+    page: 1,
+    perPage: 20,
+  });
 
   const currentMonth = new Date().getMonth();
   const currentYear = new Date().getFullYear();
@@ -66,8 +69,8 @@ const NotepadScreen: FC = () => {
             <div>Loading...</div>
           ) : (
             <>
-              {data && data.length > 0 ? (
-                data.map((item) => (
+              {notepadList?.data && notepadList.data.length > 0 ? (
+                notepadList.data.map((item) => (
                   <NotepadSection key={item.id} notepad={item} />
                 ))
               ) : (
