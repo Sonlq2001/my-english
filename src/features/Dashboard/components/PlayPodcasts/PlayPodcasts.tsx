@@ -18,7 +18,7 @@ const PlayPodcasts: FC = () => {
 
   const handlePlayVideo = () => {
     if (playVideo) {
-      playVideo("https://www.youtube.com/watch?v=HidWExUWxfc");
+      playVideo("https://www.youtube.com/watch?v=LAYLRUvw0eE");
     }
     if (toggleNavbarAudioPlay) {
       toggleNavbarAudioPlay(true);

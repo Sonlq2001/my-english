@@ -46,8 +46,8 @@ const Article: FC<ArticleProps> = ({ article }) => {
       <WrapArticle>
         <span className="topic-article">{article.topic}</span>
         <Link
-          to={ReadingPathsEnum.ARTICLE_DETAIL.replace(
-            ":article_id",
+          to={ReadingPathsEnum.DOCUMENT_DETAIL.replace(
+            ":document_id",
             article.id
           )}
           className="title-article"

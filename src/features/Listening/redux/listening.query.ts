@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 
-import { QueryParamsUrl } from "@app/types/app.types";
+import { BaseResponse, QueryParamsUrl } from "@app/types/app.types";
 import { baseQueryWithAuth } from "@app/features/setting/helpers/get-base-query-auth";
 import {
   ResListPodcast,
@@ -20,7 +20,7 @@ export const listeningQuery = createApi({
         ),
       }),
     }),
-    getListPodcast: build.query<ResListPodcast, QueryParamsUrl>({
+    getListPodcast: build.query<BaseResponse<ResListPodcast>, QueryParamsUrl>({
       query: (params) => {
         return {
           url: ListeningEndpointsEnum.GET_LIST_PODCAST,

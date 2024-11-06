@@ -50,6 +50,7 @@ export type InitCreatePodcast = {
   file: File | null;
   description: string;
   thumbnail?: string;
+  type: "VIDEO" | "AUDIO";
 };
 
 export type ReqCreatePodcast = Omit<InitCreatePodcast, "file" | "thumbnail"> & {

@@ -64,7 +64,7 @@ const CreateDocument: FC = () => {
       .then(unwrapResult)
       .then((res) => {
         navigate(
-          ReadingPathsEnum.ARTICLE_DETAIL.replace(":article_id", res.id)
+          ReadingPathsEnum.DOCUMENT_DETAIL.replace(":document_id", res.id)
         );
       })
       .finally(() => setIsLoadingDocument(false));

@@ -27,8 +27,8 @@ const ItemArticle: FC<ItemArticleProps> = ({ document }) => {
         </header>
         <h3>{document.title}</h3>
         <Link
-          to={ReadingPathsEnum.ARTICLE_DETAIL.replace(
-            ":article_id",
+          to={ReadingPathsEnum.DOCUMENT_DETAIL.replace(
+            ":document_id",
             document.id
           )}
           className="btn-read"

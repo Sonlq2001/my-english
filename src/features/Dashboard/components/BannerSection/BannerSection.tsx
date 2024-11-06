@@ -19,14 +19,14 @@ import {
 import { Link } from "react-router-dom";
 
 const BannerSection: FC = () => {
-  const { data } = useGetListPodcastQuery({ page: 1, perPage: 5 });
+  const { data: podcastList } = useGetListPodcastQuery({ page: 1, perPage: 5 });
 
   const podcastIdLatest = useMemo(() => {
-    if (data && data.length > 0) {
-      return data[0].id;
+    if (podcastList?.data && podcastList.data.length > 0) {
+      return podcastList?.data[0].id;
     }
     return null;
-  }, [data]);
+  }, [podcastList?.data]);
 
   return (
     <BannerSectionWrap>

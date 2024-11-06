@@ -29,7 +29,7 @@ const DashboardScreen: FC = () => {
   const [currentTabFavorite, setCurrentTabFavorite] = useState(
     TabFavorite.Tab1
   );
-  const { data } = useGetListPodcastQuery({ page: 1, perPage: 5 });
+  const { data: podcastList } = useGetListPodcastQuery({ page: 1, perPage: 5 });
 
   return (
     <DashboardWrap>
@@ -41,9 +41,9 @@ const DashboardScreen: FC = () => {
         <WrapPodcast>
           <h3>Most popular</h3>
 
-          {data && data.length > 0 && (
+          {podcastList?.data && podcastList.data.length > 0 && (
             <ul className="list-section">
-              {data.map((podcastItem, index) => (
+              {podcastList?.data.map((podcastItem, index) => (
                 <SectionPodcast key={podcastItem.id}>
                   <span className="index-podcast">{`0${index + 1}`}</span>
 
