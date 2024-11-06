@@ -3,4 +3,5 @@ export enum AuthEndpointsEnum {
   LOGOUT = "/auth/logout",
   REFRESH_TOKEN = "/auth/refresh-token",
   USER_INFO = "/user/info",
+  MARK_CONTENT = "/user/mark-document",
 }

@@ -30,3 +30,7 @@ export type DefUser = {
 export type ResRefreshToken = {
   accessToken: string;
 };
+
+export type ResUserInfo = DefUser & {
+  markDocument: { id: string; title: string; createdAt: string }[];
+};

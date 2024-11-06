@@ -15,6 +15,7 @@ import {
   InfoArticle,
 } from "./DocumentDetail.styles";
 import { ReadingPathsEnum } from "../../constants/reading.paths";
+import { useAddMarkDocumentMutation } from "@app/features/auth/auth";
 
 const DocumentDetail: FC = () => {
   const { document_id: documentId } = useParams<{ document_id: string }>();
@@ -79,8 +80,11 @@ const DocumentDetail: FC = () => {
     }
   }, [isOpenModal]);
 
+  const [addMarkDocument] = useAddMarkDocumentMutation();
+
   const handleMarkDocument = () => {
-    console.log("hi");
+    if (!documentId) return;
+    addMarkDocument(documentId);
   };
 
   return (
