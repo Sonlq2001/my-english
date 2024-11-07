@@ -8,7 +8,6 @@ import ItemTopic from "@app/features/reading/components/ItemTopic/ItemTopic";
 import ContentContainer from "@app/components/ContentContainer/ContentContainer";
 import ItemArticle from "@app/features/reading/components/ItemArticle/ItemArticle";
 import ListMemoArticles from "@app/features/reading/components/ListMemoArticles/ListMemoArticles";
-import { useGetUserInfoQuery } from "@app/features/auth/auth";
 
 import {
   WrapReadingScreen,
@@ -22,8 +21,7 @@ const ReadingScreen: FC = () => {
     page: 1,
     perPage: 10,
   });
-  const { data } = useGetUserInfoQuery();
-  console.log(data);
+
   return (
     <WrapReadingScreen>
       <ContentContainer title="Topics">

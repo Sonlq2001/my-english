@@ -3,7 +3,7 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQueryWithAuth } from "@app/features/setting/helpers/get-base-query-auth";
 
 import { AuthEndpointsEnum } from "../constants/auth.endpoints";
-import { AuthResponse } from "../types/auth.type";
+import { AuthResponse, ResUserInfo } from "../types/auth.type";
 
 export const authQuery = createApi({
   reducerPath: "authQuery",
@@ -16,17 +16,23 @@ export const authQuery = createApi({
         method: "POST",
       }),
     }),
-    getUserInfo: build.query<void, void>({
+    getUserInfo: build.query<ResUserInfo, void>({
       query: () => AuthEndpointsEnum.USER_INFO,
     }),
-    addMarkDocument: build.mutation({
-      query: () => {
+    addMarkDocument: build.mutation<void, string>({
+      query: (documentId) => {
         return {
-          url: "",
+          url: AuthEndpointsEnum.MARK_CONTENT,
+          body: { documentId },
+          method: "PATCH",
         };
       },
     }),
   }),
 });
 
-export const { usePostLoginSuccessMutation, useGetUserInfoQuery } = authQuery;
+export const {
+  usePostLoginSuccessMutation,
+  useGetUserInfoQuery,
+  useAddMarkDocumentMutation,
+} = authQuery;
