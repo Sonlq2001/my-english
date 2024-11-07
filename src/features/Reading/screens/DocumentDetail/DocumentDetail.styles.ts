@@ -18,6 +18,9 @@ export const HeaderArticleDetail = styled.div`
   svg {
     cursor: pointer;
   }
+  svg.active {
+    color: #ff9100;
+  }
 `;
 
 export const InfoArticle = styled.div`

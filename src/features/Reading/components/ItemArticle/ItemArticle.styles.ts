@@ -3,10 +3,10 @@ import styled from "styled-components";
 export const WrapItemArticle = styled.article`
   display: flex;
   gap: 2rem;
-  img {
+  /* img {
     max-width: 12rem;
     border-radius: 1rem;
-  }
+  } */
   .article-content {
     flex: 1;
     .article-header {

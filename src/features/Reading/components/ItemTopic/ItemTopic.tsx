@@ -1,18 +1,31 @@
 import { FC, memo, ReactNode } from "react";
+import clsx from "clsx";
 
 import { WrapItemTopic } from "./ItemTopic.styles";
 
 interface ItemTopicProps {
-  title: string;
+  label: string;
   thumbnail: ReactNode;
-  color: string;
+  setFilterSearch: (topic: string) => void;
+  filterSearch: string;
 }
 
-const ItemTopic: FC<ItemTopicProps> = ({ title, thumbnail, color }) => {
+const ItemTopic: FC<ItemTopicProps> = ({
+  label,
+  thumbnail,
+  setFilterSearch,
+  filterSearch,
+}) => {
+  const handleChooseTopic = () => {
+    setFilterSearch(filterSearch === label ? "" : label);
+  };
   return (
-    <WrapItemTopic color={color}>
+    <WrapItemTopic
+      onClick={handleChooseTopic}
+      className={clsx(filterSearch === label && "active")}
+    >
       {thumbnail}
-      <span>{title}</span>
+      <span>{label}</span>
     </WrapItemTopic>
   );
 };

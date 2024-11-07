@@ -4,10 +4,11 @@ export const WrapReadingScreen = styled.main`
   padding-top: 3.5rem;
 `;
 
-export const ListTopics = styled.div`
+export const ListTopics = styled.ul`
   margin-top: 3.5rem;
   display: flex;
   gap: 2rem;
+  list-style-type: none;
 `;
 
 export const SectionLayoutReading = styled.section`

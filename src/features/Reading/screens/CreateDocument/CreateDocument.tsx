@@ -23,7 +23,7 @@ import {
   createDocument,
   schemaCreateDocument,
   ReqDocument,
-  LIST_TOPICS_DOCUMENT,
+  LIST_TOPICS,
   TOPIC_KEY,
 } from "@app/features/reading/reading";
 import RadioGroup from "@app/components/RadioGroup/RadioGroup";
@@ -90,7 +90,7 @@ const CreateDocument: FC = () => {
       description: documentDetail?.description || "",
       author: documentDetail?.author || "",
       shortDescription: documentDetail?.shortDescription || "",
-      topic: documentDetail?.topic || TOPIC_KEY.SocialScience,
+      topic: documentDetail?.topic || TOPIC_KEY.Study,
     };
   }, [documentDetail]);
 
@@ -126,11 +126,7 @@ const CreateDocument: FC = () => {
                   placeholder="Brief description of the article"
                 />
 
-                <RadioGroup
-                  options={LIST_TOPICS_DOCUMENT}
-                  name="topic"
-                  label="Topic"
-                />
+                <RadioGroup options={LIST_TOPICS} name="topic" label="Topic" />
 
                 <TextField
                   label="Author"

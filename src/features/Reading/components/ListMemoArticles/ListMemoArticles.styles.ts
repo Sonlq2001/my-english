@@ -13,6 +13,11 @@ export const ItemMemoArticle = styled.article`
   gap: 8px;
   h4 {
     font-weight: 500;
+    line-height: 2.2rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
   }
   .last-open {
     font-size: 1.3rem;

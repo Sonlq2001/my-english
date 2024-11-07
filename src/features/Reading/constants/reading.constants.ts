@@ -6,60 +6,44 @@ import IconExperiment from "@app/assets/images/icon-svg/icon-experiment-one.svg?
 import IconCode from "@app/assets/images/icon-svg/icon-code.svg?react";
 
 export enum TOPIC_KEY {
-  SocialScience = "Social science",
   Environment = "Environment",
   Business = "Business",
+  Society = "Society",
+  Study = "Study",
   Music = "Music",
+  Science = "Science",
+  Technology = "Technology",
 }
 
-export const LIST_TOPICS_DOCUMENT = [
+export const LIST_TOPICS = [
   {
-    label: TOPIC_KEY.SocialScience,
-    value: TOPIC_KEY.SocialScience,
+    label: TOPIC_KEY.Music,
+    value: TOPIC_KEY.Music,
+    thumbnail: IconHeadphone,
   },
   {
     label: TOPIC_KEY.Environment,
     value: TOPIC_KEY.Environment,
-  },
-  {
-    label: TOPIC_KEY.Business,
-    value: TOPIC_KEY.Business,
-  },
-  {
-    label: TOPIC_KEY.Music,
-    value: TOPIC_KEY.Music,
-  },
-];
-
-export const LIST_TOPICS = [
-  {
-    title: "Music",
-    thumbnail: IconHeadphone,
-    color: "#f4ce7433",
-  },
-  {
-    title: "Environment",
     thumbnail: IconLeaf,
-    color: "#399f2d33",
   },
   {
-    title: "Society",
+    label: TOPIC_KEY.Society,
+    value: TOPIC_KEY.Society,
     thumbnail: IconCityscape,
-    color: "#2d849f33",
   },
   {
-    title: "Study",
+    label: TOPIC_KEY.Study,
+    value: TOPIC_KEY.Study,
     thumbnail: IconBook,
-    color: "#b8040433",
   },
   {
-    title: "Science",
+    label: TOPIC_KEY.Science,
+    value: TOPIC_KEY.Science,
     thumbnail: IconExperiment,
-    color: "#b8045633",
   },
   {
-    title: "Technology",
+    label: TOPIC_KEY.Technology,
+    value: TOPIC_KEY.Technology,
     thumbnail: IconCode,
-    color: "#04b87433",
   },
 ];
