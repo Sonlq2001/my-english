@@ -39,6 +39,7 @@ export type QueryParamsUrl = {
   page: number;
   perPage: number;
   type?: TypePodCast;
+  filter?: string;
 };
 
 export type TypePodCast = "VIDEO" | "AUDIO";

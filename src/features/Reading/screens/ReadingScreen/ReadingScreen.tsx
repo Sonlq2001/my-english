@@ -1,4 +1,4 @@
-import { FC, ElementType } from "react";
+import { FC, ElementType, useState } from "react";
 
 import {
   LIST_TOPICS,
@@ -17,9 +17,12 @@ import {
 } from "./ReadingScreen.styles";
 
 const ReadingScreen: FC = () => {
+  const [filterSearch, setFilterSearch] = useState<string>("");
+
   const { data: listDocuments, isLoading } = useGetListDocumentsQuery({
     page: 1,
     perPage: 10,
+    ...(filterSearch ? { filter: filterSearch } : {}),
   });
 
   return (
@@ -33,6 +36,8 @@ const ReadingScreen: FC = () => {
                 key={`topic-${index}`}
                 {...topic}
                 thumbnail={<IconTopic />}
+                filterSearch={filterSearch}
+                setFilterSearch={setFilterSearch}
               />
             );
           })}

@@ -1,5 +1,6 @@
-import { FC, useState, useEffect, useCallback } from "react";
+import { FC, useState, useEffect, useCallback, useMemo } from "react";
 import { useParams } from "react-router-dom";
+import clsx from "clsx";
 
 import IconBookmark from "@app/assets/images/icon-svg/icon-bookmark.svg?react";
 import ReturnButton from "@app/components/ReturnButton/ReturnButton";
@@ -15,7 +16,10 @@ import {
   InfoArticle,
 } from "./DocumentDetail.styles";
 import { ReadingPathsEnum } from "../../constants/reading.paths";
-import { useAddMarkDocumentMutation } from "@app/features/auth/auth";
+import {
+  useAddMarkDocumentMutation,
+  useGetUserInfoQuery,
+} from "@app/features/auth/auth";
 
 const DocumentDetail: FC = () => {
   const { document_id: documentId } = useParams<{ document_id: string }>();
@@ -81,11 +85,25 @@ const DocumentDetail: FC = () => {
   }, [isOpenModal]);
 
   const [addMarkDocument] = useAddMarkDocumentMutation();
+  const { data, refetch } = useGetUserInfoQuery();
 
-  const handleMarkDocument = () => {
-    if (!documentId) return;
-    addMarkDocument(documentId);
+  const handleMarkDocument = async () => {
+    if (
+      !documentId ||
+      (data?.markDocument &&
+        data.markDocument.length >= 3 &&
+        !isActiveMarkDocument)
+    ) {
+      return;
+    }
+    await addMarkDocument(documentId);
+    refetch();
   };
+
+  const isActiveMarkDocument = useMemo(
+    () => data?.markDocument.some((item) => item.id === documentId),
+    [data?.markDocument, documentId]
+  );
 
   return (
     <main>
@@ -95,7 +113,10 @@ const DocumentDetail: FC = () => {
         <ReturnButton to={ReadingPathsEnum.READING} />
 
         <HeaderArticleDetail>
-          <IconBookmark onClick={handleMarkDocument} />
+          <IconBookmark
+            className={clsx(isActiveMarkDocument && "active")}
+            onClick={handleMarkDocument}
+          />
         </HeaderArticleDetail>
 
         {isLoading ? (

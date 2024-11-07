@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 
 import IconDoubleArrowRight from "@app/assets/images/icon-svg/icon-keyboard-double-arrow-right.svg?react";
-import LazyImage from "@app/components/LazyImage/LazyImage";
+// import LazyImage from "@app/components/LazyImage/LazyImage";
 
 import { ReadingPathsEnum, ResDocument } from "@app/features/reading/reading";
 import { formatDate } from "@app/helpers/time";
@@ -16,10 +16,10 @@ interface ItemArticleProps {
 const ItemArticle: FC<ItemArticleProps> = ({ document }) => {
   return (
     <WrapItemArticle>
-      <LazyImage
+      {/* <LazyImage
         src="https://cdn.pixabay.com/photo/2023/08/19/13/42/flowers-8200510_1280.jpg"
         alt=""
-      />
+      /> */}
       <div className="article-content">
         <header className="article-header">
           <span className="article-cate">{document.topic}</span>
