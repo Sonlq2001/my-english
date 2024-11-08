@@ -11,7 +11,7 @@ interface ItemAudioProps {
     title: string;
     author: string;
     id: string;
-    index: number;
+    index?: number;
     type: TypePodCast;
     image?: string;
   };

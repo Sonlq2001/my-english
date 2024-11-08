@@ -8,6 +8,8 @@ import ItemTopic from "@app/features/reading/components/ItemTopic/ItemTopic";
 import ContentContainer from "@app/components/ContentContainer/ContentContainer";
 import ItemArticle from "@app/features/reading/components/ItemArticle/ItemArticle";
 import ListMemoArticles from "@app/features/reading/components/ListMemoArticles/ListMemoArticles";
+import Pagination from "@app/components/Pagination/Pagination";
+import { QueryParamsUrl } from "@app/types/app.types";
 
 import {
   WrapReadingScreen,
@@ -17,12 +19,14 @@ import {
 } from "./ReadingScreen.styles";
 
 const ReadingScreen: FC = () => {
-  const [filterSearch, setFilterSearch] = useState<string>("");
-
-  const { data: listDocuments, isLoading } = useGetListDocumentsQuery({
+  const [queryParams, setQueryParams] = useState<QueryParamsUrl>({
     page: 1,
     perPage: 10,
-    ...(filterSearch ? { filter: filterSearch } : {}),
+    filter: "",
+  });
+  const { data: listDocuments, isLoading } = useGetListDocumentsQuery({
+    ...queryParams,
+    filter: queryParams.filter || undefined,
   });
 
   return (
@@ -36,8 +40,8 @@ const ReadingScreen: FC = () => {
                 key={`topic-${index}`}
                 {...topic}
                 thumbnail={<IconTopic />}
-                filterSearch={filterSearch}
-                setFilterSearch={setFilterSearch}
+                queryParams={queryParams}
+                setQueryParams={setQueryParams}
               />
             );
           })}
@@ -63,6 +67,15 @@ const ReadingScreen: FC = () => {
                       }}
                     />
                   ))}
+
+                  <Pagination
+                    total={listDocuments.meta.total}
+                    perPage={queryParams.perPage}
+                    onChange={(page) =>
+                      setQueryParams({ ...queryParams, page: Number(page) })
+                    }
+                    className="pagination"
+                  />
                 </SectionArticleList>
               ) : (
                 <div>Empty</div>
