@@ -1,28 +1,33 @@
 import { FC, memo, ReactNode } from "react";
 import clsx from "clsx";
 
+import { QueryParamsUrl } from "@app/types/app.types";
+
 import { WrapItemTopic } from "./ItemTopic.styles";
 
 interface ItemTopicProps {
   label: string;
   thumbnail: ReactNode;
-  setFilterSearch: (topic: string) => void;
-  filterSearch: string;
+  setQueryParams: (params: QueryParamsUrl) => void;
+  queryParams: QueryParamsUrl;
 }
 
 const ItemTopic: FC<ItemTopicProps> = ({
   label,
   thumbnail,
-  setFilterSearch,
-  filterSearch,
+  setQueryParams,
+  queryParams,
 }) => {
   const handleChooseTopic = () => {
-    setFilterSearch(filterSearch === label ? "" : label);
+    setQueryParams({
+      ...queryParams,
+      filter: queryParams.filter === label ? "" : label,
+    });
   };
   return (
     <WrapItemTopic
       onClick={handleChooseTopic}
-      className={clsx(filterSearch === label && "active")}
+      className={clsx(queryParams.filter === label && "active")}
     >
       {thumbnail}
       <span>{label}</span>

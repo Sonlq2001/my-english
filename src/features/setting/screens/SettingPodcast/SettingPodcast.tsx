@@ -1,5 +1,4 @@
-import { FC, useEffect, useState } from "react";
-import { unwrapResult } from "@reduxjs/toolkit";
+import { FC, useState } from "react";
 
 import AppButton from "@app/components/AppButton/AppButton";
 import {
@@ -8,10 +7,9 @@ import {
 } from "@app/features/setting/setting";
 import {
   deletePodcast,
-  getListPodcasts,
   useGetListPodcastQuery,
 } from "@app/features/listening/listening";
-import { useAppDispatch, useAppSelector } from "@app/redux/store";
+import { useAppDispatch } from "@app/redux/store";
 import { HEADER_CELLS } from "@app/features/setting/constants/setting.constants";
 import IconWarning from "@app/assets/images/icon-svg/icon-warning.svg?react";
 import Modal from "@app/components/Modal/Modal";
@@ -138,10 +136,7 @@ const SettingPodcast: FC = () => {
         <Modal
           title="You really want to delete !"
           open
-          onClosed={() => {
-            console.log("close");
-            setOpenModalConfirmDelete(false);
-          }}
+          onClosed={() => setOpenModalConfirmDelete(false)}
           textOK="Delete"
           onSubmit={() => handleDeleteNotepad(idPodcast)}
           disabled={disabledBtnDelete}

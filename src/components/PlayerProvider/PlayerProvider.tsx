@@ -22,6 +22,7 @@ export const PlayerContext = createContext<{
   toggleNavbarAudioPlay?: (open: boolean) => void;
   autoPlayVideo: () => void;
   playPause: () => void;
+  seekToVideo?: (value: number) => void;
 }>({
   isOpenAudio: false,
   videoRunningTime: 0,
@@ -106,6 +107,7 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
     toggleNavbarAudioPlay,
     autoPlayVideo,
     playPause,
+    seekToVideo,
   };
 
   return (

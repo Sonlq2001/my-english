@@ -53,8 +53,12 @@ export const WrapItemAudio = styled.li`
   h3 {
     font-size: 1.6rem;
     font-weight: 500;
-    line-height: 1.8rem;
+    line-height: 2.2rem;
     margin-bottom: 0.8rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
   }
   p {
     font-size: 1.4rem;

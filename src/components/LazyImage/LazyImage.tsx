@@ -39,7 +39,7 @@ const LazyImage: React.FC<LazyImageProps> = ({ src, className, ...props }) => {
   }, []);
 
   return inView ? (
-    <img src={src} className={className} {...props} />
+    <img src={src || PlaceholderImage} className={className} {...props} />
   ) : (
     <WrapLazyImage>
       <div className="lazyContent" ref={placeholderRef} />

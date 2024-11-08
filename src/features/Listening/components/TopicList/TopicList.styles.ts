@@ -57,6 +57,11 @@ export const ItemCarousel = styled.article`
   p {
     font-size: 1.3rem;
     color: ${(props) => props.theme.palette.gray.medium};
+    display: flex;
+    gap: 0.5rem;
+    a:hover {
+      text-decoration: underline;
+    }
   }
   .cate-image {
     position: relative;

@@ -1,9 +1,12 @@
 import { FC, useRef } from "react";
 import Slider from "react-slick";
+import { Link } from "react-router-dom";
 
 import IconLeft from "@app/assets/images/icon-svg/icon-left.svg?react";
 import IconRight from "@app/assets/images/icon-svg/icon-right.svg?react";
 import LazyImage from "@app/components/LazyImage/LazyImage";
+import { encodeKeyword } from "@app/helpers/encode-decode-word";
+import { LIST_TOPICS_PODCAST } from "@app/features/setting/constants/setting.constants";
 
 import {
   HeaderBox,
@@ -11,7 +14,8 @@ import {
   WrapCarousel,
   WrapTopicList,
 } from "./TopicList.styles";
-import { TOPIC_LIST_PODCAST } from "../../constants/listening.constants";
+
+import { ListeningPathsEnum } from "../../listening";
 
 const TopicList: FC = () => {
   const sliderRef = useRef<Slider>(null);
@@ -47,7 +51,7 @@ const TopicList: FC = () => {
 
       <WrapCarousel>
         <Slider {...settings} ref={sliderRef}>
-          {TOPIC_LIST_PODCAST.map((topic, index) => (
+          {LIST_TOPICS_PODCAST.map((topic, index) => (
             <ItemCarousel key={index}>
               <div className="cate-image">
                 <LazyImage
@@ -55,8 +59,24 @@ const TopicList: FC = () => {
                   alt={`thumbnail-topic-${index}`}
                 />
               </div>
-              <h3>{topic.title}</h3>
-              <p>{topic.subTitle}</p>
+              <h3>{topic.label}</h3>
+              <p>
+                <Link
+                  to={`${
+                    ListeningPathsEnum.PODCAST_LIST
+                  }?type=video&topic=${encodeKeyword(topic.value)}`}
+                >
+                  Video
+                </Link>
+                /
+                <Link
+                  to={`${
+                    ListeningPathsEnum.PODCAST_LIST
+                  }?type=audio&topic=${encodeKeyword(topic.value)}`}
+                >
+                  Audio
+                </Link>
+              </p>
             </ItemCarousel>
           ))}
         </Slider>
