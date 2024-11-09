@@ -1,6 +1,7 @@
 export type ResListTopics = {
   name: string;
   id: string;
+  theme: string;
 }[];
 
 export type TypeInitVocabulary = {
@@ -35,3 +36,14 @@ export type ResListPartsOfSpeech = {
   vn: string;
   id: string;
 }[];
+
+export type ResMarkVocabularyList = {
+  id: string;
+  markVocabulary: ItemMarkVocabulary[];
+};
+
+export type ItemMarkVocabulary = {
+  id: string;
+  name: string;
+  meanings: string;
+};

@@ -6,9 +6,10 @@ export const WrapPage = styled.main`
   gap: 2rem;
 `;
 
-export const WrapListVocabulary = styled.div`
+export const WrapListVocabulary = styled.ul`
   column-count: 2;
   gap: 6rem;
+  list-style-type: none;
 `;
 
 export const WrapContent = styled.div`

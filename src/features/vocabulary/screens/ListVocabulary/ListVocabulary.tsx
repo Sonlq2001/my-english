@@ -13,43 +13,59 @@ import {
   WrapPage,
 } from "./ListVocabulary.styles";
 import VocabularyItem from "../../components/VocabularyItem/VocabularyItem";
-import { useGetListVocabularyByTopicQuery } from "../../vocabulary";
+import {
+  useGetListVocabularyByTopicQuery,
+  useGetMarkVocabularyListQuery,
+} from "../../vocabulary";
 
 const ListVocabulary: FC = () => {
   const { topic } = useParams<{ topic: string }>();
-  const { data, error, isLoading } = useGetListVocabularyByTopicQuery(
+  const { data, isLoading } = useGetListVocabularyByTopicQuery(
     decodeKeyword(topic || "")
   );
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error || !data) {
-    return <div>Error</div>;
-  }
+  const { data: markVocabularyList, isLoading: isLoadingMarkVocabularyList } =
+    useGetMarkVocabularyListQuery(topic || "");
 
   return (
     <WrapPage>
       <LeftLayout>
         <ContentContainer title="Vocabulary topic">
           <WrapContent>
-            <WrapListVocabulary>
-              {data.length > 0 &&
-                data.map((item) => (
-                  <VocabularyItem key={item.id} vocabulary={item} />
-                ))}
-            </WrapListVocabulary>
+            {isLoading ? (
+              <div>Loading...</div>
+            ) : (
+              <>
+                {data && data.length > 0 ? (
+                  <WrapListVocabulary>
+                    {data.length > 0 &&
+                      data.map((item) => (
+                        <VocabularyItem key={item.id} vocabulary={item} />
+                      ))}
+                  </WrapListVocabulary>
+                ) : (
+                  <div>Empty</div>
+                )}
+              </>
+            )}
           </WrapContent>
         </ContentContainer>
       </LeftLayout>
 
       <RightLayout>
-        <PinCard />
-        <PinCard />
-        <PinCard />
-        <PinCard />
-        <PinCard />
+        {isLoadingMarkVocabularyList ? (
+          <div>Loading...</div>
+        ) : (
+          <>
+            {markVocabularyList?.markVocabulary ? (
+              markVocabularyList.markVocabulary.map((item) => (
+                <PinCard key={item.id} vocabulary={item} />
+              ))
+            ) : (
+              <div>Empty</div>
+            )}
+          </>
+        )}
       </RightLayout>
     </WrapPage>
   );

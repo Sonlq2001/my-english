@@ -6,6 +6,7 @@ import { VocabularyEndpointsEnum } from "../constants/vocabulary.endpoints";
 import {
   ResListPartsOfSpeech,
   ResListTopics,
+  ResMarkVocabularyList,
   ResVocabulary,
 } from "../types/vocabulary.type";
 
@@ -28,6 +29,28 @@ export const vocabularyQuery = createApi({
       query: (topic) =>
         VocabularyEndpointsEnum.GET_LIST_VOCABULARY.replace(":topic", topic),
     }),
+    updateMarkVocabulary: build.mutation<
+      unknown,
+      { topicId: string; vocabularyId: string }
+    >({
+      query: (payload) => {
+        return {
+          url: VocabularyEndpointsEnum.POST_MARK_VOCABULARY,
+          body: payload,
+          method: "POST",
+        };
+      },
+    }),
+    getMarkVocabularyList: build.query<ResMarkVocabularyList, string>({
+      query: (topicId) => {
+        return {
+          url: VocabularyEndpointsEnum.GET_MARK_VOCABULARY_LIST.replace(
+            ":topic_name",
+            topicId
+          ),
+        };
+      },
+    }),
   }),
 });
 
@@ -36,4 +59,6 @@ export const {
   useGetPartsOfSpeechQuery,
   useGetVocabularyDetailQuery,
   useGetListVocabularyByTopicQuery,
+  useUpdateMarkVocabularyMutation,
+  useGetMarkVocabularyListQuery,
 } = vocabularyQuery;
