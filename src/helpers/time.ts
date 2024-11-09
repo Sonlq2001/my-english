@@ -9,7 +9,7 @@ export const convertSeconds = (seconds: number, skipHours = false) => {
   // Format the result string hh:mm:ss
   const formattedTime = `
   ${skipHours ? "" : `${hours.toString().padStart(2, "0")}:`}
-  ${minutes.toString().padStart(2, "0")}:
+  ${minutes.toString().padStart(2, "0")} :
   ${secondsRounded.toString().padStart(2, "0")}`;
 
   return formattedTime;

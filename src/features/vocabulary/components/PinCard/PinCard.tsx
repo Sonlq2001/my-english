@@ -1,12 +1,19 @@
-import { WrapPinCard } from "./PinCard.styles";
+import { FC } from "react";
 
 import IconPin from "@app/assets/images/icon-svg/icon-pin.svg?react";
+import { ItemMarkVocabulary } from "@app/features/vocabulary/vocabulary";
 
-const PinCard = () => {
+import { WrapPinCard } from "./PinCard.styles";
+
+interface PinCardProps {
+  vocabulary: ItemMarkVocabulary;
+}
+
+const PinCard: FC<PinCardProps> = ({ vocabulary }) => {
   return (
     <WrapPinCard>
-      <p className="name">decade</p>
-      <p className="mean">Thập kỉ</p>
+      <p className="name">{vocabulary.name}</p>
+      <p className="mean">{vocabulary.meanings}</p>
       <IconPin className="icon-pin" />
     </WrapPinCard>
   );
