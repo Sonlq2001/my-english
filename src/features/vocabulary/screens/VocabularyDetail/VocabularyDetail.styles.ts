@@ -10,6 +10,13 @@ export const WrapVocabularyDetail = styled.div`
     display: flex;
     align-items: center;
   }
+  .icon-pin {
+    margin-left: auto;
+    transform: rotate(45deg);
+    &.active {
+      color: #ff9100;
+    }
+  }
 
   .vocabulary {
     font-size: 2.5rem;
@@ -17,7 +24,7 @@ export const WrapVocabularyDetail = styled.div`
     margin-right: 3rem;
   }
 
-  svg:hover {
+  svg {
     cursor: pointer;
   }
 
@@ -28,7 +35,7 @@ export const WrapVocabularyDetail = styled.div`
   }
 `;
 
-export const ListInfoVocabulary = styled.div`
+export const ListInfoVocabulary = styled.section`
   margin-top: 2rem;
   border-top: 1px solid #eee;
   padding-top: 2rem;
