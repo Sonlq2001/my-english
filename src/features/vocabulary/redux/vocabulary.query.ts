@@ -31,7 +31,7 @@ export const vocabularyQuery = createApi({
     }),
     updateMarkVocabulary: build.mutation<
       unknown,
-      { topicId: string; vocabularyId: string }
+      { topicName: string; vocabularyId: string }
     >({
       query: (payload) => {
         return {

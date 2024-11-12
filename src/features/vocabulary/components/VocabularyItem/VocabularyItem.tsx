@@ -1,26 +1,28 @@
 import { FC } from "react";
 
+import { encodeKeyword } from "@app/helpers/encode-decode-word";
+import LazyImage from "@app/components/LazyImage/LazyImage";
+
 import {
   VocabularyPathsEnum,
   ResVocabulary,
 } from "@app/features/vocabulary/vocabulary";
-import { encodeKeyword } from "@app/helpers/encode-decode-word";
-import LazyImage from "@app/components/LazyImage/LazyImage";
 
 import { Vocabulary } from "./VocabularyItem.styles";
 
 interface VocabularyItemProps {
   vocabulary: ResVocabulary;
+  topic: string;
 }
 
-const VocabularyItem: FC<VocabularyItemProps> = ({ vocabulary }) => {
+const VocabularyItem: FC<VocabularyItemProps> = ({ vocabulary, topic }) => {
   return (
     <li>
       <Vocabulary
-        to={VocabularyPathsEnum.VOCABULARY_DETAIL.replace(
+        to={`${VocabularyPathsEnum.VOCABULARY_DETAIL.replace(
           ":word",
           encodeKeyword(vocabulary.name)
-        )}
+        )}?topic=${encodeKeyword(topic)}`}
       >
         <LazyImage
           src={vocabulary.reminiscentPhoto?.imageUrl ?? ""}

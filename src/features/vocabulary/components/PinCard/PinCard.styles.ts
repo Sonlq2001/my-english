@@ -18,5 +18,8 @@ export const WrapPinCard = styled.section`
     right: 2rem;
     transform: rotate(45deg);
     cursor: pointer;
+    &.active {
+      color: #ff9100;
+    }
   }
 `;

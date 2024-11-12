@@ -40,7 +40,11 @@ const ListVocabulary: FC = () => {
                   <WrapListVocabulary>
                     {data.length > 0 &&
                       data.map((item) => (
-                        <VocabularyItem key={item.id} vocabulary={item} />
+                        <VocabularyItem
+                          key={item.id}
+                          vocabulary={item}
+                          topic={topic || ""}
+                        />
                       ))}
                   </WrapListVocabulary>
                 ) : (
@@ -59,7 +63,7 @@ const ListVocabulary: FC = () => {
           <>
             {markVocabularyList?.markVocabulary ? (
               markVocabularyList.markVocabulary.map((item) => (
-                <PinCard key={item.id} vocabulary={item} />
+                <PinCard key={item.id} vocabulary={item} topic={topic || ""} />
               ))
             ) : (
               <div>Empty</div>
