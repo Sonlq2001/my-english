@@ -8,6 +8,8 @@ import {
 import SettingPodcast from "../screens/SettingPodcast/SettingPodcast";
 import SettingGeneral from "../screens/SettingGeneral/SettingGeneral";
 import CreatePodcast from "../screens/CreatePodcast/CreatePodcast";
+import SettingDocument from "../screens/SettingDocument/SettingDocument";
+import CreateDocument from "../screens/CreateDocument/CreateDocument";
 
 const SETTING_SCREEN: RouteItemDef = {
   id: "setting-screen",
@@ -34,6 +36,21 @@ const SETTING_SCREEN: RouteItemDef = {
       id: "general-setting",
       path: SettingSubPathsEnum.GENERAL,
       component: SettingGeneral,
+    },
+    {
+      id: "document-list",
+      path: SettingSubPathsEnum.DOCUMENTS,
+      component: SettingDocument,
+    },
+    {
+      id: "create-document-list",
+      path: SettingSubPathsEnum.DOCUMENT_CREATE,
+      component: CreateDocument,
+    },
+    {
+      id: "edit-document-list",
+      path: SettingSubPathsEnum.DOCUMENT_EDIT,
+      component: CreateDocument,
     },
   ],
 };

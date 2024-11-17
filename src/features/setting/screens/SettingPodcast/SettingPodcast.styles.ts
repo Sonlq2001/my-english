@@ -4,12 +4,16 @@ export const HeaderSetting = styled.div`
   margin-top: 2rem;
   display: flex;
   justify-content: flex-end;
+  button {
+    min-width: fit-content;
+  }
 `;
 
 export const WrapTable = styled.div`
   overflow-x: auto;
   margin-top: 2rem;
   max-width: 100%;
+  font-size: 1.5rem;
 `;
 
 export const Table = styled.table`
@@ -63,6 +67,9 @@ export const WrapAction = styled.div`
   display: flex;
   gap: 1rem;
   align-items: center;
+  button {
+    min-width: max-content;
+  }
 `;
 
 export const ContentConfirm = styled.div`

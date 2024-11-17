@@ -21,7 +21,12 @@ export const notepadQuery = createApi({
         };
       },
     }),
+    getNotepadDetail: build.query<ResNotepadItem, string>({
+      query: (notepadId) =>
+        NotepadEndpointsEnum.GET_NOTEPAD.replace(":notepad_id", notepadId),
+    }),
   }),
 });
 
-export const { useGetListNotepadsQuery } = notepadQuery;
+export const { useGetListNotepadsQuery, useGetNotepadDetailQuery } =
+  notepadQuery;

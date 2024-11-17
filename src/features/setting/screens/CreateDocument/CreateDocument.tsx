@@ -5,10 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { unwrapResult } from "@reduxjs/toolkit";
 
 import TitlePage from "@app/components/TitlePage/TitlePage";
-import {
-  WrapCreateDocument,
-  WrapFormik,
-} from "@app/features/reading/screens/CreateDocument/CreateDocument.styles";
+
 import ReturnButton from "@app/components/ReturnButton/ReturnButton";
 import TextField from "@app/components/TextField/TextField";
 import TextEditor2 from "@app/components/TextEditor2/TextEditor2";
@@ -28,6 +25,12 @@ import {
 } from "@app/features/reading/reading";
 import RadioGroup from "@app/components/RadioGroup/RadioGroup";
 import { useAppDispatch, useAppSelector } from "@app/redux/store";
+
+import { WrapCreateDocument, WrapFormik } from "./CreateDocument.styles";
+import {
+  SettingPathsEnum,
+  SettingSubPathsEnum,
+} from "@app/features/setting/setting";
 
 const CreateDocument: FC = () => {
   const dispatch = useAppDispatch();
@@ -99,7 +102,9 @@ const CreateDocument: FC = () => {
       <TitlePage title={title} subtitle={subtitle} />
 
       <WrapCreateDocument>
-        <ReturnButton to={ReadingPathsEnum.READING} />
+        <ReturnButton
+          to={`${SettingPathsEnum.SETTINGS}/${SettingSubPathsEnum.DOCUMENTS}`}
+        />
 
         {isLoadingDoc ? (
           <div>Loading...</div>
