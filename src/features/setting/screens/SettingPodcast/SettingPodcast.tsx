@@ -13,6 +13,9 @@ import { useAppDispatch } from "@app/redux/store";
 import { HEADER_CELLS } from "@app/features/setting/constants/setting.constants";
 import IconWarning from "@app/assets/images/icon-svg/icon-warning.svg?react";
 import Modal from "@app/components/Modal/Modal";
+import IconTrash from "@app/assets/images/icon-svg/icon-trash.svg?react";
+import IconWritingNotepad from "@app/assets/images/icon-svg/icon-pencil.svg?react";
+import IconPlus from "@app/assets/images/icon-svg/icon-plus.svg?react";
 
 import TitleSetting from "../../components/TitleSetting/TitleSetting";
 import {
@@ -51,10 +54,10 @@ const SettingPodcast: FC = () => {
       <HeaderSetting>
         <AppButton
           size="small"
+          leftIcon={<IconPlus />}
+          variant="outlined"
           to={`${SettingPathsEnum.SETTINGS}/${SettingSubPathsEnum.CREATE_PODCAST}`}
-        >
-          Create
-        </AppButton>
+        />
       </HeaderSetting>
 
       {isLoading ? (
@@ -107,9 +110,8 @@ const SettingPodcast: FC = () => {
                           )}`}
                           variant="outlined"
                           size="small"
-                        >
-                          Edit
-                        </AppButton>
+                          leftIcon={<IconWritingNotepad />}
+                        />
                         <AppButton
                           variant="outlined"
                           size="small"
@@ -117,9 +119,8 @@ const SettingPodcast: FC = () => {
                             setOpenModalConfirmDelete(true);
                             setIdPodcast(item.id);
                           }}
-                        >
-                          Delete
-                        </AppButton>
+                          leftIcon={<IconTrash />}
+                        />
                       </WrapAction>
                     </td>
                   </tr>

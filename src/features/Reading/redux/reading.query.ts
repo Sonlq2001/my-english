@@ -22,7 +22,20 @@ export const readingQuery = createApi({
       query: (documentId) =>
         ReadingEndpointsEnum.GET_DOCUMENT.replace(":document_id", documentId),
     }),
+
+    deleteDocument: build.mutation<void, string>({
+      query: (id) => {
+        return {
+          url: ReadingEndpointsEnum.DELETE_DOCUMENT.replace(":document_id", id),
+          method: "DELETE",
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetListDocumentsQuery, useGetDocumentQuery } = readingQuery;
+export const {
+  useGetListDocumentsQuery,
+  useGetDocumentQuery,
+  useDeleteDocumentMutation,
+} = readingQuery;
