@@ -12,10 +12,6 @@ const DocumentDetail = lazy(
   () => import("../screens/DocumentDetail/DocumentDetail")
 );
 
-const CreateDocument = lazy(
-  () => import("../screens/CreateDocument/CreateDocument")
-);
-
 const READING_SCREEN: RouteItemDef = {
   id: "reading-screen",
   path: ReadingPathsEnum.READING,
@@ -28,21 +24,4 @@ const ARTICLE_DETAIL: RouteItemDef = {
   component: DocumentDetail,
 };
 
-const CREATE_DOCUMENT: RouteItemDef = {
-  id: "create-document-screen",
-  path: ReadingPathsEnum.CREATE_DOCUMENT,
-  component: CreateDocument,
-};
-
-const EDIT_DOCUMENT: RouteItemDef = {
-  id: "edit-document-screen",
-  path: ReadingPathsEnum.EDIT_DOCUMENT,
-  component: CreateDocument,
-};
-
-export const READING_ROUTES = [
-  READING_SCREEN,
-  ARTICLE_DETAIL,
-  CREATE_DOCUMENT,
-  EDIT_DOCUMENT,
-];
+export const READING_ROUTES = [READING_SCREEN, ARTICLE_DETAIL];

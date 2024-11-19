@@ -3,7 +3,7 @@ export type ResDocument = {
   title: string;
   author?: string;
   topic: string;
-  shortDescription: string;
+  shortDescription?: string;
   description: string;
   createdAt: string;
   updatedAt: string;

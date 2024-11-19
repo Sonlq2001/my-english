@@ -8,9 +8,13 @@ import { ReadingPathsEnum, ResDocument } from "@app/features/reading/reading";
 import { formatDate } from "@app/helpers/time";
 
 import { WrapItemArticle } from "./ItemArticle.styles";
+import textParser from "@app/helpers/text-parser";
 
 interface ItemArticleProps {
-  document: Pick<ResDocument, "title" | "topic" | "createdAt" | "id">;
+  document: Pick<
+    ResDocument,
+    "title" | "topic" | "createdAt" | "id" | "shortDescription" | "description"
+  >;
 }
 
 const ItemArticle: FC<ItemArticleProps> = ({ document }) => {
@@ -21,11 +25,12 @@ const ItemArticle: FC<ItemArticleProps> = ({ document }) => {
         alt=""
       /> */}
       <div className="article-content">
-        <header className="article-header">
+        <div className="article-header">
           <span className="article-cate">{document.topic}</span>
           <span className="article-date">{formatDate(document.createdAt)}</span>
-        </header>
+        </div>
         <h3>{document.title}</h3>
+        <p>{document?.shortDescription || textParser(document.description)}</p>
         <Link
           to={ReadingPathsEnum.DOCUMENT_DETAIL.replace(
             ":document_id",

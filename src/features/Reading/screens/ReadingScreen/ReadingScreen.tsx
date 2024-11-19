@@ -64,6 +64,8 @@ const ReadingScreen: FC = () => {
                         topic: item.topic,
                         createdAt: item.createdAt,
                         id: item.id,
+                        shortDescription: item.shortDescription,
+                        description: item.description,
                       }}
                     />
                   ))}
