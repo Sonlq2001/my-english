@@ -1,4 +1,4 @@
-import { FC, useState, memo, useEffect, ComponentPropsWithoutRef } from "react";
+import { FC, useState, memo, ComponentPropsWithoutRef } from "react";
 import clsx from "clsx";
 
 import IconRight from "@app/assets/images/icon-svg/icon-right.svg?react";
@@ -23,21 +23,22 @@ const Pagination: FC<PaginationProps> = ({
 
   const handlePreviousPage = () => {
     if (currentPage <= 1) return;
-    setCurrentPage((page) => page - 1);
+    const page = currentPage - 1;
+    setCurrentPage(page);
+    onChange(page);
   };
 
   const handleNextPage = () => {
     if (currentPage >= limitPage) return;
-    setCurrentPage((page) => page + 1);
+    const page = currentPage + 1;
+    setCurrentPage(page);
+    onChange(page);
   };
 
   const handleSelectPage = (itemPage: number) => {
     setCurrentPage(itemPage);
+    onChange(itemPage);
   };
-
-  useEffect(() => {
-    onChange(currentPage);
-  }, [currentPage]);
 
   if (limitPage <= 1) return;
 

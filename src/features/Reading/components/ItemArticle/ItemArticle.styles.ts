@@ -26,6 +26,10 @@ export const WrapItemArticle = styled.article`
       margin: 8px 0;
       max-width: 80%;
     }
+    p {
+      font-size: 1.4rem;
+      color: ${(props) => props.theme.palette.gray.medium};
+    }
     .article-date {
       color: ${(props) => props.theme.palette.gray.medium};
     }
